@@ -8,7 +8,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-changes made using system76-notebook-pc (6/28/2021) @ 5:18PM
+changes made using system76-desktop-pc (6/28/2021) @ 6:55PM
 0.9) Fix location source files to the following directory: (99.5% completed) --4-30-2021
 /home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
