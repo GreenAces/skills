@@ -965,8 +965,8 @@ class player1Moves {
 
 
             //change boolean state so that computer can attack
-            confirm.makeMove[0].player1Move = false;
-            confirm.makeMove[0].computerMove = true;
+            confirm.makeMove[0].player1Move === false;
+            confirm.makeMove[0].computerMove === true;
 
             console.log(confirm.makeMove[0]);
 
