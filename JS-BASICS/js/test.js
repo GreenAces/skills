@@ -8,7 +8,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-used github token for atom-desktop-pc (verify)
+Change source files to the following: (7/1/2021)
+ /home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon |100% complete on JS  | Not used in HTML
+ /home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon | 100% complete on JS | 100% complete on HTML
+Debug lines 949 to 955 -- find source of error to make web site functional again before proceeeding (7/1/2021)
 0.9) Fix location source files to the following directory: (99.5% completed) --4-30-2021
 /home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
@@ -44,7 +47,7 @@ class images {
   constructor () {
     this.chrAtkImage1 = function (){  // image 1 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/fireBlaster.gif" </img>';
+      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/fireBlaster.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
       document.getElementById("attack_graphic").style.height = 100;
 
@@ -58,9 +61,9 @@ class images {
 
 
     }
-    this.scyAtkImage1 = function (){ // image 1 of 6
+    this.scyAtkImage1 = function (){ // image 2 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/slash.gif" </img>';
+      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/slash.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
       document.getElementById("attack_graphic").style.height = 100;
 
@@ -73,9 +76,9 @@ class images {
 
     }
 
-    this.squPokeImage = function (){ // image 1 of 6
+    this.squPokeImage = function (){ // image 3 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/slash.gif" </img>';
+      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/slash.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
       document.getElementById("attack_graphic").style.height = 100;
 
@@ -100,16 +103,16 @@ computerImg = new images;
 
 class sound {
   constructor (){
-     this.charmanderVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/CharmanderVoice.mp3');
-     this.blastoiseVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/BlastoiseVoice.wav');
-     this.charizardVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/CharizardVoice.wav');
-     this.pikachuVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/PikachuVoice.mp3');
-     this.pokemonBattleVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/gameboy_battleTheme.wav');
-     this.pokemonVictoryVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/victoryThemezz.mp3');
-     this.scytherVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/ScytherVoice.wav');
-     this.squirtleVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/SquirtleVoicezzz.mp3');
-     this.wartortleVO = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/WartortleVoice.wav');
-     this.soundConfirmer = new Audio('/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/pokemon/soundConfirmer.wav');
+     this.charmanderVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/CharmanderVoice.mp3');
+     this.blastoiseVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/BlastoiseVoice.wav');
+     this.charizardVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/CharizardVoice.wav');
+     this.pikachuVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/PikachuVoice.mp3');
+     this.pokemonBattleVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/gameboy_battleTheme.mp3');
+     this.pokemonVictoryVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/victoryThemezz.mp3');
+     this.scytherVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/ScytherVoice.wav');
+     this.squirtleVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/SquirtleVoicezzz.mp3');
+     this.wartortleVO = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/WartortleVoice.wav');
+     this.soundConfirmer = new Audio('/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/soundConfirmer.wav');
 
     this.soundSettingsOn = function() {
 
@@ -522,7 +525,7 @@ class changePokemon {
     //  player1SD.charmanderVO.play();
 
       // load player1 pokemon
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/charmander.gif" </img>';
+      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon/charmander.gif" </img>';
       document.getElementById("Player1PokeImage").style.width = 200;
       document.getElementById("Player1PokeImage").style.height = 180;
 
@@ -542,7 +545,7 @@ class changePokemon {
 
 
            //load  water-type for computer pokemon
-          document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/squirtle.gif" </img>';
+          document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/squirtle.gif" </img>';
           document.getElementById("CpuPokeImage").style.width = 320;
           document.getElementById("CpuPokeImage").style.height = 380;
 
@@ -602,7 +605,7 @@ class changePokemon {
 
             // replace with new pokemon
 
-            document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/Scyther.gif" </img>';
+            document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/Scyther.gif" </img>';
             document.getElementById("CpuPokeImage").style.width = 320;
             document.getElementById("CpuPokeImage").style.height = 380;
 
@@ -665,7 +668,7 @@ class changePokemon {
 
         // load player1 pokemon
 
-       document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/blastoise.gif" </img>';
+       document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/blastoise.gif" </img>';
        document.getElementById("Player1PokeImage").style.width = 100;
        document.getElementById("Player1PokeImage").style.height = 100;
 
@@ -727,7 +730,7 @@ class changePokemon {
 
         // replace with new pokemon
 
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/squirtle.gif" </img>';
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/squirtle.gif" </img>';
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
@@ -753,7 +756,7 @@ class changePokemon {
 
         // replace with new pokemon
 
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/Scyther.gif" </img>';
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/Scyther.gif" </img>';
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
@@ -781,7 +784,7 @@ class changePokemon {
 
         // replace with new pokemon
 
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/charizard.gif" </img>';
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/charizard.gif" </img>';
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
@@ -828,7 +831,7 @@ class changePokemon {
 
        // load player1 pokemon
 
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/Pikachu.gif" </img>';
+      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/Pikachu.gif" </img>';
       document.getElementById("Player1PokeImage").style.width = 200;
       document.getElementById("Player1PokeImage").style.height = 180;
 
@@ -853,7 +856,7 @@ class changePokemon {
     this.squPokeImage = function () {
 
       // load computer pokemon
-      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/squirtle.gif" </img>';
+      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/squirtle.gif" </img>';
       document.getElementById("attack_graphic").style.width = 200;
       document.getElementById("attack_graphic").style.height = 180;
 
@@ -895,7 +898,7 @@ class changePokemon {
 
        // load player1 pokemon
 
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon/warturtle.gif" </img>';
+      document.getElementById("Player1PokeImage").innerHTML = '<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/warturtle.gif" </img>';
       document.getElementById("Player1PokeImage").style.width = 200;
       document.getElementById("Player1PokeImage").style.height = 180;
 
