@@ -11,6 +11,7 @@ NOTE:
 Change source files to the following: (7/1/2021)
  /home/robertlabonte/Practice/Programming/skills/JS-BASICS/sounds/pokemon |100% complete on JS  | Not used in HTML
  /home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon | 100% complete on JS | 100% complete on HTML
+ The above directories will not display on local windows machine -- solution is to find a host to create permanment links.
 Debug lines 949 to 955 -- find source of error to make web site functional again before proceeeding (7/1/2021)
 0.9) Fix location source files to the following directory: (99.5% completed) --4-30-2021
 /home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon
