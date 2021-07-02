@@ -1,0 +1,140 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pokemon Battle -- version 0.01</title>
+  <link rel="stylesheet" type="text/css" href="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/css/pokemon.css">
+</head>
+</head>
+<body>
+
+    <!-- Game tips and status-->
+    <div class="div1">
+
+      <div class="statusLayout"><p id="addTips">Choose your pokemon wisely! A water-type is better suited against a fire-type.</p>
+
+          <div class="statusLayoutProgress">
+            <p id="statusProgress"></p>
+          </div>
+          <div class="statusLayoutProgress2">
+            <p id="statusProgress2"></p>
+          </div>
+          <div class="statusLayoutProgress3">
+            <p id="statusProgress3"></p>
+          </div>
+
+
+         </div>
+         <!--nav menu-->
+         <div class ="pokemonLogoLayout">
+           <img id="pokemon_logo" src="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/pokemon_logo.jpg"
+              alt="Pokemon"></img>
+         </div>
+
+         <div class="div3">
+           <div class="dropdownbtnA"><h3 id="PLY1">PLAYER1</h3>
+            <button class="dropbtnA">ATTACK</button>
+            <div class="dropdown-content">
+            <a id="attackA"></a>
+            <a id="attackB"></a>
+            <a id="attackC"></a>
+          </div>
+          </div>
+
+
+
+           <div class="dropdownbtnB"><h3 id="PLY1_2">MENU</h3>
+             <button class="dropbtnB">DEFEND</button>
+             <div class="dropdown-content">
+               <a id="defenseA"></a>
+               <a id="defenseB"></a>
+               <a id="defenseC"></a>
+             </div>
+            </div>
+
+
+             <div class="dropdownChangePoke"><h3 id="GAME_OPT">Select Pokemon</h3>
+               <button class="dropbtnD">SELECT</button>
+               <div class="dropdown-content">
+                  <a id="Charmander_sel">Charmander</a>
+                  <a id="Blastoise_sel">Blastoise</a>
+                  <a id="Warturtle_sel">Wartortle</a>
+                  <a id="Pikachu_sel">Pikachu</a>
+               </div>
+              </div>
+
+              <div class="dropdownGameOpt"><h3 id="GAME_OPT">Game</h3>
+                <button class="dropbtnC">SOUND</button>
+                <div class="dropdown-content">
+                  <a id="soundON">ON</a>
+                  <a id="soundOFF">OFF</a>
+                </div>
+               </div>
+
+
+
+               <div class="dropdownGameOpt2"><h3 id="GAME_OPT">Options</h3>
+                 <button class="dropbtnE">RESTART</button>
+                 <div class="dropdown-content">
+                   <a id="restartYES">YES</a>
+                 </div>
+                </div>
+
+          </div> <!--end of div3 tag -->
+
+
+
+
+      <!--pokemon battle ground -->
+      <div class="div2">
+        <div class="Player1Status">
+          <p><b>Pokemon name:</p></b>
+          <p id="p1PokemonName"></p>
+          <p id="p1HpFont"><b>HP:</p></b>
+        <progress id="player1HP" value="100" max="100"></progress>
+          <p id="p1SpeedFont"><b>Speed:</p></b>
+        <progress id="playerSpeed" value="100" max="100"></progress>
+        </div>
+
+
+        <div class="Player1PokemonContainer"><p><b>Player1</p></b>
+          <!-- image goes here -->
+          <p id="Player1PokeImage"></p>
+        </div>
+
+
+        <div class="AttackGraphicContainer">
+          <!-- image goes here -->
+        <p id="attack_graphic"></p>
+        </div>
+
+
+        <div class="CpuPokemonContainer"><p><b>Computer</p></b>
+        <!-- image goes here -->
+        <p id="CpuPokeImage"></p>
+        </div>
+
+
+
+        <div class="CpuStatus">
+          <p><b>Pokemon name:</p></b>
+          <p id="cpuPokemonName"></p>
+          <p id="cpuHpFont"><b>HP:</p></b>
+        <progress id="cpuHP" value="100" max="100"></progress>
+        <p id="cpuSpeedFont"><b>Speed:</p></b>
+        <progress id="cpuSpeed" value="100" max="100"></progress>
+        </div>
+
+    </div> <!-- end of div2 tag -->
+
+
+</div> <!-- end of div1 tag -->
+
+
+
+    <!-- JavaScript should always be placed after the body tag 95% of the time. -->
+  <script src="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/js/test.js">
+  </script>
+</body>
+</html>
