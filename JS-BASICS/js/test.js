@@ -74,7 +74,7 @@ class images {
 
     this.squPokeImage = function (){ // image 3 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="/home/robertlabonte/Practice/Programming/skills/JS-BASICS/images/pokemon/slash.gif" </img>';
+      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/bubbles-gif.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
       document.getElementById("attack_graphic").style.height = 100;
 
@@ -1033,6 +1033,7 @@ class player1Moves {
 player1 = new player1Moves;
 
 
+// compare computerMoves to pokemonType on line 411 -- and create a defensive strategy
 
 class computerMoves {
    constructor () {
@@ -1041,6 +1042,8 @@ class computerMoves {
      this.ScytherMoves = function () {
 
           confirm.makeMove[0].computerMove = true;
+
+          //if statement1
 
        if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
          && player1CH.pokemonType[3].isSelected === true) {
@@ -1073,6 +1076,8 @@ class computerMoves {
    this.SquirtleMoves = function () {
      confirm.makeMove[0].computerMove = true;
 
+     // if statement2
+
   if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
     && player1CH.pokemonType[0].isSelected === true) {
 
@@ -1080,7 +1085,7 @@ class computerMoves {
      document.getElementById("player1HP").value -= 20;
 
     //debugging pokemon name here:
-      player1CH.randomPokemonSelector();
+     player1CH.randomPokemonSelector();
 
 
     // changes need to be reflected in healthBar array as well
@@ -1108,7 +1113,7 @@ class computerMoves {
     console.log(confirm.makeMove[0]);
 
 
-    } // end of 2nd if statement
+  } // end of if statement2
 
   } // end of SquirtleMoves function
 
