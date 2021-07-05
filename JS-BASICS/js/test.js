@@ -423,9 +423,9 @@ class changePokemon {
                        {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false}
                         ];
     this.savedPokemonName = []; // NOTE: empty array of randomly selected pokemon generated from randomPokemonSelector()
-    this.loadPokemonImage = []; // NOTE: this array of pokemon images are empty until ComputerPokemonLoader() is called upon.
+    this.loadPokemonImage = []; // NOTE: this array of pokemon images are empty until computerPokemonLoader() is called upon.
 
-    this.ComputerPokemonLoader = function () {}; // ended tag here instead. -- fix this later if need be
+    this.computerPokemonLoader = function () {
 
     this.loadPokemonImage.push(
 
@@ -435,6 +435,7 @@ class changePokemon {
 
     );
 
+  }; // end of computerPokemonLoader function
 
     this.repeat === true;
 
@@ -449,7 +450,7 @@ class changePokemon {
         if (computerCH.repeat === true) {
 
           //calling function to save data to another empty array labeled as loadPokemonImage: NOTE: this should only be executed once
-          this.ComputerPokemonLoader();
+          this.computerPokemonLoader();
 
           computerCH.repeat === false;
 
