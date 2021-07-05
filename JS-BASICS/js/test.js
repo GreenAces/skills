@@ -22,7 +22,7 @@ Added comments to the following classes: pokemenClass, playerMoves Class, and co
 7) Remove the stars *** for the following comment: "please wait for computer to attack or switch(***)" but only after fixing new mechanism
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
-10) charmander sound is turned off
+10) charmander sound is turned on (7/5/2021)
 11) add attack graphic for squirtle on line 66
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
@@ -33,7 +33,6 @@ Added comments to the following classes: pokemenClass, playerMoves Class, and co
 Date:
 09/31/2019 -- load the correct pokemonImage with the following array: loadPokemonImage on line 429
 
-Uncaught SyntaxError: Unexpected identifier on line 947
 
 */
 
