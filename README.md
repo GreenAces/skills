@@ -6,5 +6,4 @@ Examples:
 C#, C++, Python, etc...
 
 Web site (work-in-progress):
-
-<a href="robert-labonte.great-site.netl">Official site</a>
+<a href="http://www.robert-labonte.great-site.net" target="_blank">Link</a>
