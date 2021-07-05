@@ -8,12 +8,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Change source files to the following so that local machines can benefit from these changes: (7/2/2021)
- http://robert-labonte.great-site.net/JS-BASICS/sounds/pokemon |0% complete on JS  | Not used in HTML
- http://robert-labonte.great-site.net/JS-BASICS/images/pokemon |0% complete on JS | 100% complete on HTML
-Debug lines 949 to 955 -- find source of error to make web site functional again before proceeeding (7/1/2021)
-0.9) Fix location source files to the following directory: (99.5% completed) --4-30-2021
-/home/robertlabonte/Dropbox/BareEssentials/Desktop/Programming/JavaScript/RLabontes_JavaScript_Lessons/JS-BASICS/images/pokemon
+Lastest update: (7/5/2021)
+Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
+
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
@@ -101,6 +98,7 @@ player1Img = new images;
 computerImg = new images;
 
 
+
 class sound {
   constructor (){
      this.charmanderVO = new Audio('http://robert-labonte.great-site.net/JS-BASICS/sounds/pokemon/CharmanderVoice.mp3');
@@ -168,7 +166,7 @@ class sound {
     }
 
 
-  }
+  } // end of soundclass
 
 
 
@@ -408,7 +406,11 @@ class wait {
 
 confirm = new wait;
 
+
+
+
 class changePokemon {
+
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
@@ -423,7 +425,7 @@ class changePokemon {
     this.savedPokemonName = []; // NOTE: empty array of randomly selected pokemon generated from randomPokemonSelector()
     this.loadPokemonImage = []; // NOTE: this array of pokemon images are empty until ComputerPokemonLoader() is called upon.
 
-    this.ComputerPokemonLoader = function () {
+    this.ComputerPokemonLoader = function () {}; // ended tag here instead. -- fix this later if need be
 
     this.loadPokemonImage.push(
 
@@ -941,13 +943,21 @@ class changePokemon {
 
     }
 
-  } // end of constructor
-} // end of class
+
+
+
+
+} // end of pokemeon constructor
+
+
+} // end of changePokemon class
+
 
 
 
 player1CH = new changePokemon;
 computerCH = new changePokemon;
+
 
 
 
@@ -965,8 +975,8 @@ class player1Moves {
 
 
             //change boolean state so that computer can attack
-            confirm.makeMove[0].player1Move === false;
-            confirm.makeMove[0].computerMove === true;
+            confirm.makeMove[0].player1Move = false;
+            confirm.makeMove[0].computerMove = true;
 
             console.log(confirm.makeMove[0]);
 
@@ -985,10 +995,10 @@ class player1Moves {
 
 
 
-          }
+          } // end of if statement
 
 
-     }
+     } // end of fireBlasterMove
 
 
      this.blazeMove = function() {
@@ -996,7 +1006,7 @@ class player1Moves {
        let health = document.getElementById("cpuHP")
        health.value -= 10;
 
-     }
+     } // end of blazeMove
 
 
      this.solarMove = function(){
@@ -1007,11 +1017,18 @@ class player1Moves {
        let speed = document.getElementById("playerSpeed")
        speed.value -=65;
 
-     }
+     } // end of solarMove
 
 
-   }
-}
+   } // end of player1Move constructor
+
+
+
+
+} // end of play1Moves class
+
+
+
 
 player1 = new player1Moves;
 
@@ -1095,13 +1112,14 @@ class computerMoves {
 
   } // end of SquirtleMoves function
 
- } // end of constructor
+} // end of computerMoves constructor
 
-} // end of class
+} // end of computerMoves...
 
 
 
 computer = new computerMoves;
+
 
 
 // restart function
