@@ -10,8 +10,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 NOTE:
 Lastest update: (7/5/2021)
 Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
-x) bubble attack image not showing up for squirtle move -- find out why -- maybe something to do with bubble-gif?
-y) investigate this this.squPokeImage2() on line 411
+x) investigate this this.squPokeImage2() on line 411
+y)
 z)
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
