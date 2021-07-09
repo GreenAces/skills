@@ -17,6 +17,10 @@ public class ListViewActivity extends AppCompatActivity {
 
             "Introduction",
             "My Bio App - Relative Layout",
+            "My Bio App - Linear Layout",
+            "Login Form - Constraint Layout (doesn't work)",
+            "Dice App   - Skipped tutorial (1:20:00)",
+            "SMS App"
 
 
     };
@@ -43,6 +47,24 @@ public class ListViewActivity extends AppCompatActivity {
                         break;
                     case 1:
                         intent = new Intent(ListViewActivity.this, MyBioRelativeLayout.class);
+                        startActivity(intent);
+
+                        break;
+
+                    case 2:
+                        intent = new Intent(ListViewActivity.this, MyBioLinearLayout.class);
+                        startActivity(intent);
+
+                        break;
+
+                    case 3:
+                        intent = new Intent(ListViewActivity.this, LoginFormActivity.class);
+                        startActivity(intent);
+
+                        break;
+
+                    case 4:
+                        intent = new Intent(ListViewActivity.this, SmsActivity.class);
                         startActivity(intent);
 
                         break;

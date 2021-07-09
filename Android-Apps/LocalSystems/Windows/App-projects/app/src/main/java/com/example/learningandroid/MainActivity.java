@@ -9,13 +9,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Date 7/8/2021
+ * Date 7/9/2021
  * Added songbird.jpg to MyApplication>app>src>main>res
- * video paused at 1:00:39
+ * video paused at 1:34:00
  * Code re-formatting should be applied to activity_listview.xml
  * Windows: Ctrl + Alt + L
  * Linux: Ctrl + Shift + Alt + L
- * Active  file is activity_my_bio_relative_layout.xml
+ * error on activity_login_form.xml (maybe it's not linked to activity_login_form.java? debug later...)
  */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

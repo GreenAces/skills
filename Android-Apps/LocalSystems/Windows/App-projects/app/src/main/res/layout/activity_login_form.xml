@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".LoginFormActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--activity_login_form.xml contains the following error-->
+        <!--ERROR:/home/robertlabonte/AndroidStudioProjects/MyApplication/app/src/main/res
+        /layout/activity_login_form.xml:44: AAPT: error: attribute layout_contraintTop_toBottomOf
+        (aka com.example.learningandroid:layout_contraintTop_toBottomOf) not found.-->
+
+        <!-- This comment tag ends at line 115
+
+    <TextView
+        android:id="@+id/txt_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Login Form"
+        android:textColor="#000"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/vg10"
+        app:layout_constraintRight_toLeftOf="@id/vg90"
+        app:layout_constraintTop_toBottomOf="@+id/hg10" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Your Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintLeft_toRightOf="@id/vg10"
+        app:layout_constraintRight_toRightOf="@id/vg90"
+        app:layout_constraintTop_toBottomOf="@id/txt_label" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Enter Your Password"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toRightOf="@id/vg10"
+        app:layout_constraintRight_toRightOf="@id/vg90"
+        app:layout_contraintTop_toBottomOf="@id/edt_email" />
+
+    <TextView
+        android:id="@+id/txt_label_no_account_yet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="No account yet ?"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/edt_password" />
+
+    <TextView
+        android:id="@+id/txt_label_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textColor="#64B5F6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/txt_label_no_account_yet"
+        app:layout_constraintTop_toBottomOf="@id/txt_label_no_account_yet"
+        app:layout_constraintTop_toTopOf="@id/txt_label_no_account_yet" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#64B5F6"
+        android:text="Log In"
+        android:textColor="#FFF"
+        app:layout_constraintLeft_toLeftOf="@id/vg10"
+        app:layout_constraintRight_toRightOf="@id/vg90"
+        app:layout_constraintTop_toBottomOf="@id/txt_label_no_account_yet" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="41dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+        end of XML comment -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
