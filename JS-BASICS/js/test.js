@@ -8,10 +8,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/5/2021)
+Lastest update: (7/13/2021)
 Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
 x) investigate this this.squPokeImage2() on line 411
-y)
+y) working on getPokemonName() on line 190
 z)
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
@@ -24,7 +24,7 @@ z)
 7) Remove the stars *** for the following comment: "please wait for computer to attack or switch(***)" but only after fixing new mechanism
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
-10) charmander sound is turned on (7/5/2021)
+10) charmander and squirtle sound was turned on line 152 (7/13/2021)
 11) add attack graphic for squirtle on line 66
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
@@ -149,12 +149,12 @@ class sound {
 
 
       // turn off pokemon voices
-      player1SD.charmanderVO.pause();
+    //  player1SD.charmanderVO.pause();
       player1SD.blastoiseVO.pause();
       player1SD.charizardVO.pause();
       player1SD.pikachuVO.pause();
       player1SD.scytherVO.pause();
-      player1SD.squirtleVO.pause();
+    //  player1SD.squirtleVO.pause();
       player1SD.wartortleVO.pause();
 
 
@@ -181,6 +181,49 @@ computerSD = new sound;
 class referee {
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
+    this.dataSet1 =  ["Charmander","Blastoise","Warturtle", "Pikachu"];
+    this.dataSet2 =  ["Squirtle","Charizard","Scyther","Pikachu"];
+    this.getPokemonName = function() {
+
+      //testing to see if I'm calling the functiion correctly on line 398
+
+       //console.log("getPokemonName() works");
+
+
+      for (p1.x=0; p1.x < p1.dataSet1.length; p1.x++) {
+
+          // If player1 selects pokemon from dataset1 then display the name of cpu pokemon from dataset2
+
+          //        reference data -- delete below when completed
+
+          /*
+
+          document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
+          document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
+          document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
+          document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
+          */
+
+
+        if (p1.x == 0 && (player1CH.pokemonType[0].isSelected = true)) {
+
+        // p1.getPokemonName();
+         document.getElementById("cpuPokemonName").innerHTML = p1.dataSet2[0];
+
+
+
+       } // end of if statement
+
+
+
+     } // end of for-loop
+
+
+
+
+
+     }; // end of getPokemonName function
     this.fullHealth = [100];
     this.healthBar = [0]; // NOTE: this is intentionally left empty but pokemon health will not exceed 100 HP when data is pushed to it.
     this.lowHealth = [40];
@@ -1088,6 +1131,7 @@ class computerMoves {
 
     //debugging pokemon name here:
      player1CH.randomPokemonSelector();
+    // p1.getPokemonName();
 
 
     // changes need to be reflected in healthBar array as well
@@ -1152,11 +1196,30 @@ document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
 // Event listener for player1 pokemon change
+// Seems neccessary for loading up cpu pokmon name on line 190
 
+
+
+if (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === false||
+    confirm.makeMove[0].player1Move === true && confirm.makeMove[0].computerMove === false ||
+    confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true) {
+
+      document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
+      document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
+      document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
+      document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
+      p1.getPokemonName();
+} // end of if statement
+
+
+
+/*
 document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
 document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
 document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
 document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+*/
 
 //Event listener for sound settings
 document.getElementById("soundON").addEventListener("click", player1SD.soundSettingsOn);
@@ -1179,10 +1242,13 @@ confirm.enableMoves();
 confirm.disableMoves();
 
 
+
 if(confirm.makeMove[0].player1Move === false){
 
   setTimeout (function(){
 
+    // testing -- if player1 selections will display name of cpu selction
+  //  p1.getPokemonName();
 
     computer.SquirtleMoves();
 
