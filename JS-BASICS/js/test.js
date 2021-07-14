@@ -12,7 +12,7 @@ Lastest update: (7/13/2021)
 Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
 x) investigate this this.squPokeImage2() on line 411
 y) working on getPokemonName() on line 436 & 490 inside changePokemon class focus on the debugging section and work on the correct data types to move forward
-z) changes made on line 1254 but focus on line 436 and 490 first.
+z) moniterClick1of4 begins on line 1270 -- use this method to pay attention to what the user selects and record changes to line 506 pokemonType (array of objects)
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
@@ -415,33 +415,52 @@ class changePokemon {
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
-    this.identifyPokemon = function () {
+    this.moniterClick1of4 = function () {
 
-      /*
+      //User selected charmander
+      player1CH.pokemonType[0].isSelected = true;
 
-        if (player1CH.pokemonType[0] == player1CH.savedPokemonName[0] ) {
-          //if player1 selects pokemon then push it to savedPokemonName()
-          player1CH.savedPokemonName.push(player1CH.savedPokemonName[0]);
+      // Verifing changes on console -- delete after debugging is complete
+      console.log(JSON.stringify(player1CH.pokemonType));
+    };// end of moniterClick1of4
 
-          // check to see if something was entered to the array
-            console.log("Data was entered to savedPokemonName()"+ player1HP.savedPokemonName[0]);
-        }
 
-        */
+    this.moniterClick2of4 = function () {
 
-    };
-    this.listeningFunction1of4 = function () { // See line 1236 for reference
-      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander"]);
-    };
-    this.listeningFunction2of4 = function () {
-      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Blastoise"]);
-    };
-    this.listeningFunction3of4 = function () {
-      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Warturtle"]);
-    };
-    this.listeningFunction4of4 = function () {
-      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Pikachu"]);
-    };
+      //User selected Blastoise
+      player1CH.pokemonType[1].isSelected = true;
+
+      // Verifing changes on console -- delete after debugging is complete
+      console.log(JSON.stringify(player1CH.pokemonType));
+
+    }; // end of moniterClick2of4
+
+
+
+    this.moniterClick3of4 = function () {
+
+      //User selected Warturtle
+      player1CH.pokemonType[2].isSelected = true;
+
+      // Verifing changes on console -- delete after debugging is complete
+      console.log(JSON.stringify(player1CH.pokemonType));
+
+    }; // end of moniterClick3of4
+
+
+
+    this.moniterClick4of4 = function () {
+
+      //User selected Pikachu
+      player1CH.pokemonType[3].isSelected = true;
+
+      // Verifing changes on console -- delete after debugging is complete
+      console.log(JSON.stringify(player1CH.pokemonType));
+
+    }; // end of moniterClick4of4
+
+
+
     this.getPokemonName = function() {
 
 
@@ -461,13 +480,11 @@ class changePokemon {
       //what is the type of data above? same as above
       console.log(typeof player1CH.savedPokemonName[0]);
 
+      // what type of data  is line 419?
+      console.log(typeof player1CH.person);
+
       //what is inside this array? use line 508 for reference -- save for later practice concept on line 455 instead
      //  console.log(typeof player1CH.pokemonType[0]);
-
-
-
-
-
 
 
 
@@ -1257,21 +1274,93 @@ document.getElementById("defenseB").addEventListener("click", defenseB);
 document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-// Event listener for player1 pokemon change
-// pushing data to array player1CH.savedPokemonName[] using listeningFunction1of4,etc...
+//debugging here as well
 
-document.getElementById("Charmander_sel").addEventListener("click",player1CH.listeningFunction1of4(), player1CH.chrPokeImage);
-document.getElementById("Blastoise_sel").addEventListener("click", player1CH.listeningFunction2of4(), player1CH.blaPokeImage);
-document.getElementById("Pikachu_sel").addEventListener("click",   player1CH.listeningFunction3of4(), player1CH.pikPokeImage);
-document.getElementById("Warturtle_sel").addEventListener("click", player1CH.listeningFunction4of4(), player1CH.warPokeImage);
+console.log(JSON.stringify(confirm.makeMove[0]));
 
 
+// Event listener for player1 pokemonchange on line 536
+
+// JSON.stringify(confirm.makeMove[0].player1Move) === false &&
+// JSON.stringify(confirm.makeMove[0].computerMove) === false
+
+//debugging here
+console.log(JSON.stringify(player1CH.player1PokemonChoices[1]));
+
+console.log(typeof JSON.stringify(player1CH.player1PokemonChoices[1]) );
+
+switch(JSON.stringify(player1CH.player1PokemonChoices[1] === "Blastoise" )) {
 
 
-      //don't delete this now -- needed for debugging on line 436
-      player1CH.getPokemonName();
+    case "Charmander":
+    // code block
 
-// 1263 replaces original code below -- delete if neccessary
+
+document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
+player1CH.moniterClick1of4();
+player1CH.getPokemonName();
+
+    break;
+    case "Blastoise":
+    // code block
+
+document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
+player1CH.moniterClick2of4();
+player1CH.getPokemonName();
+
+    break;
+    case "Pikachu":
+    // code block
+
+
+document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
+player1CH.moniterClick3of4();
+player1CH.getPokemonName();
+
+    break;
+    case "Wartortle":
+    // code block
+
+
+document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+player1CH.moniterClick4of4();
+player1CH.getPokemonName();
+
+    break;
+
+    //removing default by commiting it out to see if it's neccessary
+
+/*----------comment tag begins here
+
+  default:
+    // reload page and activate the event listener after 30 seconds
+
+
+   setTimeout (function(){
+
+     console.log("reloading page in 30 secs if player1 fails to pick pokemon.");
+
+     window.location.reload();
+
+     document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
+     document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
+     document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
+     document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
+   },30000); // reloads page after 30 secs
+
+
+*///----------comment tag ends here 
+
+} // end of switch statement
+
+
+
+
+
+
+
+// 1279 replaces original code below -- when debugging is complete
 
 /*
 document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
