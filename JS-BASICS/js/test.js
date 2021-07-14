@@ -12,7 +12,7 @@ Lastest update: (7/13/2021)
 Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
 x) investigate this this.squPokeImage2() on line 411
 y) working on getPokemonName() on line 436 & 490 inside changePokemon class focus on the debugging section and work on the correct data types to move forward
-z)
+z) changes made on line 1254 but focus on line 436 and 490 first.
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
@@ -429,6 +429,18 @@ class changePokemon {
 
         */
 
+    };
+    this.listeningFunction1of4 = function () { // See line 1236 for reference
+      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander"]);
+    };
+    this.listeningFunction2of4 = function () {
+      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Blastoise"]);
+    };
+    this.listeningFunction3of4 = function () {
+      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Warturtle"]);
+    };
+    this.listeningFunction4of4 = function () {
+      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Pikachu"]);
     };
     this.getPokemonName = function() {
 
@@ -1246,33 +1258,20 @@ document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
 // Event listener for player1 pokemon change
-// Seems neccessary for loading up cpu pokmon name on line 190
+// pushing data to array player1CH.savedPokemonName[] using listeningFunction1of4,etc...
+
+document.getElementById("Charmander_sel").addEventListener("click",player1CH.listeningFunction1of4(), player1CH.chrPokeImage);
+document.getElementById("Blastoise_sel").addEventListener("click", player1CH.listeningFunction2of4(), player1CH.blaPokeImage);
+document.getElementById("Pikachu_sel").addEventListener("click",   player1CH.listeningFunction3of4(), player1CH.pikPokeImage);
+document.getElementById("Warturtle_sel").addEventListener("click", player1CH.listeningFunction4of4(), player1CH.warPokeImage);
 
 
 
 
-if (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === false||
-    confirm.makeMove[0].player1Move === true && confirm.makeMove[0].computerMove === false ||
-    confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true) {
-
-      document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-      document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-      document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-      document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-
-      //pushing data to array
-
-      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"]);
-
+      //don't delete this now -- needed for debugging on line 436
       player1CH.getPokemonName();
 
-
-
-
-
-} // end of if statement
-
-
+// 1263 replaces original code below -- delete if neccessary
 
 /*
 document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
