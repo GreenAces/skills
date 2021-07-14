@@ -11,7 +11,7 @@ NOTE:
 Lastest update: (7/13/2021)
 Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
 x) investigate this this.squPokeImage2() on line 411
-y) working on getPokemonName() on line 190
+y) working on getPokemonName() on line 436 & 490 inside changePokemon class focus on the debugging section and work on the correct data types to move forward
 z)
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
@@ -181,49 +181,6 @@ computerSD = new sound;
 class referee {
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
-    this.dataSet1 =  ["Charmander","Blastoise","Warturtle", "Pikachu"];
-    this.dataSet2 =  ["Squirtle","Charizard","Scyther","Pikachu"];
-    this.getPokemonName = function() {
-
-      //testing to see if I'm calling the functiion correctly on line 398
-
-       //console.log("getPokemonName() works");
-
-
-      for (p1.x=0; p1.x < p1.dataSet1.length; p1.x++) {
-
-          // If player1 selects pokemon from dataset1 then display the name of cpu pokemon from dataset2
-
-          //        reference data -- delete below when completed
-
-          /*
-
-          document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-          document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-          document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-          document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-
-          */
-
-
-        if (p1.x == 0 && (player1CH.pokemonType[0].isSelected = true)) {
-
-        // p1.getPokemonName();
-         document.getElementById("cpuPokemonName").innerHTML = p1.dataSet2[0];
-
-
-
-       } // end of if statement
-
-
-
-     } // end of for-loop
-
-
-
-
-
-     }; // end of getPokemonName function
     this.fullHealth = [100];
     this.healthBar = [0]; // NOTE: this is intentionally left empty but pokemon health will not exceed 100 HP when data is pushed to it.
     this.lowHealth = [40];
@@ -306,7 +263,7 @@ class referee {
 
 
 
-  }
+  } //end of referee class
 
 
 
@@ -458,6 +415,99 @@ class changePokemon {
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
+    this.identifyPokemon = function () {
+
+      /*
+
+        if (player1CH.pokemonType[0] == player1CH.savedPokemonName[0] ) {
+          //if player1 selects pokemon then push it to savedPokemonName()
+          player1CH.savedPokemonName.push(player1CH.savedPokemonName[0]);
+
+          // check to see if something was entered to the array
+            console.log("Data was entered to savedPokemonName()"+ player1HP.savedPokemonName[0]);
+        }
+
+        */
+
+    };
+    this.getPokemonName = function() {
+
+
+      // debugging begins here
+      console.log("getPokemonName() works");
+
+      //undefined object yes or no? yes
+       console.log(player1CH.savedPokemonName[0]);
+
+      //pushing data to array
+
+    //  player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"]);
+
+     //undefined object yes or no? shows array above
+      console.log(player1CH.savedPokemonName[0]);
+
+      //what is the type of data above? same as above
+      console.log(typeof player1CH.savedPokemonName[0]);
+
+      //what is inside this array? use line 508 for reference -- save for later practice concept on line 455 instead
+     //  console.log(typeof player1CH.pokemonType[0]);
+
+
+
+
+
+
+
+
+
+
+      for (player1CH.x=0; player1CH.x < player1CH.player1PokemonChoices.length; player1CH.x++) {
+
+          // If player1 selects pokemon from dataset1 then display the name of cpu pokemon from dataset2
+
+
+
+          //        reference data -- delete below when completed
+          /*
+
+
+          document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
+          document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
+          document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
+          document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
+          */
+
+          // save for later
+          // && (player1CH.pokemonType[0].isSelected = true)
+
+
+        if (player1CH.x == 0) {
+
+          // debugging
+          // maybe you can convert player1CH.x to an object instead?
+          console.log(typeof player1CH.x);
+          console.log(typeof  document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage));
+          console.log(typeof player1CH.pokemonType[0]);
+
+
+
+
+       //  document.getElementById("cpuPokemonName").innerHTML = p1.dataSet2[0];
+
+
+
+       } // end of if statement
+
+
+
+     } // end of for-loop
+
+
+
+
+
+     }; // end of getPokemonName function
     this.pokemonType = [{Type: "fire", pokemonName: this.player1PokemonChoices[0], isSelected: false },
                        {Type: "water", pokemonName:  this.player1PokemonChoices[1], isSelected: false},
                        {Type: "water", pokemonName: this.player1PokemonChoices[2], isSelected: false},
@@ -1131,7 +1181,7 @@ class computerMoves {
 
     //debugging pokemon name here:
      player1CH.randomPokemonSelector();
-    // p1.getPokemonName();
+
 
 
     // changes need to be reflected in healthBar array as well
@@ -1200,6 +1250,7 @@ document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
 
+
 if (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === false||
     confirm.makeMove[0].player1Move === true && confirm.makeMove[0].computerMove === false ||
     confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true) {
@@ -1209,7 +1260,16 @@ if (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMov
       document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
       document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
 
-      p1.getPokemonName();
+      //pushing data to array
+
+      player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"]);
+
+      player1CH.getPokemonName();
+
+
+
+
+
 } // end of if statement
 
 
@@ -1248,7 +1308,7 @@ if(confirm.makeMove[0].player1Move === false){
   setTimeout (function(){
 
     // testing -- if player1 selections will display name of cpu selction
-  //  p1.getPokemonName();
+
 
     computer.SquirtleMoves();
 
