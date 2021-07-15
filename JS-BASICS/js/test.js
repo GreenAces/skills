@@ -8,24 +8,24 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/13/2021)
-Added comments to the following classes: pokemenClass, playerMoves Class, and computerMoves Class to ensure where tags ended to prevent confusion.
+Lastest update: (7/15/2021)
+
 x) investigate this this.squPokeImage2() on line 411
-y) working on getPokemonName() on line 436 & 490 inside changePokemon class focus on the debugging section and work on the correct data types to move forward
-z) moniterClick1of4 begins on line 1270 -- use this method to pay attention to what the user selects and record changes to line 506 pokemonType (array of objects)
+y) Created debuggingOperation() on line 436 & 490 inside changePokemon class to focus on the debugging activties
+z)
 1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
-3) Fix attack graphic id -- could be issue with css as image is too big and not in the right place. [100% completed]
+3)
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
 7) Remove the stars *** for the following comment: "please wait for computer to attack or switch(***)" but only after fixing new mechanism
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
-10) charmander and squirtle sound was turned on line 152 (7/13/2021)
-11) add attack graphic for squirtle on line 66
+10)
+11)
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
 14) Make healthBar turn red when health is < 40
@@ -59,7 +59,7 @@ class images {
 
 
     }
-    this.scyAtkImage1 = function (){ // image 2 of 6
+    this.scyAtkImage1 = function (){ // image 1 of 6
 
       document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/slash.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
@@ -74,7 +74,7 @@ class images {
 
     }
 
-    this.squPokeImage = function (){ // image 3 of 6
+    this.squAtkImage1 = function (){ // image 1 of 6
 
       document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/bubbles-gif.gif" </img>';
       document.getElementById("attack_graphic").style.width = 180;
@@ -88,6 +88,24 @@ class images {
       }, 6000); // 6 sec wait time
 
     }
+
+
+    this.pikAtkImage1 = function (){ // image 1 of 6
+
+      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/thunderboltimage.jpeg" </img>';
+      document.getElementById("attack_graphic").style.width = 180;
+      document.getElementById("attack_graphic").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("attack_graphic").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+
 
   } // end of constructor
 
@@ -149,12 +167,12 @@ class sound {
 
 
       // turn off pokemon voices
-    //  player1SD.charmanderVO.pause();
+      player1SD.charmanderVO.pause();
       player1SD.blastoiseVO.pause();
       player1SD.charizardVO.pause();
       player1SD.pikachuVO.pause();
       player1SD.scytherVO.pause();
-    //  player1SD.squirtleVO.pause();
+      player1SD.squirtleVO.pause();
       player1SD.wartortleVO.pause();
 
 
@@ -415,128 +433,23 @@ class changePokemon {
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
-    this.moniterClick1of4 = function () {
 
-      //User selected charmander
-      player1CH.pokemonType[0].isSelected = true;
-
-      // Verifing changes on console -- delete after debugging is complete
-      console.log(JSON.stringify(player1CH.pokemonType));
-    };// end of moniterClick1of4
-
-
-    this.moniterClick2of4 = function () {
-
-      //User selected Blastoise
-      player1CH.pokemonType[1].isSelected = true;
-
-      // Verifing changes on console -- delete after debugging is complete
-      console.log(JSON.stringify(player1CH.pokemonType));
-
-    }; // end of moniterClick2of4
-
-
-
-    this.moniterClick3of4 = function () {
-
-      //User selected Warturtle
-      player1CH.pokemonType[2].isSelected = true;
-
-      // Verifing changes on console -- delete after debugging is complete
-      console.log(JSON.stringify(player1CH.pokemonType));
-
-    }; // end of moniterClick3of4
-
-
-
-    this.moniterClick4of4 = function () {
-
-      //User selected Pikachu
-      player1CH.pokemonType[3].isSelected = true;
-
-      // Verifing changes on console -- delete after debugging is complete
-      console.log(JSON.stringify(player1CH.pokemonType));
-
-    }; // end of moniterClick4of4
-
-
-
-    this.getPokemonName = function() {
+    this.debuggingOperation = function() {
 
 
       // debugging begins here
-      console.log("getPokemonName() works");
-
-      //undefined object yes or no? yes
-       console.log(player1CH.savedPokemonName[0]);
-
-      //pushing data to array
-
-    //  player1CH.savedPokemonName.push(player1CH.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"]);
-
-     //undefined object yes or no? shows array above
-      console.log(player1CH.savedPokemonName[0]);
-
-      //what is the type of data above? same as above
-      console.log(typeof player1CH.savedPokemonName[0]);
-
-      // what type of data  is line 419?
-      console.log(typeof player1CH.person);
-
-      //what is inside this array? use line 508 for reference -- save for later practice concept on line 455 instead
-     //  console.log(typeof player1CH.pokemonType[0]);
+      console.log("debuggingOperation() works");
 
 
 
 
-
-      for (player1CH.x=0; player1CH.x < player1CH.player1PokemonChoices.length; player1CH.x++) {
-
-          // If player1 selects pokemon from dataset1 then display the name of cpu pokemon from dataset2
-
-
-
-          //        reference data -- delete below when completed
-          /*
-
-
-          document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-          document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-          document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-          document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-
-          */
-
-          // save for later
-          // && (player1CH.pokemonType[0].isSelected = true)
-
-
-        if (player1CH.x == 0) {
-
-          // debugging
-          // maybe you can convert player1CH.x to an object instead?
           console.log(typeof player1CH.x);
           console.log(typeof  document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage));
           console.log(typeof player1CH.pokemonType[0]);
 
 
 
-
-       //  document.getElementById("cpuPokemonName").innerHTML = p1.dataSet2[0];
-
-
-
-       } // end of if statement
-
-
-
-     } // end of for-loop
-
-
-
-
-
-     }; // end of getPokemonName function
+   }; // end of debuggingOperation function
     this.pokemonType = [{Type: "fire", pokemonName: this.player1PokemonChoices[0], isSelected: false },
                        {Type: "water", pokemonName:  this.player1PokemonChoices[1], isSelected: false},
                        {Type: "water", pokemonName: this.player1PokemonChoices[2], isSelected: false},
@@ -545,7 +458,10 @@ class changePokemon {
                        {Type: "fire", pokemonName: this.ComputerPokemonChoices[1], isSelected: false},
                        {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false}
                         ];
-    this.savedPokemonName = []; // NOTE: empty array of randomly selected pokemon generated from randomPokemonSelector()
+
+    this.savedPokemonName = []; // NOTE: empty array of that will be filled with pokemon names later  -- the 1st one will be used to make the game more challenging for player1 -- see squPokeImage2 on line 699 for examples
+    this.savedPokemonName2 = []; // NOTE: empty array of that will be filled with pokemon names later -- the 2nd one will be used for storing names only
+    this.modifiedPokemonStats = []; // NOTE: empty array that will contain pokemone health status later.
     this.loadPokemonImage = []; // NOTE: this array of pokemon images are empty until computerPokemonLoader() is called upon.
 
     this.computerPokemonLoader = function () {
@@ -560,50 +476,6 @@ class changePokemon {
 
   }; // end of computerPokemonLoader function
 
-    this.repeat === true;
-
-    this.randomPokemonSelector = function () {
-
-      //Saves randomly generated pokemon name to the empty array labaled as "savedPokemonName" so that I can retrieve it later
-
-        this.savedPokemonName.push(this.ComputerPokemonChoices[Math.floor(Math.random()*this.ComputerPokemonChoices.length)]);
-        this.restoredPokemonName();
-
-
-        if (computerCH.repeat === true) {
-
-          //calling function to save data to another empty array labeled as loadPokemonImage: NOTE: this should only be executed once
-          this.computerPokemonLoader();
-
-          computerCH.repeat === false;
-
-        }else if (computerCH.repeat === false) {
-
-          console.log("repeat is off");
-
-        }
-
-
-
-    }
-
-
-
-    this.restoredPokemonName = function(){
-
-      //clear previous pokemon name
-      document.getElementById("cpuPokemonName").innerHTML = ("");
-
-      //load pokemon name from empty array above
-      document.getElementById("cpuPokemonName").innerHTML = this.savedPokemonName;
-
-      //load pokemon image from empty array above
-      this.loadPokemonImage[2];
-
-      //debugging here:
-      console.log(this.loadPokemonImage);
-
-    }
 
 
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
@@ -706,9 +578,14 @@ class changePokemon {
 
 
 
-      // set boolean stats to true when computer selects a pokemon
-      computerCH.pokemonType[4].isSelected = true;
+      // set boolean stats to true when player1 selects a pokemon
+      computerCH.pokemonType[3].isSelected = true;
+
       // set boolean stats to false for non-selected pokemon
+      computerCH.pokemonType[0].isSelected = false;
+      computerCH.pokemonType[1].isSelected = false;
+      computerCH.pokemonType[2].isSelected = false;
+      computerCH.pokemonType[4].isSelected = false;
       computerCH.pokemonType[5].isSelected = false;
       computerCH.pokemonType[6].isSelected = false;
 
@@ -1091,11 +968,44 @@ class player1Moves {
      this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle", "Pikachu"];
      this.player1Menu =  ["attackA","attackB","attackC","defenseA","defenseB","defenseC"];
      this.attackOptions = ["Fire Blaster","Blaze", "Solar Beam"];
+     this.thunderShockMove = function () {
+
+       if(player1CH.pokemonType[3].isSelected === true) {
+
+
+         //change boolean state so that computer can attack
+         confirm.makeMove[0].player1Move = false;
+         confirm.makeMove[0].computerMove = true;
+
+         console.log(confirm.makeMove[0]);
+
+        // thunderShockMove does -20 damage on computer
+        let health = document.getElementById("cpuHP")
+        health.value -= 20;
+
+        // changes need to be reflected in healthBar array as well
+         comp.healthBar.push(-20);
+         console.log("ThunderShock Damage is "+comp.healthBar);
+         console.log("Computer health status is "+comp.getHealth());
+
+         // attack image for pikachu
+         player1Img.pikAtkImage1();
+
+
+     } // end of if statement
+
+
+     } // end of thunderShockMove
+
+
+
+
+
      this.fireBlasterMove = function () {
 
 
 
-          if(player1CH.pokemonType[0].isSelected === true){
+          if(player1CH.pokemonType[0].isSelected === true) {
 
 
             //change boolean state so that computer can attack
@@ -1133,7 +1043,7 @@ class player1Moves {
      } // end of blazeMove
 
 
-     this.solarMove = function(){
+     this.solarMove = function() {
        // solar restores +45 health for player1 but can't attack for 3 moves -- fix that part
        let health = document.getElementById("player1HP")
        health.value += 45;
@@ -1144,12 +1054,15 @@ class player1Moves {
      } // end of solarMove
 
 
-   } // end of player1Move constructor
 
 
 
 
-} // end of play1Moves class
+
+    } // end of player1Move constructor
+
+
+} // end of player1Moves class
 
 
 
@@ -1165,29 +1078,49 @@ class computerMoves {
      this.compMenu =  ["attackA","attackB","attackC","defenseA","defenseB","defenseC"];
      this.ScytherMoves = function () {
 
-          confirm.makeMove[0].computerMove = true;
+       confirm.makeMove[0].computerMove = true;
 
-          //if statement1
+       //if statement1
 
-       if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
-         && player1CH.pokemonType[3].isSelected === true) {
+    if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
+      && player1CH.pokemonType[3].isSelected === true) {
 
-         // does -10 damage to player1
-          document.getElementById("player1HP").value -= 10;
+        // display and save computer pokemon name to savedPokemonName2 on line 445
+       document.getElementById("cpuPokemonName").innerHTML = "Scyther";
+       computerCH.savedPokemonName2.push("Scyther");
+
+      //verifying changes -- delete if neccessary
+       console.log(computerCH.savedPokemonName2);
 
 
-         // changes need to be reflected in healthBar array as well
-            p1.healthBar.push(-10);
+      // does -10 damage to player1
+       document.getElementById("player1HP").value -= 10;
 
 
-         // inform player1 of attack from computer
-         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1]+ " attacked "+player1.pokemonName[6]+" with Slash!";
+     // changes need to be reflected in healthBar array as well
+         p1.healthBar.push(-10);
 
-         // show attack image
-         computerImg.scyAtkImage1();
+     // get the status of health for player1 and computer pokemon
+        comp.informStatus();
+        console.log(p1.healthBar);
 
-         //Change boolean state so that player1 can make a move
-         confirm.makeMove[0].computerMove = false;
+     // check computers health and report it to player if these conditions are true
+
+      comp.informWinner();
+
+
+
+      // inform player1 of attack from computer
+      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1]+ " attacked "+player1.pokemonName[6]+" with Slash!";
+
+      // show attack image
+      computerImg.scyAtkImage1();
+
+      //Change boolean state so that player1 can make a move
+      confirm.makeMove[0].computerMove = false;
+      console.log(confirm.makeMove[0]);
+      confirm.enableMoves();
+      console.log(confirm.makeMove[0]);
 
 
 
@@ -1205,12 +1138,13 @@ class computerMoves {
   if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
     && player1CH.pokemonType[0].isSelected === true) {
 
+    // display and save computer pokemon name to savedPokemonName2 on line 445
+     document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
+     computerCH.savedPokemonName2.push("Squirtle");
+
+
     // does -20 damage to player1
      document.getElementById("player1HP").value -= 20;
-
-    //debugging pokemon name here:
-     player1CH.randomPokemonSelector();
-
 
 
     // changes need to be reflected in healthBar array as well
@@ -1229,7 +1163,7 @@ class computerMoves {
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
 
     // show attack image
-    computerImg.squPokeImage();
+    computerImg.squAtkImage1();
 
     //Change boolean state so that player1 can make a move
     confirm.makeMove[0].computerMove = false;
@@ -1244,7 +1178,7 @@ class computerMoves {
 
 } // end of computerMoves constructor
 
-} // end of computerMoves...
+} // end of player1Moves class...
 
 
 
@@ -1274,100 +1208,15 @@ document.getElementById("defenseB").addEventListener("click", defenseB);
 document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-//debugging here as well
-
-console.log(JSON.stringify(confirm.makeMove[0]));
-
-
 // Event listener for player1 pokemonchange on line 536
 
-// JSON.stringify(confirm.makeMove[0].player1Move) === false &&
-// JSON.stringify(confirm.makeMove[0].computerMove) === false
 
-//debugging here
-console.log(JSON.stringify(player1CH.player1PokemonChoices[1]));
-
-console.log(typeof JSON.stringify(player1CH.player1PokemonChoices[1]) );
-
-switch(JSON.stringify(player1CH.player1PokemonChoices[1] === "Blastoise" )) {
-
-
-    case "Charmander":
-    // code block
-
-
-document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-player1CH.moniterClick1of4();
-player1CH.getPokemonName();
-
-    break;
-    case "Blastoise":
-    // code block
-
-document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-player1CH.moniterClick2of4();
-player1CH.getPokemonName();
-
-    break;
-    case "Pikachu":
-    // code block
-
-
-document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-player1CH.moniterClick3of4();
-player1CH.getPokemonName();
-
-    break;
-    case "Wartortle":
-    // code block
-
-
-document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-player1CH.moniterClick4of4();
-player1CH.getPokemonName();
-
-    break;
-
-    //removing default by commiting it out to see if it's neccessary
-
-/*----------comment tag begins here
-
-  default:
-    // reload page and activate the event listener after 30 seconds
-
-
-   setTimeout (function(){
-
-     console.log("reloading page in 30 secs if player1 fails to pick pokemon.");
-
-     window.location.reload();
-
-     document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-     document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-     document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-     document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-
-   },30000); // reloads page after 30 secs
-
-
-*///----------comment tag ends here 
-
-} // end of switch statement
-
-
-
-
-
-
-
-// 1279 replaces original code below -- when debugging is complete
-
-/*
 document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
 document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
 document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
 document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-*/
+
+
 
 //Event listener for sound settings
 document.getElementById("soundON").addEventListener("click", player1SD.soundSettingsOn);
@@ -1384,6 +1233,7 @@ function attackA() {
 
 console.log(confirm.makeMove[0]);
 
+player1.thunderShockMove();
 player1.fireBlasterMove();
 confirm.noSelectionMeansDisable();
 confirm.enableMoves();
