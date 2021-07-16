@@ -8,16 +8,18 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/15/2021)
+Lastest update: (7/16/2021)
 
 x) investigate this this.squPokeImage2() on line 411
-y) Created debuggingOperation() on line 436 & 490 inside changePokemon class to focus on the debugging activties
-z)
-1) The attack and defense menu needs to change each time a pokemon is loaded. [100% completed]
+y) Created debuggingOperation() on line 436 & 490 inside changePokemon class to focus on debugging activties
+z) disabled the restart function on line 361 informWinner() to work on line 222
+1) Each pokemon should have their own healthBar -- see line 629 and reference it with code on line 329 (getHealth)
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
-3)
+3) why is charmander pushed to deadPokemon 4 times? see line 360
+3a) why is Computer health status is undefined on line 1149?
+3b) why are there 4 squirtle images when charmander dies?
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
@@ -199,6 +201,131 @@ computerSD = new sound;
 class referee {
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
+    this.possibleDeadPokemon = []; // NOTE: This is an empty array that will be used later.
+    this.deadPokemon = []; // NOTE: This is an empty array that will be used later.
+    this.deathValidator = {pokemonDied:false};
+    this.deadPokemonConfirmed = function () {
+
+      const deathConfirmed = this.fullHealth.reduce(this.halfSum) + this.healthBar.reduce(this.halfSum);
+
+        if (deathConfirmed === 0 && p1.pokemonDied === true) {
+
+          //record this data to deadPokemon array on line 203.
+          // need to find out how to do this dynamically instead of hard coding it like this...
+          p1.deadPokemon.push("pokemon-name-goes-here");
+
+          //verify that dead pokemon is pushed to the array -- debugging here -- delete when neccessary
+          console.log(p1.deadPokemon);
+
+          //then disable pokemon here or elsewhere
+
+        } // end of if statement
+
+
+    }; // end of deadPokemonConfirmed
+
+
+    this.deadPokemonImage = function () {
+
+      //load pokemon tombstone image based on certain conditions.
+
+      if (player1CH.pokemonType[0].isSelected === true ||
+          player1CH.pokemonType[1].isSelected === true ||
+          player1CH.pokemonType[2].isSelected === true ||
+          player1CH.pokemonType[3].isSelected === true ||
+          computerCH.pokemonType[4].isSelected === false &&
+          computerCH.pokemonType[5].isSelected === false &&
+          computerCH.pokemonType[6].isSelected === false) {
+
+        //Inform player that pokemon is dead but let the game continue
+          document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
+
+
+        //disable the pokemon that died.
+
+        // remove previous Pokemon image
+
+        let elem =  document.createElement("img");
+        elem.src ="";
+        document.getElementById("CpuPokeImage").appendChild(elem);
+        document.getElementById("CpuPokeImage").style.width = 100;
+        document.getElementById("CpuPokeImage").style.height = 100;
+
+        // load tombstone
+        document.getElementById("Player1PokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/rip_pokemon.jpeg" </img>';
+        document.getElementById("Player1PokeImage").style.width = 200;
+        document.getElementById("Player1PokeImage").style.height = 180;
+
+
+          //Change boolean state so computer can make a move
+           confirm.makeMove[0].player1Move = false;
+
+
+           setTimeout(function(){
+
+             // record the pokemon that died and possible disable pokemon here? -- debugging on this line
+             p1.deadPokemonConfirmed();
+
+
+         },3000); // 3 sec wait time for computer to select pokemon
+
+
+
+         //load pokemon tombstone image based on certain conditions.
+
+      }else if (computerCH.pokemonType[0].isSelected === false ||
+                computerCH.pokemonType[1].isSelected === false ||
+                computerCH.pokemonType[2].isSelected === false ||
+                computerCH.pokemonType[3].isSelected === false ||
+                player1CH.pokemonType[4].isSelected === true &&
+                player1CH.pokemonType[5].isSelected === true &&
+                player1CH.pokemonType[6].isSelected === true) {
+
+        //Inform player that pokemon is dead but let the game continue
+          document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
+
+
+        //disable the pokemon that died.
+
+
+        // remove previous Pokemon image
+
+        let elem =  document.createElement("img");
+        elem.src ="";
+        document.getElementById("CpuPokeImage").appendChild(elem);
+        document.getElementById("CpuPokeImage").style.width = 100;
+        document.getElementById("CpuPokeImage").style.height = 100;
+
+        // load tombstone
+        document.getElementById("Player1PokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/rip_pokemon.jpeg" </img>';
+        document.getElementById("Player1PokeImage").style.width = 200;
+        document.getElementById("Player1PokeImage").style.height = 180;
+
+
+          //Change boolean state so computer can make a move
+           confirm.makeMove[0].player1Move = false;
+
+
+           setTimeout(function(){
+
+
+             // record the pokemon that died and possible disable pokemon here? -- debugging on this line
+             p1.deadPokemonConfirmed();
+
+         },3000); // 3 sec wait time for computer to select pokemon
+
+
+
+      } // end of if statements
+
+
+
+
+
+}; // end of deadPokemonImage function
+
+
+
     this.fullHealth = [100];
     this.healthBar = [0]; // NOTE: this is intentionally left empty but pokemon health will not exceed 100 HP when data is pushed to it.
     this.lowHealth = [40];
@@ -214,9 +341,58 @@ class referee {
     this.getHealth = function() {
 
 
-        return this.fullHealth.reduce(this.halfSum) + this.healthBar.reduce(this.halfSum);
 
-}
+        if (player1CH.charmanderHealthBar === 0 && computerCH.squirtleHealthBar > 1) {
+
+          // confirm dead pokemon
+          p1.deathValidator.pokemonDied = true;
+
+          // record data to deadPokemon array as well
+          p1.deadPokemon.push("Charmander");
+
+          // display player1 deadPokemon
+          p1.deadPokemonImage();
+
+
+
+
+          //confirming the status of died pokemon -- debugging here -- remove when neccessary
+          console.log(p1.deathValidator);
+          console.log(p1.possibleDeadPokemon); // remove this as it won't be needed
+          console.log(p1.deadPokemon);
+
+        }else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
+
+
+          // confirm dead pokemon
+          p1.deathValidator.pokemonDied = true;
+
+          // record data to deadPokemon array as well
+          p1.deadPokemon.push("Squirtle");
+
+          // display computer deadPokemon
+          p1.deadPokemonImage();
+
+
+
+          //confirming the status of died pokemon -- debugging here -- remove when neccessary
+          console.log(p1.deathValidator);
+          console.log(p1.possibleDeadPokemon); // remove this as it won't be needed
+          console.log(p1.deadPokemon);
+
+        } // end of if statements
+
+
+
+
+} // end of getHealth function
+
+
+
+
+
+
+
 
     this.informStatus = function() {
 
@@ -239,27 +415,22 @@ class referee {
     }
 
 
-    this.informWinner = function() { // informs winner and resets pokemon game
+    this.informWinner = function() {
+
+      // informs the winner of the game and restarts it based on certain conditions.
 
       if(p1.getHealth() == p1.zeroHealth){
 
-          document.getElementById("statusProgress").innerHTML=("Player1 lost the match... Game will restart in 10 secs...");
-
-          setTimeout (function(){
-
-            //reload page
-
-            window.location.reload();
-
-
-
-          },10000); // reloads page after 10 secs
+          document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
 
 
       }else if(comp.getHealth() == comp.zeroHealth){
 
+
+
           document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart in 10 secs...");
 
+          /* --- disabled the restart function to work on line 222
           setTimeout (function(){
 
             //reload page
@@ -269,6 +440,8 @@ class referee {
 
 
           },10000); // reloads page after 10 secs
+
+          */// --- delete this tag as well
 
       }
 
@@ -477,15 +650,36 @@ class changePokemon {
   }; // end of computerPokemonLoader function
 
 
-
+    // player1 pokemon options
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
+    this.charmanderHealthBar = 100;
+
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
+    this.blastoiseHealthBar = 100;
+
+
     this.wartortleStats = [-30, -10, -35, -20, -25];
     this.wartortleRest = [+45];
+    this.WartortleHealthBar = 100;
+
     this.pikachuStats = [-20, -10, -45];
     this.pikachuRest = [+45];
+    this.pikachuHealthBar = 100;
+
+    // computer pokemon options
+    this.squirtleStats =   [-20, -10, -45];
+    this.squirtleRest =    [+45];
+    this.squirtleHealthBar = 100;
+
+    this.charizardStats = [-20, -10, -45];
+    this.charizardRest =  [+45];
+    this.charizardHealthBar = 100;
+
+    this.scytherStats = [-20, -10, -45];
+    this.scytherRest =  [+45]
+    this.syctherHealthBar = 100;
 
 
     this.chrPokeImage =  function () {
@@ -717,86 +911,7 @@ class changePokemon {
 
 
     }
-    this.squPokeImage2 = function () {
 
-      if(this.savedPokemonName[0] == "Charizard" || this.savedPokemonName[0] == "Scyther"){
-
-        console.log(this.savedPokemonName);
-
-        // remove previous Pokemon image
-
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
-
-        // replace with new pokemon
-
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/squirtle.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
-
-      }
-
-    }
-
-
-    this.scyPokeImage2 = function () {
-
-
-      if(this.savedPokemonName[0] == "Charizard" || this.savedPokemonName[0] == "Squirtle"){
-
-        console.log(this.savedPokemonName);
-
-        // remove previous Pokemon image
-
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
-
-        // replace with new pokemon
-
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/Scyther.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
-
-      }
-
-
-
-    }
-
-    this.chaPokeImage = function () {
-
-      // remove previous pokemonName and image if one is already selected and restore new pokemonName
-
-      if(this.savedPokemonName[0] == "Squirtle" || this.savedPokemonName[0] == "Scyther"){
-
-        console.log(this.savedPokemonName);
-
-        // remove previous Pokemon image
-
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
-
-        // replace with new pokemon
-
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/charizard.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
-
-      }
-
-
-
-
-    }
 
     this.pikPokeImage = function () {
 
@@ -810,9 +925,13 @@ class changePokemon {
         player1CH.pokemonType[3].isSelected = true;
 
         // set boolean stats to false for non-selected pokemon
-        player1CH.pokemonType[0].isSelected = false;
-        player1CH.pokemonType[2].isSelected = false;
-        player1CH.pokemonType[1].isSelected = false;
+
+        computerCH.pokemonType[0].isSelected = false;
+        computerCH.pokemonType[1].isSelected = false;
+        computerCH.pokemonType[2].isSelected = false;
+        computerCH.pokemonType[4].isSelected = false;
+        computerCH.pokemonType[5].isSelected = false;
+        computerCH.pokemonType[6].isSelected = false;
 
         // inform player1 of pokemon change
         document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[3]+ ". " + " Computer will now select a pokemon.") ;
@@ -983,6 +1102,9 @@ class player1Moves {
         let health = document.getElementById("cpuHP")
         health.value -= 20;
 
+        //reflect the changes to the real pokemon health bar as well.
+        computerCH.scytherHealthBar -= 20;
+
         // changes need to be reflected in healthBar array as well
          comp.healthBar.push(-20);
          console.log("ThunderShock Damage is "+comp.healthBar);
@@ -1015,8 +1137,13 @@ class player1Moves {
             console.log(confirm.makeMove[0]);
 
            // fireBlaster does -20 damage on computer
+           // this is the HTML health bar which is only a temporary health bar
            let health = document.getElementById("cpuHP")
            health.value -= 10;
+
+           //reflect the changes to the real pokemon health bar as well.
+           computerCH.squirtleHealthBar -= 10;
+
 
            // changes need to be reflected in healthBar array as well
             comp.healthBar.push(-10);
@@ -1146,6 +1273,8 @@ class computerMoves {
     // does -20 damage to player1
      document.getElementById("player1HP").value -= 20;
 
+     //reflect the changes to the real pokemon health bar as well.
+     player1CH.charmanderHealthBar -= 20;
 
     // changes need to be reflected in healthBar array as well
        p1.healthBar.push(-20);
