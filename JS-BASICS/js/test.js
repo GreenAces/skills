@@ -8,18 +8,20 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/16/2021)
-
-x) investigate this this.squPokeImage2() on line 411
-y) Created debuggingOperation() on line 436 & 490 inside changePokemon class to focus on debugging activties
+Lastest update: (7/19/2021)
+x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
+x2) Uncaught TypeError: player1CH.charmanderHealthBar.push is not a function on line 710
+x3) investigate this this.squPokeImage2() on line 411
+y) Created debuggingOperation() on line 648 -- working on switching pokemon
 z) disabled the restart function on line 361 informWinner() to work on line 222
-1) Each pokemon should have their own healthBar -- see line 629 and reference it with code on line 329 (getHealth)
+1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
-3) why is charmander pushed to deadPokemon 4 times? see line 360
-3a) why is Computer health status is undefined on line 1149?
-3b) why are there 4 squirtle images when charmander dies?
+3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
+3a) why is Computer health status is undefined on line 1149? maybe because it's a function?
+3b) show an indictator of the dead pokemon of the total left (3) -- work on that later --  see line 225
+3c) function to disable charmander was created but don't know where to put it p1.disableDeadCharmander();
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
@@ -201,29 +203,72 @@ computerSD = new sound;
 class referee {
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
-    this.possibleDeadPokemon = []; // NOTE: This is an empty array that will be used later.
-    this.deadPokemon = []; // NOTE: This is an empty array that will be used later.
+    this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
-    this.deadPokemonConfirmed = function () {
+    this.disableDeadCharmander = function () {
 
-      const deathConfirmed = this.fullHealth.reduce(this.halfSum) + this.healthBar.reduce(this.halfSum);
-
-        if (deathConfirmed === 0 && p1.pokemonDied === true) {
-
-          //record this data to deadPokemon array on line 203.
-          // need to find out how to do this dynamically instead of hard coding it like this...
-          p1.deadPokemon.push("pokemon-name-goes-here");
-
-          //verify that dead pokemon is pushed to the array -- debugging here -- delete when neccessary
-          console.log(p1.deadPokemon);
-
-          //then disable pokemon here or elsewhere
-
-        } // end of if statement
+      console.log("Before if statement:" + JSON.stringify(p1.deadPokemon[0]));
 
 
-    }; // end of deadPokemonConfirmed
+      if (player1CH.charmanderHealthBar === 0 && p1.deadPokemon[0] === "Charmander") {
 
+        //debugging here -- executes code below but doesn't disable charmander -- perhaps it's being enabled somewhere else?
+
+        console.log("After if statement" + JSON.stringify(p1.deadPokemon[0]));
+
+        document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
+        document.getElementById("attackA").removeEventListener("click", attackA);
+        document.getElementById("attackB").removeEventListener("click", attackB);
+        document.getElementById("attackC").removeEventListener("click", attackC);
+        document.getElementById("defenseA").removeEventListener("click", defenseA);
+        document.getElementById("defenseB").removeEventListener("click", defenseB);
+        document.getElementById("defenseC").removeEventListener("click", defenseC);
+
+      } // end of if statment
+
+
+
+
+    }; // end of disableDeadCharmander (WARNING: nothing calls it)
+
+
+
+
+    this.pokemonSwitch = function () {
+
+      /* -- debugging code on line 648
+
+
+              //NOTE: record the healthBar from charmander before you reset the UI healthbar
+
+
+              // save this record as xyz as it will be used later when switching pokemon again
+
+              player1CH.savedPokemonName2.push("Charmander");
+
+              //debuggin here -- want to verify charmander is added to array
+              console.log(player1CH.savedPokemonName2);
+
+              player1CH.charmanderHealthBar.push(player1CH.modifiedHealthBar[0]);
+
+              //debuggin here -- want to verify healthBar is being pushed to the modifiedHealthBar array
+              console.log(player1CH.modifiedHealthBar);
+
+
+              // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
+              let health = document.getElementById("player1HP")
+              health.value += 100;
+
+              //where to call this function is the important question --
+
+
+
+      }
+
+      */// -- remove tag here as well
+
+
+    }; // end of pokemonSwitch function
 
     this.deadPokemonImage = function () {
 
@@ -241,15 +286,15 @@ class referee {
           document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
 
 
-        //disable the pokemon that died.
 
-        // remove previous Pokemon image
+
+        // remove previous player1 Pokemon image
 
         let elem =  document.createElement("img");
         elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
+        document.getElementById("Player1PokeImage").appendChild(elem);
+        document.getElementById("Player1PokeImage").style.width = 100;
+        document.getElementById("Player1PokeImage").style.height = 100;
 
         // load tombstone
         document.getElementById("Player1PokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/rip_pokemon.jpeg" </img>';
@@ -257,14 +302,16 @@ class referee {
         document.getElementById("Player1PokeImage").style.height = 180;
 
 
-          //Change boolean state so computer can make a move
-           confirm.makeMove[0].player1Move = false;
+          //Change boolean state so player1 can't make a move
+           confirm.makeMove[0].computerMove = true;
 
+           // inform player1 that it's the computer turn to attack
+           document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon. --- debugging here***";
 
            setTimeout(function(){
 
-             // record the pokemon that died and possible disable pokemon here? -- debugging on this line
-             p1.deadPokemonConfirmed();
+             // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+             console.log("Should there be a 3 second timer when a pokemon dies?");
 
 
          },3000); // 3 sec wait time for computer to select pokemon
@@ -285,10 +332,12 @@ class referee {
           document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
 
 
-        //disable the pokemon that died.
+        //no need to disable squirtle as it's a computer pokemon (user could never select it from menu)
 
 
-        // remove previous Pokemon image
+
+
+        // remove previous computer Pokemon image
 
         let elem =  document.createElement("img");
         elem.src ="";
@@ -297,20 +346,23 @@ class referee {
         document.getElementById("CpuPokeImage").style.height = 100;
 
         // load tombstone
-        document.getElementById("Player1PokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/rip_pokemon.jpeg" </img>';
-        document.getElementById("Player1PokeImage").style.width = 200;
-        document.getElementById("Player1PokeImage").style.height = 180;
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/rip_pokemon.jpeg" </img>';
+        document.getElementById("CpuPokeImage").style.width = 200;
+        document.getElementById("CpuPokeImage").style.height = 180;
 
 
-          //Change boolean state so computer can make a move
-           confirm.makeMove[0].player1Move = false;
+          //Change boolean state so computer move can't make a move
+           confirm.makeMove[0].player1Move = true;
+
+           //Inform player1 that they can attack the computer
+           document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon. ---debugging here***");
 
 
            setTimeout(function(){
 
 
-             // record the pokemon that died and possible disable pokemon here? -- debugging on this line
-             p1.deadPokemonConfirmed();
+             // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+             console.log("Should there be a 3 second timer when a pokemon dies?****");
 
          },3000); // 3 sec wait time for computer to select pokemon
 
@@ -354,12 +406,10 @@ class referee {
           p1.deadPokemonImage();
 
 
+          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
 
+          p1.deadPokemon.length = 1;
 
-          //confirming the status of died pokemon -- debugging here -- remove when neccessary
-          console.log(p1.deathValidator);
-          console.log(p1.possibleDeadPokemon); // remove this as it won't be needed
-          console.log(p1.deadPokemon);
 
         }else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
 
@@ -373,17 +423,16 @@ class referee {
           // display computer deadPokemon
           p1.deadPokemonImage();
 
+          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
 
+          p1.deadPokemon.length = 1;
 
-          //confirming the status of died pokemon -- debugging here -- remove when neccessary
-          console.log(p1.deathValidator);
-          console.log(p1.possibleDeadPokemon); // remove this as it won't be needed
-          console.log(p1.deadPokemon);
 
         } // end of if statements
 
 
 
+          return;
 
 } // end of getHealth function
 
@@ -391,6 +440,39 @@ class referee {
 
 
 
+
+    this.isPokemonAlive = function () { // NOTE: function NOT called yet...
+
+      if (JSON.stringify(p1.charmanderHealthBar != 0) ) {
+
+        //NOTE: record the healthBar from charmander before you reset the UI healthbar
+
+
+        // save this record as xyz as it will be used later when switching pokemon again
+
+        p1.savedPokemonName2.push("Charmander");
+
+        //debuggin here -- want to verify charmander is added to array
+        console.log(p1.savedPokemonName2);
+
+        p1.charmanderHealthBar.push(p1.modifiedHealthBar[0]);
+
+        //debuggin here -- want to verify healthBar is being pushed to the modifiedHealthBar array
+        console.log(p1.modifiedHealthBar);
+
+
+        // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
+        let health = document.getElementById("player1HP")
+        health.value += 100;
+
+        //where to call this function is the important question --
+
+
+      }
+
+
+
+    };// end of isPokemonAlive
 
 
 
@@ -610,19 +692,41 @@ class changePokemon {
     this.debuggingOperation = function() {
 
 
-      // debugging begins here
-      console.log("debuggingOperation() works");
+      // debugging begins here -- actual code is on 236
+
+      if (JSON.stringify(p1.charmanderHealthBar != 0) ) {
+
+        //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
 
+        // save this record as xyz as it will be used later when switching pokemon again
+
+        player1CH.savedPokemonName2.push("Charmander");
+
+        //debuggin here -- want to verify charmander is added to array
+        console.log(player1CH.savedPokemonName2);
+
+        //copy charmanderHealthBar to modifiedHealthBar array
+
+        player1CH.charmanderHealthBar.push(player1CH.modifiedHealthBar[0]);
+
+        //debuggin here -- want to verify healthBar is being pushed to the modifiedHealthBar array
+        console.log(player1CH.modifiedHealthBar);
 
 
-          console.log(typeof player1CH.x);
-          console.log(typeof  document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage));
-          console.log(typeof player1CH.pokemonType[0]);
+        // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
+        let health = document.getElementById("player1HP")
+        health.value += 100;
 
+        //where to call this function is the important question --
+
+
+      }
 
 
    }; // end of debuggingOperation function
+
+
     this.pokemonType = [{Type: "fire", pokemonName: this.player1PokemonChoices[0], isSelected: false },
                        {Type: "water", pokemonName:  this.player1PokemonChoices[1], isSelected: false},
                        {Type: "water", pokemonName: this.player1PokemonChoices[2], isSelected: false},
@@ -632,9 +736,9 @@ class changePokemon {
                        {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false}
                         ];
 
-    this.savedPokemonName = []; // NOTE: empty array of that will be filled with pokemon names later  -- the 1st one will be used to make the game more challenging for player1 -- see squPokeImage2 on line 699 for examples
-    this.savedPokemonName2 = []; // NOTE: empty array of that will be filled with pokemon names later -- the 2nd one will be used for storing names only
-    this.modifiedPokemonStats = []; // NOTE: empty array that will contain pokemone health status later.
+    this.savedPokemonName = []; // NOTE: empty array of that will be filled with pokemon names to be used later  -- the 1st one will be used to make the game more challenging for player1 -- see squPokeImage2 on line 699 for examples
+    this.savedPokemonName2 = []; // NOTE: empty array of that will be filled with pokemon names to be used later -- the 2nd one will be used for storing names only
+    this.modifiedHealthBar = []; // NOTE: empty array that will contain pokemone health status to be used later
     this.loadPokemonImage = []; // NOTE: this array of pokemon images are empty until computerPokemonLoader() is called upon.
 
     this.computerPokemonLoader = function () {
@@ -654,6 +758,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
+    this.charmanderHealthBar2 = [100];
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -1136,18 +1241,16 @@ class player1Moves {
 
             console.log(confirm.makeMove[0]);
 
-           // fireBlaster does -20 damage on computer
-           // this is the HTML health bar which is only a temporary health bar
+           // fireBlaster does -10 damage on squirtle
+           // this is the HTML health bar which is part of the ui
            let health = document.getElementById("cpuHP")
            health.value -= 10;
 
-           //reflect the changes to the real pokemon health bar as well.
+           //reflect the changes to squirtleHealthBar and charmanderHealthBar.
            computerCH.squirtleHealthBar -= 10;
 
-
-           // changes need to be reflected in healthBar array as well
-            comp.healthBar.push(-10);
-            console.log("FireBlaster Damage is "+comp.healthBar);
+          //line 1149 was showing as undefined -- but now it displays the array --- good... but line 1153 shows undefined -- find out why?
+            console.log("FireBlaster Damage is ");
             console.log("Computer health status is "+comp.getHealth());
 
             // show image
@@ -1174,6 +1277,12 @@ class player1Moves {
        // solar restores +45 health for player1 but can't attack for 3 moves -- fix that part
        let health = document.getElementById("player1HP")
        health.value += 45;
+
+       //reflect these changes to charmanderHealthBar array as well.
+       p1.charmanderHealthBar +=45;
+
+       //dugging charmanderHealthBar
+       console.log("debugging charmanderHealthBar -- status is: " + p1.charmanderHealthBar);
 
        let speed = document.getElementById("playerSpeed")
        speed.value -=65;
@@ -1276,6 +1385,9 @@ class computerMoves {
      //reflect the changes to the real pokemon health bar as well.
      player1CH.charmanderHealthBar -= 20;
 
+     //--debugging here-- reflect the changes to the charmanderHealthBar2 array as this will be needed later
+     player1CH.charmanderHealthBar.push(20);
+
     // changes need to be reflected in healthBar array as well
        p1.healthBar.push(-20);
 
@@ -1367,6 +1479,8 @@ player1.fireBlasterMove();
 confirm.noSelectionMeansDisable();
 confirm.enableMoves();
 confirm.disableMoves();
+player1CH.debuggingOperation();
+
 
 
 
@@ -1374,10 +1488,11 @@ if(confirm.makeMove[0].player1Move === false){
 
   setTimeout (function(){
 
-    // testing -- if player1 selections will display name of cpu selction
+
 
 
     computer.SquirtleMoves();
+
 
   },2000); // computer attacks after 2 secs
 
