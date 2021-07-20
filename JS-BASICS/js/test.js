@@ -443,7 +443,7 @@ class referee {
 
     this.isPokemonAlive = function () { // NOTE: function NOT called yet...
 
-      if (JSON.stringify(p1.charmanderHealthBar != 0) ) {
+      if (JSON.stringify(player1CH.charmanderHealthBar != 0) ) {
 
         //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
@@ -455,10 +455,10 @@ class referee {
         //debuggin here -- want to verify charmander is added to array
         console.log(p1.savedPokemonName2);
 
-        p1.charmanderHealthBar.push(p1.modifiedHealthBar[0]);
+        player1CH.charmanderHealthBar.push(player1CH.modifiedHealthBar[0]);
 
         //debuggin here -- want to verify healthBar is being pushed to the modifiedHealthBar array
-        console.log(p1.modifiedHealthBar);
+        console.log(player1CH.modifiedHealthBar);
 
 
         // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
@@ -694,31 +694,53 @@ class changePokemon {
 
       // debugging begins here -- actual code is on 236
 
-      if (JSON.stringify(p1.charmanderHealthBar != 0) ) {
+      if (JSON.stringify(player1CH.charmanderHealthBar != 0) ) {
 
         //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
 
-        // save this record as xyz as it will be used later when switching pokemon again
+        // set a limit to how many entries is entered into the array; therefore charmander is only displayed once
 
         player1CH.savedPokemonName2.push("Charmander");
+        player1CH.savedPokemonName2.length = 1;
 
-        //debuggin here -- want to verify charmander is added to array
-        console.log(player1CH.savedPokemonName2);
 
-        //copy charmanderHealthBar to modifiedHealthBar array
 
-        player1CH.charmanderHealthBar.push(player1CH.modifiedHealthBar[0]);
+        //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
+        console.log(player1CH.savedPokemonName2); // charmander
+        console.log(typeof player1CH.charmanderHealthBar); // number
+        console.log(player1CH.charmanderHealthBar); // exactly what numbers? 80, 60, 40, 20, 0
 
-        //debuggin here -- want to verify healthBar is being pushed to the modifiedHealthBar array
-        console.log(player1CH.modifiedHealthBar);
+        //copy data from p1.healthBar array to player1CH.charmanderHealthBar2
+
+
+        player1CH.charmanderHealthBar2.push(p1.healthBar);
+
+
+        //debuggin here -- want to verify charmanderHealthBar2 has the data from charmanderHealthBar
+        console.log(player1CH.charmanderHealthBar2);
 
 
         // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
         let health = document.getElementById("player1HP")
         health.value += 100;
 
+
+        //working on reduceArray function for charmanderHealthBar2 -- eventually this will be its own function in referee class
+
+           /* ---begins here
+        let numbers = [1, 2, 3];
+
+        let dataMerge =
+
+        let sum = numbers.reduce(function (accumulator, currentValue) {
+          return accumulator + currentValue;
+        });
+        console.log(sum);
+
         //where to call this function is the important question --
+
+          *///----ends here
 
 
       }
@@ -758,7 +780,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = [100];
+    this.charmanderHealthBar2 = {}; // This will eventually become an object of charmanderHealthBar (taken from healthBar array)
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -1282,7 +1304,7 @@ class player1Moves {
        p1.charmanderHealthBar +=45;
 
        //dugging charmanderHealthBar
-       console.log("debugging charmanderHealthBar -- status is: " + p1.charmanderHealthBar);
+       console.log("debugging charmanderHealthBar -- status is: " + player1CH.charmanderHealthBar);
 
        let speed = document.getElementById("playerSpeed")
        speed.value -=65;
@@ -1367,6 +1389,7 @@ class computerMoves {
 
 
    this.SquirtleMoves = function () {
+
      confirm.makeMove[0].computerMove = true;
 
      // if statement2
@@ -1385,8 +1408,6 @@ class computerMoves {
      //reflect the changes to the real pokemon health bar as well.
      player1CH.charmanderHealthBar -= 20;
 
-     //--debugging here-- reflect the changes to the charmanderHealthBar2 array as this will be needed later
-     player1CH.charmanderHealthBar.push(20);
 
     // changes need to be reflected in healthBar array as well
        p1.healthBar.push(-20);
