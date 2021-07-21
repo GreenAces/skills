@@ -10,7 +10,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 NOTE:
 Lastest update: (7/19/2021)
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
-x2) Uncaught TypeError: player1CH.charmanderHealthBar.push is not a function on line 710
+x2) focus on line 387 dataMerge function 
 x3) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -384,6 +384,14 @@ class referee {
     this.zeroHealth = [0];
     this.rechargeHealth = [60];
     this.isRecharging = false;
+    this.dataMerge = function () {
+
+      console.log(p1.dataMerge);
+
+    return  this.fullHealth.reduce(this.halfSum) + this.charmanderHealthBar2.reduce(this.halfSum);
+    }
+
+
     this.halfSum = function(total, num){
 
       return total + num;
@@ -711,19 +719,15 @@ class changePokemon {
         console.log(typeof player1CH.charmanderHealthBar); // number
         console.log(player1CH.charmanderHealthBar); // exactly what numbers? 80, 60, 40, 20, 0
 
-        //copy data from p1.healthBar array to player1CH.charmanderHealthBar2
+        //get healh information for charmanderHealthBar2
 
-
-        player1CH.charmanderHealthBar2.push(p1.healthBar);
-
-
-        //debuggin here -- want to verify charmanderHealthBar2 has the data from charmanderHealthBar
-        console.log(player1CH.charmanderHealthBar2);
+        p1.dataMerge();
 
 
         // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
-        let health = document.getElementById("player1HP")
-        health.value += 100;
+
+        //  let health = document.getElementById("player1HP")
+        //  health.value += 100;
 
 
         //working on reduceArray function for charmanderHealthBar2 -- eventually this will be its own function in referee class
@@ -780,7 +784,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = {}; // This will eventually become an object of charmanderHealthBar (taken from healthBar array)
+    this.charmanderHealthBar2 = [0]; // This will eventually become an object of charmanderHealthBar (taken from healthBar array)
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -1405,8 +1409,8 @@ class computerMoves {
     // does -20 damage to player1
      document.getElementById("player1HP").value -= 20;
 
-     //reflect the changes to the real pokemon health bar as well.
-     player1CH.charmanderHealthBar -= 20;
+     //reflect the changes to charmanderHealthBar2 array as well.
+     player1CH.charmanderHealthBar2.push(-20);
 
 
     // changes need to be reflected in healthBar array as well
@@ -1415,6 +1419,7 @@ class computerMoves {
     // get the status of health for player1 and computer pokemon
        comp.informStatus();
        console.log(p1.healthBar);
+       console.log(player1CH.charmanderHealthBar2);
 
    // check computers health and report it to player if these conditions are true
 
@@ -1440,7 +1445,7 @@ class computerMoves {
 
 } // end of computerMoves constructor
 
-} // end of player1Moves class...
+} // end of computerMoves class...
 
 
 
@@ -1501,6 +1506,7 @@ confirm.noSelectionMeansDisable();
 confirm.enableMoves();
 confirm.disableMoves();
 player1CH.debuggingOperation();
+
 
 
 
