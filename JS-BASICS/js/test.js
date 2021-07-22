@@ -8,9 +8,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/19/2021)
+Lastest update: (7/22/2021)
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
-x2) focus on line 387 dataMerge function 
+x2) undefined on line 418 and 419 -- need this to work to move forward with mechanism *high priority*
 x3) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -384,19 +384,45 @@ class referee {
     this.zeroHealth = [0];
     this.rechargeHealth = [60];
     this.isRecharging = false;
+    this.reducer = function (accumulator, currentValue) {accumulator + currentValue;}
+    this.array1 = [1, 2, 3, 4];
     this.dataMerge = function () {
 
-      console.log(p1.dataMerge);
+      // need line 392 for console
 
-    return  this.fullHealth.reduce(this.halfSum) + this.charmanderHealthBar2.reduce(this.halfSum);
-    }
+      /*
+
+    let hpDamage = p1.fullHealth.reduce(p1.reducer) + player1CH.charmanderHealthBar2.reduce(p1.reducer,0);
 
 
-    this.halfSum = function(total, num){
 
-      return total + num;
 
-      }
+
+     p1.fullHealth.reduce(p1.reducer) + player1CH.charmanderHealthBar2.reduce(p1.reducer,0);
+
+
+     //debugging here --
+
+     console.log("Charmander HP is currently  " +  p1.dataMerge.hpDamage);
+
+     */
+
+console.log(typeof p1.array1); //output object
+console.log(typeof p1.reducer); //output function
+
+     // 1 + 2 + 3 + 4
+console.log(p1.array1.reduce(p1.reducer));
+// expected output: 10 but it's instead undefined
+
+// 5 + 1 + 2 + 3 + 4
+console.log(p1.array1.reduce(p1.reducer, 5));
+// expected output: 15 but it's instead undefined
+
+//     return
+
+  } // end of dataMerge
+
+
 
     this.getHealth = function() {
 
