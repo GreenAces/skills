@@ -127,6 +127,23 @@ update progress bar style here
 
 */
 
+/* For Firefox */
+        progress::-moz-progress-bar {
+            background: lightblue;
+            width:120px;height:10px;
+        }
+
+        /* For Chrome or Safari */
+        progress::-webkit-progress-value {
+            background: lightblue;
+            width:120px;height:10px;
+        }
+
+        /* For IE10 */
+        progress {
+            background: lightblue;
+            width:120px;height:10px;
+        }
 
 
 
@@ -442,7 +459,7 @@ update progress bar style here
 
   width: 100px;
   height: 150px;
-  background-color: lightblue;
+  background-color: yellow;
   border: 25px solid green;
   padding: 25px;
   margin: 25px;

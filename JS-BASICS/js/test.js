@@ -8,11 +8,13 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/22/2021)
+Lastest update: (7/23/2021)
+x0) CharmanderHealthBar2 array is 980 on line 1556 -- WTF! how? -- fix this 
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
-x2) undefined on line 418 and 419 -- need this to work to move forward with mechanism *high priority*
-x3) investigate this this.squPokeImage2() on line 411
-y) Created debuggingOperation() on line 648 -- working on switching pokemon
+x2) turn comp.informStatus on after debugging on line 839 as it needs to be called  *high priority*
+x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
+x4) investigate this this.squPokeImage2() on line 411
+y) Created debuggingOperation() on line 648 -- working on switching pokemon -- created dataMerge function but needs fixing
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
@@ -201,10 +203,57 @@ computerSD = new sound;
 
 
 class referee {
+
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
+    this.htmlProgressBar = function() {
+
+      let updatedHtmlProgressBarForComputer = document.getElementById ('cpuHP');
+      let updatedHtmlProgressBarForPlayer1 = document.getElementById ('player1HP');
+
+      /*
+
+      let health = document.getElementById("cpuHP")
+      health.value -= 10;
+
+      */
+
+      if (player1CH.charmanderHealthBar === 40 && computerCH.squirtleHealthBar >= 70) {
+
+        //if player1 health is low than the html progress bar will be red
+
+
+        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "red");
+        document.body.appendChild(updatedHtmlProgressBarForPlayer1);
+
+
+      } else if (player1CH.charmanderHealthBar >= 60 && computerCH.squirtleHealthBar === 30) {
+
+        //if computer pokemon health is low than the html progress bar will be red
+
+        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "red");
+        document.body.appendChild(updatedHtmlProgressBarForComputer);
+
+
+      } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
+
+        //if both pokemon are alive than the html progress bar will be blue (default)
+
+        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "lightblue");
+
+        document.body.appendChild(updatedHtmlProgressBarForPlayer1);
+        document.body.appendChild(updatedHtmlProgressBarForComputer);
+
+
+
+      }// end of if statements
+
+
+
+    } // end of htmlProgressBar function
+
     this.disableDeadCharmander = function () {
 
       console.log("Before if statement:" + JSON.stringify(p1.deadPokemon[0]));
@@ -409,6 +458,7 @@ class referee {
 
 console.log(typeof p1.array1); //output object
 console.log(typeof p1.reducer); //output function
+console.log(typeof p1.dataMerge); //output function
 
      // 1 + 2 + 3 + 4
 console.log(p1.array1.reduce(p1.reducer));
@@ -444,8 +494,12 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           p1.deadPokemon.length = 1;
 
+          // call the InformWinner function here -- needs to modified for accuracy later
 
-        }else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
+      //    comp.informWinner();
+
+
+        } else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
 
 
           // confirm dead pokemon
@@ -461,8 +515,26 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           p1.deadPokemon.length = 1;
 
+          // call the InformWinner function here -- needs to modified for accuracy later
 
-        } // end of if statements
+    //      comp.informWinner();
+
+
+        } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
+
+          // this else if statement is to off-set the undefined error
+          // having a while-loop here could be useful here
+
+          //turn comp.informStatus on after debugging on line 839 as it needs to be called
+
+          //comp.informStatus();
+
+
+
+        }// end of if statements
+
+
+
 
 
 
@@ -512,37 +584,61 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
     this.informStatus = function() {
 
-      if(p1.getHealth() <= p1.lowHealth){
+      console.log("InformStatus function was called.");
 
+      //inform pokemon health status when both pokemon has a difference of 30 HP
+
+
+
+       if (JSON.stringify(player1CH.CharmanderHealthBar2[3] === -60)  && JSON.stringify(computerCH.squirtleHealthBar2[3]=== -30) ) {
+
+        console.log("debuggin--player1 health is low");
 
         document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
 
 
-      }else if (comp.getHealth() <= comp.lowHealth){
+        // update html progress bar --- see line on 232 for more details
+        p1.htmlProgressBar();
 
-      //  comp.healthBar.reduce(this.getHealth);
+
+
+      } else if (JSON.stringify(player1CH.CharmanderHealthBar2[1] === -40)  && JSON.stringify(computerCH.squirtleHealthBar2[6]=== -80) ) {
+
+        console.log("debuggin--computer health is low");
+
+
         document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
 
+        // update html progress bar --- see line on 232 for more details
+        comp.htmlProgressBar();
 
 
 
-      }
 
-    }
+      } // end of if statement
+
+    } // end of informStatus function
 
 
     this.informWinner = function() {
 
+      console.log("InformWinner function was called.");
+
       // informs the winner of the game and restarts it based on certain conditions.
 
-      if(p1.getHealth() == p1.zeroHealth){
+
+
+          if (JSON.stringify(player1CH.CharmanderHealthBar2[6]=== -120) && computerCH.squirtleHealthBar >=1){
+
+          console.log("debuggin--player1 pokemon is dead.");
 
           document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
 
 
-      }else if(comp.getHealth() == comp.zeroHealth){
 
+        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2 [12]=== -120) ) {
 
+          console.log("debuggin--player1 won the match");
 
           document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart in 10 secs...");
 
@@ -559,15 +655,15 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           */// --- delete this tag as well
 
-      }
+      } // end of if statements
 
 
-    }
+    } // end of InformWinner function
 
 
-    }
 
 
+} // end of constructor class
 
 
   } //end of referee class
@@ -725,10 +821,14 @@ class changePokemon {
 
     this.debuggingOperation = function() {
 
+      //default message for debuggingOperating function -- comment out if working on errors
+
+    //  console.log("DebuggingOperation function is launched. There are no major issues here.");
+
 
       // debugging begins here -- actual code is on 236
 
-      if (JSON.stringify(player1CH.charmanderHealthBar != 0) ) {
+      if (player1CH.charmanderHealthBar != 0 ) {
 
         //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
@@ -738,12 +838,22 @@ class changePokemon {
         player1CH.savedPokemonName2.push("Charmander");
         player1CH.savedPokemonName2.length = 1;
 
-
+        // remember this: JSON.stringify(player1CH.CharmanderHealthBar2[6]=== -120)
 
         //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
         console.log(player1CH.savedPokemonName2); // charmander
-        console.log(typeof player1CH.charmanderHealthBar); // number
-        console.log(player1CH.charmanderHealthBar); // exactly what numbers? 80, 60, 40, 20, 0
+        console.log(typeof player1CH.CharmanderHealthBar2); //undefined
+        player1CH.charmanderHealthBar2.push(1000); //test.js:845 Uncaught TypeError: player1CH.charmanderHealthBar2.push is not a function
+        console.log(JSON.stringify(player1CH.CharmanderHealthBar2));
+        console.log(typeof player1CH.CharmanderHealthBar2); //undefined -- nothing gets pushed
+        console.log(JSON.stringify(player1CH.CharmanderHealthBar2));
+
+
+
+
+
+        //console.log(JSON.stringify(player1CH.CharmanderHealthBar2));  // Uncaught TypeError: Cannot read property '3' of undefined
+
 
         //get healh information for charmanderHealthBar2
 
@@ -810,7 +920,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = [0]; // This will eventually become an object of charmanderHealthBar (taken from healthBar array)
+    this.charmanderHealthBar2 = []; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -829,6 +939,7 @@ class changePokemon {
     this.squirtleStats =   [-20, -10, -45];
     this.squirtleRest =    [+45];
     this.squirtleHealthBar = 100;
+    this.squirtleHealthBar2 = []; // exact duplicate of squirtleHealthBar and relects htmlProgressBar function
 
     this.charizardStats = [-20, -10, -45];
     this.charizardRest =  [+45];
@@ -1265,7 +1376,7 @@ class player1Moves {
         // changes need to be reflected in healthBar array as well
          comp.healthBar.push(-20);
          console.log("ThunderShock Damage is "+comp.healthBar);
-         console.log("Computer health status is "+comp.getHealth());
+         console.log("Computer health status is "+ comp.getHealth());
 
          // attack image for pikachu
          player1Img.pikAtkImage1();
@@ -1294,16 +1405,22 @@ class player1Moves {
             console.log(confirm.makeMove[0]);
 
            // fireBlaster does -10 damage on squirtle
-           // this is the HTML health bar which is part of the ui
+           // this is the HTML progress bar that displays the pokemon HP (does damage to computer HP)
            let health = document.getElementById("cpuHP")
            health.value -= 10;
 
-           //reflect the changes to squirtleHealthBar and charmanderHealthBar.
-           computerCH.squirtleHealthBar -= 10;
+           //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
+           computerCH.squirtleHealthBar -=10;   //this is a number
+           computerCH.squirtleHealthBar2 -=10;  //this is an array
+           console.log("squirtleHealthBar varible is "+computerCH.squirtleHealthBar);
+           console.log("squirtleHealthBar2 array is " + computerCH.squirtleHealthBar2);
+           console.log(computerCH.squirtleHealthBar2);
 
           //line 1149 was showing as undefined -- but now it displays the array --- good... but line 1153 shows undefined -- find out why?
             console.log("FireBlaster Damage is ");
-            console.log("Computer health status is "+comp.getHealth());
+            console.log(typeof comp.getHealth());
+            console.log("Computer health status is "+ comp.getHealth());
+            console.log(typeof comp.getHealth());
 
             // show image
             player1Img.chrAtkImage1();
@@ -1389,13 +1506,8 @@ class computerMoves {
          p1.healthBar.push(-10);
 
      // get the status of health for player1 and computer pokemon
-        comp.informStatus();
+
         console.log(p1.healthBar);
-
-     // check computers health and report it to player if these conditions are true
-
-      comp.informWinner();
-
 
 
       // inform player1 of attack from computer
@@ -1432,25 +1544,26 @@ class computerMoves {
      computerCH.savedPokemonName2.push("Squirtle");
 
 
-    // does -20 damage to player1
+    // this is the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
      document.getElementById("player1HP").value -= 20;
 
-     //reflect the changes to charmanderHealthBar2 array as well.
-     player1CH.charmanderHealthBar2.push(-20);
+     //reflect the changes to player1CH.charmanderHealthBar AND charmanderHealthBar2 array as well.
+     player1CH.charmanderHealthBar-=20; // this is a number
+     player1CH.charmanderHealthBar2-=20; // this is an array
 
+
+    //debugging here
+     console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar); // incorrect -- why is this array not being updated with the damage?
+     console.log("CharmanderHealthBar2 array is "+player1CH.charmanderHealthBar2);
 
     // changes need to be reflected in healthBar array as well
        p1.healthBar.push(-20);
 
+
     // get the status of health for player1 and computer pokemon
-       comp.informStatus();
+
        console.log(p1.healthBar);
        console.log(player1CH.charmanderHealthBar2);
-
-   // check computers health and report it to player if these conditions are true
-
-      comp.informWinner();
-
 
     // inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
