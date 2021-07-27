@@ -127,23 +127,89 @@ update progress bar style here
 
 */
 
-/* For Firefox */
-        progress::-moz-progress-bar {
+      /* progress bar for player1 HP*/
+
+        /* For Firefox */
+        #player1HP::-moz-progress-bar {
             background: lightblue;
             width:120px;height:10px;
         }
 
         /* For Chrome or Safari */
-        progress::-webkit-progress-value {
+        #player1HP::-webkit-progress-value {
             background: lightblue;
             width:120px;height:10px;
         }
 
         /* For IE10 */
-        progress {
+        #player1HP {
             background: lightblue;
             width:120px;height:10px;
         }
+
+
+
+        /* speedbar for player1 -- not used*/
+
+          /* For Firefox */
+          #playerSpeed::-moz-progress-bar {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
+          /* For Chrome or Safari */
+          #playerSpeed::-webkit-progress-value {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
+          /* For IE10 */
+          #playerSpeed {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
+
+        /* progress bar for computer HP*/
+
+        /* For Firefox */
+        #cpuHP::-moz-progress-bar {
+            background: lightblue;
+            width:120px;height:10px;
+        }
+
+        /* For Chrome or Safari */
+        #cpuHP::-webkit-progress-value {
+            background: lightblue;
+            width:120px;height:10px;
+        }
+
+        /* For IE10 */
+        #cpuHP {
+            background: lightblue;
+            width:120px;height:10px;
+        }
+
+        /* speedbar for computer -- not used*/
+
+          /* For Firefox */
+          #cpuSpeed::-moz-progress-bar {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
+          /* For Chrome or Safari */
+          #cpuSpeed::-webkit-progress-value {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
+          /* For IE10 */
+          #cpuSpeed {
+              background: lightblue;
+              width:120px;height:10px;
+          }
+
 
 
 

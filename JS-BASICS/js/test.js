@@ -8,10 +8,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/23/2021)
-x0) CharmanderHealthBar2 array is 980 on line 1556 -- WTF! how? -- fix this 
+Lastest update: (7/27/2021)
+x0) debuggin--player1 health is low on line 596 is being triggered too early -- check if statement for correctness
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
-x2) turn comp.informStatus on after debugging on line 839 as it needs to be called  *high priority*
+x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon -- created dataMerge function but needs fixing
@@ -210,42 +210,32 @@ class referee {
     this.deathValidator = {pokemonDied:false};
     this.htmlProgressBar = function() {
 
-      let updatedHtmlProgressBarForComputer = document.getElementById ('cpuHP');
-      let updatedHtmlProgressBarForPlayer1 = document.getElementById ('player1HP');
 
-      /*
-
-      let health = document.getElementById("cpuHP")
-      health.value -= 10;
-
-      */
 
       if (player1CH.charmanderHealthBar === 40 && computerCH.squirtleHealthBar >= 70) {
 
         //if player1 health is low than the html progress bar will be red
 
 
-        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "red");
-        document.body.appendChild(updatedHtmlProgressBarForPlayer1);
+          document.getElementById('player1HP').style.background = "#f3f3f3";
 
 
       } else if (player1CH.charmanderHealthBar >= 60 && computerCH.squirtleHealthBar === 30) {
 
         //if computer pokemon health is low than the html progress bar will be red
 
-        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "red");
-        document.body.appendChild(updatedHtmlProgressBarForComputer);
+
+          document.getElementById('cpuHP').style.background = "#f3f3f3";
+
 
 
       } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
 
         //if both pokemon are alive than the html progress bar will be blue (default)
 
-        updatedHtmlProgressBarForComputer.setAttribute("background: lightblue", "lightblue");
 
-        document.body.appendChild(updatedHtmlProgressBarForPlayer1);
-        document.body.appendChild(updatedHtmlProgressBarForComputer);
-
+         document.getElementById('player1HP').style.background = "#f3f3f3";
+         document.getElementById('cpuHP').style.background = "#f3f3f3";
 
 
       }// end of if statements
@@ -253,6 +243,8 @@ class referee {
 
 
     } // end of htmlProgressBar function
+
+
 
     this.disableDeadCharmander = function () {
 
@@ -527,7 +519,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           //turn comp.informStatus on after debugging on line 839 as it needs to be called
 
-          //comp.informStatus();
+          comp.informStatus();
 
 
 
@@ -588,9 +580,18 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
       //inform pokemon health status when both pokemon has a difference of 30 HP
 
+// charmanderHealthBar2 array cheatsheet
+
+        // [1] === -20
+       // [2] === -40
+      // [3] === -60
+    // [4] === -80
+  // [5] === -100
+// [6] === -120 (dead)
 
 
-       if (JSON.stringify(player1CH.CharmanderHealthBar2[3] === -60)  && JSON.stringify(computerCH.squirtleHealthBar2[3]=== -30) ) {
+
+       if (JSON.stringify(player1CH.CharmanderHealthBar2=== -60) && JSON.stringify(computerCH.squirtleHealthBar2=== -30) ) {
 
         console.log("debuggin--player1 health is low");
 
@@ -602,7 +603,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-      } else if (JSON.stringify(player1CH.CharmanderHealthBar2[1] === -40)  && JSON.stringify(computerCH.squirtleHealthBar2[6]=== -80) ) {
+      } else if (JSON.stringify(player1CH.CharmanderHealthBar2=== -40)  && JSON.stringify(computerCH.squirtleHealthBar2=== -80) ) {
 
         console.log("debuggin--computer health is low");
 
@@ -628,7 +629,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-          if (JSON.stringify(player1CH.CharmanderHealthBar2[6]=== -120) && computerCH.squirtleHealthBar >=1){
+          if (JSON.stringify(player1CH.CharmanderHealthBar2=== -120) && computerCH.squirtleHealthBar >=1){
 
           console.log("debuggin--player1 pokemon is dead.");
 
@@ -636,7 +637,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2 [12]=== -120) ) {
+        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2=== -120)) {
 
           console.log("debuggin--player1 won the match");
 
@@ -842,17 +843,15 @@ class changePokemon {
 
         //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
         console.log(player1CH.savedPokemonName2); // charmander
-        console.log(typeof player1CH.CharmanderHealthBar2); //undefined
-        player1CH.charmanderHealthBar2.push(1000); //test.js:845 Uncaught TypeError: player1CH.charmanderHealthBar2.push is not a function
-        console.log(JSON.stringify(player1CH.CharmanderHealthBar2));
-        console.log(typeof player1CH.CharmanderHealthBar2); //undefined -- nothing gets pushed
-        console.log(JSON.stringify(player1CH.CharmanderHealthBar2));
+
+        console.log(player1CH.charmanderHealthBar2[2]);
+        console.log(player1CH.charmanderHealthBar2[3]);
+        console.log(player1CH.charmanderHealthBar2[4]);
+        console.log(player1CH.charmanderHealthBar2[5]);
+        console.log(player1CH.charmanderHealthBar2[6]);
 
 
 
-
-
-        //console.log(JSON.stringify(player1CH.CharmanderHealthBar2));  // Uncaught TypeError: Cannot read property '3' of undefined
 
 
         //get healh information for charmanderHealthBar2
@@ -920,7 +919,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = []; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
+    this.charmanderHealthBar2 = [null,null,null,null,null,null,null]; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
