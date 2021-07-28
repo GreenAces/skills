@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 /*
 NOTE:
 Lastest update: (7/28/2021)
-x0) on line 833 -- this is the way to use JSON.stringify -- using it inside the if statement will not work properly. Find a workaround to move forward. 
+x0) Uncaught TypeError: computerCH.squirtleHealthBar2.indexOf is not a function on line 834 -- find a way to read array and develop logic based on it. 
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -830,12 +830,14 @@ class changePokemon {
       // debugging begins here -- actual code is on 236
       // on line 833 -- this is the way to use JSON.stringify -- using it inside the if statement will not work properly. Find a workaround to move forward.
 
-      console.log(JSON.stringify(player1CH.CharmanderHealthBar2 <=-60) && JSON.stringify(computerCH.squirtleHealthBar2<=-30)); // returns false
+      let x = player1CH.charmanderHealthBar2.indexOf(3)==1; // returns -1 if not found (true) or 1 if found (false)
+      let y = computerCH.squirtleHealthBar2.indexOf(3)==1;
+      console.log(x); //returns true
+      console.log(y);
 
-      let x = false;
 
 
-      if (x === true) {
+      if (x === false && y === false) {
 
         console.log("debuggingOperation successfull: if statment was triggered.");
 
