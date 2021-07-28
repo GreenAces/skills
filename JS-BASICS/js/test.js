@@ -8,8 +8,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/27/2021)
-x0) debuggin--player1 health is low on line 596 is being triggered too early -- check if statement for correctness
+Lastest update: (7/28/2021)
+x0) on line 833 -- this is the way to use JSON.stringify -- using it inside the if statement will not work properly. Find a workaround to move forward. 
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -488,7 +488,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           // call the InformWinner function here -- needs to modified for accuracy later
 
-      //    comp.informWinner();
+          //  comp.informWinner();
 
 
         } else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
@@ -509,7 +509,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           // call the InformWinner function here -- needs to modified for accuracy later
 
-    //      comp.informWinner();
+          comp.informWinner();
 
 
         } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
@@ -591,7 +591,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-       if (JSON.stringify(player1CH.CharmanderHealthBar2=== -60) && JSON.stringify(computerCH.squirtleHealthBar2=== -30) ) {
+       if (JSON.stringify(player1CH.CharmanderHealthBar2 <=-60) && JSON.stringify(computerCH.squirtleHealthBar2<=-30) ) {
 
         console.log("debuggin--player1 health is low");
 
@@ -603,7 +603,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-      } else if (JSON.stringify(player1CH.CharmanderHealthBar2=== -40)  && JSON.stringify(computerCH.squirtleHealthBar2=== -80) ) {
+      } else if (JSON.stringify(player1CH.CharmanderHealthBar2>=-40)  && JSON.stringify(computerCH.squirtleHealthBar2>=-80) ) {
 
         console.log("debuggin--computer health is low");
 
@@ -629,7 +629,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-          if (JSON.stringify(player1CH.CharmanderHealthBar2=== -120) && computerCH.squirtleHealthBar >=1){
+          if (JSON.stringify(player1CH.CharmanderHealthBar2>=-120) && computerCH.squirtleHealthBar >=1){
 
           console.log("debuggin--player1 pokemon is dead.");
 
@@ -637,7 +637,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
 
 
-        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2=== -120)) {
+        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2>=-120)) {
 
           console.log("debuggin--player1 won the match");
 
@@ -828,8 +828,16 @@ class changePokemon {
 
 
       // debugging begins here -- actual code is on 236
+      // on line 833 -- this is the way to use JSON.stringify -- using it inside the if statement will not work properly. Find a workaround to move forward.
 
-      if (player1CH.charmanderHealthBar != 0 ) {
+      console.log(JSON.stringify(player1CH.CharmanderHealthBar2 <=-60) && JSON.stringify(computerCH.squirtleHealthBar2<=-30)); // returns false
+
+      let x = false;
+
+
+      if (x === true) {
+
+        console.log("debuggingOperation successfull: if statment was triggered.");
 
         //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
@@ -919,7 +927,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = [null,null,null,null,null,null,null]; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
+    this.charmanderHealthBar2 = []; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -1413,13 +1421,6 @@ class player1Moves {
            computerCH.squirtleHealthBar2 -=10;  //this is an array
            console.log("squirtleHealthBar varible is "+computerCH.squirtleHealthBar);
            console.log("squirtleHealthBar2 array is " + computerCH.squirtleHealthBar2);
-           console.log(computerCH.squirtleHealthBar2);
-
-          //line 1149 was showing as undefined -- but now it displays the array --- good... but line 1153 shows undefined -- find out why?
-            console.log("FireBlaster Damage is ");
-            console.log(typeof comp.getHealth());
-            console.log("Computer health status is "+ comp.getHealth());
-            console.log(typeof comp.getHealth());
 
             // show image
             player1Img.chrAtkImage1();
