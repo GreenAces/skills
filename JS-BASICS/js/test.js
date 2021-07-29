@@ -8,8 +8,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (7/28/2021)
-x0) Uncaught TypeError: computerCH.squirtleHealthBar2.indexOf is not a function on line 834 -- find a way to read array and develop logic based on it. 
+Lastest update: (7/29/2021)
+x0) Work on filter on line 614 before working with the if statment
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -208,7 +208,23 @@ class referee {
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
+    this.pokemonHealthStatus = function(lowHealth) {
+
+
+
+
+    return lowHealth >= -60;
+
+
+
+
+
+    } // pokemonHealthStatus function ended
+
+
     this.htmlProgressBar = function() {
+
+
 
 
 
@@ -589,9 +605,13 @@ console.log(p1.array1.reduce(p1.reducer, 5));
   // [5] === -100
 // [6] === -120 (dead)
 
+        // apply filter first before if statement
+
+        let x = player1CH.charmanderHealthBar2.filter(p1.pokemonHealthStatus);
+        let y = computerCH.squirtleHealthBar2.filter(p1.pokemonHealthStatus);
 
 
-       if (JSON.stringify(player1CH.CharmanderHealthBar2 <=-60) && JSON.stringify(computerCH.squirtleHealthBar2<=-30) ) {
+       if (x <=-60) {
 
         console.log("debuggin--player1 health is low");
 
@@ -828,71 +848,78 @@ class changePokemon {
 
 
       // debugging begins here -- actual code is on 236
-      // on line 833 -- this is the way to use JSON.stringify -- using it inside the if statement will not work properly. Find a workaround to move forward.
 
-      let x = player1CH.charmanderHealthBar2.indexOf(3)==1; // returns -1 if not found (true) or 1 if found (false)
-      let y = computerCH.squirtleHealthBar2.indexOf(3)==1;
-      console.log(x); //returns true
-      console.log(y);
+        let x = 20;
 
 
-
-      if (x === false && y === false) {
-
-        console.log("debuggingOperation successfull: if statment was triggered.");
-
-        //NOTE: record the healthBar from charmander before you reset the UI healthbar
-
-
-        // set a limit to how many entries is entered into the array; therefore charmander is only displayed once
-
-        player1CH.savedPokemonName2.push("Charmander");
-        player1CH.savedPokemonName2.length = 1;
-
-        // remember this: JSON.stringify(player1CH.CharmanderHealthBar2[6]=== -120)
-
-        //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
-        console.log(player1CH.savedPokemonName2); // charmander
-
-        console.log(player1CH.charmanderHealthBar2[2]);
-        console.log(player1CH.charmanderHealthBar2[3]);
-        console.log(player1CH.charmanderHealthBar2[4]);
-        console.log(player1CH.charmanderHealthBar2[5]);
-        console.log(player1CH.charmanderHealthBar2[6]);
+        if (x=== 20) {
 
 
 
+          console.log("debuggingOperation successfull: if statment was triggered.");
+
+          //console.log(p1.ages.filter(p1.checkAdult)); this works -- next line will be changed to accommodate the desired array
+
+          p1.pokemonHealthStatus();
+
+          //NOTE: record the healthBar from charmander before you reset the UI healthbar
+
+          // set a limit to how many entries is entered into the array; therefore charmander is only displayed once
+
+          player1CH.savedPokemonName2.push("Charmander");
+          player1CH.savedPokemonName2.length = 1;
+
+          // remember this: JSON.stringify(player1CH.CharmanderHealthBar2[6]=== -120)
+
+          //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
+          console.log(player1CH.savedPokemonName2); // charmander
+
+          console.log(player1CH.charmanderHealthBar2[2]);
+          console.log(player1CH.charmanderHealthBar2[3]);
+          console.log(player1CH.charmanderHealthBar2[4]);
+          console.log(player1CH.charmanderHealthBar2[5]);
+          console.log(player1CH.charmanderHealthBar2[6]);
 
 
-        //get healh information for charmanderHealthBar2
-
-        p1.dataMerge();
 
 
-        // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
 
-        //  let health = document.getElementById("player1HP")
-        //  health.value += 100;
+          //get healh information for charmanderHealthBar2
 
-
-        //working on reduceArray function for charmanderHealthBar2 -- eventually this will be its own function in referee class
-
-           /* ---begins here
-        let numbers = [1, 2, 3];
-
-        let dataMerge =
-
-        let sum = numbers.reduce(function (accumulator, currentValue) {
-          return accumulator + currentValue;
-        });
-        console.log(sum);
-
-        //where to call this function is the important question --
-
-          *///----ends here
+          p1.dataMerge();
 
 
-      }
+          // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
+
+          //  let health = document.getElementById("player1HP")
+          //  health.value += 100;
+
+
+          //working on reduceArray function for charmanderHealthBar2 -- eventually this will be its own function in referee class
+
+             /* ---begins here
+          let numbers = [1, 2, 3];
+
+          let dataMerge =
+
+          let sum = numbers.reduce(function (accumulator, currentValue) {
+            return accumulator + currentValue;
+          });
+          console.log(sum);
+
+          //where to call this function is the important question --
+
+            *///----ends here
+
+
+
+        } // end of if statement
+
+
+
+
+
+
 
 
    }; // end of debuggingOperation function
@@ -923,7 +950,6 @@ class changePokemon {
     );
 
   }; // end of computerPokemonLoader function
-
 
     // player1 pokemon options
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
