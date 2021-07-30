@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 /*
 NOTE:
 Lastest update: (7/29/2021)
-x0) test.js:874 Uncaught TypeError: 
+x0) Focus on line 863. Need to figure out how to get the filter function to output -60. Can make big progress if this is solved. *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -43,6 +43,7 @@ Date:
 
 
 */
+
 
 
 
@@ -208,27 +209,6 @@ class referee {
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
-    this.checkPokemonHealth = function (lowHealth) {
-
-      if (lowHealth2 >=-60) {
-
-      document.getElementById("statusProgress3").innerHTML = "This is a test to see if checkPokemonHealth is working."
-
-    }else if (lowHealth2 <=-60) {
-
-      document.getElementById("statusLayoutProgress2").innerHTML = "This is a test to see if checkPokemonHealth is working 2."
-
-    } // end of if statements
-
-      return lowHealth2 >= -60;
-
-    }; // end of checkPokemonHealth function
-
-
-
-
-
-
     this.htmlProgressBar = function() {
 
 
@@ -616,7 +596,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
            /* delete other comment tags on lines 617 and 650
 
-         let isCharmanderDying = player1CH.charmanderHealthBar2.filter(function(lowHealth){
+         let isCharmanderDying = player1CH.charmanderHealthBar2.filter(function(criticalHealth){
 
 
               if () {
@@ -643,7 +623,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
            } // end of if statements
 
-           return lowHealth <= -60;
+           return criticalHealth <= -60;
 
          }); // end of isCharmanderDying function
 
@@ -867,11 +847,19 @@ class changePokemon {
 
 
 
-          console.log("debuggingOperation successfull called: if statment was triggered.");
+          console.log("debuggingOperation successful : if statment was triggered.");
 
 
+           let charmanderHPStatus =  capture.charmanderHealthBar2.filter(hp => hp ==-60);
 
-         console.log(player1CH.charmanderHealthBar2.filter(p1.checkPokemonHealth));
+           console.log(charmanderHPStatus); // expected output should be -60 but it shows empty array instead. why?
+
+           if (charmanderHPStatus === -60) {
+
+             console.log("testing to see if this would work..."); // doesn't get triggered
+           }
+
+
 
 
 
@@ -1389,14 +1377,14 @@ class changePokemon {
 } // end of pokemeon constructor
 
 
-} // end of changePokemon class
+} // end of class
 
 
 
 
 player1CH = new changePokemon;
 computerCH = new changePokemon;
-
+capture = new changePokemon;
 
 
 
