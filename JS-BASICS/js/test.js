@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 /*
 NOTE:
 Lastest update: (7/29/2021)
-x0) Work on filter on line 614 before working with the if statment
+x0) test.js:874 Uncaught TypeError: 
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -208,18 +208,25 @@ class referee {
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
-    this.pokemonHealthStatus = function(lowHealth) {
+    this.checkPokemonHealth = function (lowHealth) {
+
+      if (lowHealth2 >=-60) {
+
+      document.getElementById("statusProgress3").innerHTML = "This is a test to see if checkPokemonHealth is working."
+
+    }else if (lowHealth2 <=-60) {
+
+      document.getElementById("statusLayoutProgress2").innerHTML = "This is a test to see if checkPokemonHealth is working 2."
+
+    } // end of if statements
+
+      return lowHealth2 >= -60;
+
+    }; // end of checkPokemonHealth function
 
 
 
 
-    return lowHealth >= -60;
-
-
-
-
-
-    } // pokemonHealthStatus function ended
 
 
     this.htmlProgressBar = function() {
@@ -535,7 +542,7 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
           //turn comp.informStatus on after debugging on line 839 as it needs to be called
 
-          comp.informStatus();
+        //  comp.informStatus();
 
 
 
@@ -607,36 +614,40 @@ console.log(p1.array1.reduce(p1.reducer, 5));
 
         // apply filter first before if statement
 
-        let x = player1CH.charmanderHealthBar2.filter(p1.pokemonHealthStatus);
-        let y = computerCH.squirtleHealthBar2.filter(p1.pokemonHealthStatus);
+           /* delete other comment tags on lines 617 and 650
+
+         let isCharmanderDying = player1CH.charmanderHealthBar2.filter(function(lowHealth){
 
 
-       if (x <=-60) {
+              if () {
 
-        console.log("debuggin--player1 health is low");
+             console.log("debuggin--player1 health is low");
 
-        document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
+             document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
 
+             // update html progress bar --- see line on 232 for more details
+             p1.htmlProgressBar();
 
-        // update html progress bar --- see line on 232 for more details
-        p1.htmlProgressBar();
+           } else if () {
 
-
-
-      } else if (JSON.stringify(player1CH.CharmanderHealthBar2>=-40)  && JSON.stringify(computerCH.squirtleHealthBar2>=-80) ) {
-
-        console.log("debuggin--computer health is low");
+             console.log("debuggin--computer health is low");
 
 
-        document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
+             document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
 
-        // update html progress bar --- see line on 232 for more details
-        comp.htmlProgressBar();
+             // update html progress bar --- see line on 232 for more details
+             comp.htmlProgressBar();
 
 
 
 
-      } // end of if statement
+           } // end of if statements
+
+           return lowHealth <= -60;
+
+         }); // end of isCharmanderDying function
+
+         */// delete other tag on line 617 and 650
 
     } // end of informStatus function
 
@@ -856,11 +867,16 @@ class changePokemon {
 
 
 
-          console.log("debuggingOperation successfull: if statment was triggered.");
+          console.log("debuggingOperation successfull called: if statment was triggered.");
 
-          //console.log(p1.ages.filter(p1.checkAdult)); this works -- next line will be changed to accommodate the desired array
 
-          p1.pokemonHealthStatus();
+
+         console.log(player1CH.charmanderHealthBar2.filter(p1.checkPokemonHealth));
+
+
+
+
+          //  p1.informStatus(); // Uncaught TypeError: player1CH.charmanderHealthBar2.filter is not a function on line 610 -- fix this
 
           //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
