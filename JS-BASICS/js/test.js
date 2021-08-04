@@ -8,8 +8,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/03/2021)
-x0) Focus on line 833 and 855. Need to figure out how to get the simplifier function to output -60. Can make big progress if this is solved. *high prirority*
+Lastest update: (8/04/2021)
+x0) Focus on line 869. Need to figure out how to get the simplifier function to output -60. Can make big progress if this is solved. *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -830,28 +830,6 @@ class changePokemon {
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
-    this.simplifier = function (displayHP) {
-
-
-       // logic needs to be improved to reflect squirtle damage as well
-       if(displayHP ===-60) {
-
-         console.log("CharmanderHealthBar2 array is -60. The simplifier function works correctly."); // doesn't get triggered
-
-       }else if (displayHP ===-30) {
-
-         console.log("squirtleHealthBar2 array is -30. The simplifier function works correctly."); // doesn't get triggered
-
-       }
-
-       //delete line 847 after debugging is complete.
-
-       console.log(player1CH.displayHP); // undefined
-
-       return player1CH.displayHP;
-
-     }
-
     this.debuggingOperation = function() {
 
       //default message for debuggingOperating function -- comment out if working on errors
@@ -868,18 +846,30 @@ class changePokemon {
 
 
 
+
           console.log("debuggingOperation successful : if statment was triggered.");
           console.log("----------------------------------------------------------");
 
 
-           let charmanderHPStatus =  capture.charmanderHealthBar2.filter(player1CH.simplifier);
-           let squirtleHPStatus = capture.squirtleHealthBar2.filter(player1CH.simplifier);
 
 
-           // see line 833 for simplifier function
-           console.log("---------------------------------------------------------");
-           console.log(charmanderHPStatus); // just shows an empty array
-           console.log(squirtleHPStatus); // just shows an empty array
+            function simplifier  (element, index, array) {
+
+              console.log(element, index, array);
+              return element === -20;
+
+
+            } // end of simplifier function
+
+
+            // Seems like applying a filter on charmanderHealthBar2 yields nothing unless you ruduce the array first,
+            // but that also leads to a problem as well as it uses the original array instead of the modified one.
+            // applying a filter to charmanderStats works as expected but why doesn't it work for charmanderHealthBar2???
+
+           let value = capture.charmanderStats.filter(simplifier);
+           console.log(value);
+
+
 
 
 
@@ -986,7 +976,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = [null]; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
+    this.charmanderHealthBar2 = [0]; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -1005,7 +995,7 @@ class changePokemon {
     this.squirtleStats =   [-20, -10, -45];
     this.squirtleRest =    [+45];
     this.squirtleHealthBar = 100;
-    this.squirtleHealthBar2 = [null]; // exact duplicate of squirtleHealthBar and relects htmlProgressBar function
+    this.squirtleHealthBar2 = [0]; // exact duplicate of squirtleHealthBar and relects htmlProgressBar function
 
     this.charizardStats = [-20, -10, -45];
     this.charizardRest =  [+45];
