@@ -8,13 +8,13 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/04/2021)
-x0) Focus on line 869. Need to figure out how to get the simplifier function to output -60. Can make big progress if this is solved. *high prirority*
+Lastest update: (8/06/2021)
+x0) Focus on line 1562. Need to figure out why charmanderHealthBar2 is a number -- it should be an object to apply filter. *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
 x4) investigate this this.squPokeImage2() on line 411
-y) Created debuggingOperation() on line 648 -- working on switching pokemon -- created dataMerge function but needs fixing
+y) Created debuggingOperation() on line 648 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
 2) Add computer pokemon each time player selects a pokemon. [10% completed]
@@ -428,44 +428,7 @@ class referee {
     this.zeroHealth = [0];
     this.rechargeHealth = [60];
     this.isRecharging = false;
-    this.reducer = function (accumulator, currentValue) {accumulator + currentValue;}
-    this.array1 = [1, 2, 3, 4];
-    this.dataMerge = function () {
 
-      // need line 392 for console
-
-      /*
-
-    let hpDamage = p1.fullHealth.reduce(p1.reducer) + player1CH.charmanderHealthBar2.reduce(p1.reducer,0);
-
-
-
-
-
-     p1.fullHealth.reduce(p1.reducer) + player1CH.charmanderHealthBar2.reduce(p1.reducer,0);
-
-
-     //debugging here --
-
-     console.log("Charmander HP is currently  " +  p1.dataMerge.hpDamage);
-
-     */
-
-console.log(typeof p1.array1); //output object
-console.log(typeof p1.reducer); //output function
-console.log(typeof p1.dataMerge); //output function
-
-     // 1 + 2 + 3 + 4
-console.log(p1.array1.reduce(p1.reducer));
-// expected output: 10 but it's instead undefined
-
-// 5 + 1 + 2 + 3 + 4
-console.log(p1.array1.reduce(p1.reducer, 5));
-// expected output: 15 but it's instead undefined
-
-//     return
-
-  } // end of dataMerge
 
 
 
@@ -851,26 +814,23 @@ class changePokemon {
           console.log("----------------------------------------------------------");
 
 
-
-
-            function simplifier  (element, index, array) {
-
-              console.log(element, index, array);
-              return element === -20;
-
-
-            } // end of simplifier function
-
-
             // Seems like applying a filter on charmanderHealthBar2 yields nothing unless you ruduce the array first,
             // but that also leads to a problem as well as it uses the original array instead of the modified one.
             // applying a filter to charmanderStats works as expected but why doesn't it work for charmanderHealthBar2???
+            // moving the function on line 1610 didn't fix the problem
+            // changing the reference from capture to player1CH makes the problem worst... why?
 
-           let value = capture.charmanderStats.filter(simplifier);
-           console.log(value);
+           // let value = capture.charmanderStats.filter((element, index, array) => element === -20);
+           // console.log(value); //-20
 
 
 
+
+           let result = capture.charmanderStats.filter((element, index, array) => element === 20);
+
+           console.log("charmanderHealthBar2 (first line) typeof " +typeof player1HP.charmanderHealthBar2); //undefined
+
+           console.log("filter function output is " + result); // shows nothing
 
 
 
@@ -907,7 +867,7 @@ class changePokemon {
 
           //get healh information for charmanderHealthBar2
 
-          p1.dataMerge();
+
 
 
           // reset the UI healthBar for player1 so that the new pokemon starts with 100 health
@@ -916,21 +876,7 @@ class changePokemon {
           //  health.value += 100;
 
 
-          //working on reduceArray function for charmanderHealthBar2 -- eventually this will be its own function in referee class
 
-             /* ---begins here
-          let numbers = [1, 2, 3];
-
-          let dataMerge =
-
-          let sum = numbers.reduce(function (accumulator, currentValue) {
-            return accumulator + currentValue;
-          });
-          console.log(sum);
-
-          //where to call this function is the important question --
-
-            *///----ends here
 
 
 
@@ -1598,12 +1544,14 @@ class computerMoves {
 
      //reflect the changes to player1CH.charmanderHealthBar AND charmanderHealthBar2 array as well.
      player1CH.charmanderHealthBar-=20; // this is a number
-     player1CH.charmanderHealthBar2-=20; // this is an array
+     player1CH.charmanderHealthBar2 -=20; // this is an array
 
 
     //debugging here
-     console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar); // incorrect -- why is this array not being updated with the damage?
+     console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
      console.log("CharmanderHealthBar2 array is "+player1CH.charmanderHealthBar2);
+
+
 
     // changes need to be reflected in healthBar array as well
        p1.healthBar.push(-20);
@@ -1611,8 +1559,10 @@ class computerMoves {
 
     // get the status of health for player1 and computer pokemon
 
-       console.log(p1.healthBar);
-       console.log(player1CH.charmanderHealthBar2);
+       console.log("healhBar array is " +p1.healthBar); // 0,-20,-20
+       console.log("p1.healthBar array typeof " +typeof p1.healthBar); //object
+       console.log("charmanderHealthBar2 array is " +player1CH.charmanderHealthBar2); //-20
+       console.log("charmanderHealthBar2 typeof " +typeof player1CH.charmanderHealthBar2); //number
 
     // inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
