@@ -8,8 +8,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/06/2021)
-x0) Focus on line 1562. Need to figure out why charmanderHealthBar2 is a number -- it should be an object to apply filter. *high prirority*
+Lastest update: (8/12/2021)
+x0) Focus on line 1349 and 833 -- need to be able to reference an array and outcome -20. Seems to only work for predefined arrays such healBar  *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -822,15 +822,15 @@ class changePokemon {
 
            // let value = capture.charmanderStats.filter((element, index, array) => element === -20);
            // console.log(value); //-20
+           // a1.array1
 
 
 
+           let result = a1.array1.filter((element, index, array) => element === -20);
 
-           let result = capture.charmanderStats.filter((element, index, array) => element === 20);
+           console.log("charmanderHealthBar2 (line 831) typeof " +typeof a1.array1); // was undefined -- now it's object (it works)
 
-           console.log("charmanderHealthBar2 (first line) typeof " +typeof player1HP.charmanderHealthBar2); //undefined
-
-           console.log("filter function output is " + result); // shows nothing
+           console.log("filter function output is " + result); // before it shows nothing -- now it nothing as well. perhaps it's because you're calling it at the wrong location? nope...
 
 
 
@@ -855,11 +855,7 @@ class changePokemon {
           //debuggin here -- verify only charmander is added to array and verify the datatype of charmanderHealthBar to debug line 714
           console.log(player1CH.savedPokemonName2); // charmander
 
-          console.log(player1CH.charmanderHealthBar2[2]);
-          console.log(player1CH.charmanderHealthBar2[3]);
-          console.log(player1CH.charmanderHealthBar2[4]);
-          console.log(player1CH.charmanderHealthBar2[5]);
-          console.log(player1CH.charmanderHealthBar2[6]);
+
 
 
 
@@ -1350,6 +1346,19 @@ computerCH = new changePokemon;
 capture = new changePokemon;
 
 
+class objectofArrays {
+  constructor () {
+    this.array1 = [];
+    this.array2 = [];
+
+
+  } // end of constructor class
+} // end of objectofArrays class
+
+a1 = new objectofArrays;
+
+
+
 
 
 class player1Moves {
@@ -1544,13 +1553,12 @@ class computerMoves {
 
      //reflect the changes to player1CH.charmanderHealthBar AND charmanderHealthBar2 array as well.
      player1CH.charmanderHealthBar-=20; // this is a number
-     player1CH.charmanderHealthBar2 -=20; // this is an array
-
+     player1CH.charmanderHealthBar2.push(-20); // reference this array with player1CH
+     a1.array1.push(-20); // possible solution to referencing charmander's health from now on.
 
     //debugging here
      console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
      console.log("CharmanderHealthBar2 array is "+player1CH.charmanderHealthBar2);
-
 
 
     // changes need to be reflected in healthBar array as well
@@ -1562,7 +1570,8 @@ class computerMoves {
        console.log("healhBar array is " +p1.healthBar); // 0,-20,-20
        console.log("p1.healthBar array typeof " +typeof p1.healthBar); //object
        console.log("charmanderHealthBar2 array is " +player1CH.charmanderHealthBar2); //-20
-       console.log("charmanderHealthBar2 typeof " +typeof player1CH.charmanderHealthBar2); //number
+       console.log("charmanderHealthBar2 typeof " +typeof capture.charmanderHealthBar2); // reference this array with capture why? so that it can be identified as an object *very important*
+       console.log("charmanderHealthBar2 typeof " + typeof a1.array1)
 
     // inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
@@ -1597,6 +1606,9 @@ function refreshPage(){
 
     window.location.reload();
 }
+
+
+
 
 
 
