@@ -1,3 +1,5 @@
+
+
 /* This Javascript file is for testing purposes. Please read JavaScript manual for more information.
 
 https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
@@ -8,8 +10,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/12/2021)
-x0) troubleshoot line 1596 -- Uncaught reference error -- need to reduce array before applying filter. also need a function for main logic when filter is applied. *high prirority*
+Lastest update: (8/13/2021)
+x0) troubleshoot line 1586 -- Uncaught TypeError-- need to reduce array before applying filter. also need a function for main logic when filter is applied. *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -43,7 +45,6 @@ Date:
 
 
 */
-
 
 
 
@@ -1343,27 +1344,17 @@ a2 = new objectofArrays;
 
 
 class arrayFunctions {
+
   constructor () {
-    this.reduceCharmander = function (accumulator,currentValue) {
-
-      a1.charmanderHealthBar2.reduce((this.reduceCharmander));
-
-      console.log(accumulator + currentValue);
-
-      return accumulator + currentValue;
-
-    }
 
 
-    this.reduceSquirtle  =  function (accumulator,currentValue) {
 
-      a1.squirtleHealthBar2.reduce((this.reduceSquirtle));
 
-      console.log(accumulator + currentValue);
+    this.charmanderHPReduced = a1.charmanderHealthBar2.reduce(function (accumulator, currentValue) {
 
-      return accumulator + currentValue;
-
-    }
+          console.log("charmanderHPReduced value: " + this.charmanderHPReduced); // debugging
+          return accumulator + currentValue;
+          });
 
 
     this.getCharmanderHP =  function () {
@@ -1592,8 +1583,7 @@ class computerMoves {
      a1.charmanderHealthBar2.push(-20); // push this data to charmanderHealthBar2 array as well
 
      // You need a function to apply the filter over here. But you need to reduce the array first. The function also needs to call informStatus for main logic
-    // array1.reduceCharmander;   // nothing happens
-     array1.reduceCharmander; // Uncaught TypeError if you add ()
+     array1.accumulatorFunction(); // test.js:1586 Uncaught TypeError: array1.accumulatorFunction is not a function
 
     //debugging here
      console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
