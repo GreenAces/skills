@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 /*
 NOTE:
 Lastest update: (8/12/2021)
-x0) Focus on line 1349 and 833 -- need to be able to reference an array and outcome -20. Seems to only work for predefined arrays such healBar  *high prirority*
+x0) troubleshoot line 1596 -- Uncaught reference error -- need to reduce array before applying filter. also need a function for main logic when filter is applied. *high prirority*
 x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
@@ -611,7 +611,7 @@ class referee {
 
 
 
-        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(computerCH.squirtleHealthBar2>=-120)) {
+        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(a2.squirtleHealthBar2>=-120)) {
 
           console.log("debuggin--player1 won the match");
 
@@ -805,7 +805,7 @@ class changePokemon {
         let x = 20;
 
 
-        if (x=== 20) {
+        if (x=== 10) {
 
 
 
@@ -814,27 +814,9 @@ class changePokemon {
           console.log("----------------------------------------------------------");
 
 
-            // Seems like applying a filter on charmanderHealthBar2 yields nothing unless you ruduce the array first,
-            // but that also leads to a problem as well as it uses the original array instead of the modified one.
-            // applying a filter to charmanderStats works as expected but why doesn't it work for charmanderHealthBar2???
-            // moving the function on line 1610 didn't fix the problem
-            // changing the reference from capture to player1CH makes the problem worst... why?
-
-           // let value = capture.charmanderStats.filter((element, index, array) => element === -20);
-           // console.log(value); //-20
-           // a1.array1
 
 
-
-           let result = a1.array1.filter((element, index, array) => element === -20);
-
-           console.log("charmanderHealthBar2 (line 831) typeof " +typeof a1.array1); // was undefined -- now it's object (it works)
-
-           console.log("filter function output is " + result); // before it shows nothing -- now it nothing as well. perhaps it's because you're calling it at the wrong location? nope...
-
-
-
-            console.log("---------------------------------------------------------");
+          console.log("---------------------------------------------------------");
 
 
 
@@ -918,7 +900,7 @@ class changePokemon {
     this.charmanderStats = [-20, -10, -45]; // attack/defense moves
     this.charmanderRest = [+45]; // restores health by +45 hp
     this.charmanderHealthBar = 100;
-    this.charmanderHealthBar2 = [0]; // exact duplicate of charmanderHealthBar and relects htmlProgressBar function
+
 
     this.blastoiseStats = [-20, -10, -45];
     this.blastoiseRest = [+45];
@@ -937,7 +919,7 @@ class changePokemon {
     this.squirtleStats =   [-20, -10, -45];
     this.squirtleRest =    [+45];
     this.squirtleHealthBar = 100;
-    this.squirtleHealthBar2 = [0]; // exact duplicate of squirtleHealthBar and relects htmlProgressBar function
+
 
     this.charizardStats = [-20, -10, -45];
     this.charizardRest =  [+45];
@@ -1343,19 +1325,73 @@ class changePokemon {
 
 player1CH = new changePokemon;
 computerCH = new changePokemon;
-capture = new changePokemon;
+
 
 
 class objectofArrays {
   constructor () {
-    this.array1 = [];
-    this.array2 = [];
+    this.charmanderHealthBar2 = [0];
+    this.squirtleHealthBar2 = [0];
 
 
   } // end of constructor class
 } // end of objectofArrays class
 
 a1 = new objectofArrays;
+a2 = new objectofArrays;
+
+
+
+class arrayFunctions {
+  constructor () {
+    this.reduceCharmander = function (accumulator,currentValue) {
+
+      a1.charmanderHealthBar2.reduce((this.reduceCharmander));
+
+      console.log(accumulator + currentValue);
+
+      return accumulator + currentValue;
+
+    }
+
+
+    this.reduceSquirtle  =  function (accumulator,currentValue) {
+
+      a1.squirtleHealthBar2.reduce((this.reduceSquirtle));
+
+      console.log(accumulator + currentValue);
+
+      return accumulator + currentValue;
+
+    }
+
+
+    this.getCharmanderHP =  function () {
+
+
+      a1.charmanderHealthBar2.filter((element, index, array))
+
+
+      return element === -60;
+    }
+
+
+    this.getSquirtleHP   =  function () {
+
+      a1.squirtleHealthBar2.filter((element, index, array))
+
+      return element === -30;
+    }
+
+  } // end of constructor
+} // end of arrayArrows class
+
+array1 = new arrayFunctions;
+array2 = new arrayFunctions;
+
+
+
+
 
 
 
@@ -1422,9 +1458,9 @@ class player1Moves {
 
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            computerCH.squirtleHealthBar -=10;   //this is a number
-           computerCH.squirtleHealthBar2 -=10;  //this is an array
+           a2.squirtleHealthBar2 -=10;  //this is an array
            console.log("squirtleHealthBar varible is "+computerCH.squirtleHealthBar);
-           console.log("squirtleHealthBar2 array is " + computerCH.squirtleHealthBar2);
+           console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
 
             // show image
             player1Img.chrAtkImage1();
@@ -1553,12 +1589,15 @@ class computerMoves {
 
      //reflect the changes to player1CH.charmanderHealthBar AND charmanderHealthBar2 array as well.
      player1CH.charmanderHealthBar-=20; // this is a number
-     player1CH.charmanderHealthBar2.push(-20); // reference this array with player1CH
-     a1.array1.push(-20); // possible solution to referencing charmander's health from now on.
+     a1.charmanderHealthBar2.push(-20); // push this data to charmanderHealthBar2 array as well
+
+     // You need a function to apply the filter over here. But you need to reduce the array first. The function also needs to call informStatus for main logic
+    // array1.reduceCharmander;   // nothing happens
+     array1.reduceCharmander; // Uncaught TypeError if you add ()
 
     //debugging here
      console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
-     console.log("CharmanderHealthBar2 array is "+player1CH.charmanderHealthBar2);
+     console.log("CharmanderHealthBar2 array is "+a1.charmanderHealthBar2);
 
 
     // changes need to be reflected in healthBar array as well
@@ -1569,9 +1608,9 @@ class computerMoves {
 
        console.log("healhBar array is " +p1.healthBar); // 0,-20,-20
        console.log("p1.healthBar array typeof " +typeof p1.healthBar); //object
-       console.log("charmanderHealthBar2 array is " +player1CH.charmanderHealthBar2); //-20
-       console.log("charmanderHealthBar2 typeof " +typeof capture.charmanderHealthBar2); // reference this array with capture why? so that it can be identified as an object *very important*
-       console.log("charmanderHealthBar2 typeof " + typeof a1.array1)
+       console.log("charmanderHealthBar2 array is " +a1.charmanderHealthBar2); //-20
+       console.log("charmanderHealthBar2 typeof " +typeof a1.charmanderHealthBar2);
+
 
     // inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
