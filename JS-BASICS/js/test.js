@@ -10,9 +10,9 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/13/2021)
-x0) troubleshoot line 1586 -- Uncaught TypeError-- need to reduce array before applying filter. also need a function for main logic when filter is applied. *high prirority*
-x1) charmanderHealthBar2 added on line 762 to work with modifiedHealthBar -- if this works you may need to intergrate this new mechanism for line 1387 squirtleMoves
+Lastest update: (8/16/2021)
+x0) troubleshoot htmlProgressBar and informStatus functions on line 213 and 544. Don't forget to use the getHealth function on line 436  *high prirority*
+x1) new function added on line 1339 checkTheStatus() which uses reduce method for arrays and calls on informStatus() + htmlProgressBar()
 x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
 x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
 x4) investigate this this.squPokeImage2() on line 411
@@ -545,34 +545,23 @@ class referee {
 
       console.log("InformStatus function was called.");
 
-      //inform pokemon health status when both pokemon has a difference of 30 HP
+      //inform pokemon health status when each pokemon have low health
 
-// charmanderHealthBar2 array cheatsheet
+      // varible declartions
 
-        // [1] === -20
-       // [2] === -40
-      // [3] === -60
-    // [4] === -80
-  // [5] === -100
-// [6] === -120 (dead)
+      let charmanderHP2 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP2 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
-        // apply filter first before if statement
-
-           /* delete other comment tags on lines 617 and 650
-
-         let isCharmanderDying = player1CH.charmanderHealthBar2.filter(function(criticalHealth){
-
-
-              if () {
+              if (charmanderHP2 === 360 && squirtleHP2 === 180) {
 
              console.log("debuggin--player1 health is low");
 
              document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-             p1.htmlProgressBar();
+          //   p1.htmlProgressBar();    remove comment tag here  after debugging informStatus function
 
-           } else if () {
+        } else if (squirtleHP2 === 150) {
 
              console.log("debuggin--computer health is low");
 
@@ -580,18 +569,13 @@ class referee {
              document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-             comp.htmlProgressBar();
+            // comp.htmlProgressBar(); remove comment tag here  after debugging informStatus function
 
 
 
 
            } // end of if statements
 
-           return criticalHealth <= -60;
-
-         }); // end of isCharmanderDying function
-
-         */// delete other tag on line 617 and 650
 
     } // end of informStatus function
 
@@ -602,9 +586,14 @@ class referee {
 
       // informs the winner of the game and restarts it based on certain conditions.
 
+      // new variable declartions to avoid reference error
+
+      let charmanderHP3 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP3 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
 
-          if (JSON.stringify(player1CH.CharmanderHealthBar2>=-120) && computerCH.squirtleHealthBar >=1){
+
+          if (charmanderHP3 === 300 && squirtleHP3 >=10 ){
 
           console.log("debuggin--player1 pokemon is dead.");
 
@@ -612,7 +601,7 @@ class referee {
 
 
 
-        } else if (player1CH.CharmanderHealthBar >=1 && JSON.stringify(a2.squirtleHealthBar2>=-120)) {
+        } else if (charmanderHP3 >=310 && squirtleHP3 === 100) {
 
           console.log("debuggin--player1 won the match");
 
@@ -824,7 +813,7 @@ class changePokemon {
 
 
 
-          //  p1.informStatus(); // Uncaught TypeError: player1CH.charmanderHealthBar2.filter is not a function on line 610 -- fix this
+
 
           //NOTE: record the healthBar from charmander before you reset the UI healthbar
 
@@ -1331,8 +1320,8 @@ computerCH = new changePokemon;
 
 class objectofArrays {
   constructor () {
-    this.charmanderHealthBar2 = [0];
-    this.squirtleHealthBar2 = [0];
+    this.charmanderHealthBar2 = [0,20,40,60,80,100,120];
+    this.squirtleHealthBar2 =   [0,10,20,30,40,50,60];
 
 
   } // end of constructor class
@@ -1347,14 +1336,46 @@ class arrayFunctions {
 
   constructor () {
 
+    this.checkTheStatus = function () {
+
+      // varible declartions
+
+      let charmanderHP = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+
+
+      // create a reduce function for charmanderHealthBar2
+      console.log("charmanderHealthBar2 array was reduced to: " + charmanderHP); // 420
+      console.log("squirtleHealthBar2 array was reduced to: "+ squirtleHP) //210
+
+      //create a logic based on the output for the reduce function and call other functions if conditions are true
+
+      if(charmanderHP === 360  ){
+
+          p1.informStatus();
+
+
+      }else if (squirtleHP === 150 ){
+
+          p1.informStatus();
 
 
 
-    this.charmanderHPReduced = a1.charmanderHealthBar2.reduce(function (accumulator, currentValue) {
 
-          console.log("charmanderHPReduced value: " + this.charmanderHPReduced); // debugging
+
+      }// end of if statements
+
+    }; // end of checkTheStatus function
+
+
+
+    this.PokemonHPReduced = function (accumulator, currentValue) {
+
+        // pass accumulator + currentValue to another function later. it has a value of 420 for charmander
+          console.log("read this line: ");
+
           return accumulator + currentValue;
-          });
+          };
 
 
     this.getCharmanderHP =  function () {
@@ -1449,7 +1470,7 @@ class player1Moves {
 
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            computerCH.squirtleHealthBar -=10;   //this is a number
-           a2.squirtleHealthBar2 -=10;  //this is an array
+           a2.squirtleHealthBar2.push(-10);  //this is an array
            console.log("squirtleHealthBar varible is "+computerCH.squirtleHealthBar);
            console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
 
@@ -1583,7 +1604,8 @@ class computerMoves {
      a1.charmanderHealthBar2.push(-20); // push this data to charmanderHealthBar2 array as well
 
      // You need a function to apply the filter over here. But you need to reduce the array first. The function also needs to call informStatus for main logic
-     array1.accumulatorFunction(); // test.js:1586 Uncaught TypeError: array1.accumulatorFunction is not a function
+
+        array1.checkTheStatus();
 
     //debugging here
      console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
