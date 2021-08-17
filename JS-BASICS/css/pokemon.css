@@ -131,19 +131,19 @@ update progress bar style here
 
         /* For Firefox */
         #player1HP::-moz-progress-bar {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
         /* For Chrome or Safari */
         #player1HP::-webkit-progress-value {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
         /* For IE10 */
         #player1HP {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
@@ -153,19 +153,19 @@ update progress bar style here
 
           /* For Firefox */
           #playerSpeed::-moz-progress-bar {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 
           /* For Chrome or Safari */
           #playerSpeed::-webkit-progress-value {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 
           /* For IE10 */
           #playerSpeed {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 
@@ -174,19 +174,19 @@ update progress bar style here
 
         /* For Firefox */
         #cpuHP::-moz-progress-bar {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
         /* For Chrome or Safari */
         #cpuHP::-webkit-progress-value {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
         /* For IE10 */
         #cpuHP {
-            background: lightblue;
+            background-color: #A6EDED;
             width:120px;height:10px;
         }
 
@@ -194,19 +194,19 @@ update progress bar style here
 
           /* For Firefox */
           #cpuSpeed::-moz-progress-bar {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 
           /* For Chrome or Safari */
           #cpuSpeed::-webkit-progress-value {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 
           /* For IE10 */
           #cpuSpeed {
-              background: lightblue;
+              background-color: #A6EDED;
               width:120px;height:10px;
           }
 

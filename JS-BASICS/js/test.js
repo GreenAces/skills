@@ -10,11 +10,11 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/16/2021)
-x0) troubleshoot htmlProgressBar and informStatus functions on line 213 and 544. Don't forget to use the getHealth function on line 436  *high prirority*
-x1) new function added on line 1339 checkTheStatus() which uses reduce method for arrays and calls on informStatus() + htmlProgressBar()
-x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 211
-x3) added htmlProgressBar function but it needs work -- something wrong with the logic  and this.informWinner on line 622 needs fixing -- should be disabled on line 476 getHealth function
+Lastest update: (8/17/2021)
+x0)
+x1)
+x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 215 *high prirority*
+x3) 
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -212,37 +212,50 @@ class referee {
     this.deathValidator = {pokemonDied:false};
     this.htmlProgressBar = function() {
 
+      console.log("htmlProgressBar function was started");
+
+
+      // new variable declartions to avoid reference error
+
+      let charmanderHP3 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP3 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+
+      let player1HP = document.getElementById('player1HP')
+      let computerHP = document.getElementById('cpuHP')
 
 
 
-
-      if (player1CH.charmanderHealthBar === 40 && computerCH.squirtleHealthBar >= 70) {
+      if (charmanderHP3 <= 360  &&  squirtleHP3 >= 110) {
 
         //if player1 health is low than the html progress bar will be red
 
+          console.log("if you can read this text, then the expression is valid");
 
-          document.getElementById('player1HP').style.background = "#f3f3f3";
+          player1HP.backgroundColor = "#FD0202";
 
 
-      } else if (player1CH.charmanderHealthBar >= 60 && computerCH.squirtleHealthBar === 30) {
+
+
+
+        //  document.getElementById('player1HP').style.background = "#f3f3f3";
+
+
+      } else if (charmanderHP3 >= 360 && computerCH.squirtleHealthBar >= 150) {
 
         //if computer pokemon health is low than the html progress bar will be red
 
+          console.log("if you can read this text as well, then the expression is valid");
 
-          document.getElementById('cpuHP').style.background = "#f3f3f3";
-
-
-
-      } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
-
-        //if both pokemon are alive than the html progress bar will be blue (default)
+          computerHP.backgroundColor = "#FD0202";
 
 
-         document.getElementById('player1HP').style.background = "#f3f3f3";
-         document.getElementById('cpuHP').style.background = "#f3f3f3";
 
 
-      }// end of if statements
+        //  document.getElementById('cpuHP').style.background = "#f3f3f3";
+
+
+
+      } // end of if statements
 
 
 
@@ -252,6 +265,7 @@ class referee {
 
     this.disableDeadCharmander = function () {
 
+      console.log("disableDeadCharmander was started");
       console.log("Before if statement:" + JSON.stringify(p1.deadPokemon[0]));
 
 
@@ -435,9 +449,16 @@ class referee {
 
     this.getHealth = function() {
 
+      console.log("getHealth was started");
+
+      // new variable declartions to avoid reference error
+
+      let charmanderHP4 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP4 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
 
-        if (player1CH.charmanderHealthBar === 0 && computerCH.squirtleHealthBar > 1) {
+
+        if (charmanderHP4 === 300 && squirtleHP4 >= 110) {
 
           // confirm dead pokemon
           p1.deathValidator.pokemonDied = true;
@@ -455,10 +476,10 @@ class referee {
 
           // call the InformWinner function here -- needs to modified for accuracy later
 
-          //  comp.informWinner();
+           comp.informWinner();
 
 
-        } else if (player1CH.charmanderHealthBar > 1 && computerCH.squirtleHealthBar ===0) {
+        } else if (charmanderHP4 >= 310 && squirtleHP4 === 100) {
 
 
           // confirm dead pokemon
@@ -479,25 +500,22 @@ class referee {
           comp.informWinner();
 
 
-        } else if (player1CH.charmanderHealthBar >= 1 && computerCH.squirtleHealthBar >=1) {
+        } else if (charmanderHP4 >= 310 && squirtleHP4 >=110) {
 
           // this else if statement is to off-set the undefined error
           // having a while-loop here could be useful here
 
           //turn comp.informStatus on after debugging on line 839 as it needs to be called
+          console.log("comp.informStatus was started again on this line: ")
+          console.log("Both pokemon are live -- add more code to this line: ")
 
-        //  comp.informStatus();
+          comp.informStatus();
 
 
 
         }// end of if statements
 
 
-
-
-
-
-          return;
 
 } // end of getHealth function
 
@@ -552,24 +570,24 @@ class referee {
       let charmanderHP2 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
       let squirtleHP2 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
-              if (charmanderHP2 === 360 && squirtleHP2 === 180) {
+              if (charmanderHP2 <= 360 && squirtleHP2 >= 180) {
 
-             console.log("debuggin--player1 health is low");
+
 
              document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-          //   p1.htmlProgressBar();    remove comment tag here  after debugging informStatus function
+                p1.htmlProgressBar();
 
-        } else if (squirtleHP2 === 150) {
+        } else if (squirtleHP2 <= 150) {
 
-             console.log("debuggin--computer health is low");
+
 
 
              document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-            // comp.htmlProgressBar(); remove comment tag here  after debugging informStatus function
+                comp.htmlProgressBar();
 
 
 
@@ -593,12 +611,13 @@ class referee {
 
 
 
-          if (charmanderHP3 === 300 && squirtleHP3 >=10 ){
+          if (charmanderHP3 === 300 && squirtleHP3 >=110 ){
 
           console.log("debuggin--player1 pokemon is dead.");
 
           document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
 
+          p1.getHealth();
 
 
         } else if (charmanderHP3 >=310 && squirtleHP3 === 100) {
@@ -606,6 +625,8 @@ class referee {
           console.log("debuggin--player1 won the match");
 
           document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart in 10 secs...");
+
+          p1.getHealth();
 
           /* --- disabled the restart function to work on line 222
           setTimeout (function(){
@@ -1355,15 +1376,7 @@ class arrayFunctions {
           p1.informStatus();
 
 
-      }else if (squirtleHP === 150 ){
-
-          p1.informStatus();
-
-
-
-
-
-      }// end of if statements
+      } // end of if statement
 
     }; // end of checkTheStatus function
 
@@ -1435,7 +1448,7 @@ class player1Moves {
         // changes need to be reflected in healthBar array as well
          comp.healthBar.push(-20);
          console.log("ThunderShock Damage is "+comp.healthBar);
-         console.log("Computer health status is "+ comp.getHealth());
+
 
          // attack image for pikachu
          player1Img.pikAtkImage1();
@@ -1471,7 +1484,7 @@ class player1Moves {
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            computerCH.squirtleHealthBar -=10;   //this is a number
            a2.squirtleHealthBar2.push(-10);  //this is an array
-           console.log("squirtleHealthBar varible is "+computerCH.squirtleHealthBar);
+
            console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
 
             // show image
@@ -1608,7 +1621,7 @@ class computerMoves {
         array1.checkTheStatus();
 
     //debugging here
-     console.log("CharamanderHealthBar variable is "+player1CH.charmanderHealthBar);
+
      console.log("CharmanderHealthBar2 array is "+a1.charmanderHealthBar2);
 
 
@@ -1619,9 +1632,8 @@ class computerMoves {
     // get the status of health for player1 and computer pokemon
 
        console.log("healhBar array is " +p1.healthBar); // 0,-20,-20
-       console.log("p1.healthBar array typeof " +typeof p1.healthBar); //object
        console.log("charmanderHealthBar2 array is " +a1.charmanderHealthBar2); //-20
-       console.log("charmanderHealthBar2 typeof " +typeof a1.charmanderHealthBar2);
+
 
 
     // inform player1 of attack from computer
