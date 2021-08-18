@@ -127,88 +127,67 @@ update progress bar style here
 
 */
 
-      /* progress bar for player1 HP*/
+         /* progress bar for player1 HP*/
 
-        /* For Firefox */
-        #player1HP::-moz-progress-bar {
-            background-color: #A6EDED;
+         .player1HP-progressBarBackground{
+           background: black;
+           padding: 3px;
+           width: 100px;
+         }
+
+          .player1HP {
             width:120px;height:10px;
-        }
-
-        /* For Chrome or Safari */
-        #player1HP::-webkit-progress-value {
             background-color: #A6EDED;
-            width:120px;height:10px;
-        }
-
-        /* For IE10 */
-        #player1HP {
-            background-color: #A6EDED;
-            width:120px;height:10px;
-        }
+            width: 100px;
+           }
 
 
-
-        /* speedbar for player1 -- not used*/
-
-          /* For Firefox */
-          #playerSpeed::-moz-progress-bar {
-              background-color: #A6EDED;
-              width:120px;height:10px;
+       /* speedbar for player1 -- not used*/
+          .playerSpeed-progressBarBackground{
+          background: black;
+          padding: 3px;
+          width: 100px;
           }
 
-          /* For Chrome or Safari */
-          #playerSpeed::-webkit-progress-value {
-              background-color: #A6EDED;
+          .playerSpeed {
               width:120px;height:10px;
-          }
-
-          /* For IE10 */
-          #playerSpeed {
               background-color: #A6EDED;
-              width:120px;height:10px;
-          }
+              width: 100px;
+            }
 
 
-        /* progress bar for computer HP*/
 
-        /* For Firefox */
-        #cpuHP::-moz-progress-bar {
-            background-color: #A6EDED;
-            width:120px;height:10px;
-        }
 
-        /* For Chrome or Safari */
-        #cpuHP::-webkit-progress-value {
-            background-color: #A6EDED;
-            width:120px;height:10px;
-        }
+            /* progress bar for computer HP*/
 
-        /* For IE10 */
-        #cpuHP {
-            background-color: #A6EDED;
-            width:120px;height:10px;
-        }
+            .cpuHP-progressBarBackground{
+              background: black;
+              padding: 3px;
+              width: 100px;
+              }
 
-        /* speedbar for computer -- not used*/
+            .cpuHP {
+                width:120px;height:10px;
+                background-color: #A6EDED;
+                width: 100px;
+              }
 
-          /* For Firefox */
-          #cpuSpeed::-moz-progress-bar {
-              background-color: #A6EDED;
-              width:120px;height:10px;
-          }
 
-          /* For Chrome or Safari */
-          #cpuSpeed::-webkit-progress-value {
-              background-color: #A6EDED;
-              width:120px;height:10px;
-          }
+          /* speedbar for computer -- not used*/
 
-          /* For IE10 */
-          #cpuSpeed {
-              background-color: #A6EDED;
-              width:120px;height:10px;
-          }
+            .cpuSpeed-progressBarBackground{
+              background: black;
+              padding: 3px;
+              width: 100px;
+              }
+
+
+              .cpuSpeed {
+                  width:120px;height:10px;
+                  background-color: #A6EDED;
+                  width: 100px;
+                }
+
 
 
 

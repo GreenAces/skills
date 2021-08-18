@@ -10,11 +10,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/17/2021)
-x0)
-x1)
-x2) htmlProgressBar bar needs to be fixed -- pokemonHealth needs  to change to red if certain conditions are true --  check on line 215 *high prirority*
-x3) 
+Lastest update: (8/18/2021)
+
+x0) when pokemon is attacked, the damage is displayed only once at the progressbar. Find a way to make it show consistently when computer pokemon is attacked. line 1352 *high priority*
+x1) made progressbar turn red on line 235 when player1 takes damange but it needs work. It doesn't seem to work for computer pokemon. *low priority*
+x2) change htmlProgressBar to lowHealthIndicator function at line 213 *low priority*
+x3) if you're not able to complete task x0 to x2 then consider reverting back to original progress bar *last priority*
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -220,8 +221,8 @@ class referee {
       let charmanderHP3 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
       let squirtleHP3 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
-      let player1HP = document.getElementById('player1HP')
-      let computerHP = document.getElementById('cpuHP')
+      let player1HP = document.querySelector('.player1HP');
+      let computerHP = document.querySelector('cpuHP');
 
 
 
@@ -231,13 +232,9 @@ class referee {
 
           console.log("if you can read this text, then the expression is valid");
 
-          player1HP.backgroundColor = "#FD0202";
 
+          player1HP.style.backgroundColor = "#FD0202";
 
-
-
-
-        //  document.getElementById('player1HP').style.background = "#f3f3f3";
 
 
       } else if (charmanderHP3 >= 360 && computerCH.squirtleHealthBar >= 150) {
@@ -246,12 +243,7 @@ class referee {
 
           console.log("if you can read this text as well, then the expression is valid");
 
-          computerHP.backgroundColor = "#FD0202";
-
-
-
-
-        //  document.getElementById('cpuHP').style.background = "#f3f3f3";
+          computerHP.style.backgroundColor = "#FD0202";
 
 
 
@@ -1351,6 +1343,32 @@ class objectofArrays {
 a1 = new objectofArrays;
 a2 = new objectofArrays;
 
+class progressBar {
+  constructor () {
+
+    this.decreaseSquirtleHP = function () {
+
+      let percent = 100;
+      document.querySelector(".cpuHP").style.width =-10 + percent + "%";
+
+
+    } // end of decreaseSquirtleHP function
+
+    this.decreaseCharmanderHP = function () {
+
+      let percent = 100;
+      document.querySelector(".player1HP").style.width =-20 + percent + "%";
+
+
+
+    } // end of decreaseCharmanderHP function
+
+  } // end of progressBar constructor
+} // end of prograssBar class
+
+charmanderProgressBar = new progressBar;
+squirtleProgressBar = new progressBar;
+
 
 
 class arrayFunctions {
@@ -1478,8 +1496,10 @@ class player1Moves {
 
            // fireBlaster does -10 damage on squirtle
            // this is the HTML progress bar that displays the pokemon HP (does damage to computer HP)
-           let health = document.getElementById("cpuHP")
-           health.value -= 10;
+           //let health = document.getElementById("cpuHP")
+
+           charmanderProgressBar.decreaseSquirtleHP();
+
 
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            computerCH.squirtleHealthBar -=10;   //this is a number
@@ -1610,7 +1630,8 @@ class computerMoves {
 
 
     // this is the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-     document.getElementById("player1HP").value -= 20;
+    // document.getElementById("player1HP").value -= 20;
+       squirtleProgressBar.decreaseCharmanderHP();
 
      //reflect the changes to player1CH.charmanderHealthBar AND charmanderHealthBar2 array as well.
      player1CH.charmanderHealthBar-=20; // this is a number
