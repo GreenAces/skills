@@ -10,12 +10,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/20/2021)
+Lastest update: (8/21/2021)
 
 x0) progressBar must reflect new health status when different pokemon is selected. But don't forget to record previous pokemon HP as it will be needed for switching back on  line 1377 *high priority*
 x1) why doesn't tombstone image work when squirtle dies?
-x2) rename SolarMove on line 1583 to rest function and make neccessary changes to code to reflect the new progress bar. This can allow you to see what happens when squirtle dies *low priority*
-x3)
+x2) retreiverAndResolver formula on line 1420 needs to corrected. restoredHealth on line 1432 is wrong and therefore fix or delete it. refer to the original array for the correct value. also troubleshoot get and set function. *high priority*
+x3) create a function to find the correct HP when the switch on line 1377 goes to the default code
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -406,13 +406,16 @@ class referee {
 
 
 
-        if (charmanderHP4 === 300 && squirtleHP4 >= 110) {
+        if (charmanderHP4 === 320 && squirtleHP4 >= 110) {
 
           // confirm dead pokemon
           p1.deathValidator.pokemonDied = true;
 
           // record data to deadPokemon array as well
           p1.deadPokemon.push("Charmander");
+
+          //debugging here. Delete when neccessary
+          console.log("Dead pokemon saved in array: " + p1.deadPokemon);
 
           // display player1 deadPokemon
           p1.deadPokemonImage();
@@ -423,7 +426,7 @@ class referee {
           p1.deadPokemon.length = 1;
 
 
-        } else if (charmanderHP4 >= 310 && squirtleHP4 === 100) {
+        } else if (charmanderHP4 >= 320 && squirtleHP4 === 100) {
 
 
           // confirm dead pokemon
@@ -431,6 +434,10 @@ class referee {
 
           // record data to deadPokemon array as well
           p1.deadPokemon.push("Squirtle");
+
+
+          //debugging here. Delete when neccessary
+          console.log("Dead pokemon saved in array: " + p1.deadPokemon);
 
           // display computer deadPokemon
           p1.deadPokemonImage();
@@ -441,21 +448,7 @@ class referee {
 
 
 
-        } else if (charmanderHP4 >= 310 && squirtleHP4 >=110) {
-
-          // this else if statement is to off-set the undefined error
-          // having a while-loop here could be useful here
-
-          //turn comp.informStatus on after debugging on line 839 as it needs to be called
-          console.log("comp.informStatus was started again on this line: ")
-          console.log("Both pokemon are live -- add more code to this line: ")
-
-          comp.informStatus();
-
-
-
-        }// end of if statements
-
+        } // end of if statements
 
 
 } // end of getHealth function
@@ -552,7 +545,7 @@ class referee {
 
 
 
-          if (charmanderHP3 === 300 && squirtleHP3 >=110 ){
+          if (charmanderHP3 === 320 && squirtleHP3 >=110 ){
 
           console.log("debuggin--player1 pokemon is dead.");
 
@@ -561,7 +554,7 @@ class referee {
           p1.getHealth();
 
 
-        } else if (charmanderHP3 >=310 && squirtleHP3 === 110) {
+        } else if (charmanderHP3 >=320 && squirtleHP3 === 110) {
 
           console.log("debuggin--player1 won the match");
 
@@ -903,7 +896,7 @@ class changePokemon {
       //load pokemon attack/defense menu
       document.getElementById("attackA").innerHTML = ("Fire Blaster (-20HP)");
       document.getElementById("attackB").innerHTML = ("Blaze (-10HP)");
-      document.getElementById("attackC").innerHTML = ("Solar Power (-45)");
+      document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
 
       document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
       document.getElementById("defenseB").innerHTML = ("Smokescreen (-20HP)");
@@ -1352,14 +1345,12 @@ class progressBar {
       break;
 
       case squirtleHP5 === 110:
-      document.querySelector(".cpuHP").style.width =-99+ percent + "%";
-      break;
-
-      case squirtleHP5 === 100:
+      document.querySelector(".cpuHP").style.width =-100+ percent + "%";
       p1.informWinner();
       break;
 
       default:
+      // Add a function here to find the range of squirtles health for the default block
       console.log("The default block was executed for decreaseSquirtleHP function at this line: ");
 
 }// end of switch statement
@@ -1400,14 +1391,12 @@ class progressBar {
       break;
 
       case charmanderHP5 === 320:
-      document.querySelector(".player1HP").style.width =-99 + percent + "%";
-      break;
-
-      case charmanderHP5 === 300:
+      document.querySelector(".player1HP").style.width =-100 + percent + "%";
       comp.informWinner();
       break;
 
       default:
+      // Add a function here to find the range of charmanders health for the default block
       console.log("The default block was executed for decreaseCharmanderHP function at this line: ");
 
 }// end of switch statement
@@ -1428,6 +1417,54 @@ class arrayFunctions {
 
   constructor () {
 
+    this.retreiverAndResolver = function () {
+      //retreiverAndResolver is a getter and setter function and will be used to fitch and retreive data from outside this class.
+
+      //find the value of previousHP from charmander and squirtle and create a function to find and restore the difference of HP.
+      let charmanderPreviousHP = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtlePreviousHP =   a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+
+      let charmanderCurrentHP = restore.charmanderRestoredHP.reduce(array1.PokemonRestoredReducer);
+      console.log("charmanderCurrentHP value: "+ charmanderCurrentHP); //0
+
+      let restoredHealth = charmanderPreviousHP  + charmanderCurrentHP;
+      console.log("restoredHealth value: " + restoredHealth); //400
+
+      let mirror = {
+
+      restoredHealthCopy: restoredHealth,
+
+      get reducedArray() {
+        return this.restoredHealthCopy;
+      },
+
+      set createData(x) {
+        this.restoredHealthCopy = x * 1;
+
+      }
+
+
+
+    }; // end of mirror object
+
+
+    /*
+    console.log(mirror.arrayCopy); // []
+    console.log(mirror.reducedArray); // []
+    mirror.createData = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+    console.log(mirror.arrayCopy); // 400
+    console.log(typeof mirror.arrayCopy);
+
+    */
+
+
+    } // end of retreiverAndResolver
+
+
+
+
+
+
     this.checkTheStatus = function () {
 
       // varible declartions
@@ -1436,18 +1473,27 @@ class arrayFunctions {
       let squirtleHP = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
 
-      // create a reduce function for charmanderHealthBar2
-      console.log("charmanderHealthBar2 array was reduced to: " + charmanderHP); // 420
-      console.log("squirtleHealthBar2 array was reduced to: "+ squirtleHP) //210
+      // create a reduce function for charmanderHealthBar2 and squirtleHealthBar2
+      console.log("charmanderHealthBar2 array was reduced to: " + charmanderHP); // full HP is 420
+      console.log("squirtleHealthBar2 array was reduced to: "+ squirtleHP); // full HP  is 210
 
       //create a logic based on the output for the reduce function and call other functions if conditions are true
 
-      if(charmanderHP === 360  ){
+      if(charmanderHP === 360 || squirtleHP === 110  ){
 
           p1.informStatus();
 
 
-      } // end of if statement
+      }else if (charmanderHP >= 310 && squirtleHP >= 110 ) {
+
+        //debugging here -- delete when neccessary
+        console.log("Testing getter and setter on this line: ");
+
+        array1.retreiverAndResolver();
+
+
+
+      } // end of if statements
 
     }; // end of checkTheStatus function
 
@@ -1455,12 +1501,15 @@ class arrayFunctions {
 
     this.PokemonHPReduced = function (accumulator, currentValue) {
 
-        // pass accumulator + currentValue to another function later. it has a value of 420 for charmander
-          console.log("read this line: ");
 
           return accumulator + currentValue;
           };
 
+    this.PokemonRestoredReducer = function (accumulator, currentValue) {
+
+
+                return accumulator + currentValue;
+                };
 
     this.getCharmanderHP =  function () {
 
@@ -1482,12 +1531,23 @@ class arrayFunctions {
   } // end of constructor
 } // end of arrayArrows class
 
+
+
 array1 = new arrayFunctions;
 array2 = new arrayFunctions;
 
 
+class Sleep {
+  constructor () {
+    this.restedPokemon = false;
+    this.restedPokemonArray = [];
+    this.charmanderRestoredHP = [0];
 
 
+  }// end of rest constructor
+} // end of rest class
+
+restore = new Sleep;
 
 
 
@@ -1580,21 +1640,40 @@ class player1Moves {
      } // end of blazeMove
 
 
-     this.solarMove = function() {
+     this.rest = function() {
+
+       console.log("The rest function started on this line: ");
        // solar restores +45 health for player1 but can't attack for 3 moves -- fix that part
-       let health = document.getElementById("player1HP")
-       health.value += 45;
 
-       //reflect these changes to charmanderHealthBar array as well.
-       p1.charmanderHealthBar +=45;
 
-       //dugging charmanderHealthBar
-       console.log("debugging charmanderHealthBar -- status is: " + player1CH.charmanderHealthBar);
+      let charmanderHPIncreased = document.querySelector('.player1HP');
+      let charmanderSpeedDecreased = document.querySelector('.playerSpeed');
+      let percent =100;
 
-       let speed = document.getElementById("playerSpeed")
-       speed.value -=65;
+       //Add 45% to pokemon HP
+       charmanderHPIncreased.style.width ="45%";
 
-     } // end of solarMove
+       //Decrease speedbar to 50% and append this data to an array (will do the array part later)
+       charmanderSpeedDecreased.style.width =-50 + percent +"%";
+
+       //Change progress bar color to default color (light blue)
+       charmanderHPIncreased.style.backgroundColor = "A6EDED";
+
+       //reflect the changes to charmanderHealthBar2 array as well.
+       a1.charmanderHealthBar2.push(45);
+
+       //record rest action that was taken as it will be used later.
+       restore.restedPokemon = true;
+       restore.restedPokemonArray.push("Charmander");
+       restore.charmanderRestoredHP.push(45);
+
+       //debugging
+       console.log("The following pokemon rested: " + restore.restedPokemonArray);
+       console.log("This is how much HP was restored: " + restore.charmanderRestoredHP);
+
+
+
+     } // end of rest function
 
 
 
@@ -1830,7 +1909,7 @@ confirm.noSelectionMeansDisable();
 function attackC() {
 
 
-player1.solarMove();
+
 confirm.noSelectionMeansDisable();
 
 
@@ -1860,7 +1939,7 @@ confirm.noSelectionMeansDisable();
 function defenseC() {
 
 
-
+player1.rest();
 confirm.noSelectionMeansDisable();
 
 
