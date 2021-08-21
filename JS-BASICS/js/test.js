@@ -10,11 +10,11 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/18/2021)
+Lastest update: (8/20/2021)
 
-x0) when pokemon is attacked, the damage is displayed only once at the progressbar. Find a way to make it show consistently when computer pokemon is attacked. line 1352 *high priority*
-x1) made progressbar turn red on line 235 when player1 takes damange but it needs work. It doesn't seem to work for computer pokemon. *low priority*
-x2) change htmlProgressBar to lowHealthIndicator function at line 213 *low priority*
+x0) Fix charmanderProgressBar. The progressBar is empty when charmanders health is 320 but it should be at 300 instead. Might need to decrease width only for charmander.  line 1377 *high priority*
+x1)
+x2)
 x3) if you're not able to complete task x0 to x2 then consider reverting back to original progress bar *last priority*
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon --
@@ -211,50 +211,6 @@ class referee {
     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
-    this.htmlProgressBar = function() {
-
-      console.log("htmlProgressBar function was started");
-
-
-      // new variable declartions to avoid reference error
-
-      let charmanderHP3 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP3 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
-
-      let player1HP = document.querySelector('.player1HP');
-      let computerHP = document.querySelector('cpuHP');
-
-
-
-      if (charmanderHP3 <= 360  &&  squirtleHP3 >= 110) {
-
-        //if player1 health is low than the html progress bar will be red
-
-          console.log("if you can read this text, then the expression is valid");
-
-
-          player1HP.style.backgroundColor = "#FD0202";
-
-
-
-      } else if (charmanderHP3 >= 360 && computerCH.squirtleHealthBar >= 150) {
-
-        //if computer pokemon health is low than the html progress bar will be red
-
-          console.log("if you can read this text as well, then the expression is valid");
-
-          computerHP.style.backgroundColor = "#FD0202";
-
-
-
-      } // end of if statements
-
-
-
-    } // end of htmlProgressBar function
-
-
-
     this.disableDeadCharmander = function () {
 
       console.log("disableDeadCharmander was started");
@@ -569,7 +525,7 @@ class referee {
              document.getElementById("statusProgress").innerHTML=("Player1 pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-                p1.htmlProgressBar();
+                console.log("insert code here if needed on this line ");
 
         } else if (squirtleHP2 <= 150) {
 
@@ -579,7 +535,7 @@ class referee {
              document.getElementById("statusProgress").innerHTML=("Computer pokemon health is low.");
 
              // update html progress bar --- see line on 232 for more details
-                comp.htmlProgressBar();
+                console.log("insert code here if needed on this line ");
 
 
 
@@ -1348,16 +1304,116 @@ class progressBar {
 
     this.decreaseSquirtleHP = function () {
 
+      // variable declartions
+
       let percent = 100;
-      document.querySelector(".cpuHP").style.width =-10 + percent + "%";
+      let squirtleHP5 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let computerLowHealthIndicator = document.querySelector('cpuHP');
+
+
+      switch(squirtleHP5 >= 110) {
+
+      case squirtleHP5 === 210:
+      document.querySelector(".cpuHP").style.width =-8.3 + percent + "%";
+      break;
+
+      case squirtleHP5 === 200:
+      document.querySelector(".cpuHP").style.width =-16.6 + percent + "%";
+      break;
+
+      case squirtleHP5 === 200:
+      document.querySelector(".cpuHP").style.width =-24.9 + percent + "%";
+      break;
+
+      case squirtleHP5 === 190:
+      document.querySelector(".cpuHP").style.width =-33.2 + percent + "%";
+      break;
+
+      case squirtleHP5 === 180:
+      document.querySelector(".cpuHP").style.width =-41.5 + percent + "%";
+      break;
+
+      case squirtleHP5 === 170:
+      document.querySelector(".cpuHP").style.width =-49.8 + percent + "%";
+      break;
+
+      case squirtleHP5 === 160:
+      document.querySelector(".cpuHP").style.width =-58.1 + percent + "%";
+      computerLowHealthIndicator.style.backgroundColor = "#FD0202";
+      break;
+
+      case squirtleHP5 === 150:
+      document.querySelector(".cpuHP").style.width =-66.4 + percent + "%";
+      break;
+
+      case squirtleHP5 === 140:
+      document.querySelector(".cpuHP").style.width =-74.7 + percent + "%";
+      break;
+
+      case squirtleHP5 === 130:
+      document.querySelector(".cpuHP").style.width =-83 + percent + "%";
+      break;
+
+      case squirtleHP5 === 120:
+      document.querySelector(".cpuHP").style.width =-91.3 + percent + "%";
+      break;
+
+      case squirtleHP5 === 110:
+      document.querySelector(".cpuHP").style.width =-100+ percent + "%";
+      break;
+
+      default:
+      console.log("The default block was executed for decreaseSquirtleHP function at this line: ");
+
+}// end of switch statement
 
 
     } // end of decreaseSquirtleHP function
 
     this.decreaseCharmanderHP = function () {
 
+      // variable declartions
+
       let percent = 100;
-      document.querySelector(".player1HP").style.width =-20 + percent + "%";
+      let charmanderHP5 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let player1LowHealthIndicator = document.querySelector('.player1HP');
+
+
+      switch(charmanderHP5 >= 300) {
+
+      case charmanderHP5 === 420:
+      document.querySelector(".player1HP").style.width =-14.29 + percent + "%";
+      break;
+
+      case charmanderHP5 === 400:
+      document.querySelector(".player1HP").style.width =-28.58 + percent + "%";
+      break;
+
+      case charmanderHP5 === 380:
+      document.querySelector(".player1HP").style.width =-42.87 + percent + "%";
+      break;
+
+      case charmanderHP5 === 360:
+      document.querySelector(".player1HP").style.width =-57.16 + percent + "%";
+      player1LowHealthIndicator.style.backgroundColor = "#FD0202";
+      break;
+
+      case charmanderHP5 === 340:
+      document.querySelector(".player1HP").style.width =-71.45 + percent + "%";
+      break;
+
+      case charmanderHP5 === 320:
+      document.querySelector(".player1HP").style.width =-85.74 + percent + "%";
+      break;
+
+      case charmanderHP5 === 300:
+      document.querySelector(".player1HP").style.width =-100 + percent + "%";
+      break;
+
+      default:
+      console.log("The default block was executed for decreaseCharmanderHP function at this line: ");
+
+}// end of switch statement
 
 
 
