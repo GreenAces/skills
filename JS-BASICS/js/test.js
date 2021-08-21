@@ -12,10 +12,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 NOTE:
 Lastest update: (8/20/2021)
 
-x0) Fix charmanderProgressBar. The progressBar is empty when charmanders health is 320 but it should be at 300 instead. Might need to decrease width only for charmander.  line 1377 *high priority*
-x1)
-x2)
-x3) if you're not able to complete task x0 to x2 then consider reverting back to original progress bar *last priority*
+x0) progressBar must reflect new health status when different pokemon is selected. But don't forget to record previous pokemon HP as it will be needed for switching back on  line 1377 *high priority*
+x1) why doesn't tombstone image work when squirtle dies?
+x2) rename SolarMove on line 1583 to rest function and make neccessary changes to code to reflect the new progress bar. This can allow you to see what happens when squirtle dies *low priority*
+x3)
 x4) investigate this this.squPokeImage2() on line 411
 y) Created debuggingOperation() on line 648 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -422,10 +422,6 @@ class referee {
 
           p1.deadPokemon.length = 1;
 
-          // call the InformWinner function here -- needs to modified for accuracy later
-
-           comp.informWinner();
-
 
         } else if (charmanderHP4 >= 310 && squirtleHP4 === 100) {
 
@@ -443,9 +439,6 @@ class referee {
 
           p1.deadPokemon.length = 1;
 
-          // call the InformWinner function here -- needs to modified for accuracy later
-
-          comp.informWinner();
 
 
         } else if (charmanderHP4 >= 310 && squirtleHP4 >=110) {
@@ -518,7 +511,7 @@ class referee {
       let charmanderHP2 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
       let squirtleHP2 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
-              if (charmanderHP2 <= 360 && squirtleHP2 >= 180) {
+              if (charmanderHP2 <= 360 ) {
 
 
 
@@ -568,7 +561,7 @@ class referee {
           p1.getHealth();
 
 
-        } else if (charmanderHP3 >=310 && squirtleHP3 === 100) {
+        } else if (charmanderHP3 >=310 && squirtleHP3 === 110) {
 
           console.log("debuggin--player1 won the match");
 
@@ -1308,7 +1301,7 @@ class progressBar {
 
       let percent = 100;
       let squirtleHP5 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
-      let computerLowHealthIndicator = document.querySelector('cpuHP');
+      let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
       switch(squirtleHP5 >= 110) {
@@ -1359,7 +1352,11 @@ class progressBar {
       break;
 
       case squirtleHP5 === 110:
-      document.querySelector(".cpuHP").style.width =-100+ percent + "%";
+      document.querySelector(".cpuHP").style.width =-99+ percent + "%";
+      break;
+
+      case squirtleHP5 === 100:
+      p1.informWinner();
       break;
 
       default:
@@ -1382,32 +1379,32 @@ class progressBar {
       switch(charmanderHP5 >= 300) {
 
       case charmanderHP5 === 420:
-      document.querySelector(".player1HP").style.width =-14.29 + percent + "%";
+      document.querySelector(".player1HP").style.width =-16.67 + percent + "%";
       break;
 
       case charmanderHP5 === 400:
-      document.querySelector(".player1HP").style.width =-28.58 + percent + "%";
+      document.querySelector(".player1HP").style.width =-33.34 + percent + "%";
       break;
 
       case charmanderHP5 === 380:
-      document.querySelector(".player1HP").style.width =-42.87 + percent + "%";
+      document.querySelector(".player1HP").style.width =-50.01 + percent + "%";
       break;
 
       case charmanderHP5 === 360:
-      document.querySelector(".player1HP").style.width =-57.16 + percent + "%";
+      document.querySelector(".player1HP").style.width =-66.68 + percent + "%";
       player1LowHealthIndicator.style.backgroundColor = "#FD0202";
       break;
 
       case charmanderHP5 === 340:
-      document.querySelector(".player1HP").style.width =-71.45 + percent + "%";
+      document.querySelector(".player1HP").style.width =-83.35 + percent + "%";
       break;
 
       case charmanderHP5 === 320:
-      document.querySelector(".player1HP").style.width =-85.74 + percent + "%";
+      document.querySelector(".player1HP").style.width =-99 + percent + "%";
       break;
 
       case charmanderHP5 === 300:
-      document.querySelector(".player1HP").style.width =-100 + percent + "%";
+      comp.informWinner();
       break;
 
       default:
