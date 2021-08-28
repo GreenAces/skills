@@ -10,9 +10,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/24/2021)
+Lastest update: (8/25/2021)
+FTP client not working -- use web site instead for now.
 
-x0) progressBar must reflect new health status when different pokemon is selected. But don't forget to record previous pokemon HP as it will be needed for switching back on  line 1233 *high priority*
+x0) charmander and squirtle progressBar updated with shorter code. Output should be the same on line 1363 -- also don't forget to add functions when array is > 100 and < 0*high priority*
 x1) why doesn't tombstone image work when squirtle dies?
 x2) retreiverAndResolver formula on line 2952 needs to corrected. restoredHealth on line 1432 is wrong and therefore fix or delete it. refer to the original array for the correct value. also troubleshoot get and set function. *high priority*
 x3) create a function to find the correct HP when the switch on line 2077 and 2501 goes to the default code
@@ -34,7 +35,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
 10) investigate this this.squPokeImage2() on line 411 *low priority*
-11) commented out charmander sound on line  844 *********************************************************************************************************************************** 8/24/2021 
+11) commented out charmander sound on line  844 *********************************************************************************************************************************** 8/24/2021
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
 14) Make healthBar turn red when health is < 40
@@ -504,7 +505,7 @@ class referee {
       let charmanderHP2 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
       let squirtleHP2 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
 
-              if (charmanderHP2 <= 50 ) {
+              if (charmanderHP2 <= 40 ) {
 
 
 
@@ -513,7 +514,7 @@ class referee {
              // update html progress bar --- see line on 232 for more details
                 console.log("insert code here if needed on this line ");
 
-        } else if (squirtleHP2 <= 50) {
+        } else if (squirtleHP2 <= 40) {
 
 
 
@@ -545,7 +546,7 @@ class referee {
 
 
 
-          if (charmanderHP3 === 0 && squirtleHP3 >= 5 ){
+          if (charmanderHP3 === 0 && squirtleHP3 >= 1 ){
 
           console.log("debuggin--player1 pokemon is dead.");
 
@@ -554,7 +555,7 @@ class referee {
           p1.getHealth();
 
 
-        } else if (charmanderHP3 >= 5 && squirtleHP3 === 0) {
+        } else if (charmanderHP3 >= 1 && squirtleHP3 === 0) {
 
           console.log("debuggin--player1 won the match");
 
@@ -1255,506 +1256,49 @@ class progressBar {
 
         switch(squirtleHP5 >= 0) {
 
-        case squirtleHP5 === 100:
+
+        case (squirtleHP5 === 0):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
+        p1.informWinner();
         break;
 
-        case squirtleHP5 === 99 :
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 98 :
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 97 :
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 96 :
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 95 :
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 94:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 93:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 92:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 91:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 90:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 89:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 88:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 86:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 85:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 84:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 83:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 82:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 81:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 80:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 79:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 78:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 77:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 76:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 75:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 74:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 73:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 72:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 71:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 70:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 69:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 68:
+        case (squirtleHP5 > 0 && squirtleHP5 <= 20):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
         break;
 
-        case squirtleHP5 === 67:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 66:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 65:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 64:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 63:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 62:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 61:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 60:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 59:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 58:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 57:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 56:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 55:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 54:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 53:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 52:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 51:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 50:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 49:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 48:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 47:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 46:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 45:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 44:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 43:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 42:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 41:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 40:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 39:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 38:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 37:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 36:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 35:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 34:
+        case (squirtleHP5 > 20 && squirtleHP5 <= 40):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";
         break;
 
-        case squirtleHP5 === 33:
+        case (squirtleHP5 > 40 && squirtleHP5 <= 60):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         break;
 
-        case squirtleHP5 === 32:
+        case (squirtleHP5 > 60 && squirtleHP5 <= 80):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         break;
 
-        case squirtleHP5 === 31:
+        case (squirtleHP5 > 80 && squirtleHP5 <= 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         break;
 
-        case squirtleHP5 === 30:
+        case (squirtleHP5 > 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        console.log("squirtle array is > 100. Create a function for this.");
         break;
 
-        case squirtleHP5 === 29:
+        case (squirtleHP5 < 0):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 28:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 27:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 26:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 25:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 24:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 23:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 22:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 21:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 20:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 19:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 18:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 17:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 16:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 15:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 14:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 13:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 12:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 11:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 10:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 9:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 8:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 7:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 6:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 5:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 4:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 3:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 2:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 1:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case squirtleHP5 === 0:
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        p1.informWinner();
+        console.log("squirtle array is < 0. Create a function for this.");
         break;
 
         default:
@@ -1768,508 +1312,50 @@ class progressBar {
 
 
 
-  switch(squirtleHP5 >= 0) {
+  switch(squirtleHP5 === 0) {
 
-  case squirtleHP5 === 100:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 99 :
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 98 :
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 97 :
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 96 :
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 95 :
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 94:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 93:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 92:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 91:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 90:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 89:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 88:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 86:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 85:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 84:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 83:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 82:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 81:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 80:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 79:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 78:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 77:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 76:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 75:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 74:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 73:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 72:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 71:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 70:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 69:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 68:
-  hpDamage = squirtleHP5 + hpRecovered;
+  case (squirtleHP5 >=0):
+  hpDamage = squirtleHP5;
   document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
+  p1.informWinner();
   break;
 
-  case squirtleHP5 === 67:
+  case (squirtleHP5 > 0 && squirtleHP5 <= 20):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
 
-  case squirtleHP5 === 66:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 65:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 64:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 63:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 62:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 61:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 60:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 59:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 58:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 57:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 56:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 55:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 54:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 53:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 52:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 51:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 50:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 49:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 48:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 47:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 46:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 45:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 44:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 43:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 42:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 41:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 40:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 39:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 38:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 37:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 36:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 35:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 34:
+  case (squirtleHP5 > 20 && squirtleHP5 <= 40):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   computerLowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
 
-  case squirtleHP5 === 33:
+  case (squirtleHP5 > 40 && squirtleHP5 <= 60):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
 
-  case squirtleHP5 === 32:
+  case (squirtleHP5 > 60 && squirtleHP5 <= 80):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
 
-  case squirtleHP5 === 31:
+  case (squirtleHP5 > 80 && squirtleHP5 <= 100):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
 
-  case squirtleHP5 === 30:
-  hpDamage = squirtleHP5 + hpRecovered;
+  case (squirtleHP5 > 100):
+  hpDamage = squirtleHP5;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  console.log("squirtle array is > 100. Create a function for this.");
   break;
 
-  case squirtleHP5 === 29:
-  hpDamage = squirtleHP5 + hpRecovered;
+  case (squirtleHP5 < 0):
+  hpDamage = squirtleHP5;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 28:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 27:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 26:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 25:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 24:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 23:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 22:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 21:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 20:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 19:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 18:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 17:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 16:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 15:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 14:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 13:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 12:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 11:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 10:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 9:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 8:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 7:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 6:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 5:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 4:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 3:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 2:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 1:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case squirtleHP5 === 0:
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  p1.informWinner();
+  console.log("squirtle array is < 0. Create a function for this.");
   break;
 
   default:
@@ -2302,506 +1388,51 @@ class progressBar {
 
         switch(charmanderHP5 >= 0) {
 
-        case charmanderHP5 === 100:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 99:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 98:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 97:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 96:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 95:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 94:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 93:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 92:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 91:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 90:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 89:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 88:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 87:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 86:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 85:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 84:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 83:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 82:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 81:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 80:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 79:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 78:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 77:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 76:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 75:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 74:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 73:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 72:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 71:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 70:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 69:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 68:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 67:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 66:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 65:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 64:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 63:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 62:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 61:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 60:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 59:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 58:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 57:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 56:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 55:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 54:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 53:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 52:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 51:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 50:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 49:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 48:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 47:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 46:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 45:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 44:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 43:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 42:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 41:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 40:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 39:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 38:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 37:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 36:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 35:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        player1LowHealthIndicator.style.backgroundColor = "#FD0202";
-        break;
-        case charmanderHP5 === 34:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 33:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 32:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 31:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 30:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 29:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 28:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 27:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 26:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 25:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 24:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 23:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 22:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 21:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 20:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 19:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 18:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 17:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 16:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 15:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 14:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 13:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 12:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 11:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 10:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 9:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 8:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 7:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 6:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 5:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 4:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 3:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 2:
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case charmanderHP5 === 1:
+        case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
         comp.informWinner();
         break;
+
+        case (charmanderHP5 > 0 && charmanderHP5 <= 20):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        break;
+
+        case (charmanderHP5 > 20 && charmanderHP5 <= 40):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        player1LowHealthIndicator.style.backgroundColor = "#FD0202";
+        break;
+
+        case (charmanderHP5 > 40 && charmanderHP5 <= 60):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        break;
+
+        case (charmanderHP5 > 60 && charmanderHP5 <= 80):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        break;
+
+        case (charmanderHP5 > 80 && charmanderHP5 <= 100):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        break;
+
+        case (charmanderHP5 > 100):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        console.log("charmander array is > 100. Create a function for this.");
+        break;
+
+        case (charmanderHP5 < 0):
+        hpDamage2 = charmanderHP5;
+        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        console.log("charmander array is < 0. Create a function for this.");
+        break;
+
+
 
         default:
         // Add a function here to find the range of charmanders health for the default block
@@ -2818,506 +1449,51 @@ class progressBar {
 
   switch(charmanderHP5 >= 0) {
 
-  case charmanderHP5 === 100:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 99:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 98:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 97:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 96:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 95:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 94:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 93:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 92:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 91:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 90:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 89:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 88:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 87:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 86:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 85:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 84:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 83:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 82:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 81:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 80:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 79:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 78:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 77:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 76:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 75:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 74:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 73:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 72:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 71:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 70:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 69:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 68:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 67:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 66:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 65:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 64:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 63:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 62:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 61:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 60:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 59:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 58:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 57:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 56:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 55:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 54:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 53:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 52:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 51:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 50:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 49:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 48:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 47:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 46:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 45:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 44:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 43:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 42:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 41:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 40:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 39:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 38:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 37:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
+  case (charmanderHP5 === 0):
+  hpDamage2 = charmanderHP5;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  comp.informWinner();
   break;
 
-  case charmanderHP5 === 36:
+  case (charmanderHP5 > 0 && charmanderHP5 <= 20):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
 
-  case charmanderHP5 === 35:
+  case (charmanderHP5 > 20 && charmanderHP5 <= 40):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   player1LowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
-  case charmanderHP5 === 34:
+
+  case (charmanderHP5 > 40 && charmanderHP5 <= 60):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
 
-  case charmanderHP5 === 33:
+  case (charmanderHP5 > 60 && charmanderHP5 <= 80):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
 
-  case charmanderHP5 === 32:
+  case (charmanderHP5 > 80 && charmanderHP5 <= 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
 
-  case charmanderHP5 === 31:
+  case (charmanderHP5 > 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  console.log("charmander array is > 100. Create a function for this.");
   break;
 
-  case charmanderHP5 === 30:
+  case (charmanderHP5 < 0):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  console.log("charmander array is < 0. Create a function for this.");
   break;
 
-  case charmanderHP5 === 29:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
 
-  case charmanderHP5 === 28:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 27:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 26:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 25:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 24:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 23:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 22:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 21:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 20:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 19:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 18:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 17:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 16:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 15:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 14:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 13:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 12:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 11:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 10:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 9:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 8:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 7:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 6:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 5:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 4:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 3:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 2:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case charmanderHP5 === 1:
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  comp.informWinner();
-  break;
 
   default:
   // Add a function here to find the range of charmanders health for the default block
@@ -3416,7 +1592,7 @@ class arrayFunctions {
 
       //create a logic based on the output for the reduce function and call other functions if conditions are true
 
-      if(charmanderHP === 50 || squirtleHP === 10  ){
+      if(charmanderHP >= 20 &&  charmanderHP <= 40 || squirtleHP >= 20 &&  squirtleHP <= 40){
 
           p1.informStatus();
 
