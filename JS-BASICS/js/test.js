@@ -1274,17 +1274,12 @@ class progressBar {
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";
         break;
 
-        case (squirtleHP5 > 40 && squirtleHP5 <= 60):
+        case (squirtleHP5 > 40 && squirtleHP5 <= 99):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         break;
 
-        case (squirtleHP5 > 60 && squirtleHP5 <= 80):
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case (squirtleHP5 > 80 && squirtleHP5 <= 100):
+        case (squirtleHP5 === 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width =hpDamage +   "%";
         break;
@@ -1331,17 +1326,12 @@ class progressBar {
   computerLowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
 
-  case (squirtleHP5 > 40 && squirtleHP5 <= 60):
+  case (squirtleHP5 > 40 && squirtleHP5 <= 90):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
 
-  case (squirtleHP5 > 60 && squirtleHP5 <= 80):
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case (squirtleHP5 > 80 && squirtleHP5 <= 100):
+  case (squirtleHP5 === 100):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width =hpDamage +   "%";
   break;
@@ -1405,17 +1395,12 @@ class progressBar {
         player1LowHealthIndicator.style.backgroundColor = "#FD0202";
         break;
 
-        case (charmanderHP5 > 40 && charmanderHP5 <= 60):
+        case (charmanderHP5 > 40 && charmanderHP5 <= 99):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
         break;
 
-        case (charmanderHP5 > 60 && charmanderHP5 <= 80):
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case (charmanderHP5 > 80 && charmanderHP5 <= 100):
+        case (charmanderHP5 === 100):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
         break;
@@ -1466,17 +1451,12 @@ class progressBar {
   player1LowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
 
-  case (charmanderHP5 > 40 && charmanderHP5 <= 60):
+  case (charmanderHP5 > 40 && charmanderHP5 <= 99):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
 
-  case (charmanderHP5 > 60 && charmanderHP5 <= 80):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
-
-  case (charmanderHP5 > 80 && charmanderHP5 <= 100):
+  case (charmanderHP5 === 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
   break;
