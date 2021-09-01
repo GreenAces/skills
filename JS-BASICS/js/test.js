@@ -10,13 +10,13 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (8/25/2021)
-FTP client not working -- use web site instead for now.
+Lastest update: (9/1/2021)
+
 
 x0) charmander and squirtle progressBar updated with shorter code. Output should be the same on line 1363 -- also don't forget to add functions when array is > 100 and < 0*high priority*
 x1) why doesn't tombstone image work when squirtle dies?
 x2) retreiverAndResolver formula on line 2952 needs to corrected. restoredHealth on line 1432 is wrong and therefore fix or delete it. refer to the original array for the correct value. also troubleshoot get and set function. *high priority*
-x3) create a function to find the correct HP when the switch on line 2077 and 2501 goes to the default code
+x3) added new function startGameMessage() -- to reset default progressBar when a condition is true
 x4) troubleshoot charmander and squirtle arrays. When squirtle attacks charmander for the first time, nothing displays on the progress bar. why? Array starts at 100 for each. see line 2287 *high priority*
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -602,39 +602,17 @@ comp = new referee;
 class wait {
   constructor() {
     this.makeMove = [{player1Move: false, computerMove: false}];
-    this.noSelectionMeansDisable = function () {
 
+
+    this.startGameMessage = function () {
 
       // disable attack and defense menu when computerMove and player1Move is false
 
-      if(player1CH.pokemonType[0].isSelected === false &&
-         player1CH.pokemonType[1].isSelected === false &&
-         player1CH.pokemonType[2].isSelected === false &&
-         player1CH.pokemonType[3].isSelected === false){
-
-           setTimeout (function(){
-
-             //reload page
-
-             window.location.reload();
+      if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === false) {
 
 
 
-           },2000); // reloads page after 2 secs
-
-
-        //remove add event listener for attack & defense buttons only
-        //player1 only has permissions to select a pokemon
-
-        document.getElementById("attackA").removeEventListener("click", attackA);
-        document.getElementById("attackB").removeEventListener("click", attackB);
-        document.getElementById("attackC").removeEventListener("click", attackC);
-        document.getElementById("defenseA").removeEventListener("click", defenseA);
-        document.getElementById("defenseB").removeEventListener("click", defenseB);
-        document.getElementById("defenseC").removeEventListener("click", defenseC);
-
-
-        document.getElementById("statusProgress3").innerHTML=("Please select a pokemon to begin the match.");
+        document.getElementById("statusProgress3").innerHTML=("Please select a pokemon to begin the match...");
 
 
 
@@ -850,6 +828,7 @@ class changePokemon {
       document.getElementById("Player1PokeImage").style.height = 180;
 
 
+
         //Change boolean state so computer can make a move
          confirm.makeMove[0].player1Move = false;
 
@@ -871,6 +850,13 @@ class changePokemon {
 
           //load pokemon sound
           computerSD.squirtleVO.play();
+
+          //This function restores the default settings of the progress for player1 and computer
+          defaultProgressBar.defaultHPSetting();
+
+          //Display and save computer pokemon name to savedPokemonName2 on line 445
+          document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
+          computerCH.savedPokemonName2.push("Squirtle");
 
           //change boolean state
           confirm.makeMove[0].computerMove = false;
@@ -1236,6 +1222,35 @@ a2 = new objectofArrays;
 class progressBar {
   constructor () {
 
+
+    this.defaultHPSetting = function () {
+
+      let player1DefaultHP = 100;
+      let computerDefaultHP = 100;
+      let player1DefaultSpeed = 100;
+      let computerDefaultSpeed = 100;
+
+      let squirtleHP6 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP6 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+
+      if (charmanderHP6 === 100 && squirtleHP6 === 100) {
+
+
+        document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
+        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
+
+        // Add an else if statement later for the defaultSpeed and make player1 lose turn if defaultSpeed is zero but you will need to create an array for this to work...
+
+        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+
+      }// end of if statements
+
+
+
+    }// end of defaultHPSetting
+
     this.decreaseSquirtleHP = function () {
 
       // variable declartions
@@ -1246,53 +1261,48 @@ class progressBar {
       let squirtleHP5 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
-      if (squirtleHP5 >= 0 && computer.squirtleMovesActivated[0].squirtleFunction1of6 === true) {
+
+
+      if (squirtleHP5 < 0 || squirtleHP5 >= 0  && computer.squirtleMovesActivated[0].squirtleFunction1of6 === true) {
 
         //if statement will change the variables in the switch statements to reflect changes to the progress bar
 
 
-
-
-
-        switch(squirtleHP5 >= 0) {
+        switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
 
 
         case (squirtleHP5 === 0):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         p1.informWinner();
         break;
 
         case (squirtleHP5 > 0 && squirtleHP5 <= 20):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         break;
 
         case (squirtleHP5 > 20 && squirtleHP5 <= 40):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";
         break;
 
-        case (squirtleHP5 > 40 && squirtleHP5 <= 99):
+        case (squirtleHP5 > 40 && squirtleHP5 <= 100):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-        break;
-
-        case (squirtleHP5 === 100):
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+        if(squirtleHP5 ===100) {console.log("squirtleHP5 is 100");}// end of if statement
         break;
 
         case (squirtleHP5 > 100):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         console.log("squirtle array is > 100. Create a function for this.");
         break;
 
         case (squirtleHP5 < 0):
         hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         console.log("squirtle array is < 0. Create a function for this.");
         break;
 
@@ -1303,48 +1313,44 @@ class progressBar {
   }// end of switch statement
 
 
-}else if (squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+}else if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
 
 
-  switch(squirtleHP5 === 0) {
+  switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
 
   case (squirtleHP5 >=0):
   hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width =-hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
   p1.informWinner();
   break;
 
   case (squirtleHP5 > 0 && squirtleHP5 <= 20):
   hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
   break;
 
   case (squirtleHP5 > 20 && squirtleHP5 <= 40):
   hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
   computerLowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
 
-  case (squirtleHP5 > 40 && squirtleHP5 <= 90):
+  case (squirtleHP5 > 40 && squirtleHP5 <= 100):
   hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
-  break;
-
-  case (squirtleHP5 === 100):
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+  if(squirtleHP5 ===100) {console.log("squirtleHP statement 2 is 100");}// end of if statement
   break;
 
   case (squirtleHP5 > 100):
   hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
   console.log("squirtle array is > 100. Create a function for this.");
   break;
 
   case (squirtleHP5 < 0):
   hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width =hpDamage +   "%";
+  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
   console.log("squirtle array is < 0. Create a function for this.");
   break;
 
@@ -1371,53 +1377,48 @@ class progressBar {
       let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
-      if(charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true) {
+
+      if(charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true) {
 
         //if statement will change the variables in the switch statements to reflect changes to the progress bar
 
 
-        switch(charmanderHP5 >= 0) {
+        switch(charmanderHP5 < 0 || charmanderHP5 >= 0) {
 
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         comp.informWinner();
         break;
 
         case (charmanderHP5 > 0 && charmanderHP5 <= 20):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         break;
 
         case (charmanderHP5 > 20 && charmanderHP5 <= 40):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         player1LowHealthIndicator.style.backgroundColor = "#FD0202";
         break;
 
-        case (charmanderHP5 > 40 && charmanderHP5 <= 99):
+        case (charmanderHP5 > 40 && charmanderHP5 <= 100):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-        break;
-
-        case (charmanderHP5 === 100):
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+        if(charmanderHP5 ===100) {console.log("charmanderHP5 is 100");}// end of if statement
         break;
 
         case (charmanderHP5 > 100):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         console.log("charmander array is > 100. Create a function for this.");
         break;
 
         case (charmanderHP5 < 0):
         hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         console.log("charmander array is < 0. Create a function for this.");
         break;
-
-
 
         default:
         // Add a function here to find the range of charmanders health for the default block
@@ -1425,55 +1426,51 @@ class progressBar {
 
 }// end of switch statement
 
-}else if (charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+}else if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
 
 
 
 
 
-  switch(charmanderHP5 >= 0) {
+  switch(charmanderHP5 < 0 || charmanderHP5 >= 0 ) {
 
   case (charmanderHP5 === 0):
   hpDamage2 = charmanderHP5;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
   comp.informWinner();
   break;
 
   case (charmanderHP5 > 0 && charmanderHP5 <= 20):
   hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
   break;
 
   case (charmanderHP5 > 20 && charmanderHP5 <= 40):
   hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
   player1LowHealthIndicator.style.backgroundColor = "#FD0202";
   break;
 
-  case (charmanderHP5 > 40 && charmanderHP5 <= 99):
+  case (charmanderHP5 > 40 && charmanderHP5 <= 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+  if(charmanderHP5 ===100) {console.log("charmanderHP5 statement 2 is 100");}// end of if statement
   break;
 
-  case (charmanderHP5 === 100):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
-  break;
 
   case (charmanderHP5 > 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
   console.log("charmander array is > 100. Create a function for this.");
   break;
 
+
   case (charmanderHP5 < 0):
   hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width =hpDamage2 +   "%";
+  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
   console.log("charmander array is < 0. Create a function for this.");
   break;
-
-
 
   default:
   // Add a function here to find the range of charmanders health for the default block
@@ -1503,6 +1500,7 @@ class progressBar {
 
 charmanderProgressBar = new progressBar;
 squirtleProgressBar = new progressBar;
+defaultProgressBar = new progressBar;
 
 
 
@@ -1716,19 +1714,19 @@ class player1Moves {
             console.log(confirm.makeMove[0]);
 
            //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
-           charmanderProgressBar.decreaseSquirtleHP();
+            charmanderProgressBar.decreaseSquirtleHP();
 
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            //fireBlaster does -10 damage on squirtle
-           a2.squirtleHealthBar -=10;         //this is a backup array
-           a2.squirtleHealthBar2.push(-10);  //this is an array
+            a2.squirtleHealthBar -=10;         //this is a backup array
+            a2.squirtleHealthBar2.push(-10);  //this is an array
 
            //debugging here
-           console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
-           console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
+            console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
+            console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
 
             // show image
-            player1Img.chrAtkImage1();
+             player1Img.chrAtkImage1();
 
 
 
@@ -1884,11 +1882,6 @@ class computerMoves {
           console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
 
 
-          // display and save computer pokemon name to savedPokemonName2 on line 445
-          document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
-          computerCH.savedPokemonName2.push("Squirtle");
-
-
           //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
           squirtleProgressBar.decreaseCharmanderHP();
 
@@ -1987,6 +1980,11 @@ document.getElementById("restartYES").addEventListener("click", refreshPage);
 
 
 
+//This function needs to be called here as well to inform player1 to select a pokemon at the start of the game
+confirm.startGameMessage();
+
+
+
 
 function attackA() {
 
@@ -1994,7 +1992,6 @@ console.log(confirm.makeMove[0]);
 
 player1.thunderShockMove();
 player1.fireBlasterMove();
-confirm.noSelectionMeansDisable();
 confirm.enableMoves();
 confirm.disableMoves();
 player1CH.debuggingOperation();
@@ -2026,7 +2023,7 @@ function attackB() {
 
 
 player1.blazeMove();
-confirm.noSelectionMeansDisable();
+
 
 
 
@@ -2036,7 +2033,7 @@ function attackC() {
 
 
 
-confirm.noSelectionMeansDisable();
+
 
 
 }
@@ -2048,7 +2045,7 @@ function defenseA() {
 
 
 
-confirm.noSelectionMeansDisable();
+
 
 
 }
@@ -2057,7 +2054,7 @@ function defenseB() {
 
 
 
-confirm.noSelectionMeansDisable();
+
 
 
 }
@@ -2066,7 +2063,7 @@ function defenseC() {
 
 
 player1.rest();
-confirm.noSelectionMeansDisable();
+
 
 
 

@@ -138,11 +138,11 @@ update progress bar style here
           .player1HP {
             width:100px;height:10px;
             background-color: #A6EDED;
-            width: 100px;
+            width: 0px;
            }
 
 
-       /* speedbar for player1 -- not used*/
+       /* speedbar for player1 */
           .playerSpeed-progressBarBackground{
           background: black;
           padding: 3px;
@@ -152,7 +152,7 @@ update progress bar style here
           .playerSpeed {
               width:10px;height:10px;
               background-color: #A6EDED;
-              width: 100px;
+              width: 0px;
             }
 
 
@@ -169,11 +169,11 @@ update progress bar style here
             .cpuHP {
                 width:100px;height:10px;
                 background-color: #A6EDED;
-                width: 100px;
+                width: 0px;
               }
 
 
-          /* speedbar for computer -- not used*/
+          /* speedbar for computer */
 
             .cpuSpeed-progressBarBackground{
               background: black;
@@ -185,7 +185,7 @@ update progress bar style here
               .cpuSpeed {
                   width:100px;height:10px;
                   background-color: #A6EDED;
-                  width: 100px;
+                  width: 0px;
                 }
 
 
