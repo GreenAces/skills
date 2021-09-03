@@ -10,14 +10,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (9/1/2021)
+Lastest update: (9/2/2021)
 
 
-x0) charmander and squirtle progressBar updated with shorter code. Output should be the same on line 1363 -- also don't forget to add functions when array is > 100 and < 0*high priority*
-x1) why doesn't tombstone image work when squirtle dies?
-x2) retreiverAndResolver formula on line 2952 needs to corrected. restoredHealth on line 1432 is wrong and therefore fix or delete it. refer to the original array for the correct value. also troubleshoot get and set function. *high priority*
-x3) added new function startGameMessage() -- to reset default progressBar when a condition is true
-x4) troubleshoot charmander and squirtle arrays. When squirtle attacks charmander for the first time, nothing displays on the progress bar. why? Array starts at 100 for each. see line 2287 *high priority*
+x0) charmander and squirtle progressBar updated with shorter code. Output should be the same on line 1363 -- also don't forget to add functions when array is > 100 and < 0 *high priority*
+x1) create custom error message when switch goes out of bonds *high priority*
+x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
+x3) Create a function to switch pokemon without losing HP data from array *2nd priority*
+x4) Attack moves for computer pokemon need to be combined to one function *3rd priority*
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
@@ -280,15 +280,13 @@ class referee {
 
     this.deadPokemonImage = function () {
 
+      // variable declartions
+      let charmanderHP7 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP7 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+
       //load pokemon tombstone image based on certain conditions.
 
-      if (player1CH.pokemonType[0].isSelected === true ||
-          player1CH.pokemonType[1].isSelected === true ||
-          player1CH.pokemonType[2].isSelected === true ||
-          player1CH.pokemonType[3].isSelected === true ||
-          computerCH.pokemonType[4].isSelected === false &&
-          computerCH.pokemonType[5].isSelected === false &&
-          computerCH.pokemonType[6].isSelected === false) {
+      if (charmanderHP7 === 0 && squirtleHP7 >= 5) {
 
         //Inform player that pokemon is dead but let the game continue
           document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
@@ -328,13 +326,7 @@ class referee {
 
          //load pokemon tombstone image based on certain conditions.
 
-      }else if (computerCH.pokemonType[0].isSelected === false ||
-                computerCH.pokemonType[1].isSelected === false ||
-                computerCH.pokemonType[2].isSelected === false ||
-                computerCH.pokemonType[3].isSelected === false ||
-                player1CH.pokemonType[4].isSelected === true &&
-                player1CH.pokemonType[5].isSelected === true &&
-                player1CH.pokemonType[6].isSelected === true) {
+      }else if (squirtleHP7 === 0 && charmanderHP7 >= 5) {
 
         //Inform player that pokemon is dead but let the game continue
           document.getElementById("statusProgress").innerHTML=("Pokemon is dead. Please choose another pokemon.");
@@ -412,7 +404,10 @@ class referee {
           // confirm dead pokemon
           p1.deathValidator.pokemonDied = true;
 
-          // record data to deadPokemon array as well
+          //confirm that the pokemon can no longer be selected
+          player1CH.pokemonType[0].isSelected = false; // charmander
+
+          //record data to deadPokemon array as well
           p1.deadPokemon.push("Charmander");
 
           //debugging here. Delete when neccessary
@@ -422,9 +417,9 @@ class referee {
           p1.deadPokemonImage();
 
 
-          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
+          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit. UPDATE: fix this later as there should be no limit instead use filter
 
-          p1.deadPokemon.length = 1;
+          p1.deadPokemon.length = 6;
 
 
         } else if (charmanderHP4 >= 5 && squirtleHP4 === 0) {
@@ -433,9 +428,11 @@ class referee {
           // confirm dead pokemon
           p1.deathValidator.pokemonDied = true;
 
+          //confirm that the pokemon can no longer be selected
+          computerCH.pokemonType[2].isSelected = false; // squirtle
+
           // record data to deadPokemon array as well
           p1.deadPokemon.push("Squirtle");
-
 
           //debugging here. Delete when neccessary
           console.log("Dead pokemon saved in array: " + p1.deadPokemon);
@@ -445,7 +442,7 @@ class referee {
 
           // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
 
-          p1.deadPokemon.length = 1;
+          p1.deadPokemon.length = 6;
 
 
 
@@ -831,6 +828,17 @@ class changePokemon {
 
         //Change boolean state so computer can make a move
          confirm.makeMove[0].player1Move = false;
+
+         //set boolean stats to reflect computer selected pokemon
+         computerCH.pokemonType[2].isSelected = true; // squirtle
+
+         //set boolean stats to false for non-selected pokemon
+         computerCH.pokemonType[0].isSelected = false;
+         computerCH.pokemonType[1].isSelected = false;
+         computerCH.pokemonType[3].isSelected = false;
+         computerCH.pokemonType[4].isSelected = false;
+         computerCH.pokemonType[5].isSelected = false;
+         computerCH.pokemonType[6].isSelected = false;
 
 
 
@@ -1222,6 +1230,54 @@ a2 = new objectofArrays;
 class progressBar {
   constructor () {
 
+    this.catchErrorFromSwitch = function () {
+
+      //varible declartions
+
+      let squirtleHP8 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP9 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+
+
+  if ( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100 ) {
+
+    throw 'Error: Attack range is out of bounds. Review switch cases.';
+
+  }else if (isNaN(squirtleHP8) || isNaN(charmanderHP9)) {
+
+     throw "Error: The array(s) only accepts numbers.";
+
+  } // end of else if statements
+
+
+  try {
+
+  // attempt to fix the problem and end the game.
+
+  switch( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100 ) {
+
+  case squirtleHP8 < 0:
+     squirtleHP8 === 0;
+    break;
+
+  case charmanderHP9 > 100:
+    charmanderHP9 === 0;
+    break;
+
+  default:
+    default
+    document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
+    
+}// end of switch statement
+
+
+} catch (reportError) {
+
+  console.error(reportError);
+
+}
+
+    }// end of catchErrorFromSwitch function
+
 
     this.defaultHPSetting = function () {
 
@@ -1291,24 +1347,10 @@ class progressBar {
         case (squirtleHP5 > 40 && squirtleHP5 <= 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-        if(squirtleHP5 ===100) {console.log("squirtleHP5 is 100");}// end of if statement
-        break;
-
-        case (squirtleHP5 > 100):
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-        console.log("squirtle array is > 100. Create a function for this.");
-        break;
-
-        case (squirtleHP5 < 0):
-        hpDamage = squirtleHP5;
-        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-        console.log("squirtle array is < 0. Create a function for this.");
         break;
 
         default:
-        // Add a function here to find the range of squirtles health for the default block
-        console.log("The default block was executed for decreaseSquirtleHP function at this line: ");
+        defaultProgressBar.catchErrorFromSwitch();
 
   }// end of switch statement
 
@@ -1339,24 +1381,10 @@ class progressBar {
   case (squirtleHP5 > 40 && squirtleHP5 <= 100):
   hpDamage = squirtleHP5 + hpRecovered;
   document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  if(squirtleHP5 ===100) {console.log("squirtleHP statement 2 is 100");}// end of if statement
-  break;
-
-  case (squirtleHP5 > 100):
-  hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  console.log("squirtle array is > 100. Create a function for this.");
-  break;
-
-  case (squirtleHP5 < 0):
-  hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  console.log("squirtle array is < 0. Create a function for this.");
   break;
 
   default:
-  // Add a function here to find the range of squirtles health for the default block
-  console.log("The default block was executed for decreaseSquirtleHP function at this line: ");
+  defaultProgressBar.catchErrorFromSwitch();
 
 }// end of switch statement
 
@@ -1405,26 +1433,15 @@ class progressBar {
         case (charmanderHP5 > 40 && charmanderHP5 <= 100):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-        if(charmanderHP5 ===100) {console.log("charmanderHP5 is 100");}// end of if statement
-        break;
-
-        case (charmanderHP5 > 100):
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-        console.log("charmander array is > 100. Create a function for this.");
-        break;
-
-        case (charmanderHP5 < 0):
-        hpDamage2 = charmanderHP5;
-        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-        console.log("charmander array is < 0. Create a function for this.");
         break;
 
         default:
-        // Add a function here to find the range of charmanders health for the default block
-        console.log("The default block was executed for decreaseCharmanderHP function at this line: ");
+        defaultProgressBar.catchErrorFromSwitch();
+
 
 }// end of switch statement
+
+
 
 }else if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
@@ -1455,26 +1472,10 @@ class progressBar {
   case (charmanderHP5 > 40 && charmanderHP5 <= 100):
   hpDamage2 = charmanderHP5 + hpRecovered2;
   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  if(charmanderHP5 ===100) {console.log("charmanderHP5 statement 2 is 100");}// end of if statement
-  break;
-
-
-  case (charmanderHP5 > 100):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  console.log("charmander array is > 100. Create a function for this.");
-  break;
-
-
-  case (charmanderHP5 < 0):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  console.log("charmander array is < 0. Create a function for this.");
   break;
 
   default:
-  // Add a function here to find the range of charmanders health for the default block
-  console.log("The default block was executed for decreaseCharmanderHP function at this line: ");
+  defaultProgressBar.catchErrorFromSwitch();
 
 
 }// end if switch statement
@@ -1608,7 +1609,7 @@ class arrayFunctions {
       a1.charmanderHealthBar2.filter((element, index, array))
 
 
-      return element === -60;
+      return element === 60;
     }
 
 
@@ -1616,7 +1617,7 @@ class arrayFunctions {
 
       a1.squirtleHealthBar2.filter((element, index, array))
 
-      return element === -30;
+      return element === 30;
     }
 
   } // end of constructor
@@ -1713,13 +1714,13 @@ class player1Moves {
 
             console.log(confirm.makeMove[0]);
 
-           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
-            charmanderProgressBar.decreaseSquirtleHP();
-
            //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
            //fireBlaster does -10 damage on squirtle
             a2.squirtleHealthBar -=10;         //this is a backup array
             a2.squirtleHealthBar2.push(-10);  //this is an array
+
+          //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
+            charmanderProgressBar.decreaseSquirtleHP();
 
            //debugging here
             console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
@@ -1881,13 +1882,12 @@ class computerMoves {
           //debugging here -- delete when neccessary
           console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
 
-
-          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-          squirtleProgressBar.decreaseCharmanderHP();
-
           //reflect the changes to charmanderHealthBar AND charmanderHealthBar2 array as well.
           a1.charmanderHealthBar-=20; // this is a backup array
           a1.charmanderHealthBar2.push(-20); // push this data to charmanderHealthBar2 array as well
+
+          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+          squirtleProgressBar.decreaseCharmanderHP();
 
           // This is the function that applies the filter to the arrays listed above. It also calls other functions
           array1.checkTheStatus();
