@@ -10,11 +10,11 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
 /*
 NOTE:
-Lastest update: (9/2/2021)
+Lastest update: (9/3/2021)
 
 
-x0) charmander and squirtle progressBar updated with shorter code. Output should be the same on line 1363 -- also don't forget to add functions when array is > 100 and < 0 *high priority*
-x1) create custom error message when switch goes out of bonds *high priority*
+x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
+x1) Created pokemonIndicator on line 717 which is called on line 420 but it doesn't seem to work. Troubleshoot it *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) Create a function to switch pokemon without losing HP data from array *2nd priority*
 x4) Attack moves for computer pokemon need to be combined to one function *3rd priority*
@@ -35,7 +35,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
 10) investigate this this.squPokeImage2() on line 411 *low priority*
-11) commented out charmander sound on line  844 *********************************************************************************************************************************** 8/24/2021
+11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
 14) Make healthBar turn red when health is < 40
@@ -413,9 +413,11 @@ class referee {
           //debugging here. Delete when neccessary
           console.log("Dead pokemon saved in array: " + p1.deadPokemon);
 
-          // display player1 deadPokemon
+          //display player1 deadPokemon
           p1.deadPokemonImage();
 
+          //make changes to pokemon indicator icon NOTE: only do this for player1
+          player1CH.pokemonIndicator();
 
           // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit. UPDATE: fix this later as there should be no limit instead use filter
 
@@ -714,6 +716,72 @@ class changePokemon {
   constructor () {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
+    this.pokemonIndicator = function() {
+      //This function informs the player of the remaining pokemon that is left using images
+
+      //varible declartions
+      let charmanderHP8 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP8 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let demopokemon = 1; // replace demopokemon with actual pokemon name -- work on this later
+      let demopokemon2 =2; // replace demopokemon with actual pokemon name -- work on this later
+      let demopokemon3 =3; // replace demopokemon with actual pokemon name -- work on this later
+      let demopokemon4 =4; // replace demopokemon with actual pokemon name -- work on this later
+
+        if (charmanderHP8 === 0 && squirtleHP8 >= 5) {
+
+          // remove previous Pokemon image
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("pokemon_indicator").appendChild(elem);
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+          // replace with new pokemon
+
+          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/1DeadPokemonof3.png" </img>';
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+        }else if (demopokemon === 0 && demopokemon2 >= 5) {
+
+          // remove previous Pokemon image
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("pokemon_indicator").appendChild(elem);
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+          // replace with new pokemon
+
+          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/2DeadPokemonof3.png" </img>';
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+        }else if (demopokemon3 === 0 && demopokemon4 >= 5) {
+
+          // remove previous Pokemon image
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("pokemon_indicator").appendChild(elem);
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+          // replace with new pokemon
+
+          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/3DeadPokemonof3.png" </img>';
+          document.getElementById("pokemon_indicator").style.width = 135;
+          document.getElementById("pokemon_indicator").style.height = 65;
+
+        }// end of if statements
+
+
+
+
+
+    }// end of pokemonIndicator
     this.debuggingOperation = function() {
 
       //default message for debuggingOperating function -- comment out if working on errors
@@ -857,7 +925,7 @@ class changePokemon {
           document.getElementById("CpuPokeImage").style.height = 380;
 
           //load pokemon sound
-          computerSD.squirtleVO.play();
+          //computerSD.squirtleVO.play();
 
           //This function restores the default settings of the progress for player1 and computer
           defaultProgressBar.defaultHPSetting();
@@ -1253,21 +1321,20 @@ class progressBar {
 
   // attempt to fix the problem and end the game.
 
-  switch( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100 ) {
+    if( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100) {
 
-  case squirtleHP8 < 0:
-     squirtleHP8 === 0;
-    break;
+        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
 
-  case charmanderHP9 > 100:
-    charmanderHP9 === 0;
-    break;
+        array1.getCharmanderHP();
+        array2.getSquirtleHP();
 
-  default:
-    default
-    document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
-    
-}// end of switch statement
+    }else if (isNaN(squirtleHP8) || isNaN(charmanderHP9)) {
+
+        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
+
+
+
+    }// end of if statements
 
 
 } catch (reportError) {
@@ -1608,8 +1675,8 @@ class arrayFunctions {
 
       a1.charmanderHealthBar2.filter((element, index, array))
 
-
-      return element === 60;
+      console.log("Results from getCharmanderHP: " + element);
+      return element === 45;
     }
 
 
@@ -1617,6 +1684,7 @@ class arrayFunctions {
 
       a1.squirtleHealthBar2.filter((element, index, array))
 
+      console.log("Results from getSquirtleHP: " + element);
       return element === 30;
     }
 
@@ -1995,6 +2063,7 @@ player1.fireBlasterMove();
 confirm.enableMoves();
 confirm.disableMoves();
 player1CH.debuggingOperation();
+
 
 
 
