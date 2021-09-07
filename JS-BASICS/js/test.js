@@ -1,11 +1,11 @@
 
 /*
 NOTE:
-Lastest update: (9/6/2021)
+Lastest update: (9/7/2021)
 
 
 x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
-x1) created a function for recharging on line 1516 and 2071, but there must be set a limit that will disable the speed progressbar and skip player's ability to attack. *high priority*
+x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) Create a function to switch pokemon without losing HP data from array *2nd priority*
 x4) Attack moves for computer pokemon need to be combined to one function *3rd priority*
@@ -799,13 +799,15 @@ class changePokemon {
         let x = 20;
 
 
-        if (x=== 10) {
+        if (x === 0) {
 
 
 
 
           console.log("debuggingOperation successful : if statment was triggered.");
           console.log("----------------------------------------------------------");
+
+
 
 
 
@@ -1278,8 +1280,7 @@ computerCH = new changePokemon;
 class objectofArrays {
 
   constructor () {
-    this.player1IsRecharging =  false;
-    this.computerIsRecharging = false;
+
     this.charmanderHealthBar =  [100];
     this.charmanderBackup =     [100];
     this.charmanderHpRecovered = [0];
@@ -1315,6 +1316,7 @@ class objectofArrays {
 
 a1 = new objectofArrays;
 a2 = new objectofArrays;
+a3 = new objectofArrays;
 
 
 
@@ -1517,12 +1519,11 @@ this.increaseComputerHP = function () {
   // let computerSPD2,3,4 etc = other SpeedProgressBar -- that you can recycle the code and not have to re-create a new function
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
-  if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true
-      && computerSPD >= 0 && a2.computerIsRecharging === true ) {
+  if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true && computerSPD >= 0) {
 
 
 
-    switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
+    switch(squirtleHP5 < 0 || squirtleHP5 >= 0 || computerSPD < 0 || computerSPD >= 0) {
 
     case (squirtleHP5 === 0 || computerSPD === 0):
 
@@ -1589,11 +1590,10 @@ this.increasePlayerHP = function () {
   // let player1SPD2,3,4 etc.. = other SpeedProgressBar so that you can recycle the code and not have to re-create a new function.
   let player1LowHealthIndicator2 = document.querySelector('.player1HP');
 
-  if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true
-      && player1SPD >= 0 && a1.player1IsRecharging === true) {
+  if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true && player1SPD >= 0) {
 
 
-   switch(charmanderHP5 < 0 || charmanderHP5 >= 0 ) {
+   switch(charmanderHP5 < 0 || charmanderHP5 >= 0 || player1SPD < 0  || player1SPD >= 0) {
 
    case (charmanderHP5 === 0 || player1SPD === 0):
 
@@ -1799,6 +1799,7 @@ array1 = new arrayFunctions;
 array2 = new arrayFunctions;
 
 
+
 class Sleep {
   constructor () {
     this.restedPokemon = false;
@@ -1881,7 +1882,7 @@ class player1Moves {
            //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
            //fireBlaster does -10 damage on squirtle
             a2.squirtleHealthBar.push(-10);
-            a2.squirtleBackup -=10;
+            a2.squirtleBackup.push(-10);
 
           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
             charmanderProgressBar.decreaseComputerHP();
@@ -1921,9 +1922,6 @@ class player1Moves {
        //confirm attack move for pokemon was clicked
        player1.charmanderMoves.charmanderFunction6of6 = true;
 
-       //confirm that player1 used the rest function to recharge HP;
-       a1.player1IsRecharging = true;
-
        //reflect the changes to the charmanderHpRecovered array only because charmanderHealthBarBackup will eventually have this data when the array is reduced.
        a1.charmanderHpRecovered.push(45);
 
@@ -1939,7 +1937,7 @@ class player1Moves {
        //debugging--------------------------------------
        console.log("The following pokemon health was restored: " + restore.restedPokemonArray);
        console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
-       console.log("charmanderBackup array when health is restored is: " + a1.charmanderBackup);
+       console.log("charmanderBackup array BEFORE health was restored (commented out on line 1934): " + a1.charmanderBackup);
 
        // show image
        player1Img.pokRecImage1();
@@ -2052,7 +2050,7 @@ class computerMoves {
 
           //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
           a1.charmanderHealthBar.push(-20);
-          a1.charmanderBackup-=20;
+          a1.charmanderBackup.push(-20);
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
@@ -2075,17 +2073,21 @@ class computerMoves {
           //show attack image
           computerImg.squAtkImage1();
 
+
           //if statement 3
 
-          if (player1.charmanderMoves.charmanderFunction6of6 === true && a1.player1IsRecharging === true) {
-            // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-            a1.chaSpeedProgressBar -=50;
+          if (player1.charmanderMoves.charmanderFunction6of6 === true) {
 
-            //This is a function that allows player1 to recoverHP if conditions are true
+            //debugging here -- this is not the best place to insert this code -- find an alternative location but this is okay for now
+            console.log("player1.charmanderMoves.charmanderFunction6of6 === true AND was activated via squirtleMoves function. This does 50% damage to speedbar of charmander.");
+
+            // player1 speed progressbar needs to reflect changes if the rest function was clicked.
+            a1.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
+
+            //This is a function that allows player1 to recoverHP if the condition above is true.
             squirtleProgressBar.increasePlayerHP();
 
           }// end of if statement3
-
 
 
           //Change boolean state so that player1 can make a move
@@ -2178,8 +2180,6 @@ player1CH.debuggingOperation();
 if(confirm.makeMove[0].player1Move === false){
 
   setTimeout (function(){
-
-
 
 
     computer.squirtleMoves();
