@@ -1,20 +1,11 @@
 
-
-/* This Javascript file is for testing purposes. Please read JavaScript manual for more information.
-
-https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
-
-*/
-
-
-
 /*
 NOTE:
-Lastest update: (9/3/2021)
+Lastest update: (9/6/2021)
 
 
 x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
-x1) Created pokemonIndicator on line 717 which is called on line 420 but it doesn't seem to work. Troubleshoot it *high priority*
+x1) created a function for recharging on line 1516 and 2071, but there must be set a limit that will disable the speed progressbar and skip player's ability to attack. *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) Create a function to switch pokemon without losing HP data from array *2nd priority*
 x4) Attack moves for computer pokemon need to be combined to one function *3rd priority*
@@ -37,13 +28,9 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 10) investigate this this.squPokeImage2() on line 411 *low priority*
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
-13) Find a way to randomly select a computer pokemon and focus on making player1 attacks effective only if conditions are true... eg: water vs fire type --- see line 480
-14) Make healthBar turn red when health is < 40
-15) Find a way to save pokemon health and name when player1 changes pokemon
-
-
-Date:
-09/31/2019 -- load the correct pokemonImage with the following array: loadPokemonImage on line 429
+13) on line 1568 defaultProgressBar.catchErrorFromSwitch(); needs to be updated to reflect changes to player1 and computer speed progressbars *low priority*
+14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
+15) add a tip section that changes based on cases from the switch. This should be next to pokomon logo at top left corner. *low priority*
 
 
 */
@@ -53,6 +40,22 @@ Date:
 
 class images {
   constructor () {
+
+
+    this.pokRecImage1 = function () {
+
+      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
+      document.getElementById("attack_graphic").style.width = 50;
+      document.getElementById("attack_graphic").style.height = 50;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 4 secs
+        document.getElementById("attack_graphic").innerHTML=("");
+
+      }, 5000); // 5 sec wait time
+
+    }// end of pokRecImage1
     this.chrAtkImage1 = function (){  // image 1 of 6
 
       document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/fireBlaster.gif" </img>';
@@ -281,8 +284,8 @@ class referee {
     this.deadPokemonImage = function () {
 
       // variable declartions
-      let charmanderHP7 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP7 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP7 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP7 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
       //load pokemon tombstone image based on certain conditions.
 
@@ -377,25 +380,14 @@ class referee {
 }; // end of deadPokemonImage function
 
 
-
-    this.fullHealth = [100];
-    this.healthBar = [0]; // NOTE: this is intentionally left empty but pokemon health will not exceed 100 HP when data is pushed to it.
-    this.lowHealth = [40];
-    this.zeroHealth = [0];
-    this.rechargeHealth = [60];
-    this.isRecharging = false;
-
-
-
-
     this.getHealth = function() {
 
       console.log("getHealth was started");
 
       // new variable declartions to avoid reference error
 
-      let charmanderHP4 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP4 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP4 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP4 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
 
 
@@ -501,8 +493,8 @@ class referee {
 
       // varible declartions
 
-      let charmanderHP2 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP2 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP2 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP2 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
               if (charmanderHP2 <= 40 ) {
 
@@ -540,8 +532,8 @@ class referee {
 
       // new variable declartions to avoid reference error
 
-      let charmanderHP3 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP3 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP3 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
 
 
@@ -612,6 +604,8 @@ class wait {
 
 
         document.getElementById("statusProgress3").innerHTML=("Please select a pokemon to begin the match...");
+
+        player1CH.pokemonIndicator(); // displays pokemon icon image
 
 
 
@@ -717,63 +711,74 @@ class changePokemon {
     this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
     this.pokemonIndicator = function() {
+
       //This function informs the player of the remaining pokemon that is left using images
 
       //varible declartions
-      let charmanderHP8 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP8 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP8 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
       let demopokemon = 1; // replace demopokemon with actual pokemon name -- work on this later
       let demopokemon2 =2; // replace demopokemon with actual pokemon name -- work on this later
       let demopokemon3 =3; // replace demopokemon with actual pokemon name -- work on this later
       let demopokemon4 =4; // replace demopokemon with actual pokemon name -- work on this later
 
+        if (charmanderHP8 >= 5 && squirtleHP8 >= 5) {
+
+          // show default icon if both pokemon are live
+
+          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/NoDeadPokemon.png" </img>';
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
+
+        }// end of if statement
+
         if (charmanderHP8 === 0 && squirtleHP8 >= 5) {
 
-          // remove previous Pokemon image
+          // remove previousicon
 
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
-          // replace with new pokemon
+          // replace with new icon
 
           document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/1DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
         }else if (demopokemon === 0 && demopokemon2 >= 5) {
 
-          // remove previous Pokemon image
+          // remove previous icon
 
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
-          // replace with new pokemon
+          // replace with new icon
 
           document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/2DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
         }else if (demopokemon3 === 0 && demopokemon4 >= 5) {
 
-          // remove previous Pokemon image
+          // remove previous icon
 
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
-          // replace with new pokemon
+          // replace with new icon
 
           document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/3DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 135;
-          document.getElementById("pokemon_indicator").style.height = 65;
+          document.getElementById("pokemon_indicator").style.width = 131;
+          document.getElementById("pokemon_indicator").style.height = 66;
 
         }// end of if statements
 
@@ -1271,17 +1276,38 @@ computerCH = new changePokemon;
 
 
 class objectofArrays {
+
   constructor () {
+    this.player1IsRecharging =  false;
+    this.computerIsRecharging = false;
     this.charmanderHealthBar =  [100];
-    this.charmanderHealthBar2 = [100];
-    this.charmanderHpRecovered= [45];
+    this.charmanderBackup =     [100];
+    this.charmanderHpRecovered = [0];
+    this.chaSpeedProgressBar =  [100];
     this.squirtleHealthBar =    [100];
-    this.squirtleHealthBar2 =   [100];
-    this.squirtleHpRecovered =  [30];
-
-
-
-
+    this.squirtleBackup =       [100];
+    this.squirtleHpRecovered =  [0];
+    this.squSpeedProgressBar =  [100];
+    this.blastoiseHealthBar =   [100];
+    this.blastoiseBackup =      [100];
+    this.blastoiseHpRecovered = [0];
+    this.blaSpeedProgressBar =  [100];
+    this.scytherHealthBar =     [100];
+    this.scytherBackup =        [100];
+    this.scytherHpRecovered =   [0];
+    this.scySpeedProgressBar =  [100];
+    this.wartortleHealthBar =   [100];
+    this.wartortleBackup =      [100];
+    this.wartortleHpRecovered = [0];
+    this.warSpeedProgressBar =  [100];
+    this.charizardPokemonHealthBar =    [100];
+    this.charizardPokemonBackup =       [100];
+    this.charizardPokemonHpRecovered =  [0];
+    this.charizardSpeedProgressBar =    [100];
+    this.pikachuHealthBar =     [100];
+    this.pikachuBackup =        [100];
+    this.pikachuHpRecovered =   [0];
+    this.pikSpeedProgressBar =  [100];
 
 
   } // end of constructor class
@@ -1302,8 +1328,8 @@ class progressBar {
 
       //varible declartions
 
-      let squirtleHP8 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
-      let charmanderHP9 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP8 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let charmanderHP9 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 
 
   if ( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100 ) {
@@ -1353,8 +1379,8 @@ class progressBar {
       let player1DefaultSpeed = 100;
       let computerDefaultSpeed = 100;
 
-      let squirtleHP6 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
-      let charmanderHP6 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP6 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 
       if (charmanderHP6 === 100 && squirtleHP6 === 100) {
 
@@ -1374,14 +1400,14 @@ class progressBar {
 
     }// end of defaultHPSetting
 
-    this.decreaseSquirtleHP = function () {
+    this.decreaseComputerHP = function () {
 
       // variable declartions
 
 
       let hpDamage = 0;
       let hpRecovered = a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
-      let squirtleHP5 = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let squirtleHP5 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -1421,54 +1447,19 @@ class progressBar {
 
   }// end of switch statement
 
+        }// end of if statement
 
-}else if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
-
-
-
-  switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
-
-  case (squirtleHP5 >=0):
-  hpDamage = squirtleHP5;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  p1.informWinner();
-  break;
-
-  case (squirtleHP5 > 0 && squirtleHP5 <= 20):
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  break;
-
-  case (squirtleHP5 > 20 && squirtleHP5 <= 40):
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  computerLowHealthIndicator.style.backgroundColor = "#FD0202";
-  break;
-
-  case (squirtleHP5 > 40 && squirtleHP5 <= 100):
-  hpDamage = squirtleHP5 + hpRecovered;
-  document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-  break;
-
-  default:
-  defaultProgressBar.catchErrorFromSwitch();
-
-}// end of switch statement
+            } // end of decreaseComputerHP function
 
 
-}// end if statements
-
-      } // end of decreaseSquirtleHP function
-
-
-    this.decreaseCharmanderHP = function () {
+    this.decreasePlayerHP = function () {
 
       // variable declartions
 
 
       let hpDamage2 = 0;
       let hpRecovered2 = a1.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
-      let charmanderHP5 = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
@@ -1508,50 +1499,153 @@ class progressBar {
 
 }// end of switch statement
 
+      }// end of if statement
 
-
-}else if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
-
-
-
+          } // end of decreasePlayerHP function
 
 
 
-  switch(charmanderHP5 < 0 || charmanderHP5 >= 0 ) {
+this.increaseComputerHP = function () {
 
-  case (charmanderHP5 === 0):
-  hpDamage2 = charmanderHP5;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  comp.informWinner();
-  break;
-
-  case (charmanderHP5 > 0 && charmanderHP5 <= 20):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  break;
-
-  case (charmanderHP5 > 20 && charmanderHP5 <= 40):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  player1LowHealthIndicator.style.backgroundColor = "#FD0202";
-  break;
-
-  case (charmanderHP5 > 40 && charmanderHP5 <= 100):
-  hpDamage2 = charmanderHP5 + hpRecovered2;
-  document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-  break;
-
-  default:
-  defaultProgressBar.catchErrorFromSwitch();
+  // variable declartions
 
 
-}// end if switch statement
+  let hpDamage = 0;
+  let speedReduced = 0;
+  let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
+  let computerSPD =  a1.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  // let computerSPD2,3,4 etc = other SpeedProgressBar -- that you can recycle the code and not have to re-create a new function
+  let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
-      }// end of if statements
+  if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true
+      && computerSPD >= 0 && a2.computerIsRecharging === true ) {
 
-          } // end of decreaseCharmanderHP function
 
 
+    switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
+
+    case (squirtleHP5 === 0 || computerSPD === 0):
+
+    hpDamage = squirtleHP5;
+    document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+    speedReduced = computerSPD;
+    document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+    p1.informWinner();
+    //create code here for when computer speed progress bar is 0.
+    console.log("no code at line 1536");
+    break;
+
+    case (squirtleHP5 > 0 && squirtleHP5 <= 20 || computerSPD > 0 && computerSPD <= 20):
+
+    hpDamage = squirtleHP5;
+    document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+    speedReduced = computerSPD;
+    document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+    break;
+
+    case (squirtleHP5 > 20 && squirtleHP5 <= 40 || computerSPD > 20 && computerSPD <= 40):
+
+    hpDamage = squirtleHP5;
+    document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+    computerLowHealthIndicator2.style.backgroundColor = "#A6EDED";
+
+    speedReduced = computerSPD;
+    document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+    break;
+
+    case (squirtleHP5 > 40 && squirtleHP5 <= 100 || computerSPD > 40 && computerSPD <= 100):
+
+    hpDamage = squirtleHP5
+    document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+    speedReduced = computerSPD;
+    document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+    break;
+
+    default:
+    defaultProgressBar.catchErrorFromSwitch();
+
+  }// end of switch statement
+
+
+        }// end if statements
+
+
+            }// end of increaseComputerHP
+
+
+
+this.increasePlayerHP = function () {
+
+  // variable declartions
+
+
+  let hpDamage2 = 0;
+  let speedReduced2 = 0;
+  let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced) + a1.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
+  let player1SPD    = a1.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
+  // let player1SPD2,3,4 etc.. = other SpeedProgressBar so that you can recycle the code and not have to re-create a new function.
+  let player1LowHealthIndicator2 = document.querySelector('.player1HP');
+
+  if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true
+      && player1SPD >= 0 && a1.player1IsRecharging === true) {
+
+
+   switch(charmanderHP5 < 0 || charmanderHP5 >= 0 ) {
+
+   case (charmanderHP5 === 0 || player1SPD === 0):
+
+   hpDamage2 = charmanderHP5;
+   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+   comp.informWinner();
+
+   speedReduced = player1SPD;
+   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
+   //create a code here for when player1speedbar is 0.
+   console.log("no code added for line 1605");
+   break;
+
+   case (charmanderHP5 > 0 && charmanderHP5 <= 20 || player1SPD > 0  && player1SPD <= 20):
+
+   hpDamage2 = charmanderHP5;
+   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+
+   speedReduced = player1SPD;
+   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
+   break;
+
+   case (charmanderHP5 > 20 && charmanderHP5 <= 40 || player1SPD > 20  && player1SPD <= 40):
+
+   hpDamage2 = charmanderHP5;
+   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+   player1LowHealthIndicator2.style.backgroundColor = "#A6EDED";
+
+   speedReduced = player1SPD;
+   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
+   break;
+
+   case (charmanderHP5 > 40 && charmanderHP5 <= 100 || player1SPD > 40  && player1SPD <= 100):
+
+   hpDamage2 = charmanderHP5;
+   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+
+   speedReduced = player1SPD;
+   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
+   break;
+
+   default:
+   defaultProgressBar.catchErrorFromSwitch();
+
+
+ }// end if switch statement
+
+
+       }// end of if statements
+
+
+            }// end of increasePlayerHP
 
 
 
@@ -1580,8 +1674,8 @@ class arrayFunctions {
       //retreiverAndResolver is a getter and setter function and will be used to fitch and retreive data from outside this class.
 
       //find the value of previousHP from charmander and squirtle and create a function to find and restore the difference of HP.
-      let charmanderPreviousHP = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtlePreviousHP =   a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderPreviousHP = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtlePreviousHP =   a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
       let charmanderCurrentHP = restore.charmanderRestoredHP.reduce(array1.PokemonRestoredReducer);
       console.log("charmanderCurrentHP value: "+ charmanderCurrentHP); //0
@@ -1610,7 +1704,7 @@ class arrayFunctions {
     /*
     console.log(mirror.arrayCopy); // []
     console.log(mirror.reducedArray); // []
-    mirror.createData = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
+    mirror.createData = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
     console.log(mirror.arrayCopy); // 400
     console.log(typeof mirror.arrayCopy);
 
@@ -1628,13 +1722,13 @@ class arrayFunctions {
 
       // varible declartions
 
-      let charmanderHP = a1.charmanderHealthBar2.reduce(array1.PokemonHPReduced);
-      let squirtleHP = a2.squirtleHealthBar2.reduce(array1.PokemonHPReduced);
+      let charmanderHP = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
 
 
-      // create a reduce function for charmanderHealthBar2 and squirtleHealthBar2
-      console.log("charmanderHealthBar2 array was reduced to: " + charmanderHP); // full HP is 420
-      console.log("squirtleHealthBar2 array was reduced to: "+ squirtleHP); // full HP  is 210
+      // create a reduce function for charmanderHealthBar and squirtleHealthBar
+      console.log("charmanderHealthBar array was reduced to: " + charmanderHP);
+      console.log("squirtleHealthBar array was reduced to: "+ squirtleHP);
 
       //create a logic based on the output for the reduce function and call other functions if conditions are true
 
@@ -1647,6 +1741,7 @@ class arrayFunctions {
 
         //debugging here -- delete when neccessary
         console.log("retreiverAndResolver function was commented out on this line : ");
+
 
       //  array1.retreiverAndResolver(); <-- remove comment tag when needed
 
@@ -1667,13 +1762,20 @@ class arrayFunctions {
     this.PokemonRestoredReducer = function (accumulator, currentValue) {
 
 
-                return accumulator + currentValue;
-                };
+          return accumulator + currentValue;
+        };
+
+    this.PokemonSpeedReduced = function (accumulator, currentValue) {
+
+
+          return accumulator + currentValue;
+      };
+
 
     this.getCharmanderHP =  function () {
 
 
-      a1.charmanderHealthBar2.filter((element, index, array))
+      a1.charmanderHealthBar.filter((element, index, array))
 
       console.log("Results from getCharmanderHP: " + element);
       return element === 45;
@@ -1682,7 +1784,7 @@ class arrayFunctions {
 
     this.getSquirtleHP   =  function () {
 
-      a1.squirtleHealthBar2.filter((element, index, array))
+      a1.squirtleHealthBar.filter((element, index, array))
 
       console.log("Results from getSquirtleHP: " + element);
       return element === 30;
@@ -1701,7 +1803,7 @@ class Sleep {
   constructor () {
     this.restedPokemon = false;
     this.restedPokemonArray = [];
-    this.charmanderRestoredHP = [0];
+    this.charmanderRestoredHPBackup = [0];
 
 
   }// end of rest constructor
@@ -1776,28 +1878,26 @@ class player1Moves {
             //debugging here -- delete when neccessary
             console.log("charmanderFunction1of6 is: " + player1.charmanderMoves[0].charmanderFunction1of6);
 
-            //change boolean state so that computer can attack
-            confirm.makeMove[0].player1Move = false;
-            confirm.makeMove[0].computerMove = true;
-
-            console.log(confirm.makeMove[0]);
-
-           //reflect the changes to squirtleHealthBar AND squirtleHealthBar2 array as well.
+           //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
            //fireBlaster does -10 damage on squirtle
-            a2.squirtleHealthBar -=10;         //this is a backup array
-            a2.squirtleHealthBar2.push(-10);  //this is an array
+            a2.squirtleHealthBar.push(-10);
+            a2.squirtleBackup -=10;
 
           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
-            charmanderProgressBar.decreaseSquirtleHP();
+            charmanderProgressBar.decreaseComputerHP();
 
-           //debugging here
+           //debugging here -----------------------------------
             console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
-            console.log("squirtleHealthBar2 array is " + a2.squirtleHealthBar2);
+            console.log("squirtleBackup array is " + a2.squirtleBackup);
 
             // show image
              player1Img.chrAtkImage1();
 
+             //change boolean state so that computer can attack
+             confirm.makeMove[0].player1Move = false;
+             confirm.makeMove[0].computerMove = true;
 
+             console.log(confirm.makeMove[0]);
 
 
           } // end of if statement
@@ -1821,34 +1921,34 @@ class player1Moves {
        //confirm attack move for pokemon was clicked
        player1.charmanderMoves.charmanderFunction6of6 = true;
 
-      // solar restores +45 health for player1 but can't attack for 3 moves -- fix that part
+       //confirm that player1 used the rest function to recharge HP;
+       a1.player1IsRecharging = true;
 
-      let charmanderHPIncreased = document.querySelector('.player1HP');
-      let charmanderSpeedDecreased = document.querySelector('.playerSpeed');
-      let percent2 =100;
+       //reflect the changes to the charmanderHpRecovered array only because charmanderHealthBarBackup will eventually have this data when the array is reduced.
+       a1.charmanderHpRecovered.push(45);
 
-       //Add 45% to pokemon HP
-       charmanderHPIncreased.style.width ="45%";
-
-       //Decrease speedbar to 50% and append this data to an array (will do the array part later)
-       charmanderSpeedDecreased.style.width =-50 + "%";
-
-       //Change progress bar color to default color (light blue)
-       charmanderHPIncreased.style.backgroundColor = "A6EDED";
-
-       //reflect the changes to charmanderHealthBar2 array as well.
-       a1.charmanderHealthBar2.push(45);
+       //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
+       charmanderProgressBar.increasePlayerHP();
 
        //record rest action that was taken as it will be used later.
        restore.restedPokemon = true;
        restore.restedPokemonArray.push("Charmander");
-       restore.charmanderRestoredHP.push(45);
+      // a1.charmanderBackup.push(45); this is the regular backup for hpDamage -- delete it when neccessary
+       restore.charmanderRestoredHPBackup.push(45);
 
-       //debugging
-       console.log("The following pokemon rested: " + restore.restedPokemonArray);
-       console.log("This is how much HP was restored: " + restore.charmanderRestoredHP);
+       //debugging--------------------------------------
+       console.log("The following pokemon health was restored: " + restore.restedPokemonArray);
+       console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
+       console.log("charmanderBackup array when health is restored is: " + a1.charmanderBackup);
 
+       // show image
+       player1Img.pokRecImage1();
 
+       //change boolean state so that computer can attack
+       confirm.makeMove[0].player1Move = false;
+       confirm.makeMove[0].computerMove = true;
+
+       console.log(confirm.makeMove[0]);
 
      } // end of rest function
 
@@ -1950,37 +2050,43 @@ class computerMoves {
           //debugging here -- delete when neccessary
           console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
 
-          //reflect the changes to charmanderHealthBar AND charmanderHealthBar2 array as well.
-          a1.charmanderHealthBar-=20; // this is a backup array
-          a1.charmanderHealthBar2.push(-20); // push this data to charmanderHealthBar2 array as well
+          //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
+          a1.charmanderHealthBar.push(-20);
+          a1.charmanderBackup-=20;
+
 
           //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-          squirtleProgressBar.decreaseCharmanderHP();
+          squirtleProgressBar.decreasePlayerHP();
 
           // This is the function that applies the filter to the arrays listed above. It also calls other functions
           array1.checkTheStatus();
 
-          //debugging here
+          //debugging here------------------------------------------------------
 
           console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-
-          // changes need to be reflected in healthBar array as well
-          p1.healthBar.push(-20);
-
-
           // get the status of health for player1 and computer pokemon
 
-          console.log("healhBar array is " +p1.healthBar); // 0,-20,-20  <-- this is another backup array for debugging -- delete when neccessary
-          console.log("charmanderHealthBar2 array is " +a1.charmanderHealthBar2); //-20
-
-
+          console.log("charmanderBackup array is " +a1.charmanderBackup);
 
           // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
           document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
 
-          // show attack image
+          //show attack image
           computerImg.squAtkImage1();
+
+          //if statement 3
+
+          if (player1.charmanderMoves.charmanderFunction6of6 === true && a1.player1IsRecharging === true) {
+            // player1 speed progressbar needs to reflect changes if the rest function was clicked.
+            a1.chaSpeedProgressBar -=50;
+
+            //This is a function that allows player1 to recoverHP if conditions are true
+            squirtleProgressBar.increasePlayerHP();
+
+          }// end of if statement3
+
+
 
           //Change boolean state so that player1 can make a move
           confirm.makeMove[0].computerMove = false;

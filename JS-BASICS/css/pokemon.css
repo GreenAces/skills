@@ -235,7 +235,7 @@ update progress bar style here
   display: block;
 }
 
-.dropdownbtnA a:hover {background-color: #f1f1f1}
+.dropdownbtnA a:hover {background-color: #94b0eb}
 
 .dropdownbtnA:hover .dropdown-content {
   display: block;
@@ -291,7 +291,7 @@ update progress bar style here
   display: block;
 }
 
-.dropdownbtnB a:hover {background-color: #f1f1f1}
+.dropdownbtnB a:hover {background-color: #94b0eb}
 
 .dropdownbtnB:hover .dropdown-content {
   display: block;
@@ -348,7 +348,7 @@ update progress bar style here
   display: block;
 }
 
-.dropdownChangePoke a:hover {background-color: #f1f1f1}
+.dropdownChangePoke a:hover {background-color: #94b0eb}
 
 .dropdownChangePoke:hover .dropdown-content {
   display: block;
@@ -405,7 +405,7 @@ update progress bar style here
   display: block;
 }
 
-.dropdownGameOpt a:hover {background-color: #f1f1f1}
+.dropdownGameOpt a:hover {background-color: #94b0eb}
 
 .dropdownGameOpt:hover .dropdown-content {
   display: block;
@@ -465,7 +465,7 @@ update progress bar style here
   display: block;
 }
 
-.dropdownGameOpt2 a:hover {background-color: #f1f1f1}
+.dropdownGameOpt2 a:hover {background-color: #94b0eb}
 
 .dropdownGameOpt2:hover .dropdown-content {
   display: block;
