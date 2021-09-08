@@ -1,12 +1,76 @@
 <html lang = "en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>JavaScript Basics -- FrontEnd</title>
-  <link rel="stylesheet" type="text/css" href="/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/css/lucky7.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>GreenAces Javascript Lucky7 Game</title>
+  <link rel="stylesheet" type="text/css" href="http://robert-labonte.great-site.net/JS-BASICS/css/lucky7.css">
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid">
+  <a class="navbar-brand" href="http://www.robert-labonte.great-site.net/?i=1">GreenAces</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="http://www.robert-labonte.great-site.net/?i=1">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/GreenAces/skills" target="_blank">Github</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Projects
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Andriod</a></li>
+          <li><hr class="dropdown-divider1"></li>
+          <li><a class="dropdown-item" href="#">Java</a></li>
+          <li><hr class="dropdown-divider2"></li>
+          <li><a class="dropdown-item" href="#">JavaScript</a></li>
+          <li><hr class="dropdown-divider3"></li>
+          <li><a class="dropdown-item" href="http://www.robert-labonte.great-site.net/lucky7.html" target="_blank">Lucky 7 Game</a></li>
+          <li><a class="dropdown-item" href="http://www.robert-labonte.great-site.net/pokemon.html" target="_blank">Pokemon Game</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+</nav>
+
+
+  <!-- JavaScript should always be placed after the body tag 95% of the time. -->
+<script src="http://robert-labonte.great-site.net/JS-BASICS/js/lucky7.js"></script>
+
+<div class="container">
+<div class="row">
+<div class="col align-self-start">
+
+
+
+  <div id="GameInfo">
+
+  <p>Click the button to win lucky number 7!</p>
+  <p>You're given 3 rounds before the game ends.</p>
+  <p>Are you feeling lucky?</>
+  </div>
+</div>
+
+
+<div class="col align-self-center">
 
   <div id="GameNumberFont">
   <h3 id= "displayRandomNumber"></h3>
@@ -15,38 +79,49 @@
   <div id="GameLogo">
   <p id="logo1"></p>
   </div>
-  <div id="GameInfo">
 
-  <p>Click the button to win lucky number 7!</p>
-  <p>You're given 3 rounds before the game ends.</p>
-  <p>Are you feeling lucky?</>
+  <div id="GameButtonAndText">
+  <button id="myBtn" onclick = "callAllFunctions()">Click</button>
+  <p id= "displayGameAlert"></p>
+  <p id= "InformPlayerLoss"></p>
+  <p id= "InformPlayerWon"></p>
+  <p id= "PlayAgainButton"></p>
   </div>
 
-<div id="GameButtonAndText">
-<button id="myBtn" onclick = "callAllFunctions()"></button>
-<p id= "displayGameAlert"></p>
-<p id= "InformPlayerLoss"></p>
-<p id= "InformPlayerWon"></p>
-<p id= "PlayAgainButton"></p>
 </div>
 
-<table id="t01" style="width:40%" align = center>
-	<tr>
-	<th align = left>Data Type:</th>
-  <th align = left>Status:</th>
-    </tr>
-    <tr>
-    <td># of Rounds:</td>
-    <td id = "data2">data2</td>
-    </tr>
-    <tr>
-    <td>Odd or Even:</td>
-    <td id = "data3" >data3</td>
-    </tr>
-  </table> <br></br>
 
-  <!-- JavaScript should always be placed after the body tag 95% of the time. -->
-<script src="/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/js/lucky7.js">
-</script>
+<div class="col align-self-end">
+
+  <table id="t01" style="width:40%" align = center>
+  	<tr>
+  	<th align = left>Data Type:</th>
+    <th align = left>Status:</th>
+      </tr>
+      <tr>
+      <td># of Rounds:</td>
+      <td id = "data2">data2</td>
+      </tr>
+      <tr>
+      <td>Odd or Even:</td>
+      <td id = "data3" >data3</td>
+      </tr>
+    </table> <br></br>
+
+
+</div>
+</div>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
 </body>
 </html>

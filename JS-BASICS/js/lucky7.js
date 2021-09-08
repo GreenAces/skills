@@ -16,8 +16,8 @@ function play() {
   let number = Math.ceil((Math.random() * 10));
   let text ="";
   let text2 ="";
-  let mouseClickSound = new Audio('/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/lucky7/MouseDoubleClick.wav');
-  let applauseSound = new Audio('/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav');
+  let mouseClickSound = new Audio('http://robert-labonte.great-site.net/JS-BASICS/sounds/lucky7/MouseDoubleClick.wav');
+  let applauseSound = new Audio('http://robert-labonte.great-site.net/JS-BASICS/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav');
   mouseClickSound.play();
 
   if (number == 7) {
