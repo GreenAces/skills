@@ -90,7 +90,7 @@ console.log(canDrink2);
 console.log("------------------new line of code(6)-------------------------");
 
 console.log(hotChicks[2]);
-document.getElementById("displayText").innerHTML=(JSON.stringify(hotChicks[2]));
+//document.getElementById("displayText").innerHTML=(JSON.stringify(hotChicks[2])); -->> commented out
 
 console.log("------------------new line of code(7)-------------------------");
 
@@ -116,7 +116,7 @@ console.log("------------------new line of code(7)-------------------------");
 
 
 console.log(myArray);
-document.getElementById("displayText").innerHTML=(JSON.stringify(myArray));
+//document.getElementById("displayText").innerHTML=(JSON.stringify(myArray)); -->> commented out
 
  console.log("------------------new line of code(8)-------------------------");
 
