@@ -64,156 +64,197 @@
   </div>
 </div>
 </nav>
-    <!-- Game tips and status-->
-    <div class="div1">
 
-      <div class="statusLayout"><img id="pokemon_logo" src = "http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" alt= "Pokemon"></img>
-
-          <div class="statusLayoutProgress">
-            <p id="statusProgress"></p>
-          </div>
-          <div class="statusLayoutProgress2">
-            <p id="statusProgress2"></p>
-          </div>
-          <div class="statusLayoutProgress3">
-            <p id="statusProgress3"></p>
-          </div>
+  <!-- bootstrap5 containers -->
 
 
-         </div>
-         <!--nav menu-->
-         <div class ="pokemonLogoLayout">
-          <p id="pokemon_indicator"></p>
-         </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">.col-md-4</div>
 
-         <div class="div3">
-           <div class="dropdownbtnA"><h3 id="PLY1">PLAYER1</h3>
-            <button class="dropbtnA">ATTACK</button>
-            <div class="dropdown-content">
-            <a id="attackA"></a>
-            <a id="attackB"></a>
-            <a id="attackC"></a>
-          </div>
-          </div>
+    <div class="container">
+  <div class="row">
+    <div class="col align-self-start">
 
+      <!-- find a better spot to put pokemon logo -->
 
+  <div class="statusLayout"><img id="pokemon_logo" src = "http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" alt= "Pokemon"></img>
+  </div>
 
-           <div class="dropdownbtnB"><h3 id="PLY1_2">MENU</h3>
-             <button class="dropbtnB">DEFEND</button>
-             <div class="dropdown-content">
-               <a id="defenseA"></a>
-               <a id="defenseB"></a>
-               <a id="defenseC"></a>
-             </div>
-            </div>
+      <!-- status indicator -->
+
+    <div class="statusLayoutProgress">
+      <p id="statusProgress"></p>
+    </div>
+    <div class="statusLayoutProgress2">
+      <p id="statusProgress2"></p>
+    </div>
+    <div class="statusLayoutProgress3">
+      <p id="statusProgress3"></p>
+    </div>
 
 
-             <div class="dropdownChangePoke"><h3 id="GAME_OPT_1">Select Pokemon</h3>
-               <button class="dropbtnD">SELECT</button>
-               <div class="dropdown-content">
-                  <a id="Charmander_sel">Charmander</a>
-                  <a id="Blastoise_sel">Blastoise</a>
-                  <a id="Warturtle_sel">Wartortle</a>
-                  <a id="Pikachu_sel">Pikachu</a>
-               </div>
-              </div>
+    </div>
+    <div class="col align-self-center">
+      2 of three columns
+    </div>
+    <div class="col align-self-end">
+      3 of three columns
+    </div>
+  </div>
+</div>
 
-              <div class="dropdownGameOpt"><h3 id="GAME_OPT">Game</h3>
-                <button class="dropbtnC">SOUND</button>
-                <div class="dropdown-content">
-                  <a id="soundON">ON</a>
-                  <a id="soundOFF">OFF</a>
-                </div>
-               </div>
-
-
-
-               <div class="dropdownGameOpt2"><h3 id="GAME_OPT">Options</h3>
-                 <button class="dropbtnE">RESTART</button>
-                 <div class="dropdown-content">
-                   <a id="restartYES">YES</a>
-                 </div>
-                </div>
-
-          </div> <!--end of div3 tag -->
+  <!-- add something here if you want -->
 
 
 
 
-      <!--pokemon battle ground -->
-      <div class="div2">
-        <div class="Player1Status">
-          <p><b>Pokemon name:</p></b>
-          <p id="p1PokemonName"></p>
-          <p id="p1HpFont"><b>HP:</p></b>
-          <div class="player1HP-progressBarBackground">
-        <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+
+
+    <!-- computer pokemon -->
+
+    <div class="CpuPokemonContainer"><p><b>Computer</p></b>
+    <!-- image goes here -->
+    <p id="CpuPokeImage"></p>
+    </div>
+
+  <!-- computer pokemon progress bar -->
+
+
+    <div class="CpuStatus">
+      <p><b>Pokemon name:</p></b>
+      <p id="cpuPokemonName"></p>
+      <p id="cpuHpFont"><b>HP:</p></b>
+      <div class="cpuHP-progressBarBackground">
+    <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <p id="cpuSpeedFont"><b>Speed:</p></b>
+    <div class="cpuSpeed-progressBarBackground">
+    <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    </div>
+
+
+
+
+
+  </div>
+  <div class="row">
+    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+
+    <!--pokemon_indicator menu-->
+    <div class ="pokemonLogoLayout">
+     <p id="pokemon_indicator"></p>
+    </div>
+
+    <!-- attack image goes here -->
+    <div class="AttackGraphicContainer">
+    <p id="attack_graphic"></p>
+    </div>
+
+    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+
+    <!-- player1 pokemon -->
+
+    <div class="Player1PokemonContainer"><p><b>Player1</p></b>
+      <!-- image goes here -->
+      <p id="Player1PokeImage"></p>
+    </div>
+
+
+    <!-- player1 pokemon progress bar -->
+
+
+      <div class="Player1Status">
+        <p><b>Pokemon name:</p></b>
+        <p id="p1PokemonName"></p>
+        <p id="p1HpFont"><b>HP:</p></b>
+        <div class="player1HP-progressBarBackground">
+      <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+        <p id="p1SpeedFont"><b>Speed:</p></b>
+        <div class="playerSpeed-progressBarBackground">
+      <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-          <p id="p1SpeedFont"><b>Speed:</p></b>
-          <div class="playerSpeed-progressBarBackground">
-        <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        </div>
-
-
-        <div class="Player1PokemonContainer"><p><b>Player1</p></b>
-          <!-- image goes here -->
-          <p id="Player1PokeImage"></p>
-        </div>
-
-
-        <div class="AttackGraphicContainer">
-          <!-- image goes here -->
-        <p id="attack_graphic"></p>
-        </div>
-
-
-        <div class="CpuPokemonContainer"><p><b>Computer</p></b>
-        <!-- image goes here -->
-        <p id="CpuPokeImage"></p>
-        </div>
+      </div>
 
 
 
-        <div class="CpuStatus">
-          <p><b>Pokemon name:</p></b>
-          <p id="cpuPokemonName"></p>
-          <p id="cpuHpFont"><b>HP:</p></b>
-          <div class="cpuHP-progressBarBackground">
-        <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <p id="cpuSpeedFont"><b>Speed:</p></b>
-        <div class="cpuSpeed-progressBarBackground">
-        <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        </div>
-
-    </div> <!-- end of div2 tag -->
 
 
-</div> <!-- end of div1 tag -->
-
-
-
-    <!-- JavaScript should always be placed after the body tag 95% of the time. -->
-  <script src="http://robert-labonte.great-site.net/JS-BASICS/js/pokemon-game.js"></script>
-
-  <!-- bootstrap5 container -->
-
-  <div class="container">
-<div class="row">
-  <div class="col align-self-start">
-    Hello, <br>
-    Welcome to GreenAces Official web site.
   </div>
-  <div class="col align-self-center">
-    This site is a work in progress.
-  </div>
-  <div class="col align-self-end">
-    Eventually more content will be added here soon.
+  <div class="row">
+    <div class="col-auto me-auto">.col-auto .me-auto</div>
+
+    <!--attack/defense menu-->
+    <div class="div3">
+      <div class="dropdownbtnA"><h3 id="PLY1">PLAYER1</h3>
+       <button class="dropbtnA">ATTACK</button>
+       <div class="dropdown-content">
+       <a id="attackA"></a>
+       <a id="attackB"></a>
+       <a id="attackC"></a>
+     </div>
+     </div>
+
+
+
+      <div class="dropdownbtnB"><h3 id="PLY1_2">MENU</h3>
+        <button class="dropbtnB">DEFEND</button>
+        <div class="dropdown-content">
+          <a id="defenseA"></a>
+          <a id="defenseB"></a>
+          <a id="defenseC"></a>
+        </div>
+       </div>
+
+
+        <div class="dropdownChangePoke"><h3 id="GAME_OPT_1">Select Pokemon</h3>
+          <button class="dropbtnD">SELECT</button>
+          <div class="dropdown-content">
+             <a id="Charmander_sel">Charmander</a>
+             <a id="Blastoise_sel">Blastoise</a>
+             <a id="Warturtle_sel">Wartortle</a>
+             <a id="Pikachu_sel">Pikachu</a>
+          </div>
+         </div>
+
+         <div class="dropdownGameOpt"><h3 id="GAME_OPT">Game</h3>
+           <button class="dropbtnC">SOUND</button>
+           <div class="dropdown-content">
+             <a id="soundON">ON</a>
+             <a id="soundOFF">OFF</a>
+           </div>
+          </div>
+
+
+
+          <div class="dropdownGameOpt2"><h3 id="GAME_OPT">Options</h3>
+            <button class="dropbtnE">RESTART</button>
+            <div class="dropdown-content">
+              <a id="restartYES">YES</a>
+            </div>
+           </div>
+
+     </div> <!--end of div3 tag -->
+
+
+
+    <div class="col-auto">.col-auto</div>
+
+<!-- add something here if you want -->
+
+
   </div>
 </div>
-</div>
+
+
+
+
+<!-- JavaScript should always be placed after the body tag 95% of the time. -->
+<script src="http://robert-labonte.great-site.net/JS-BASICS/js/pokemon-game.js"></script>
+
 
   <!-- Optional JavaScript; choose one of the two! -->
 
