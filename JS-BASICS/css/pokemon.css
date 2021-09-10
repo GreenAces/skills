@@ -2,66 +2,30 @@
 additional information can be found here:
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div */
 
-.statusLayout{
-  width: 520px;
-  height: 96px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
 
-}
 
 .statusLayoutProgress{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
+  width: 276px;
+  height: 98px;
 
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px red;
 
 }
 
 
 
 .statusLayoutProgress2{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
+  width: 276px;
+  height: 98px;
 
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px yellow;
 }
 
 
 
 
 .statusLayoutProgress3{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
+  width: 276px;
+  height: 98px;
 
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px green;
 }
 
 
@@ -562,8 +526,43 @@ update progress bar style here
 
 
 #pokemon_logo{
-  width: 150px;
-  height: 100px;
+  width: 286px;
+  height: 107px;
+  display:inline-block;
+
+}
+
+#attack-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#defense-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#select-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#settings-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#hamburger-menu-icon{
+  width: 58px;
+  height: 30px;
   display:inline-block;
 
 }

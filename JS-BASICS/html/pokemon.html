@@ -11,8 +11,8 @@
   <link rel="stylesheet" type="text/css" href="http://robert-labonte.great-site.net/JS-BASICS/css/pokemon.css">
 </head>
 <body>
-  <!-- Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Navbars-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- start of 1st nav bar-->
 <div class="container-fluid">
   <a class="navbar-brand" href="http://www.robert-labonte.great-site.net/?i=1">GreenAces</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,131 +63,163 @@
     </form>
   </div>
 </div>
-</nav>
 
-  <!-- bootstrap5 containers -->
+</nav> <!-- end of 1st nav bar-->
 
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">.col-md-4</div>
-
-    <div class="container">
-  <div class="row">
-    <div class="col align-self-start">
-
-      <!-- find a better spot to put pokemon logo -->
-
-  <div class="statusLayout"><img id="pokemon_logo" src = "http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" alt= "Pokemon"></img>
-  </div>
-
-      <!-- status indicator -->
-
-    <div class="statusLayoutProgress">
-      <p id="statusProgress"></p>
-    </div>
-    <div class="statusLayoutProgress2">
-      <p id="statusProgress2"></p>
-    </div>
-    <div class="statusLayoutProgress3">
-      <p id="statusProgress3"></p>
-    </div>
+  <!-- bootstrap5 tables 1 of 3 -->
 
 
-    </div>
-    <div class="col align-self-center">
-      2 of three columns
-    </div>
-    <div class="col align-self-end">
-      3 of three columns
-    </div>
-  </div>
-</div>
+        <!--table1 -->
 
-  <!-- add something here if you want -->
+        <table class="table table-borderless">
+          <tr id="TableRow-A-1">
 
+            <td id="cell1.1">
+              <!-- pokemon logo -->
 
+            <img img id="pokemon_logo" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" class="card-img-top" alt="Pokemon Logo">
+
+              cell 1.1</td>
 
 
-    <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
-
-
-    <!-- computer pokemon -->
-
-    <div class="CpuPokemonContainer"><p><b>Computer</p></b>
-    <!-- image goes here -->
-    <p id="CpuPokeImage"></p>
-    </div>
-
-  <!-- computer pokemon progress bar -->
-
-
-    <div class="CpuStatus">
-      <p><b>Pokemon name:</p></b>
-      <p id="cpuPokemonName"></p>
-      <p id="cpuHpFont"><b>HP:</p></b>
-      <div class="cpuHP-progressBarBackground">
-    <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-    <p id="cpuSpeedFont"><b>Speed:</p></b>
-    <div class="cpuSpeed-progressBarBackground">
-    <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-    </div>
+          </table>
 
 
 
 
 
-  </div>
-  <div class="row">
-    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+<!--table 2 -->
 
-    <!--pokemon_indicator menu-->
-    <div class ="pokemonLogoLayout">
-     <p id="pokemon_indicator"></p>
-    </div>
+<table class="table table-borderless">
+ <tr id="TableRow-A">
 
-    <!-- attack image goes here -->
-    <div class="AttackGraphicContainer">
-    <p id="attack_graphic"></p>
-    </div>
+    <td id="cell1">
 
-    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+      <!--pokemon_indicator menu-->
+      <div class ="pokemonLogoLayout">
+       <p id="pokemon_indicator"></p>
+      </div>
+      cell 1</td>
+    <td id="cell2">
 
-    <!-- player1 pokemon -->
+      <!-- status indicators 1 of 3 -->
 
-    <div class="Player1PokemonContainer"><p><b>Player1</p></b>
+      <div class="statusLayoutProgress">
+        <p id="statusProgress"></p>
+      </div>
+
+      <div class="statusLayoutProgress2">
+        <p id="statusProgress2"></p>
+      </div>
+
+      <div class="statusLayoutProgress3">
+        <p id="statusProgress3"></p>
+      </div>
+
+
+      cell 2</td>
+  </tr>
+
+  <tr id ="TableRow-B">
+    <td id="cell3">
+
+      <!-- computer pokemon progress bar -->
+
+
+        <div class="CpuStatus">
+          <p><b>Pokemon name:</p></b>
+          <p id="cpuPokemonName"></p>
+          <p id="cpuHpFont"><b>HP:</p></b>
+          <div class="cpuHP-progressBarBackground">
+        <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="cpuSpeedFont"><b>Speed:</p></b>
+        <div class="cpuSpeed-progressBarBackground">
+        <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+
+      cell 3</td>
+    <td id="cell4">
+
+      <!-- computer pokemon -->
+
+      <div class="CpuPokemonContainer"><p><b>Computer</p></b>
       <!-- image goes here -->
-      <p id="Player1PokeImage"></p>
-    </div>
-
-
-    <!-- player1 pokemon progress bar -->
-
-
-      <div class="Player1Status">
-        <p><b>Pokemon name:</p></b>
-        <p id="p1PokemonName"></p>
-        <p id="p1HpFont"><b>HP:</p></b>
-        <div class="player1HP-progressBarBackground">
-      <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-        <p id="p1SpeedFont"><b>Speed:</p></b>
-        <div class="playerSpeed-progressBarBackground">
-      <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+      <p id="CpuPokeImage"></p>
       </div>
+
+
+      cell 4</td>
+  </tr>
+
+  <tr id="TableRow-C">
+    <td id="cell5">
+
+      <!-- attack image goes here -->
+      <div class="AttackGraphicContainer2">
+      <p id="attack_graphic2"></p>
       </div>
 
 
 
 
+      cell 5</td>
+    <td id="cell6">
 
-  </div>
-  <div class="row">
-    <div class="col-auto me-auto">.col-auto .me-auto</div>
+      <!-- attack image goes here -->
+      <div class="AttackGraphicContainer">
+      <p id="attack_graphic"></p>
+      </div>
 
-    <!--attack/defense menu-->
+
+
+      cell 6</td>
+  </tr>
+
+   <tr id="TableRow-D">
+    <td id="cell7">
+
+      <!-- player1 pokemon -->
+
+      <div class="Player1PokemonContainer"><p><b>Player1</p></b>
+        <!-- image goes here -->
+        <p id="Player1PokeImage"></p>
+      </div>
+
+
+
+      cell 7</td>
+    <td id="cell8">
+
+      <!-- player1 pokemon progress bar -->
+
+
+        <div class="Player1Status">
+          <p><b>Pokemon name:</p></b>
+          <p id="p1PokemonName"></p>
+          <p id="p1HpFont"><b>HP:</p></b>
+          <div class="player1HP-progressBarBackground">
+        <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+          <p id="p1SpeedFont"><b>Speed:</p></b>
+          <div class="playerSpeed-progressBarBackground">
+        <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+
+      cell 8</td>
+  </tr>
+</table>
+
+
+      <!--table 3 for menu is temporary for attack/defense menu -->
+
+      <table class="table table-borderless">
+        <td id="TableCell4.0">Cell 1</td>
+      <td id =TableCell4.1>
+
+        <!--attack/defense menu-->
     <div class="div3">
       <div class="dropdownbtnA"><h3 id="PLY1">PLAYER1</h3>
        <button class="dropbtnA">ATTACK</button>
@@ -241,13 +273,16 @@
 
 
 
-    <div class="col-auto">.col-auto</div>
 
-<!-- add something here if you want -->
-
-
+<nav class="navbar fixed-bottom navbar-light bg-light"><!-- start of 2nd nav bar-->
+  <div id="mainNavbarControls" class="container-fluid">
+    <a class="navbar-brand" href="#"><img id="attack-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/attack-menu-icon.jpg"></a>
+    <a class="navbar-brand" href="#"><img id="defense-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/defense-menu-icon.jpg"></a>
+    <a class="navbar-brand" href="#"><img id="select-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/select-icon.jpg"></a>
+    <a class="navbar-brand" href="#"><img id="settings-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/settings.jpg"></a>
+    <a class="navbar-brand" href="#"><img id="hamburger-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/Hamburger-icon.jpg"></a>
   </div>
-</div>
+</nav>  <!-- end of 2nd nav bar-->
 
 
 

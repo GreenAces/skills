@@ -2154,6 +2154,21 @@ document.getElementById("soundOFF").addEventListener("click", player1SD.soundSet
 
 document.getElementById("restartYES").addEventListener("click", refreshPage);
 
+// adding functionality for bottom navbar here to make it constantly stick while user is scrolling the page
+
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("mainNavbarControls");
+var sticky = mainNavbarControls.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    mainNavbarControls.classList.add("sticky")
+  } else {
+    mainNavbarControls.classList.remove("sticky");
+  }
+}
+
 
 
 //This function needs to be called here as well to inform player1 to select a pokemon at the start of the game
