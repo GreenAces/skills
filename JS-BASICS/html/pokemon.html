@@ -77,7 +77,7 @@
             <td id="cell1.1">
               <!-- pokemon logo -->
 
-            <img img id="pokemon_logo" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" class="card-img-top" alt="Pokemon Logo">
+            <img id="pokemon_logo" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" class="card-img-top" alt="Pokemon Logo">
 
               cell 1.1</td>
 
@@ -129,11 +129,11 @@
         <div class="CpuStatus">
           <p><b>Pokemon name:</p></b>
           <p id="cpuPokemonName"></p>
-          <p id="cpuHpFont"><b>HP:</p></b>
+          <p id="cpuHpFont"><b>HP:</b></p>
           <div class="cpuHP-progressBarBackground">
         <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <p id="cpuSpeedFont"><b>Speed:</p></b>
+        <p id="cpuSpeedFont"><b>Speed:</b></p>
         <div class="cpuSpeed-progressBarBackground">
         <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -182,7 +182,7 @@
 
       <!-- player1 pokemon -->
 
-      <div class="Player1PokemonContainer"><p><b>Player1</p></b>
+      <div class="Player1PokemonContainer"><p><b>Player1</b></p>
         <!-- image goes here -->
         <p id="Player1PokeImage"></p>
       </div>
@@ -196,13 +196,13 @@
 
 
         <div class="Player1Status">
-          <p><b>Pokemon name:</p></b>
+          <p><b>Pokemon name:</b></p>
           <p id="p1PokemonName"></p>
-          <p id="p1HpFont"><b>HP:</p></b>
+          <p id="p1HpFont"><b>HP:</b></p>
           <div class="player1HP-progressBarBackground">
         <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-          <p id="p1SpeedFont"><b>Speed:</p></b>
+          <p id="p1SpeedFont"><b>Speed:</b></p>
           <div class="playerSpeed-progressBarBackground">
         <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -213,76 +213,98 @@
 </table>
 
 
-      <!--table 3 for menu is temporary for attack/defense menu -->
-
-      <table class="table table-borderless">
-        <td id="TableCell4.0">Cell 1</td>
-      <td id =TableCell4.1>
-
-        <!--attack/defense menu-->
-    <div class="div3">
-      <div class="dropdownbtnA"><h3 id="PLY1">PLAYER1</h3>
-       <button class="dropbtnA">ATTACK</button>
-       <div class="dropdown-content">
-       <a id="attackA"></a>
-       <a id="attackB"></a>
-       <a id="attackC"></a>
-     </div>
-     </div>
 
 
 
-      <div class="dropdownbtnB"><h3 id="PLY1_2">MENU</h3>
-        <button class="dropbtnB">DEFEND</button>
-        <div class="dropdown-content">
-          <a id="defenseA"></a>
-          <a id="defenseB"></a>
-          <a id="defenseC"></a>
+
+    <div class=".navbar41245" id="mainNavbarControls"><!-- start of 3rd nav bar-->
+      <div class="subnav">
+        <button class="subnavbtn"><img id="attack-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/attack-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
+        <div class="subnav-content">
+
+          <table id="tableAttackOptions">
+            <tr>
+              <td><a id="attackA"></a>&ensp;</td>
+              <td><a id="attackB"></a>&ensp;</td>
+              <td><a id="attackC"></a>&ensp;</td>
+
+            </tr>
+          </table>
+
+
+
         </div>
-       </div>
+      </div>
+      <div class="subnav">
+        <button class="subnavbtn"><img id="defense-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/defense-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
+        <div class="subnav-content">
 
-
-        <div class="dropdownChangePoke"><h3 id="GAME_OPT_1">Select Pokemon</h3>
-          <button class="dropbtnD">SELECT</button>
-          <div class="dropdown-content">
-             <a id="Charmander_sel">Charmander</a>
-             <a id="Blastoise_sel">Blastoise</a>
-             <a id="Warturtle_sel">Wartortle</a>
-             <a id="Pikachu_sel">Pikachu</a>
-          </div>
-         </div>
-
-         <div class="dropdownGameOpt"><h3 id="GAME_OPT">Game</h3>
-           <button class="dropbtnC">SOUND</button>
-           <div class="dropdown-content">
-             <a id="soundON">ON</a>
-             <a id="soundOFF">OFF</a>
-           </div>
-          </div>
-
-
-
-          <div class="dropdownGameOpt2"><h3 id="GAME_OPT">Options</h3>
-            <button class="dropbtnE">RESTART</button>
-            <div class="dropdown-content">
-              <a id="restartYES">YES</a>
-            </div>
-           </div>
-
-     </div> <!--end of div3 tag -->
+          <table id="tableDefenseOptions">
+            <tr>
+              <td><a id="defenseA"></a>&ensp;</td>
+              <td><a id="defenseB"></a>&ensp;</td>
+              <td><a id="defenseC"></a>&ensp;</td>
+            </tr>
+          </table>
 
 
 
 
-<nav class="navbar fixed-bottom navbar-light bg-light"><!-- start of 2nd nav bar-->
-  <div id="mainNavbarControls" class="container-fluid">
-    <a class="navbar-brand" href="#"><img id="attack-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/attack-menu-icon.jpg"></a>
-    <a class="navbar-brand" href="#"><img id="defense-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/defense-menu-icon.jpg"></a>
-    <a class="navbar-brand" href="#"><img id="select-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/select-icon.jpg"></a>
-    <a class="navbar-brand" href="#"><img id="settings-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/settings.jpg"></a>
-    <a class="navbar-brand" href="#"><img id="hamburger-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/Hamburger-icon.jpg"></a>
-  </div>
-</nav>  <!-- end of 2nd nav bar-->
+
+        </div>
+      </div>
+      <div class="subnav">
+        <button class="subnavbtn"><img id="select-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/select-icon.jpg"><i class="fa fa-caret-up"></i></button>
+        <div class="subnav-content">
+
+          <table id="PokemonSelectionScreen/Menu">
+            <tr>
+              <td><a id="Charmander_sel">Charmander</a>&ensp;</td>
+              <td><a id="Blastoise_sel">Blastoise</a>&ensp;</td>
+              <td><a id="Warturtle_sel">Wartortle</a>&ensp;</td>
+              <td><a id="Pikachu_sel">Pikachu</a>&ensp;</td>
+
+            </tr>
+          </table>
+
+
+
+
+        </div>
+      </div>
+      <div class="subnav">
+        <button class="subnavbtn"><img id="settings-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/settings.jpg"><i class="fa fa-caret-up"></i></button>
+        <div class="subnav-content">
+
+          <table id="SoundMenuSelection">
+            <tr>
+            <td><a id="soundON">Sound ON</a>&ensp;</td>
+            <td><a id="soundOFF">Sound OFF</a>&ensp;</td>
+
+            </tr>
+          </table>
+
+
+
+        </div>
+      </div>
+      <div class="subnav">
+        <button class="subnavbtn"><img id="hamburger-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/Hamburger-icon.jpg"><i class="fa fa-caret-up"></i></button>
+        <div class="subnav-content">
+
+          <table id="RestartMenuSelection">
+            <tr>
+              &ensp;
+              <td><a id="restartYES">Restart</a></td>
+
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div> <!-- end of 3rd nav bar-->
+
+
 
 
 
