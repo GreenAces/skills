@@ -2,123 +2,33 @@
 additional information can be found here:
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div */
 
-.statusLayout{
-  width: 520px;
-  height: 96px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
 
-}
 
 .statusLayoutProgress{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
+  width: 276px;
+  height: 98px;
 
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px red;
 
 }
 
 
 
 .statusLayoutProgress2{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
+  width: 276px;
+  height: 98px;
 
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px yellow;
 }
 
 
 
 
 .statusLayoutProgress3{
-  width: 530px;
-  height: 26px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:530px
-
-  border: 1px solid;
-  padding: 10px;
-  box-shadow: 5px 10px green;
-}
-
-
-
-.div1 {
-
-  height: 600px;
-  width: 1370px;
-  border: 10px solid orange;
-  padding: 25px;
-  margin: 25px;
-
-}
-
-#addTips {
-  background-color: lightblue;
-  max-width:500px
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-
-    font-size: 15;
-    text-align: left;
-    display:inline-block;
-
+  width: 276px;
+  height: 98px;
 
 }
 
 
-
-.dropdownMenuTest {
-
-  width: 580px;
-  height: 205px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:583px
-}
-
-
-#PLY1 {
- font-style:oblique;
- text-shadow: 1px 1px 0 #FF0000;
-}
-
-#PLY1_2 {
- font-style:oblique;
- text-shadow: 1px 1px 0 #FF0000;
-}
-
-#COM{
- font-style:oblique;
- text-shadow: 1px 1px 0 #FFE4C4;
-}
 
 
 
@@ -191,312 +101,10 @@ update progress bar style here
 
 
 
-
-
-
-.dropdownbtnA {
-  width: 68px;
-  height: 220px;
-  background-color: gray;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width: 70px;
-}
-
-.dropbtnA {
-  background-color: #4CAF50;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdownbtnA {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 104px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownbtnA a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownbtnA a:hover {background-color: #94b0eb}
-
-.dropdownbtnA:hover .dropdown-content {
-  display: block;
-}
-
-.dropdownbtnA:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-
-
-
-
-.dropdownbtnB {
-  width: 68px;
-  height: 220px;
-  background-color: gray;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:220px
-}
-
-.dropbtnB {
-  background-color: #4CAF50;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdownbtnB {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 104px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownbtnB a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownbtnB a:hover {background-color: #94b0eb}
-
-.dropdownbtnB:hover .dropdown-content {
-  display: block;
-}
-
-.dropdownbtnB:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-
-
-
-
-
-.dropdownChangePoke {
-  width: 68px;
-  height: 220px;
-  background-color: gray;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:220px
-}
-
-.dropbtnD {
-  background-color: #4CAF50;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdownChangePoke {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 104px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownChangePoke a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownChangePoke a:hover {background-color: #94b0eb}
-
-.dropdownChangePoke:hover .dropdown-content {
-  display: block;
-}
-
-.dropdownChangePoke:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-
-
-
-
-
-.dropdownGameOpt {
-  width: 68px;
-  height: 220px;
-  background-color: gray;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:220px
-}
-
-.dropbtnC {
-  background-color: #4CAF50;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdownGameOpt {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 104px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownGameOpt a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownGameOpt a:hover {background-color: #94b0eb}
-
-.dropdownGameOpt:hover .dropdown-content {
-  display: block;
-}
-
-.dropdownGameOpt:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-
-
-
-
-
-
-
-
-.dropdownGameOpt2 {
-  width: 73px;
-  height: 220px;
-  background-color: gray;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width: 75px;
-}
-
-.dropbtnE {
-  background-color: #4CAF50;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdownGameOpt2 {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 104px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownGameOpt2 a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownGameOpt2 a:hover {background-color: #94b0eb}
-
-.dropdownGameOpt2:hover .dropdown-content {
-  display: block;
-}
-
-.dropdownGameOpt2:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .Player1Status {
 
   width: 100px;
   height: 150px;
-  background-color: yellow;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-  display:inline-block;
   max-width:450px
 
 }
@@ -507,11 +115,6 @@ update progress bar style here
 .Player1PokemonContainer{
   width: 100px;
   height: 150px;
-  background-color: red;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-  display:inline-block;
   max-width:450px
 
 }
@@ -522,17 +125,12 @@ update progress bar style here
 
   width: 100%;
   height: 100%;
-  display:inline-block;
+
 }
 
 .AttackGraphicContainer{
   width: 25px;
   height: 25px;
-  background-color: gray;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-  display:inline-block;
   max-width:100px
 
 }
@@ -544,7 +142,7 @@ update progress bar style here
 
   width: 100%;
   height: 100%;
-  display:inline-block;
+
 
 }
 
@@ -552,20 +150,124 @@ update progress bar style here
 .pokemonLogoLayout{
   width: 120px;
   height: 51px;
-  background-color: white;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
   max-width:120px
 }
 
 
+/* pokemon logo */
+
 #pokemon_logo{
-  width: 150px;
-  height: 100px;
+  width: 286px;
+  height: 107px;
   display:inline-block;
 
+}
+
+
+/* main navbar menu options */
+
+#attack-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#defense-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#select-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#settings-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#hamburger-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+
+/* main navbar sub-menu options */
+
+.navbar41245 {
+  overflow: hidden;
+  background-color: #333;
+
+  list-style: none;
+  position:absolute;
+  right:50%;
+  margin-right:155px;
+  margin-top:220px;
+
+
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: #6385FB;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #6385FB;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
 }
 
 
@@ -573,14 +275,26 @@ update progress bar style here
 .CpuPokemonContainer{
   width: 100px;
   height: 150px;
-  background-color: pink;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-  display:inline-block;
   max-width:450px
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #CpuPokeImage img {
   display: block;
@@ -588,33 +302,14 @@ update progress bar style here
 
   width: 40%;
   height: 50%;
-  display:inline-block;
+
 
 }
 
 
-.CpuStatus{
+.CpuStatus {
 
   width: 100px;
   height: 150px;
-  background-color: yellow;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-  display:inline-block;
   max-width:450px
-}
-
-
-.div3 {
-
-  width: 580px;
-  height: 120px;
-  background-color: purple;
-  border: 10px solid green;
-  padding: 5px;
-  margin: 5px;
-  display:inline-block;
-  max-width:583px
-
 }
