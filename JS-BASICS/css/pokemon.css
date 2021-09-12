@@ -156,7 +156,7 @@ update progress bar style here
 
 /* pokemon logo */
 
-#pokemon_logo{
+#pokemon-logo-container{
   width: 286px;
   height: 107px;
   display:inline-block;
@@ -198,6 +198,16 @@ update progress bar style here
   width: 58px;
   height: 30px;
   display:inline-block;
+
+}
+
+
+
+/* pokemon container layout  */
+
+#pokemon-container-layout {
+
+
 
 }
 
