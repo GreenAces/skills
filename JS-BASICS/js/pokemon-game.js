@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (9/7/2021)
+Lastest update: (9/14/2021)
 
 
 x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
@@ -31,7 +31,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 13) on line 1568 defaultProgressBar.catchErrorFromSwitch(); needs to be updated to reflect changes to player1 and computer speed progressbars *low priority*
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 15) add a tip section that changes based on cases from the switch. This should be next to pokomon logo at top left corner. *low priority*
-
+16) pokRecImage2 on line 58 is the recovery image for computer -- to include this code in the function *low priority*
 
 */
 
@@ -44,28 +44,44 @@ class images {
 
     this.pokRecImage1 = function () {
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
-      document.getElementById("attack_graphic").style.width = 50;
-      document.getElementById("attack_graphic").style.height = 50;
+      document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 50;
+      document.getElementById("player1AttackImage").style.height = 50;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 4 secs
-        document.getElementById("attack_graphic").innerHTML=("");
+        document.getElementById("player1AttackImage").innerHTML=("");
 
-      }, 5000); // 5 sec wait time
+      }, 3000); // 5 sec wait time
 
     }// end of pokRecImage1
+
+      this.pokRecImage2 = function () {
+
+        document.getElementById("computerAttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
+        document.getElementById("computerAttackImage").style.width = 50;
+        document.getElementById("computerAttackImage").style.height = 50;
+
+        setTimeout(function() { // This is an anonymous callback function
+
+          // remove attack image after 4 secs
+          document.getElementById("computerAttackImage").innerHTML=("");
+
+        }, 3000); // 5 sec wait time
+
+    }// end of pokRecImage2
+
     this.chrAtkImage1 = function (){  // image 1 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/fireBlaster.gif" </img>';
-      document.getElementById("attack_graphic").style.width = 180;
-      document.getElementById("attack_graphic").style.height = 100;
+      document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/fireBlaster.gif" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 4 secs
-        document.getElementById("attack_graphic").innerHTML=("");
+        document.getElementById("player1AttackImage").innerHTML=("");
 
       }, 5000); // 5 sec wait time
 
@@ -74,14 +90,14 @@ class images {
     }
     this.scyAtkImage1 = function (){ // image 1 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/slash.gif" </img>';
-      document.getElementById("attack_graphic").style.width = 180;
-      document.getElementById("attack_graphic").style.height = 100;
+      document.getElementById("computerAttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/slash.gif" </img>';
+      document.getElementById("computerAttackImage").style.width = 180;
+      document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 5 secs
-        document.getElementById("attack_graphic").innerHTML=("");
+        document.getElementById("computerAttackImage").innerHTML=("");
 
       }, 5000); // 5 sec wait time
 
@@ -89,30 +105,30 @@ class images {
 
     this.squAtkImage1 = function (){ // image 1 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/bubbles-gif.gif" </img>';
-      document.getElementById("attack_graphic").style.width = 180;
-      document.getElementById("attack_graphic").style.height = 100;
+      document.getElementById("computerAttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/bubbles-gif.gif" </img>';
+      document.getElementById("computerAttackImage").style.width = 180;
+      document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 3 secs
-        document.getElementById("attack_graphic").innerHTML=("");
+        document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 6000); // 6 sec wait time
+      }, 3000); // 3 sec wait time
 
     }
 
 
     this.pikAtkImage1 = function (){ // image 1 of 6
 
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/thunderboltimage.jpeg" </img>';
-      document.getElementById("attack_graphic").style.width = 180;
-      document.getElementById("attack_graphic").style.height = 100;
+      document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/thunderboltimage.jpeg" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 3 secs
-        document.getElementById("attack_graphic").innerHTML=("");
+        document.getElementById("player1AttackImage").innerHTML=("");
 
       }, 3000); // 3 sec wait time
 
@@ -163,7 +179,7 @@ class sound {
 
     this.soundSettingsOff = function (){
       // inform user of audio change without audio file
-      document.getElementById("statusProgress3").innerHTML=("Sound is off.");
+      document.getElementById("statusProgress3").innerHTML=("Sound was turned off.");
 
       setTimeout(function() { // This is an anonymous callback function
 
@@ -603,7 +619,7 @@ class wait {
 
 
 
-        document.getElementById("statusProgress3").innerHTML=("Please select a pokemon to begin the match...");
+        document.getElementById("statusProgress3").innerHTML=("Select a pokemon to begin the match!");
 
         player1CH.pokemonIndicator(); // displays pokemon icon image
 
@@ -726,9 +742,17 @@ class changePokemon {
 
           // show default icon if both pokemon are live
 
-          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/NoDeadPokemon.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/charmanderHeadIcon.jpeg" </img>';
+          document.getElementById("charmanderIcon").style.width = 19;
+          document.getElementById("charmanderIcon").style.height = 24;
+
+          document.getElementById("PikachuIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/PikachuHeadIcon.jpeg" </img>';
+          document.getElementById("PikachuIcon").style.width = 19;
+          document.getElementById("PikachuIcon").style.height = 25;
+
+          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/BlastoiseHeadIcon.jpeg" </img>';
+          document.getElementById("BlastoiseIcon").style.width = 19;
+          document.getElementById("BlastoiseIcon").style.height = 25;
 
         }// end of if statement
 
@@ -738,15 +762,15 @@ class changePokemon {
 
           let elem =  document.createElement("img");
           elem.src ="";
-          document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("charmanderIcon").appendChild(elem);
+          document.getElementById("charmanderIcon").style.width = 19;
+          document.getElementById("charmanderIcon").style.height = 24;
 
           // replace with new icon
 
-          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/1DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/charmanderHeadDEAD.jpg" </img>';
+          document.getElementById("charmanderIcon").style.width = 19;
+          document.getElementById("charmanderIcon").style.height = 24;
 
         }else if (demopokemon === 0 && demopokemon2 >= 5) {
 
@@ -754,15 +778,15 @@ class changePokemon {
 
           let elem =  document.createElement("img");
           elem.src ="";
-          document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("PikachuIcon").appendChild(elem);
+          document.getElementById("PikachuIcon").style.width = 19;
+          document.getElementById("PikachuIcon").style.height = 24;
 
           // replace with new icon
 
-          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/2DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("PikachuIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/PikachuHeadDead.jpg" </img>';
+          document.getElementById("PikachuIcon").style.width = 19;
+          document.getElementById("PikachuIcon").style.height = 24;
 
         }else if (demopokemon3 === 0 && demopokemon4 >= 5) {
 
@@ -770,15 +794,15 @@ class changePokemon {
 
           let elem =  document.createElement("img");
           elem.src ="";
-          document.getElementById("pokemon_indicator").appendChild(elem);
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("BlastoiseIcon").appendChild(elem);
+          document.getElementById("BlastoiseIcon").style.width = 19;
+          document.getElementById("BlastoiseIcon").style.height = 24;
 
           // replace with new icon
 
-          document.getElementById("pokemon_indicator").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/3DeadPokemonof3.png" </img>';
-          document.getElementById("pokemon_indicator").style.width = 131;
-          document.getElementById("pokemon_indicator").style.height = 66;
+          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/BlastoiseHeadDead.jpg" </img>';
+          document.getElementById("BlastoiseIcon").style.width = 19;
+          document.getElementById("BlastoiseIcon").style.height = 24;
 
         }// end of if statements
 
@@ -787,6 +811,8 @@ class changePokemon {
 
 
     }// end of pokemonIndicator
+
+
     this.debuggingOperation = function() {
 
       //default message for debuggingOperating function -- comment out if working on errors
@@ -1175,9 +1201,9 @@ class changePokemon {
     this.squPokeImage = function () {
 
       // load computer pokemon
-      document.getElementById("attack_graphic").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/squirtle.gif" </img>';
-      document.getElementById("attack_graphic").style.width = 200;
-      document.getElementById("attack_graphic").style.height = 180;
+      document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/squirtle.gif" </img>';
+      document.getElementById("player1AttackImage").style.width = 200;
+      document.getElementById("player1AttackImage").style.height = 180;
 
     }
 
@@ -2154,20 +2180,6 @@ document.getElementById("soundOFF").addEventListener("click", player1SD.soundSet
 
 document.getElementById("restartYES").addEventListener("click", refreshPage);
 
-// adding functionality for bottom navbar here to make it constantly stick while user is scrolling the page
-
-window.onscroll = function() {myFunction()};
-
-var navbar = document.getElementById("mainNavbarControls");
-var sticky = mainNavbarControls.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    mainNavbarControls.classList.add("sticky")
-  } else {
-    mainNavbarControls.classList.remove("sticky");
-  }
-}
 
 
 

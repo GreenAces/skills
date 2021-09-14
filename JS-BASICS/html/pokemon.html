@@ -75,28 +75,34 @@
 
 <div class="container">
   <div class="row row-cols-2">
-    <div class="col">
+    <div class="col"id ="column1">
 
       <div class="statusLayout"><img id="pokemon_logo" src = "http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/pokemon_logo.jpg" alt= "Pokemon-logo"></img>
     </div>
 
 
-      Column1</div>
-    <div class="col">
+      </div>
+    <div class="col" id ="column2">
 
-      <!-- status indicators 1 of 3 -->
-      <!-- status indicators 3 of 3 ID = "column7" -->
+      <!--pokemon_icon-indicators-->
 
-      <div class="statusLayoutProgress">
-        <p id="statusProgress"></p>
+      <div class ="container">
+
+        <table id="tablePokemonIconIndicators">
+          <tr>
+            <td><p id="charmanderIcon">&ensp;</p></td>&ensp;
+            <td><p id="PikachuIcon">&ensp;</p></td>&ensp;
+            <td><p id="BlastoiseIcon"></p></td>
+          </tr>
+        </table>
+
       </div>
 
-      <div class="statusLayoutProgress2">
-        <p id="statusProgress2"></p>
-      </div>
+      <!-- Column 7 and column 12 are empty. Use them wislely -->
 
-      Column2</div>
-    <div class="col">
+
+      </div>
+    <div class="col" id ="column3">
 
       <!-- computer pokemon progress bar -->
 
@@ -115,8 +121,8 @@
         </div>
 
 
-      Column3</div>
-    <div class="col">
+      </div>
+    <div class="col"id ="column4">
 
       <!-- computer pokemon -->
 
@@ -126,43 +132,36 @@
 </div>
 
 
-      Column4</div>
-    <div class="col">
+    </div>
+    <div class="col" id ="column5">
 
-<!--this area must always be empty -->
-
-
-      Column5</div>
-    <div class="col">
+<!--this space needs to be empty for player1 attack image to display properly -->
 
 
+      </div>
+    <div class="col" id ="column6">
 
-<!-- attack image goes here -->
+
+
+<!-- player1 attack image goes here -->
 <div class="AttackGraphicContainer">
-<p id="attack_graphic"></p>
+<p id="player1AttackImage"></p>
 </div>
 
 
-      Column6</div>
-      <div class="col">
-
-        <!--pokemon_indicator menu-->
-        <div class ="container">
-         <p id="pokemon_indicator"></p>
-        </div>
-
-
-        Column 7</div>
-    <div class="col">
-
-  <!-- status indicators 3 of 3 -->
-
-      <div class="statusLayoutProgress3">
-        <p id="statusProgress3"></p>
       </div>
+      <div class="col" id ="column7">
 
-      Column 8</div>
-    <div class="col">
+        <!--column 7 is also empty -->
+
+      </div>
+    <div class="col" id ="column8">
+
+<!-- another empty column. use this space carefully -->
+    <br></br>
+
+    </div>
+    <div class="col" id ="column9">
 
       <!-- player1 pokemon -->
 
@@ -173,8 +172,8 @@
 
 
 
-      Column 9</div>
-    <div class="col">
+      </div>
+    <div class="col "id ="column10">
 
       <!-- player1 pokemon progress bar -->
 
@@ -193,8 +192,60 @@
         </div>
 
 
-      Column 10</div>
+    </div>
   </div>
+  <div class="col" id ="column11">
+
+<!--this space needs to be empty for computer attack image to display properly -->
+    <br></br>
+
+    <div class="col" id ="column12">
+
+      <!-- attack image 1 of 2 -->
+
+      <!-- computer attack image goes here -->
+      <div class="AttackGraphicContainer">
+      <p id="computerAttackImage"></p>
+      </div>
+        </div>
+
+      </div>
+
+      <div class="col" id ="column13">
+
+
+
+        <div class="col" id ="column14">
+
+          <br></br>
+          <br></br>
+
+          <!-- status indicators 1 of 3  -->
+
+          <div class="statusLayoutProgress">
+            <p id="statusProgress"></p>
+          </div>
+
+         <!-- status indicators 2 of 3  -->
+
+          <div class="statusLayoutProgress2">
+            <p id="statusProgress2"></p>
+          </div>
+
+
+       <!-- status indicators 3 of 3 -->
+
+          <br></br>
+          <br></br>
+
+          <div class="statusLayoutProgress3">
+            <p id="statusProgress3"></p>
+          </div>
+
+          </div>
+          </div>
+
+
 </div>
 
 
@@ -206,92 +257,86 @@
 
 
 
-    <div class="nav" id="mainNavbarControls"><!-- start of 3rd nav bar-->
-         <div class="subnav">
-           <button class="subnavbtn"><img id="attack-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/attack-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
-           <div class="subnav-content">
 
-             <table id="tableAttackOptions">
-               <tr>
-                 <td><a id="attackA"></a>&ensp;</td>
-                 <td><a id="attackB"></a>&ensp;</td>
-                 <td><a id="attackC"></a>&ensp;</td>
-
-               </tr>
-             </table>
+       <!--google + w3 navbar-->
 
 
+       <nav class="nav"> <!-- start of 3rd nav bar-->
 
-           </div>
+           <div class="dropup">
+         <button class="dropbtn"><img id="attack-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/attack-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+           <table id="tableAttackOptions">
+             <tr>
+               <td><a id="attackA"></a>&ensp;</td>
+               <td><a id="attackB"></a>&ensp;</td>
+               <td><a id="attackC"></a>&ensp;</td>
+
+
+             </tr>
+           </table>
          </div>
-         <div class="subnav">
-           <button class="subnavbtn"><img id="defense-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/defense-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
-           <div class="subnav-content">
-
-             <table id="tableDefenseOptions">
-               <tr>
-                 <td><a id="defenseA"></a>&ensp;</td>
-                 <td><a id="defenseB"></a>&ensp;</td>
-                 <td><a id="defenseC"></a>&ensp;</td>
-               </tr>
-             </table>
+       </div>
 
 
+          <div class="dropup">
+         <button class="dropbtn"><img id="defense-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/defense-menu-icon.jpg"><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+           <table id="tableDefenseOptions">
+             <tr>
+               <td><a id="defenseA"></a>&ensp;</td>
+               <td><a id="defenseB"></a>&ensp;</td>
+               <td><a id="defenseC"></a>&ensp;</td>
 
 
-
-           </div>
+             </tr>
+           </table>
          </div>
-         <div class="subnav">
-           <button class="subnavbtn"><img id="select-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/select-icon.jpg"><i class="fa fa-caret-up"></i></button>
-           <div class="subnav-content">
+       </div>
 
-             <table id="PokemonSelectionScreen/Menu">
-               <tr>
-                 <td><a id="Charmander_sel">Charmander</a>&ensp;</td>
-                 <td><a id="Blastoise_sel">Blastoise</a>&ensp;</td>
-                 <td><a id="Warturtle_sel">Wartortle</a>&ensp;</td>
-                 <td><a id="Pikachu_sel">Pikachu</a>&ensp;</td>
 
-               </tr>
-             </table>
+          <div class="dropup">
+         <button class="dropbtn"><img id="select-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/select-icon.jpg"><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+           <table id="PokemonSelectionScreen/Menu">
+             <tr>
+               <td><a id="Charmander_sel">Charmander</a>&ensp;</td>
+               <td><a id="Pikachu_sel">Pikachu</a>&ensp;</td>
+               <td><a id="Blastoise_sel">Blastoise</a>&ensp;</td>
+               <td><a id="Warturtle_sel">Wartortle</a>&ensp;</td> <!-- remove this option here and on the js side as well -->
 
-           </div>
+
+
+             </tr>
+           </table>
          </div>
-         <div class="subnav">
-           <button class="subnavbtn"><img id="settings-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/settings.jpg"><i class="fa fa-caret-up"></i></button>
-           <div class="subnav-content">
+       </div>
 
-             <table id="SoundMenuSelection">
-               <tr>
-               <td><a id="soundON">Sound ON</a>&ensp;</td>
-               <td><a id="soundOFF">Sound OFF</a>&ensp;</td>
+            <div class="dropup">
+         <button class="dropbtn"><img id="settings-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/settings.jpg"><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+           <table id="SoundMenuSelection">
+             <tr>
+             <td><a id="soundON">Sound ON</a>&ensp;</td>
+             <td><a id="soundOFF">Sound OFF</a>&ensp;</td>
 
-               </tr>
-             </table>
-
-
-
-           </div>
+             </tr>
+           </table>
          </div>
-         <div class="subnav">
-           <button class="subnavbtn"><img id="hamburger-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/Hamburger-icon.jpg"><i class="fa fa-caret-up"></i></button>
-           <div class="subnav-content">
+       </div>
+            <div class="dropup">
+         <button class="dropbtn"><img id="hamburger-menu-icon" src="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/three-dots.svg"><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+           <table id="RestartMenuSelection">
+             <tr>
 
-             <table id="RestartMenuSelection">
-               <tr>
-                 &ensp;
-                 <td><a id="restartYES">Restart</a></td>
+               <td><a id="restartYES">Restart</a></td>
 
-               </tr>
-             </table>
-
-           </div>
+             </tr>
+           </table>
          </div>
-       </div> <!-- end of 3rd nav bar-->
-
-
-
+       </div>
+     </nav> <!-- end of 3rd nav bar-->
 
 
 
