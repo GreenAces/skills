@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (9/14/2021)
+Lastest update: (9/15/2021)
 
 
 x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
@@ -31,7 +31,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 13) on line 1568 defaultProgressBar.catchErrorFromSwitch(); needs to be updated to reflect changes to player1 and computer speed progressbars *low priority*
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 15) add a tip section that changes based on cases from the switch. This should be next to pokomon logo at top left corner. *low priority*
-16) pokRecImage2 on line 58 is the recovery image for computer -- to include this code in the function *low priority*
+16) pokRecImage2 on line 58 is the recovery image for computer -- to include this code in the function *low priority* ************************************************************************** 9/15/2021
 
 */
 
@@ -42,31 +42,31 @@ class images {
   constructor () {
 
 
-    this.pokRecImage1 = function () {
+    this.pokRecImage1 = function () { // player1 using recovery function image
 
-      document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 50;
-      document.getElementById("player1AttackImage").style.height = 50;
+      document.getElementById("computerAttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
+      document.getElementById("computerAttackImage").style.width = 50;
+      document.getElementById("computerAttackImage").style.height = 50;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 4 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
+        document.getElementById("computerAttackImage").innerHTML=("");
 
       }, 3000); // 5 sec wait time
 
     }// end of pokRecImage1
 
-      this.pokRecImage2 = function () {
+      this.pokRecImage2 = function () { // computer using recovery function image
 
-        document.getElementById("computerAttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
-        document.getElementById("computerAttackImage").style.width = 50;
-        document.getElementById("computerAttackImage").style.height = 50;
+        document.getElementById("player1AttackImage").innerHTML='<img src ="http://robert-labonte.great-site.net/JS-BASICS/images/pokemon/HP-recovered.png" </img>';
+        document.getElementById("player1AttackImage").style.width = 50;
+        document.getElementById("player1AttackImage").style.height = 50;
 
         setTimeout(function() { // This is an anonymous callback function
 
           // remove attack image after 4 secs
-          document.getElementById("computerAttackImage").innerHTML=("");
+          document.getElementById("player1AttackImage").innerHTML=("");
 
         }, 3000); // 5 sec wait time
 
@@ -1537,7 +1537,6 @@ this.increaseComputerHP = function () {
 
   // variable declartions
 
-
   let hpDamage = 0;
   let speedReduced = 0;
   let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
@@ -1608,6 +1607,8 @@ this.increasePlayerHP = function () {
 
   // variable declartions
 
+  console.log("increasePlayerHP has started");
+
 
   let hpDamage2 = 0;
   let speedReduced2 = 0;
@@ -1615,6 +1616,9 @@ this.increasePlayerHP = function () {
   let player1SPD    = a1.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
   // let player1SPD2,3,4 etc.. = other SpeedProgressBar so that you can recycle the code and not have to re-create a new function.
   let player1LowHealthIndicator2 = document.querySelector('.player1HP');
+
+  console.log("charmanderHP5 output:" + charmanderHP5);
+  console.log("player1SPD output:" + player1SPD);
 
   if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true && player1SPD >= 0) {
 
@@ -1951,6 +1955,9 @@ class player1Moves {
        //reflect the changes to the charmanderHpRecovered array only because charmanderHealthBarBackup will eventually have this data when the array is reduced.
        a1.charmanderHpRecovered.push(45);
 
+       // player1 speed progressbar needs to reflect changes if the rest function was clicked.
+       a1.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
+
        //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
        charmanderProgressBar.increasePlayerHP();
 
@@ -1965,7 +1972,7 @@ class player1Moves {
        console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
        console.log("charmanderBackup array BEFORE health was restored (commented out on line 1934): " + a1.charmanderBackup);
 
-       // show image
+       // show recovery image
        player1Img.pokRecImage1();
 
        //change boolean state so that computer can attack
@@ -2099,21 +2106,6 @@ class computerMoves {
           //show attack image
           computerImg.squAtkImage1();
 
-
-          //if statement 3
-
-          if (player1.charmanderMoves.charmanderFunction6of6 === true) {
-
-            //debugging here -- this is not the best place to insert this code -- find an alternative location but this is okay for now
-            console.log("player1.charmanderMoves.charmanderFunction6of6 === true AND was activated via squirtleMoves function. This does 50% damage to speedbar of charmander.");
-
-            // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-            a1.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
-
-            //This is a function that allows player1 to recoverHP if the condition above is true.
-            squirtleProgressBar.increasePlayerHP();
-
-          }// end of if statement3
 
 
           //Change boolean state so that player1 can make a move
