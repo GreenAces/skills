@@ -2,6 +2,17 @@
 additional information can be found here:
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div */
 
+/* GreenAces logo */
+
+#GreenAcesNavbarBrand img {
+  display: block;
+  margin-right: right;
+
+  width: 120px;
+  height: 49px;
+
+}
+
 
 
 .statusLayoutProgress{
@@ -191,106 +202,6 @@ update progress bar style here
   display:inline-block;
 
 }
-
-/* GreenAces logo */
-
-#GreenAces-logo1{
-
-  width: 201px;
-  height: 200px;
-
-}
-
-#GreenAces-logo2{
-
-  width: 201px;
-  height: 200px;
-
-}
-
-#GreenAces-logo3{
-
-  width: 201px;
-  height: 200px;
-
-}
-
-
-/*the column menu that holds everything*/
-
-#column1{
-
-
-}
-
-#column2{
-
-
-}
-
-#column3{
-
-
-}
-
-#column4{
-
-
-}
-
-#column5{
-
-
-}
-
-
-#column6{
-
-
-}
-
-#column7{
-
-
-}
-
-
-#column8{
-
-
-}
-
-#column9{
-
-
-}
-
-
-#column10{
-
-
-}
-
-#column11{
-
-
-}
-
-#column12{
-
-
-}
-
-#column13{
-
-
-}
-
-#column14{
-
-
-}
-
 
 
 

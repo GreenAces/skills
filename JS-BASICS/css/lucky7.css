@@ -1,6 +1,18 @@
 /* NOTE: This is the external css file for index2.html and it is controlled by lucky7.js (javascript file)
           created 9/27/2018*/
 
+
+    /* GreenAces logo */
+
+  #GreenAcesNavbarBrand img {
+    display: block;
+    margin-right: right;
+
+    width: 120px;
+    height: 49px;
+
+          }
+
 /*table properties */
 
 table, th, td {
@@ -19,7 +31,7 @@ table#t01 {
 }
 body {
 
-    background-image: url("/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/images/lucky7_game_images/Black-wallpapers-33.jpg");
+    background-image: url("http://www.robert-labonte.great-site.net/JS-BASICS/images/lucky7_game_images/Black-wallpapers-33.jpg");
     background-color: #cccccc;
 }
 
@@ -62,7 +74,7 @@ p#InformPlayerWon {
 
 p#logo1 {
 
-  background-image: url(/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/images/lucky7_game_images/lucky7_logo.png);
+  background-image: url("http://www.robert-labonte.great-site.net/JS-BASICS/images/lucky7_game_images/lucky7_logo.png");
   width: 400px;
   height: 71px;
 }
@@ -85,7 +97,7 @@ button#myBtn {
 
     width: 105px;
 		height: 90px;
-		background-image: url(/home/robert/Dropbox/PC_Files/Online_Transfer/Projects/RLabontes_JavaScript_Lessons/JS-BASICS/images/lucky7_game_images/play_button.png);
+		background-image: url("http://www.robert-labonte.great-site.net/JS-BASICS/images/lucky7_game_images/play_button.png");
 		background-size: 100px 85px;
 
 
