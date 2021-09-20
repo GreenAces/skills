@@ -6,4 +6,4 @@ Examples:
 C#, C++, Python, etc...
 
 
-<a href="http://www.robert-labonte.great-site.net" target="_blank">Official GreenAces Web site</a>
+<a href="https://greenaces.site" target="_blank">Official GreenAces web site</a>

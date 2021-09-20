@@ -2,7 +2,6 @@
 
 #GreenAcesNavbarBrand img {
   display: block;
-  margin-right: right;
 
   width: 120px;
   height: 49px;
@@ -52,7 +51,7 @@
 }
 
 .container {
-  
+
   position:absolute;
   bottom:0;
   left:0;
@@ -72,76 +71,3 @@
 
 
 /*the column menu that holds everything*/
-
-#column1{
-
-
-}
-
-#column2{
-
-
-}
-
-#column3{
-
-
-}
-
-#column4{
-
-
-}
-
-#column5{
-
-
-}
-
-
-#column6{
-
-
-}
-
-#column7{
-
-
-}
-
-
-#column8{
-
-
-}
-
-#column9{
-
-
-}
-
-
-#column10{
-
-
-}
-
-#column11{
-
-
-}
-
-#column12{
-
-
-}
-
-#column13{
-
-
-}
-
-#column14{
-
-
-}
