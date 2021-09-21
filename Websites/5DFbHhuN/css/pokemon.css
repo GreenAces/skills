@@ -126,6 +126,7 @@ update progress bar style here
 .Player1PokemonContainer{
   width: 100px;
   height: 150px;
+  margin-right: right;
   max-width:450px
 
 }
@@ -147,6 +148,7 @@ update progress bar style here
 
 #player1AttackImage img {
   display: block;
+  margin-right: right;
   width: 100%;
   height: 100%;
 
@@ -155,6 +157,7 @@ update progress bar style here
 
 #computerAttackImage img {
   display: block;
+  margin-right: right;
   width: 100%;
   height: 100%;
 
@@ -357,6 +360,7 @@ body {
 .CpuPokemonContainer{
   width: 100px;
   height: 150px;
+  margin-right: right;
   max-width:450px
 
 }
