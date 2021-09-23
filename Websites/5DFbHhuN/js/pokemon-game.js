@@ -742,17 +742,17 @@ class changePokemon {
 
           // show default icon if both pokemon are live
 
-          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadIcon.jpeg" </img>';
-          document.getElementById("charmanderIcon").style.width = 19;
-          document.getElementById("charmanderIcon").style.height = 24;
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadIcon.png" </img>';
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
 
-          document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadIcon.jpeg" </img>';
-          document.getElementById("PikachuIcon").style.width = 19;
-          document.getElementById("PikachuIcon").style.height = 25;
+          document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadIcon.png" </img>';
+          document.getElementById("PikachuIcon").style.width = 34;
+          document.getElementById("PikachuIcon").style.height = 46;
 
-          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadIcon.jpeg" </img>';
-          document.getElementById("BlastoiseIcon").style.width = 19;
-          document.getElementById("BlastoiseIcon").style.height = 25;
+          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadIcon.png" </img>';
+          document.getElementById("BlastoiseIcon").style.width = 34;
+          document.getElementById("BlastoiseIcon").style.height = 46;
 
         }// end of if statement
 
@@ -763,14 +763,14 @@ class changePokemon {
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("charmanderIcon").appendChild(elem);
-          document.getElementById("charmanderIcon").style.width = 19;
-          document.getElementById("charmanderIcon").style.height = 24;
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
 
           // replace with new icon
 
-          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.jpg" </img>';
-          document.getElementById("charmanderIcon").style.width = 19;
-          document.getElementById("charmanderIcon").style.height = 24;
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
 
         }else if (demopokemon === 0 && demopokemon2 >= 5) {
 
@@ -779,14 +779,14 @@ class changePokemon {
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("PikachuIcon").appendChild(elem);
-          document.getElementById("PikachuIcon").style.width = 19;
-          document.getElementById("PikachuIcon").style.height = 24;
+          document.getElementById("PikachuIcon").style.width = 34;
+          document.getElementById("PikachuIcon").style.height = 46;
 
           // replace with new icon
 
-          document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadDead.jpg" </img>';
-          document.getElementById("PikachuIcon").style.width = 19;
-          document.getElementById("PikachuIcon").style.height = 24;
+          document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadDead.png" </img>';
+          document.getElementById("PikachuIcon").style.width = 34;
+          document.getElementById("PikachuIcon").style.height = 46;
 
         }else if (demopokemon3 === 0 && demopokemon4 >= 5) {
 
@@ -795,14 +795,14 @@ class changePokemon {
           let elem =  document.createElement("img");
           elem.src ="";
           document.getElementById("BlastoiseIcon").appendChild(elem);
-          document.getElementById("BlastoiseIcon").style.width = 19;
-          document.getElementById("BlastoiseIcon").style.height = 24;
+          document.getElementById("BlastoiseIcon").style.width = 34;
+          document.getElementById("BlastoiseIcon").style.height = 46;
 
           // replace with new icon
 
-          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadDead.jpg" </img>';
-          document.getElementById("BlastoiseIcon").style.width = 19;
-          document.getElementById("BlastoiseIcon").style.height = 24;
+          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadDead.png" </img>';
+          document.getElementById("BlastoiseIcon").style.width = 34;
+          document.getElementById("BlastoiseIcon").style.height = 46;
 
         }// end of if statements
 

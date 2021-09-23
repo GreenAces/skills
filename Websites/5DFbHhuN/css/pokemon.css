@@ -57,7 +57,7 @@ update progress bar style here
          }
 
           .player1HP {
-            width:100px;height:10px;
+            width:0px;height:10px;
             background-color: #A6EDED;
 
            }
@@ -71,7 +71,7 @@ update progress bar style here
           }
 
           .playerSpeed {
-              width:10px;height:10px;
+              width:0px;height:10px;
               background-color: #A6EDED;
 
             }
@@ -88,7 +88,7 @@ update progress bar style here
               }
 
             .cpuHP {
-                width:100px;height:10px;
+                width:0px;height:10px;
                 background-color: #A6EDED;
 
               }
@@ -104,13 +104,15 @@ update progress bar style here
 
 
               .cpuSpeed {
-                  width:100px;height:10px;
+                  width:0px;height:10px;
                   background-color: #A6EDED;
 
                 }
 
 
 
+
+  /* player1 menus  */
 
 .Player1Status {
 
@@ -121,74 +123,101 @@ update progress bar style here
 }
 
 
-
-
 .Player1PokemonContainer{
   width: 100px;
   height: 150px;
-  margin-right: right;
   max-width:450px
 
 }
 
 #Player1PokeImage img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 192px;
+  height: 192px;
 
 }
 
 .AttackGraphicContainer{
-  width: 25px;
-  height: 25px;
-  max-width:100px
+  width: 80px;
+  height: 80px;
+  max-width:250px
 
 }
 
 
 #player1AttackImage img {
   display: block;
-  margin-right: right;
-  width: 100%;
-  height: 100%;
+  width: 80px;
+  height: 80px;
+  max-width:250px
 
 
 }
+
+
+
+
+  /* computer menus */
 
 #computerAttackImage img {
   display: block;
-  margin-right: right;
-  width: 100%;
-  height: 100%;
+  width: 80px;
+  height: 80px;
+  max-width:250px
 
 
 }
+
+
+
+.CpuPokemonContainer{
+  width: 100px;
+  height: 150px;
+  max-width:450px
+
+}
+
+
+
+#CpuPokeImage img {
+  display: block;
+  width: 188px;
+  height: 188px;
+
+
+}
+
+
+.CpuStatus {
+
+  width: 100px;
+  height: 150px;
+  max-width:450px
+}
+
+
+
+
 
 /*Pokemon head icons*/
 
-#charmanderIcon{
-  width: 19px;
-  height: 24px;
+#charmanderIcon {
+  width: 34px;
+  height: 46px;
 
 }
 
-#charmanderIcon{
-  width: 19px;
-  height: 24px;
+#PikachuIcon {
+  width: 34px;
+  height: 46px;
+}
+
+#BlastoiseIcon {
+  width: 34px;
+  height: 46px;
 
 }
 
-#charmanderIcon{
-  width: 19px;
-  height: 24px;
-
-}
-
-#charmanderIcon{
-  width: 19px;
-  height: 24px;
-
-}
 
 
 /* pokemon logo */
@@ -228,7 +257,8 @@ update progress bar style here
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 560px;
+  background-color : rgba(184, 229, 250, 0.5);
+  min-width: 331px;
   bottom: 50px;
   z-index: 1;
 }
@@ -259,10 +289,12 @@ body {
 }
 
 .nav {
+  
+    align-self: center;
     position: fixed;
     bottom: 0;
-    width: 125%;
-    height: 55px;
+    width: 375px;
+    height: 65px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     display: flex;
@@ -270,6 +302,7 @@ body {
 }
 
 .nav__link {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -284,6 +317,7 @@ body {
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     transition: background-color 0.1s ease-in-out;
+
 }
 
 .nav__link:hover {
@@ -345,44 +379,4 @@ body {
   height: 30px;
   display:inline-block;
 
-}
-
-
-
-
-
-
-
-
-
-
-
-.CpuPokemonContainer{
-  width: 100px;
-  height: 150px;
-  margin-right: right;
-  max-width:450px
-
-}
-
-
-
-
-
-#CpuPokeImage img {
-  display: block;
-  margin-left: left;
-
-  width: 40%;
-  height: 50%;
-
-
-}
-
-
-.CpuStatus {
-
-  width: 100px;
-  height: 150px;
-  max-width:450px
 }
