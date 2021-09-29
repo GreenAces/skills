@@ -2,14 +2,24 @@
           created 9/27/2018*/
 
 
-    /* GreenAces logo */
+          /*custom bootstrap 5 navbar settings*/
 
-  #GreenAcesNavbarBrand img {
-    display: block;
-    width: 120px;
-    height: 49px;
 
+          #navbarDropdownProjects {
+              color: #FFFFFF;
+              background-color: #212529;
           }
+
+          #navbarDropdownAndroid {
+              color: #FFFFFF;
+              background-color: #212529;
+          }
+
+          #navbarDropdownOther {
+              color: #FFFFFF;
+              background-color: #212529;
+          }
+
 
 /*table properties */
 
