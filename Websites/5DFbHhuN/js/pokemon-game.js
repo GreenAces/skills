@@ -2140,6 +2140,22 @@ function refreshPage(){
 
 
 
+// Close the drop-up menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropup')) {
+    let dropUp = document.getElementsByClassName(".dropup-content");
+    let i;
+    for (i = 0; i < dropUp.length; i++) {
+      let openDropUp = dropUp[i];
+      if (openDropUp.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
+
 
 // Attack menu for Event listeners
 

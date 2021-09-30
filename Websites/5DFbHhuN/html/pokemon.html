@@ -105,7 +105,7 @@
 
 
         <div class="CpuStatus">
-          <p><b>Pokemon name:</p></b>
+          <p><b>Computer Pokemon:</p></b>
           <p id="cpuPokemonName"></p>
           <p id="cpuHpFont"><b>HP:</b></p>
           <div class="cpuHP-progressBarBackground">
@@ -123,7 +123,10 @@
 
       <!-- computer pokemon -->
 
-<div class="CpuPokemonContainer"><p><b>Computer</p></b>
+<div class="CpuPokemonContainer">
+
+
+
 <!-- image goes here -->
 <p id="CpuPokeImage"></p>
 </div>
@@ -155,17 +158,35 @@
     <div class="col" id ="column8">
 
 <!-- another empty column. use this space carefully -->
-    <br></br>
+
 
     </div>
     <div class="col" id ="column9">
 
-      <!-- player1 pokemon -->
+      <!-- player1 pokemon and text indicators go here -->
 
-      <div class="Player1PokemonContainer"><p><b>Player1</p></b>
-        <!-- image goes here -->
+      <div class="Player1PokemonContainer">
+
+        <!-- put all text indicators in a div tag to reduce space in this order statusProgress 1,3,2  -->
+
+        <div class="statusLayoutProgress">
+          <p id="statusProgress"></p>
+          <p id="statusProgress3"></p>
+          <p id="statusProgress2"></p>
+        </div>
+
+
+
+
+        <!-- player1 image goes here -->
         <p id="Player1PokeImage"></p>
       </div>
+
+
+
+      <!-- break tag needed at the end of player1 pokemon to display correctly DO NOT REMOVE -->
+
+      <br></br>
 
 
 
@@ -176,7 +197,7 @@
 
 
         <div class="Player1Status">
-          <p><b>Pokemon name:</p></b>
+          <p><b>Player1 Pokemon:</p></b>
           <p id="p1PokemonName"></p>
           <p id="p1HpFont"><b>HP:</p></b>
           <div class="player1HP-progressBarBackground">
@@ -194,7 +215,7 @@
   <div class="col" id ="column11">
 
 <!--this space needs to be empty for computer attack image to display properly -->
-    <br></br>
+
 
     <div class="col" id ="column12">
 
@@ -214,29 +235,16 @@
 
         <div class="col" id ="column14">
 
-          <br></br>
-          <br></br>
-          <br></br>
-
-          <!-- status indicators 1 of 3  -->
-
-          <div class="statusLayoutProgress">
-            <p id="statusProgress"></p>
-          </div>
-
-         <!-- status indicators 2 of 3  -->
-
-          <div class="statusLayoutProgress2">
-            <p id="statusProgress2"></p>
-          </div>
 
 
-       <!-- status indicators 3 of 3 -->
 
-          <br></br>
+        <!--nothing added here but previously statusProgress was here-->
 
-          <div class="statusLayoutProgress3">
-            <p id="statusProgress3"></p>
+
+
+
+
+
           </div>
 
           </div>
@@ -291,7 +299,7 @@
 
           <div class="dropup">
          <button class="dropbtn"><img id="select-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/select-icon.jpg"></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content">
+         <div class="dropup-content" id="dropUpPokemonSelectionMenu">
 
 
                <a href="#" id="Charmander_sel">Charmander</a>
@@ -305,7 +313,7 @@
 
             <div class="dropup">
          <button class="dropbtn"><img id="settings-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/settings.jpg"></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content">
+         <div class="dropup-content" id="dropupContentSettings">
 
 
              <a href="#" id="soundON">Sound ON</a>
