@@ -1,10 +1,10 @@
 
 /*
 NOTE:
-Lastest update: (9/15/2021)
+Lastest update: (10/01/2021)
 
 
-x0) Change line 215 to reflect changes in charmander and squirtle array. Also find out why does action listeners are disabled after charmander dies? (this happens if you attack when the tombstone appears) *high priority*
+x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
 x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) Create a function to switch pokemon without losing HP data from array *2nd priority*
@@ -72,7 +72,7 @@ class images {
 
     }// end of pokRecImage2
 
-    this.chrAtkImage1 = function (){  // image 1 of 6
+    this.chrAtkImage1 = function () {  // image 1 of 6
 
       document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/fireBlaster.gif" </img>';
       document.getElementById("player1AttackImage").style.width = 180;
@@ -85,10 +85,42 @@ class images {
 
       }, 5000); // 5 sec wait time
 
+  }
+
+      this.chrAtkImage2 = function () {  // image 2 of 6
+
+        document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blaze.png" </img>';
+        document.getElementById("player1AttackImage").style.width = 180;
+        document.getElementById("player1AttackImage").style.height = 100;
+
+        setTimeout(function() { // This is an anonymous callback function
+
+          // remove attack image after 4 secs
+          document.getElementById("player1AttackImage").innerHTML=("");
+
+        }, 5000); // 5 sec wait time
+
+}
+
+        this.chrAtkImage3 = function () {  // image 3 of 6
+
+          document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/solarbeam.png" </img>';
+          document.getElementById("player1AttackImage").style.width = 180;
+          document.getElementById("player1AttackImage").style.height = 100;
+
+          setTimeout(function() { // This is an anonymous callback function
+
+            // remove attack image after 4 secs
+            document.getElementById("player1AttackImage").innerHTML=("");
+
+          }, 5000); // 5 sec wait time
+
 
 
     }
-    this.scyAtkImage1 = function (){ // image 1 of 6
+
+
+    this.scyAtkImage1 = function () { // image 1 of 6
 
       document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/slash.gif" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
@@ -103,7 +135,7 @@ class images {
 
     }
 
-    this.squAtkImage1 = function (){ // image 1 of 6
+    this.squAtkImage1 = function () { // image 1 of 6
 
       document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/bubbles-gif.gif" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
@@ -117,6 +149,40 @@ class images {
       }, 3000); // 3 sec wait time
 
     }
+
+    this.squAtkImage2 = function () { // image 2 of 6
+
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/TailWhip.png" </img>';
+      document.getElementById("computerAttackImage").style.width = 180;
+      document.getElementById("computerAttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("computerAttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+
+    this.squAtkImage3 = function () { // image 3 of 6
+
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/WaterPulse.png" </img>';
+      document.getElementById("computerAttackImage").style.width = 180;
+      document.getElementById("computerAttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("computerAttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+
+
 
 
     this.pikAtkImage1 = function (){ // image 1 of 6
@@ -157,7 +223,6 @@ class sound {
      this.pokemonVictoryVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/victoryThemezz.mp3');
      this.scytherVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/ScytherVoice.wav');
      this.squirtleVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/SquirtleVoicezzz.mp3');
-     this.wartortleVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/WartortleVoice.wav');
      this.soundConfirmer = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/soundConfirmer.wav');
 
     this.soundSettingsOn = function() {
@@ -202,7 +267,7 @@ class sound {
       player1SD.pikachuVO.pause();
       player1SD.scytherVO.pause();
       player1SD.squirtleVO.pause();
-      player1SD.wartortleVO.pause();
+
 
 
 
@@ -228,21 +293,22 @@ computerSD = new sound;
 class referee {
 
   constructor (){
-    this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle","Pikachu"];
+    this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Pikachu"];
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details.
     this.deathValidator = {pokemonDied:false};
     this.disableDeadCharmander = function () {
 
-      console.log("disableDeadCharmander was started");
-      console.log("Before if statement:" + JSON.stringify(p1.deadPokemon[0]));
+      let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+
+      console.log("disableDeadCharmander was activated");
 
 
-      if (player1CH.charmanderHealthBar === 0 && p1.deadPokemon[0] === "Charmander") {
+      if (charmanderHP10 === 0 && p1.deadPokemon[0] === "Charmander") {
 
-        //debugging here -- executes code below but doesn't disable charmander -- perhaps it's being enabled somewhere else?
+        // change font color to red to let player know that pokemon is no longer active and disable all pokemon functions
 
-        console.log("After if statement" + JSON.stringify(p1.deadPokemon[0]));
 
+        document.getElementById("Charmander_sel").style.color = "#C91212";
         document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
         document.getElementById("attackA").removeEventListener("click", attackA);
         document.getElementById("attackB").removeEventListener("click", attackB);
@@ -336,7 +402,7 @@ class referee {
            setTimeout(function(){
 
              // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
-             console.log("Should there be a 3 second timer when a pokemon dies?");
+             p1.disableDeadCharmander()
 
 
          },3000); // 3 sec wait time for computer to select pokemon
@@ -381,7 +447,8 @@ class referee {
 
 
              // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
-             console.log("Should there be a 3 second timer when a pokemon dies?****");
+
+             p1.disableDeadCharmander();
 
          },3000); // 3 sec wait time for computer to select pokemon
 
@@ -646,7 +713,7 @@ class wait {
           document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
           document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
           document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-          document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
 
           // Attack menu for Event listeners
 
@@ -688,7 +755,7 @@ class wait {
           document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
           document.getElementById("Blastoise_sel").removeEventListener("click", player1CH.blaPokeImage);
           document.getElementById("Pikachu_sel").removeEventListener("click", player1CH.pikPokeImage);
-          document.getElementById("Warturtle_sel").removeEventListener("click", player1CH.warPokeImage);
+
 
           //remove add event listener for attack & defense buttons
 
@@ -724,7 +791,7 @@ confirm = new wait;
 class changePokemon {
 
   constructor () {
-    this.player1PokemonChoices = ["Charmander","Blastoise","Warturtle", "Pikachu"];
+    this.player1PokemonChoices = ["Charmander","Blastoise", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Charizard","Squirtle"];
     this.pokemonIndicator = function() {
 
@@ -902,6 +969,13 @@ class changePokemon {
 
       // inform player1 of pokemon change
       document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[0]+ ". " + " Computer will now select a pokemon.");
+
+      // Wait 3 secs and inform player1 that they can begin attacking computer pokemon
+      setTimeout(function() {
+
+      document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
+
+    }, 6000); // 6 secs
 
 
       //load pokemon attack/defense menu
@@ -1107,7 +1181,7 @@ class changePokemon {
           document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
           document.getElementById("Blastoise_sel").removeEventListener("click", player1CH.blaPokeImage);
           document.getElementById("Pikachu_sel").removeEventListener("click", player1CH.pikPokeImage);
-          document.getElementById("Warturtle_sel").removeEventListener("click", player1CH.warPokeImage);
+
 
           // re-enable event listener after 8 secs
           setTimeout(function() { // This is an anonymous callback function
@@ -1120,7 +1194,7 @@ class changePokemon {
             document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
             document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
             document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-            document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
 
 
           }, 8000); // 8 sec wait time
@@ -1207,84 +1281,7 @@ class changePokemon {
 
     }
 
-    this.warPokeImage = function () {
 
-
-      confirm.makeMove[0].player1Move = true;
-
-      if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
-
-        // set boolean stats to true when user selects a pokemon
-        player1CH.pokemonType[2].isSelected = true;
-
-        // set boolean stats to false for non-selected pokemon
-        player1CH.pokemonType[0].isSelected = false;
-        player1CH.pokemonType[3].isSelected = false;
-        player1CH.pokemonType[1].isSelected = false;
-
-        // inform player1 of pokemon change
-        document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[2]+ ". " + " Computer will now select a pokemon.") ;
-
-
-        //load pokemon attack/defense menu
-        document.getElementById("attackA").innerHTML = ("Bubble Beam (-30HP)");
-        document.getElementById("attackB").innerHTML = ("Tail Whip (-10HP)");
-        document.getElementById("attackC").innerHTML = ("Flash Cannon (-35)");
-
-        document.getElementById("defenseA").innerHTML = ("Withdraw (-20HP)");
-        document.getElementById("defenseB").innerHTML = ("HeadButt (-25HP)");
-        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
-
-        //load pokemon name
-        document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[2];
-
-        //load pokemon sound
-        player1SD.wartortleVO.play();
-
-       // load player1 pokemon
-
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/warturtle.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
-
-
-
-     }else if (confirm.makeMove[0].computerMove === true) {
-
-
-         document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon(***)."; // remove stars if no conflict is present with other counter
-
-         //remove add event listener for switch button
-         document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
-         document.getElementById("Blastoise_sel").removeEventListener("click", player1CH.blaPokeImage);
-         document.getElementById("Pikachu_sel").removeEventListener("click", player1CH.pikPokeImage);
-         document.getElementById("Warturtle_sel").removeEventListener("click", player1CH.warPokeImage);
-
-         // re-enable event listener after 8 secs
-         setTimeout(function() { // This is an anonymous callback function
-
-
-
-           document.getElementById("statusProgress3").innerHTML = "You can now attack or switch pokemon.";
-
-           //add event listener for switch button
-           document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-           document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-           document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-           document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
-
-
-         }, 8000); // 8 sec wait time
-
-
-         }
-
-
-         // change boolean state so computer can make a move
-           confirm.makeMove[0].player1Move = false;
-
-
-    }
 
 
 
@@ -1323,10 +1320,6 @@ class objectofArrays {
     this.scytherBackup =        [100];
     this.scytherHpRecovered =   [0];
     this.scySpeedProgressBar =  [100];
-    this.wartortleHealthBar =   [100];
-    this.wartortleBackup =      [100];
-    this.wartortleHpRecovered = [0];
-    this.warSpeedProgressBar =  [100];
     this.charizardPokemonHealthBar =    [100];
     this.charizardPokemonBackup =       [100];
     this.charizardPokemonHpRecovered =  [0];
@@ -1377,14 +1370,14 @@ class progressBar {
 
     if( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100) {
 
-        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
+        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated. Error code 142";
 
-        array1.getCharmanderHP();
-        array2.getSquirtleHP();
+        console.log("getCharmanderHP: " + array1.getCharmanderHP());
+        console.log("getSquirtleHP: "   + array2.getSquirtleHP());
 
     }else if (isNaN(squirtleHP8) || isNaN(charmanderHP9)) {
 
-        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated.";
+        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated. Error code 143";
 
 
 
@@ -1440,7 +1433,9 @@ class progressBar {
 
 
 
-      if (squirtleHP5 < 0 || squirtleHP5 >= 0  && computer.squirtleMovesActivated[0].squirtleFunction1of6 === true) {
+      if (squirtleHP5 < 0 || squirtleHP5 >= 0  && computer.squirtleMovesActivated[0].squirtleFunction1of6 === true ||
+          squirtleHP5 < 0 || squirtleHP5 >= 0  && computer.squirtleMovesActivated[0].squirtleFunction2of6 === true ||
+          squirtleHP5 < 0 || squirtleHP5 >= 0  && computer.squirtleMovesActivated[0].squirtleFunction3of6 === true) {
 
         //if statement will change the variables in the switch statements to reflect changes to the progress bar
 
@@ -1471,7 +1466,8 @@ class progressBar {
         break;
 
         default:
-        defaultProgressBar.catchErrorFromSwitch();
+      //  defaultProgressBar.catchErrorFromSwitch();
+      console.log("decreaseComputerHP default function was commented out for troubleshooting purposes. Fix this later.");
 
   }// end of switch statement
 
@@ -1522,7 +1518,8 @@ class progressBar {
         break;
 
         default:
-        defaultProgressBar.catchErrorFromSwitch();
+        //defaultProgressBar.catchErrorFromSwitch();
+        console.log("decreasePlayerHP default function was commented out for troubleshooting purposes. Fix this later.");
 
 
 }// end of switch statement
@@ -1591,7 +1588,8 @@ this.increaseComputerHP = function () {
     break;
 
     default:
-    defaultProgressBar.catchErrorFromSwitch();
+    //defaultProgressBar.catchErrorFromSwitch();
+    console.log("increaseComputerHP default function was commented out for troubleshooting purposes. Fix this later.");
 
   }// end of switch statement
 
@@ -1666,7 +1664,8 @@ this.increasePlayerHP = function () {
    break;
 
    default:
-   defaultProgressBar.catchErrorFromSwitch();
+   //defaultProgressBar.catchErrorFromSwitch();
+   console.log("increasePlayerHP default function was commented out for troubleshooting purposes. Fix this later.");
 
 
  }// end if switch statement
@@ -1848,7 +1847,7 @@ restore = new Sleep;
 
 class player1Moves {
    constructor () {
-     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle", "Pikachu"];
+     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle", "Pikachu"];
      this.player1Menu =  ["attackA","attackB","attackC","defenseA","defenseB","defenseC"];
      this.attackOptions = ["Fire Blaster","Blaze", "Solar Beam"];
      this.thunderShockMove = function () {
@@ -1939,10 +1938,80 @@ class player1Moves {
 
      this.blazeMove = function() {
        // blaze does -10 damage on computer
-       let health = document.getElementById("cpuHP")
-       health.value -= 10;
+
+       if(player1CH.pokemonType[0].isSelected === true) {
+
+         //confirm attack move for pokemon was clicked
+         player1.charmanderMoves[0].charmanderFunction2of6 = true;
+
+         //debugging here -- delete when neccessary
+         console.log("charmanderFunction2of6 is: " + player1.charmanderMoves[0].charmanderFunction2of6);
+
+        //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
+        //Blaze does -10 damage on squirtle
+         a2.squirtleHealthBar.push(-10);
+         a2.squirtleBackup.push(-10);
+
+       //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
+         charmanderProgressBar.decreaseComputerHP();
+
+        //debugging here -----------------------------------
+         console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
+         console.log("squirtleBackup array is " + a2.squirtleBackup);
+
+         // show image
+          player1Img.chrAtkImage2();
+
+          //change boolean state so that computer can attack
+          confirm.makeMove[0].player1Move = false;
+          confirm.makeMove[0].computerMove = true;
+
+          console.log(confirm.makeMove[0]);
+
+
+       } // end of if statement
+
 
      } // end of blazeMove
+
+     this.solarPowerMove = function() {
+
+       // solarPower does -35 damage on computer
+
+       if(player1CH.pokemonType[0].isSelected === true) {
+
+         //confirm attack move for pokemon was clicked
+         player1.charmanderMoves[0].charmanderFunction3of6 = true;
+
+         //debugging here -- delete when neccessary
+         console.log("charmanderFunction3of6 is: " + player1.charmanderMoves[0].charmanderFunction3of6);
+
+        //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
+        //Blaze does -10 damage on squirtle
+         a2.squirtleHealthBar.push(-35);
+         a2.squirtleBackup.push(-35);
+
+       //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
+         charmanderProgressBar.decreaseComputerHP();
+
+        //debugging here -----------------------------------
+         console.log("squirtleHealthBar array is " + a2.squirtleHealthBar);
+         console.log("squirtleBackup array is " + a2.squirtleBackup);
+
+         // show image
+          player1Img.chrAtkImage3();
+
+          //change boolean state so that computer can attack
+          confirm.makeMove[0].player1Move = false;
+          confirm.makeMove[0].computerMove = true;
+
+          console.log(confirm.makeMove[0]);
+
+
+       } // end of if statement
+
+
+     } //end of solarPowerMove
 
 
      this.rest = function() {
@@ -2004,7 +2073,7 @@ player1 = new player1Moves;
 
 class computerMoves {
    constructor () {
-     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle","Warturtle", "Pikachu"];
+     this.pokemonName = ["Charmander","Scyther","Blastoise","Charizard","Squirtle", "Pikachu"];
      this.compMenu =  ["attackA","attackB","attackC","defenseA","defenseB","defenseC"];
      this.ScytherMoves = function () {
 
@@ -2067,55 +2136,165 @@ class computerMoves {
 
    this.squirtleMoves = function () {
 
-     confirm.makeMove[0].computerMove = true;
+     //Squirtle switch needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-     // if statement2
+     switch (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
+        && player1CH.pokemonType[0].isSelected === true || player1.charmanderMoves[0].charmanderFunction1of6 === true
+        || player1.charmanderMoves[0].charmanderFunction2of6 === true || player1.charmanderMoves[0].charmanderFunction3of6 === true
+        || player1.charmanderMoves[0].charmanderFunction4of6 === true || player1.charmanderMoves[0].charmanderFunction5of6 === true
+        || player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-     if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
-        && player1CH.pokemonType[0].isSelected === true) {
+  case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
+    //squirtle attack move: Bubble Beam
+   //confirm attack move for squirtle pokemon was activated
+   computer.squirtleMovesActivated[0].squirtleFunction1of6 = true;
 
-          //confirm attack move for pokemon was activated
-          computer.squirtleMovesActivated[0].squirtleFunction1of6 = true;
+   //debugging here -- delete when neccessary
+   console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
 
-          //debugging here -- delete when neccessary
-          console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
-
-          //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-          a1.charmanderHealthBar.push(-20);
-          a1.charmanderBackup.push(-20);
-
-
-          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-          squirtleProgressBar.decreasePlayerHP();
-
-          // This is the function that applies the filter to the arrays listed above. It also calls other functions
-          array1.checkTheStatus();
-
-          //debugging here------------------------------------------------------
-
-          console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
-
-          // get the status of health for player1 and computer pokemon
-
-          console.log("charmanderBackup array is " +a1.charmanderBackup);
-
-          // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-          document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
-
-          //show attack image
-          computerImg.squAtkImage1();
+   //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
+   a1.charmanderHealthBar.push(-20);
+   a1.charmanderBackup.push(-20);
 
 
+   //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+   squirtleProgressBar.decreasePlayerHP();
 
-          //Change boolean state so that player1 can make a move
-          confirm.makeMove[0].computerMove = false;
-          console.log(confirm.makeMove[0]);
-          confirm.enableMoves();
-          console.log(confirm.makeMove[0]);
+   // This is the function that applies the filter to the arrays listed above. It also calls other functions
+   array1.checkTheStatus();
+
+   //debugging here------------------------------------------------------
+
+   console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+
+   // get the status of health for player1 and computer pokemon
+
+   console.log("charmanderBackup array is " +a1.charmanderBackup);
+
+   // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+   document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
+
+   //show attack image
+   computerImg.squAtkImage1();
 
 
-  } // end of if statement2
+
+   //Change boolean state so that player1 can make a move
+   confirm.makeMove[0].computerMove = false;
+   console.log(confirm.makeMove[0]);
+   confirm.enableMoves();
+   console.log(confirm.makeMove[0]);
+
+    break;
+
+
+
+
+  case (player1.charmanderMoves[0].charmanderFunction2of6 === true):
+
+  //squirtle attack move: Tail Whip
+  //confirm attack move for squirtle pokemon was activated
+  computer.squirtleMovesActivated[0].squirtleFunction2of6 = true;
+
+  //debugging here -- delete when neccessary
+  console.log("squirtleMoves Function2of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction2of6);
+
+  //Tail Whip does -5 damage to charmander
+  //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
+  a1.charmanderHealthBar.push(-5);
+  a1.charmanderBackup.push(-5);
+
+
+  //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+  squirtleProgressBar.decreasePlayerHP();
+
+  // This is the function that applies the filter to the arrays listed above. It also calls other functions
+  array1.checkTheStatus();
+
+  //debugging here------------------------------------------------------
+
+  console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+
+  // get the status of health for player1 and computer pokemon
+
+  console.log("charmanderBackup array is " +a1.charmanderBackup);
+
+  // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+  document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
+
+  //show attack image
+  computerImg.squAtkImage2();
+
+
+
+  //Change boolean state so that player1 can make a move
+  confirm.makeMove[0].computerMove = false;
+  console.log(confirm.makeMove[0]);
+  confirm.enableMoves();
+  console.log(confirm.makeMove[0]);
+
+    break;
+
+
+
+
+  case (player1.charmanderMoves[0].charmanderFunction3of6 === true):
+
+
+  //squirtle attack move: Water Pulse
+  //confirm attack move for squirtle pokemon was activated
+  computer.squirtleMovesActivated[0].squirtleFunction2of6 = true;
+
+  //debugging here -- delete when neccessary
+  console.log("squirtleMoves Function3of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction3of6);
+
+  //Tail Whip does -60 damage to charmander
+  //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
+  a1.charmanderHealthBar.push(-60);
+  a1.charmanderBackup.push(-60);
+
+
+  //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+  squirtleProgressBar.decreasePlayerHP();
+
+  // This is the function that applies the filter to the arrays listed above. It also calls other functions
+  array1.checkTheStatus();
+
+  //debugging here------------------------------------------------------
+
+  console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+
+  // get the status of health for player1 and computer pokemon
+
+  console.log("charmanderBackup array is " +a1.charmanderBackup);
+
+  // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+  document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
+
+  //show attack image
+  computerImg.squAtkImage3();
+
+
+
+  //Change boolean state so that player1 can make a move
+  confirm.makeMove[0].computerMove = false;
+  console.log(confirm.makeMove[0]);
+  confirm.enableMoves();
+  console.log(confirm.makeMove[0]);
+    break;
+
+
+
+  default:
+    console.log("squirtleMoves default switch function was activated -- evaluate cases to fix error.");
+
+
+
+
+} // end of switch statements for squirtleMoves
+
+
 
       } // end of squirtleMoves function
 
@@ -2176,7 +2355,7 @@ document.getElementById("defenseC").addEventListener("click", defenseC);
 document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
 document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
 document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-document.getElementById("Warturtle_sel").addEventListener("click", player1CH.warPokeImage);
+
 
 
 
@@ -2184,8 +2363,8 @@ document.getElementById("Warturtle_sel").addEventListener("click", player1CH.war
 document.getElementById("soundON").addEventListener("click", player1SD.soundSettingsOn);
 document.getElementById("soundOFF").addEventListener("click", player1SD.soundSettingsOff);
 
-//Event listener for restart button
 
+//Event listener for restart button
 document.getElementById("restartYES").addEventListener("click", refreshPage);
 
 
@@ -2231,9 +2410,30 @@ if(confirm.makeMove[0].player1Move === false){
 
 function attackB() {
 
+console.log(confirm.makeMove[0]);
 
 player1.blazeMove();
+confirm.enableMoves();
+confirm.disableMoves();
 
+
+
+
+
+
+
+
+if(confirm.makeMove[0].player1Move === false){
+
+  setTimeout (function(){
+
+
+    computer.squirtleMoves();
+
+
+  },2000); // computer attacks after 2 secs
+
+}
 
 
 
@@ -2241,7 +2441,30 @@ player1.blazeMove();
 
 function attackC() {
 
+console.log(confirm.makeMove[0]);
 
+player1.solarPowerMove();
+confirm.enableMoves();
+confirm.disableMoves();
+
+
+
+
+
+
+
+
+if(confirm.makeMove[0].player1Move === false){
+
+  setTimeout (function(){
+
+
+    computer.squirtleMoves();
+
+
+  },2000); // computer attacks after 2 secs
+
+}
 
 
 
