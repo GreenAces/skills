@@ -184,7 +184,30 @@ update progress bar style here
 
 
 
-/*Pokemon head icons*/
+/*pokemon_icon-indicators*/
+
+/*computer pokemon icon */
+
+#squirtleIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+#ScytherIcon {
+  width: 34px;
+  height: 46px;
+}
+
+#OnixIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+
+
+/*player1 pokemon icon */
 
 #charmanderIcon {
   width: 34px;
@@ -205,14 +228,7 @@ update progress bar style here
 
 
 
-/* pokemon logo */
 
-#pokemon_logo {
-  width: 110px;
-  height: 73px;
-  display:inline-block;
-
-}
 
 
 
