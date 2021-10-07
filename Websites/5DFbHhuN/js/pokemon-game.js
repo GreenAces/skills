@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (10/01/2021)
+Lastest update: (10/07/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -18,7 +18,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
 3a) why is Computer health status is undefined on line 1149? maybe because it's a function?
 3b) show an indictator of the dead pokemon of the total left (3) -- work on that later --  see line 225
-3c)
+3c) Added score count on lines 498 & 538 -- find out why scyther doesn't load when squirtle dies at loadScytherOnly function *********************** 10/7/2021
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
@@ -404,6 +404,9 @@ class referee {
         document.getElementById("squirtleIcon").style.width = 34;
         document.getElementById("squirtleIcon").style.height = 46;
 
+        // load another computer pokemon
+        computerCH.loadScytherOnly(); // this pokemone has no attack function right now -- work on that later
+
       } // end of if statment
 
 
@@ -464,8 +467,6 @@ class referee {
           document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please choose next pokemon.");
 
 
-
-
         // remove previous player1 Pokemon image
 
         let elem =  document.createElement("img");
@@ -480,16 +481,21 @@ class referee {
         document.getElementById("Player1PokeImage").style.height = 180;
 
 
-          //Change boolean state so player1 can't make a move
-           confirm.makeMove[0].computerMove = true;
+        // Change boolean state so player1 can't make a move
+        confirm.makeMove[0].computerMove = true;
 
-           // inform player1 that it's the computer turn to attack
-           document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon. --- debugging here***";
+        // inform player1 that it's the computer turn to attack
+        document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon. --- debugging here***";
 
-           setTimeout(function(){
+        setTimeout(function() {
 
-             // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
-             p1.disableDeadPokemon()
+       // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+       p1.disableDeadPokemon()
+
+       // give score to player1 array
+       a1.player1Score.push(1);
+       let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
+       console.log("Player1 Score: " + score1);
 
 
          },3000); // 3 sec wait time for computer to select pokemon
@@ -501,12 +507,7 @@ class referee {
       }else if (squirtleHP7 === 0 && charmanderHP7 >= 5) {
 
         //Inform player that pokemon is dead but let the game continue
-          document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select next pokemon.");
-
-
-        //no need to disable squirtle as it's a computer pokemon (user could never select it from menu)
-
-
+        document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select the next pokemon.");
 
 
         // remove previous computer Pokemon image
@@ -523,19 +524,25 @@ class referee {
         document.getElementById("CpuPokeImage").style.height = 180;
 
 
-          //Change boolean state so computer move can't make a move
-           confirm.makeMove[0].player1Move = true;
+        //Change boolean state so computer move can't make a move
+        confirm.makeMove[0].player1Move = true;
 
-           //Inform player1 that they can attack the computer
-           document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon. ---debugging here***");
-
-
-           setTimeout(function(){
+        //Inform player1 that they can attack the computer
+        document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon. ---debugging here***");
 
 
-             // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+        setTimeout(function(){
 
-             p1.disableDeadPokemon();
+
+        // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+
+        p1.disableDeadPokemon();
+
+       // give score to computer array
+       a2.computerScore.push(1);
+       let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
+       console.log("Computer Score: " + score2);
+
 
          },3000); // 3 sec wait time for computer to select pokemon
 
@@ -1008,6 +1015,8 @@ class changePokemon {
 
 
 
+
+
           console.log("---------------------------------------------------------");
 
 
@@ -1028,12 +1037,12 @@ class changePokemon {
    }; // end of debuggingOperation function
 
 
-    this.pokemonType = [{Type: "fire", pokemonName: this.player1PokemonChoices[0], isSelected: false }, // charmander
-                       {Type: "water", pokemonName:  this.player1PokemonChoices[1], isSelected: false}, // blastoise
-                       {Type: "electric", pokemonName: this.player1PokemonChoices[2], isSelected: false}, // pikachu
-                       {Type: "grass", pokemonName: this.ComputerPokemonChoices[0], isSelected: false}, // Scyther
-                       {Type: "rock", pokemonName: this.ComputerPokemonChoices[1], isSelected: false}, // onix
-                       {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false} //squirtle
+    this.pokemonType = [{Type: "fire", pokemonName: this.player1PokemonChoices[0], isSelected: false,    character:"Charmander"},    // charmander
+                       {Type: "water", pokemonName:  this.player1PokemonChoices[1], isSelected: false,   character:"Blastoise"},    // blastoise
+                       {Type: "electric", pokemonName: this.player1PokemonChoices[2], isSelected: false, character:"Pikachu"},     // pikachu
+                       {Type: "grass", pokemonName: this.ComputerPokemonChoices[0], isSelected: false,   character:"Scyther"},    // Scyther
+                       {Type: "rock", pokemonName: this.ComputerPokemonChoices[1], isSelected: false,    character:"Onix"},     // onix
+                       {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false,   character:"Squirtle"} //squirtle
                         ];
 
     this.savedPokemonName = []; // NOTE: empty array of that will be filled with pokemon names to be used later  -- the 1st one will be used to make the game more challenging for player1 -- see squPokeImage2 on line 699 for examples
@@ -1063,16 +1072,16 @@ class changePokemon {
       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
 
       // set boolean stats to true when user selects a pokemon
-      player1CH.pokemonType[0].isSelected = true;
+      player1CH.pokemonType[0].isSelected = true;   // charmander
       // set boolean stats to false for non-selected pokemon
-      player1CH.pokemonType[1].isSelected = false;
-      player1CH.pokemonType[2].isSelected = false;
-      player1CH.pokemonType[3].isSelected = false;
+      player1CH.pokemonType[1].isSelected = false; // blastoise
+      player1CH.pokemonType[2].isSelected = false; // pikachu
+
 
       // inform player1 of pokemon change
       document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[0]+ ". " + " Computer will now select a pokemon.");
 
-      // Wait 3 secs and inform player1 that they can begin attacking computer pokemon
+      // Wait 6 secs and inform player1 that they can begin attacking computer pokemon
       setTimeout(function() {
 
       document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
@@ -1091,7 +1100,7 @@ class changePokemon {
 
 
       //load pokemon name
-      document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[0];
+      document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[0]; //charmander
 
       //load pokemon sound
       //player1SD.charmanderVO.play();
@@ -1103,29 +1112,13 @@ class changePokemon {
 
 
 
-        //Change boolean state so computer can make a move
-         confirm.makeMove[0].player1Move = false;
-
-         //set boolean stats to reflect computer selected pokemon
-         computerCH.pokemonType[2].isSelected = true; // squirtle
-
-         //set boolean stats to false for non-selected pokemon
-         computerCH.pokemonType[0].isSelected = false;
-         computerCH.pokemonType[1].isSelected = false;
-         computerCH.pokemonType[3].isSelected = false;
-         computerCH.pokemonType[4].isSelected = false;
-         computerCH.pokemonType[5].isSelected = false;
-
-
-
-
          setTimeout(function (){
 
            // if player1 selects fire-type pokemon, computer will use a water-type pokemon
 
            let isPokemonFire = player1CH.pokemonType.filter(function(perfectMatch){
 
-           if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){ // NOTE: use this as a else if statement instead...
+           if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){
 
 
            //load  water-type for computer pokemon
@@ -1147,8 +1140,22 @@ class changePokemon {
           confirm.makeMove[0].computerMove = false;
           confirm.makeMove[0].player1Move = true;
 
+          //Change boolean state so computer can make a move
+          confirm.makeMove[0].player1Move = false;
 
-           }
+           //verify that computer selected a pokemon
+          computerCH.pokemonType[2].isSelected = true; // squirtle
+
+          //set boolean stats to false for non-selected pokemon
+          computerCH.pokemonType[0].isSelected = false;
+          computerCH.pokemonType[1].isSelected = false;
+          computerCH.pokemonType[3].isSelected = false;
+          computerCH.pokemonType[4].isSelected = false;
+          computerCH.pokemonType[5].isSelected = false;
+
+
+
+        }
 
          });
 
@@ -1162,25 +1169,173 @@ class changePokemon {
 
     } // end of chrPokeImage function
 
-    this.scyPokeImage = function () {
-
-      confirm.makeMove[0].computerMove = true;
-
-
-      if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true) {
 
 
 
-      // set boolean stats to true when player1 selects a pokemon
-      computerCH.pokemonType[3].isSelected = true;
 
-      // set boolean stats to false for non-selected pokemon
-      computerCH.pokemonType[0].isSelected = false;
-      computerCH.pokemonType[1].isSelected = false;
-      computerCH.pokemonType[2].isSelected = false;
-      computerCH.pokemonType[4].isSelected = false;
-      computerCH.pokemonType[5].isSelected = false;
+    this.blaPokeImage = function () {
 
+
+          confirm.makeMove[0].player1Move = true;
+
+       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
+
+         // set boolean stats to true when user selects a pokemon
+         player1CH.pokemonType[1].isSelected = true;  //blastoise
+
+         // set boolean stats to false for non-selected pokemon
+         player1CH.pokemonType[0].isSelected = false; //charmander
+         player1CH.pokemonType[2].isSelected = false; //pikachu
+
+
+         // inform player1 of pokemon change
+         document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[1]+ ". " + " Computer will now select a pokemon.");
+
+         // Wait 6 secs and inform player1 that they can begin attacking computer pokemon
+         setTimeout(function() {
+
+         document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
+
+       }, 6000); // 6 secs
+
+         //load pokemon attack/defense menu
+         document.getElementById("attackA").innerHTML = ("Aqua Jet (-20HP)");
+         document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
+         document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
+
+         document.getElementById("defenseA").innerHTML = ("Protect (-10HP)");
+         document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+         document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+         //load pokemon name
+         document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[1]; // blastoise
+
+         //load pokemon sound
+         player1SD.blastoiseVO.play();
+
+          //load player1 pokemon
+
+         document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
+         document.getElementById("Player1PokeImage").style.width = 100;
+         document.getElementById("Player1PokeImage").style.height = 100;
+
+
+         setTimeout(function(){
+
+           // if player1 selects water-type pokemon, computer will use a rock-type pokemon
+
+           let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
+
+           if(perfectMatch.Type === "water" && perfectMatch.isSelected === true){
+
+
+               // remove previous Pokemon image
+
+               let elem =  document.createElement("img");
+               elem.src ="";
+               document.getElementById("CpuPokeImage").appendChild(elem);
+               document.getElementById("CpuPokeImage").style.width = 100;
+               document.getElementById("CpuPokeImage").style.height = 100;
+
+               // replace with new pokemon
+
+               document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
+               document.getElementById("CpuPokeImage").style.width = 320;
+               document.getElementById("CpuPokeImage").style.height = 380;
+
+
+              //load pokemon sound
+              computerSD.onixVO.play();
+
+              //This function restores the default settings of the progress for player1 and computer
+              defaultProgressBar.defaultHPSetting();
+
+              //Display and save computer pokemon name to savedPokemonName2 on line 445
+              document.getElementById("cpuPokemonName").innerHTML = "Onix";
+              computerCH.savedPokemonName2.push("Onix");
+
+              //change boolean state
+              confirm.makeMove[0].computerMove = false;
+              confirm.makeMove[0].player1Move = true;
+
+              //verify that computer selected a pokemon
+              computerCH.pokemonType[4].isSelected = true; //onix
+
+              // set boolean stats to false for non-selected pokemon
+              computerCH.pokemonType[0].isSelected = false;
+              computerCH.pokemonType[1].isSelected = false;
+              computerCH.pokemonType[2].isSelected = false;
+              computerCH.pokemonType[5].isSelected = false;
+
+
+
+           }
+
+         });
+
+
+       },6000); // 6 sec wait time to load computer pokemon
+
+
+
+
+      } //end of 1st if statement
+
+
+    } //end of blaPokeImage function
+
+
+    this.pikPokeImage = function () {
+
+      confirm.makeMove[0].player1Move = true;
+
+
+      if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
+
+
+        // set boolean stats to true when user selects a pokemon
+        player1CH.pokemonType[2].isSelected = true; // pikachu
+
+        // set boolean stats to false for non-selected pokemon
+
+        computerCH.pokemonType[0].isSelected = false;
+        computerCH.pokemonType[1].isSelected = false;
+        computerCH.pokemonType[2].isSelected = false;
+        computerCH.pokemonType[4].isSelected = false;
+        computerCH.pokemonType[5].isSelected = false;
+
+
+        // inform player1 of pokemon change
+        document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[2]+ ". " + " Computer will now select a pokemon.");
+
+
+        // Wait 3 secs and inform player1 that they can begin attacking computer pokemon
+        setTimeout(function() {
+
+        document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
+
+      }, 6000); // 6 secs
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-20HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-45)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+        //load pokemon name
+        document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[2]; // pikachu
+
+        //load pokemon sound
+        player1SD.pikachuVO.play();
+
+       // load player1 pokemon
+
+      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
+      document.getElementById("Player1PokeImage").style.width = 200;
+      document.getElementById("Player1PokeImage").style.height = 180;
 
       setTimeout(function(){
 
@@ -1206,14 +1361,30 @@ class changePokemon {
             document.getElementById("CpuPokeImage").style.height = 380;
 
 
+           //load pokemon sound
+           computerSD.scytherVO.play();
+
+           //This function restores the default settings of the progress for player1 and computer
+           defaultProgressBar.defaultHPSetting();
+
+           //Display and save computer pokemon name to savedPokemonName2 on line 445
+           document.getElementById("cpuPokemonName").innerHTML = "Scyther";
+           computerCH.savedPokemonName2.push("Scyther");
+
+           //change boolean state
+           confirm.makeMove[0].computerMove = false;
+           confirm.makeMove[0].player1Move = true;
+
+           //verify that computer selected a pokemon
+           computerCH.pokemonType[3].isSelected = true; //Scyther
 
 
-       //load pokemon sound
-       computerSD.scytherVO.play();
-
-       //change boolean state
-       confirm.makeMove[0].computerMove = false;
-       confirm.makeMove[0].player1Move = true;
+           // set boolean stats to false for non-selected pokemon
+           computerCH.pokemonType[0].isSelected = false;
+           computerCH.pokemonType[1].isSelected = false;
+           computerCH.pokemonType[2].isSelected = false;
+           computerCH.pokemonType[4].isSelected = false;
+           computerCH.pokemonType[5].isSelected = false;
 
 
 
@@ -1222,39 +1393,26 @@ class changePokemon {
       });
 
 
-    },3000); // 3 sec wait time for computer to select pokemon
-
-
-  } // end of 1st if statement
-
-}// end of scyPokeImage function
-
-this.oniPokeImage = function () {
-
-  confirm.makeMove[0].computerMove = true;
-
-
-  if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true) {
+    },6000); // 6 sec wait time to load computer pokemon
 
 
 
-  // set boolean stats to true when player1 selects a pokemon
-  computerCH.pokemonType[4].isSelected = true;
+   } // end of 1st if statement
 
-  // set boolean stats to false for non-selected pokemon
-  computerCH.pokemonType[0].isSelected = false;
-  computerCH.pokemonType[1].isSelected = false;
-  computerCH.pokemonType[2].isSelected = false;
-  computerCH.pokemonType[5].isSelected = false;
+ } // end of pikPokeImage function
+
+
+
+
+// In this section computer pokemon will not be paired to player1 pokemon
+
+this.loadScytherOnly = function () {
 
 
   setTimeout(function(){
 
-    // if player1 selects water-type pokemon, computer will use a rock-type pokemon
 
-    let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
-
-    if(perfectMatch.Type === "water" && perfectMatch.isSelected === true){
+    if(p1.deadPokemon === "Squirtle"){
 
 
         // remove previous Pokemon image
@@ -1267,188 +1425,47 @@ this.oniPokeImage = function () {
 
         // replace with new pokemon
 
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
 
+       //load pokemon sound
+       computerSD.scytherVO.play();
 
+       //This function restores the default settings of the progress for player1 and computer
+       defaultProgressBar.defaultHPSetting();
 
-   //load pokemon sound
-   computerSD.onixVO.play();
+       //Display and save computer pokemon name to savedPokemonName2 on line 445
+       document.getElementById("cpuPokemonName").innerHTML = "Scyther";
+       computerCH.savedPokemonName2.push("Scyther");
 
-   //change boolean state
-   confirm.makeMove[0].computerMove = false;
-   confirm.makeMove[0].player1Move = true;
+       //change boolean state
+       confirm.makeMove[0].computerMove = false;
+       confirm.makeMove[0].player1Move = true;
 
+       //verify that computer selected a pokemon
+       computerCH.pokemonType[3].isSelected = true; //Scyther
 
 
-    }
+       // set boolean stats to false for non-selected pokemon
+       computerCH.pokemonType[0].isSelected = false;
+       computerCH.pokemonType[1].isSelected = false;
+       computerCH.pokemonType[2].isSelected = false;
+       computerCH.pokemonType[4].isSelected = false;
+       computerCH.pokemonType[5].isSelected = false;
 
-  });
 
 
-},3000); // 3 sec wait time for computer to select pokemon
+    }// end of if statement
 
 
-} // end of 1st if statement
 
-}// end of oniPokeImage function
+        }, 6000); // 6 sec wait time to load computer pokemon
 
-    this.blaPokeImage = function () {
 
 
-          confirm.makeMove[0].player1Move = true;
-
-       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
-
-         // set boolean stats to true when user selects a pokemon
-         player1CH.pokemonType[1].isSelected = true;
-
-         // set boolean stats to false for non-selected pokemon
-         player1CH.pokemonType[0].isSelected = false;
-         player1CH.pokemonType[2].isSelected = false;
-         player1CH.pokemonType[3].isSelected = false;
-
-         // inform player1 of pokemon change
-         document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[1]+ ". " + " Computer will now select a pokemon.") ;
-
-         //load pokemon attack/defense menu
-         document.getElementById("attackA").innerHTML = ("Aqua Jet (-20HP)");
-         document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
-         document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
-
-         document.getElementById("defenseA").innerHTML = ("Protect (-10HP)");
-         document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
-         document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
-
-         //load pokemon name
-         document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[1];
-
-         //load pokemon sound
-         player1SD.blastoiseVO.play();
-
-        // load player1 pokemon
-
-       document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
-       document.getElementById("Player1PokeImage").style.width = 100;
-       document.getElementById("Player1PokeImage").style.height = 100;
-
-
-
-
-
-
-
-      }else if (confirm.makeMove[0].computerMove === true) {
-
-
-          document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon(***)."; // remove stars if no conflict is present with other counter
-
-          //remove add event listener for switch button
-          document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
-          document.getElementById("Blastoise_sel").removeEventListener("click", player1CH.blaPokeImage);
-          document.getElementById("Pikachu_sel").removeEventListener("click", player1CH.pikPokeImage);
-
-
-          // re-enable event listener after 8 secs
-          setTimeout(function() { // This is an anonymous callback function
-
-
-
-            document.getElementById("statusProgress3").innerHTML = "You can now attack or switch pokemon.";
-
-            //add event listener for switch button
-            document.getElementById("Charmander_sel").addEventListener("click", player1CH.chrPokeImage);
-            document.getElementById("Blastoise_sel").addEventListener("click", player1CH.blaPokeImage);
-            document.getElementById("Pikachu_sel").addEventListener("click", player1CH.pikPokeImage);
-
-
-
-          }, 8000); // 8 sec wait time
-
-
-          }
-
-
-          // change boolean state so computer can make a move
-            confirm.makeMove[0].player1Move = false;
-
-
-    }
-
-
-    this.pikPokeImage = function () {
-
-      confirm.makeMove[0].player1Move = true;
-
-
-      if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
-
-
-        // set boolean stats to true when user selects a pokemon
-        player1CH.pokemonType[3].isSelected = true;
-
-        // set boolean stats to false for non-selected pokemon
-
-        computerCH.pokemonType[0].isSelected = false;
-        computerCH.pokemonType[1].isSelected = false;
-        computerCH.pokemonType[2].isSelected = false;
-        computerCH.pokemonType[4].isSelected = false;
-        computerCH.pokemonType[5].isSelected = false;
-
-
-        // inform player1 of pokemon change
-        document.getElementById("statusProgress3").innerHTML =("You seleted " + player1CH.player1PokemonChoices[3]+ ". " + " Computer will now select a pokemon.") ;
-
-        //load pokemon attack/defense menu
-        document.getElementById("attackA").innerHTML = ("Thunder Shock (-20HP)");
-        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
-        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-45)");
-
-        document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
-        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
-        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
-
-        //load pokemon name
-        document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[3];
-
-        //load pokemon sound
-        player1SD.pikachuVO.play();
-
-       // load player1 pokemon
-
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
-
-     setTimeout(function(){
-
-       //call the scyther function (computerMove) in 6 secs
-       computerCH.scyPokeImage();
-
-     },6000)
-
-
-     //change boolean state
-     confirm.makeMove[0].player1Move = false;
-     confirm.makeMove[0].computerMove = true;
-
-
-
-   } // end of 1st if statement
-
- } // end of pikPokeImage function
-
-    this.squPokeImage = function () {
-
-      // load computer pokemon
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-      document.getElementById("player1AttackImage").style.width = 200;
-      document.getElementById("player1AttackImage").style.height = 180;
-
-    }
-
+          } //end of loadScytherOnly function
 
 
 
@@ -1496,6 +1513,8 @@ class objectofArrays {
     this.pikachuBackup =        [100];
     this.pikachuHpRecovered =   [0];
     this.pikSpeedProgressBar =  [100];
+    this.player1Score = [0];
+    this.computerScore = [0];
 
 
   } // end of constructor class
@@ -2395,7 +2414,7 @@ class computerMoves {
 
    this.squirtleMoves = function () {
 
-     //Squirtle switch needs to evalute the selection that player1 makes and take neccessary action based on that info
+     //SquirtleMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
      switch (confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
         && player1CH.pokemonType[0].isSelected === true || player1.charmanderMoves[0].charmanderFunction1of6 === true
