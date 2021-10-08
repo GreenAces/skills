@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (10/07/2021)
+Lastest update: (10/08/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -18,7 +18,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
 3a) why is Computer health status is undefined on line 1149? maybe because it's a function?
 3b) show an indictator of the dead pokemon of the total left (3) -- work on that later --  see line 225
-3c) Added score count on lines 498 & 538 -- find out why scyther doesn't load when squirtle dies at loadScytherOnly function *********************** 10/7/2021
+3c) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
@@ -368,7 +368,7 @@ class referee {
     this.disableDeadPokemon = function () {
 
       let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP9 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP9 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
       console.log("disableDeadPokemon was activated.");
 
@@ -457,7 +457,7 @@ class referee {
 
       // variable declartions
       let charmanderHP7 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP7 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP7 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
       //load pokemon tombstone image based on certain conditions.
 
@@ -492,10 +492,11 @@ class referee {
        // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
        p1.disableDeadPokemon()
 
-       // give score to player1 array
-       a1.player1Score.push(1);
-       let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
-       console.log("Player1 Score: " + score1);
+       // give score to computer array
+
+       a2.computerScore.push(1);
+       let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
+       console.log("Computer Score: " + score2);
 
 
          },3000); // 3 sec wait time for computer to select pokemon
@@ -538,10 +539,11 @@ class referee {
 
         p1.disableDeadPokemon();
 
-       // give score to computer array
-       a2.computerScore.push(1);
-       let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
-       console.log("Computer Score: " + score2);
+       // give score to player1 array
+
+       a1.player1Score.push(1);
+       let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
+       console.log("Player1 Score: " + score1);
 
 
          },3000); // 3 sec wait time for computer to select pokemon
@@ -564,7 +566,7 @@ class referee {
       // new variable declartions to avoid reference error
 
       let charmanderHP4 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP4 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP4 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
 
 
@@ -671,7 +673,7 @@ class referee {
       // varible declartions
 
       let charmanderHP2 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP2 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP2 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
               if (charmanderHP2 <= 40 ) {
 
@@ -710,7 +712,7 @@ class referee {
       // new variable declartions to avoid reference error
 
       let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP3 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP3 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
 
 
@@ -893,7 +895,7 @@ class changePokemon {
 
       //varible declartions
       let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP8 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP8 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
       let demopokemon = 1; // replace demopokemon with actual pokemon name -- work on this later
       let demopokemon2 =2; // replace demopokemon with actual pokemon name -- work on this later
       let demopokemon3 =3; // replace demopokemon with actual pokemon name -- work on this later
@@ -1408,14 +1410,16 @@ class changePokemon {
 
 this.loadScytherOnly = function () {
 
+  setTimeout(function() {
 
-  setTimeout(function(){
+    let squirtleHP10 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+
+    //if squirtle dies than Scyther is loaded up -- no attacks are programmed as of now
+
+    if(squirtleHP10 === 0 && p1.deadPokemon[0] === "Squirtle") {
 
 
-    if(p1.deadPokemon === "Squirtle"){
-
-
-        // remove previous Pokemon image
+        //remove previous Pokemon image
 
         let elem =  document.createElement("img");
         elem.src ="";
@@ -1423,18 +1427,28 @@ this.loadScytherOnly = function () {
         document.getElementById("CpuPokeImage").style.width = 100;
         document.getElementById("CpuPokeImage").style.height = 100;
 
-        // replace with new pokemon
+        //replace with new pokemon
 
         document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
+        setTimeout(function() {
+
+        //This function restores the default settings of the progress for player1 and computer
+        defaultProgressBar.newHPSetting();
+
+      },1000); // 1 sec wait time for loading new progressBar for Scyther
+
+       //call a switch statement here -- work on this later
+
+
+        //Inform player that computer selected a pokemon
+        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[0]+ ". " + " and has 2 pokemon remaining.");
 
        //load pokemon sound
        computerSD.scytherVO.play();
 
-       //This function restores the default settings of the progress for player1 and computer
-       defaultProgressBar.defaultHPSetting();
 
        //Display and save computer pokemon name to savedPokemonName2 on line 445
        document.getElementById("cpuPokemonName").innerHTML = "Scyther";
@@ -1457,15 +1471,16 @@ this.loadScytherOnly = function () {
 
 
 
-    }// end of if statement
 
 
 
-        }, 6000); // 6 sec wait time to load computer pokemon
+          }// end of if statement
 
 
+              },6000); // 6 sec wait time for computer to select pokemon
 
-          } //end of loadScytherOnly function
+
+                } //end of loadScytherOnly function
 
 
 
@@ -1587,7 +1602,7 @@ class progressBar {
       let player1DefaultSpeed = 100;
       let computerDefaultSpeed = 100;
 
-      let squirtleHP6 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
       let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 
       if (charmanderHP6 === 100 && squirtleHP6 === 100) {
@@ -1608,6 +1623,38 @@ class progressBar {
 
     }// end of defaultHPSetting
 
+      this.newHPSetting = function () {
+
+      let player1DefaultHP = 100;
+      let computerDefaultHP = 100;
+      let player1DefaultSpeed = 100;
+      let computerDefaultSpeed = 100;
+      let player1LowHealthIndicator2 = document.querySelector('.player1HP');
+      let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
+
+      let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+
+      if (squirtleHP6 === 0) {
+
+        //computer HP and speed css settings
+        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
+        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+        computerLowHealthIndicator2.style.backgroundColor = "#A6EDED"; // blue
+
+      }else if (charmanderHP6 === 0) {
+
+        //player1 HP and speed css settings
+        document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
+        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+        player1LowHealthIndicator2.style.backgroundColor = "#A6EDED"; //blue
+
+      }// end of if statements
+
+
+
+    }// end of newHPSetting
+
     this.decreaseComputerHP = function () {
 
       // variable declartions
@@ -1615,7 +1662,7 @@ class progressBar {
 
       let hpDamage = 0;
       let hpRecovered = a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
-      let squirtleHP5 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
