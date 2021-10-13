@@ -7,7 +7,7 @@ Lastest update: (10/11/2021)
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
 x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
-x3) switchPokemon function on line 1650 needs to be evaluted -- if you can't fix it -- revert back to original code for the action listeners to be able to select a pokemon *high priority*
+x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4)
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -1068,6 +1068,9 @@ class changePokemon {
 
     this.chrPokeImage =  function () {
 
+      let score0 = a1.player1Score.reduce(array1.PokemonHPReduced);
+
+
       confirm.makeMove[0].player1Move = true;
 
 
@@ -1107,62 +1110,93 @@ class changePokemon {
       //load pokemon sound
       //player1SD.charmanderVO.play();
 
-      // load player1 pokemon
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
+      //if squirtle dies then player1 can't restore it by selecting charmander again.
+      if (p1.deathValidator.pokemonDied === true && p1.deadPokemon[0] === "Squirtle") {
+
+        //remove previous pokemon character
+        let elem =  document.createElement("img");
+        elem.src ="";
+        document.getElementById("Player1PokeImage").appendChild(elem);
+        document.getElementById("Player1PokeImage").style.width = 200;
+        document.getElementById("Player1PokeImage").style.height = 180;
+
+        //reload player1 pokemon
+        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
+        document.getElementById("Player1PokeImage").style.width = 200;
+        document.getElementById("Player1PokeImage").style.height = 180;
+
+        setTimeout(function (){
+
+        computerCH.loadOnixOnly();
+
+        },6000); // 6 sec wait time to load computer pokemon
+
+      //if player1 doesn't have a score then allow squirtle (computer pokemon) to battle with charmander.
+      }else if (score0 === 0) {
+
+        // load player1 pokemon
+        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
+        document.getElementById("Player1PokeImage").style.width = 200;
+        document.getElementById("Player1PokeImage").style.height = 180;
 
 
 
-         setTimeout(function (){
+       setTimeout(function (){
 
-           // if player1 selects fire-type pokemon, computer will use a water-type pokemon
+         // if player1 selects fire-type pokemon, computer will use a water-type pokemon
 
-           let isPokemonFire = player1CH.pokemonType.filter(function(perfectMatch){
+         let isPokemonFire = player1CH.pokemonType.filter(function(perfectMatch){
 
-           if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){
-
-
-           //load  water-type for computer pokemon
-          document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-          document.getElementById("CpuPokeImage").style.width = 320;
-          document.getElementById("CpuPokeImage").style.height = 380;
-
-          //load pokemon sound
-          //computerSD.squirtleVO.play();
-
-          //This function restores the default settings of the progress for player1 and computer
-          defaultProgressBar.defaultHPSetting();
-
-          //Display and save computer pokemon name to savedPokemonName2 on line 445
-          document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
-          computerCH.savedPokemonName2.push("Squirtle");
-
-          //change boolean state
-          confirm.makeMove[0].computerMove = false;
-          confirm.makeMove[0].player1Move = true;
-
-          //Change boolean state so computer can make a move
-          confirm.makeMove[0].player1Move = false;
-
-           //verify that computer selected a pokemon
-          computerCH.pokemonType[2].isSelected = true; // squirtle
-
-          //set boolean stats to false for non-selected pokemon
-          computerCH.pokemonType[0].isSelected = false;
-          computerCH.pokemonType[1].isSelected = false;
-          computerCH.pokemonType[3].isSelected = false;
-          computerCH.pokemonType[4].isSelected = false;
-          computerCH.pokemonType[5].isSelected = false;
+         if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){
 
 
+         //load  water-type for computer pokemon
+        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
+        document.getElementById("CpuPokeImage").style.width = 320;
+        document.getElementById("CpuPokeImage").style.height = 380;
 
-        }
+        //load pokemon sound
+        //computerSD.squirtleVO.play();
 
-         });
+        //This function restores the default settings of the progress for player1 and computer
+        defaultProgressBar.defaultHPSetting();
+
+        //Display and save computer pokemon name to savedPokemonName2 on line 445
+        document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
+        computerCH.savedPokemonName2.push("Squirtle");
+
+        //change boolean state
+        confirm.makeMove[0].computerMove = false;
+        confirm.makeMove[0].player1Move = true;
+
+        //Change boolean state so computer can make a move
+        confirm.makeMove[0].player1Move = false;
+
+         //verify that computer selected a pokemon
+        computerCH.pokemonType[2].isSelected = true; // squirtle
+
+        //set boolean stats to false for non-selected pokemon
+        computerCH.pokemonType[0].isSelected = false;
+        computerCH.pokemonType[1].isSelected = false;
+        computerCH.pokemonType[3].isSelected = false;
+        computerCH.pokemonType[4].isSelected = false;
+        computerCH.pokemonType[5].isSelected = false;
 
 
-         },6000); // 6 sec wait time to load computer pokemon
+
+      }
+
+       });
+
+
+       },6000); // 6 sec wait time to load computer pokemon
+
+
+
+
+      } //end of 2nd if statements
+
+
 
 
 
@@ -1491,11 +1525,11 @@ this.loadOnixOnly = function () {
 
   setTimeout(function() {
 
-    let ScytherHP1 = a2.ScytherHealthBar.reduce(array2.PokemonHPReduced);
+    let squirtleHP10 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
-    //if Scyther dies than onix is loaded up -- no attacks are programmed as of now
+    //if Squirtle dies than onix is loaded up -- no attacks are programmed as of now
 
-    if(ScytherHP1 === 0 && p1.deadPokemon[0] === "Scyther") {
+    if(squirtleHP10 === 0 && p1.deadPokemon[0] === "Squirtle") {
 
 
         //remove previous Pokemon image
@@ -1645,99 +1679,6 @@ this.loadScytherOnly = function () {
 
 
 
-this.switchPokemon = function () {
-
-  //computer pokemon
-  let squirtleHP10 = a2.SquirtleHealthBar.reduce(array2.PokemonHPReduced);
-  let scytherHP2 = a2.scytherHealthBar.reduce(array2.PokemonHPReduced);
-  let onixHP = a2.onixHealthBar.reduce(array2.PokemonHPReduced);
-  //player1 pokemon
-  let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-  let pikachuHP2 = a1.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-  let blastoiseHP2 = a1.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-
-
-  //this function allows for switching pokemon
-  //first it checks the prograss bar and records it to another array. Then it creates a new array for the choosen pokemon. Finally it resets the progress bar to 100% or restores original data
-
-
-  switch (charmanderHP11 < 0 &&  charmanderHP11 < 100 ||
-          pikachuHP2 < 0 && pikachuHP2 < 100 ||
-          blastoiseHP2 < 0 && blastoiseHP2 < 100) {
-
-
-
-
-
-    case (charmanderHP11 < 0 &&  charmanderHP11 < 100):
-
-      //if squirtle dies then player1 can't restore it by selecting charmander.
-      if (squirtleHP10 === 0 && p1.deadPokemon[0] === "Squirtle") {
-
-              computerCH.loadOnixOnly();
-
-
-          }
-
-      //load default pokemon charmander which is paired with squirtle
-      player1CH.chrPokeImage();
-
-      break;
-
-
-
-
-
-
-
-    case (pikachuHP2 < 0 && pikachuHP2 < 100):
-
-    //if Scyther dies then player1 can't restore it by selecting pikachu.
-    if (scytherHP2 === 0 && p1.deadPokemon[0] === "Scyther") {
-
-            computerCH.loadSquirtleOnly();
-
-        }
-
-    //load default pokemon pikachu which is paired with scyther
-    player1CH.pikPokeImage();
-    break;
-
-
-
-
-
-    case (blastoiseHP2 < 0 && blastoiseHP2 < 100):
-
-    //if Onix dies then player1 can't restore it by selecting blastoise.
-    if (onixHP === 0 && p1.deadPokemon[0] === "Onix") {
-
-            computerCH.loadScytherOnly();
-
-        }
-
-   //load default pokemon blastoise which is paired with onix
-   player1CH.blaPokeImage();
-
-
-   break;
-
-
-
-
-
-    default:
-
-    //inform player1 to select a pokemon at the start of the game
-    confirm.startGameMessage();
-    console.log("switchPokemon default function was activated and startGameMessage was activated.");
-
-
-
-
-  }//end of switch statements
-
-            }//end of switch function
 
 
 
@@ -3043,6 +2984,12 @@ computer = new computerMoves;
 
 
 
+//inform player1 to select a pokemon at the start of the game
+confirm.startGameMessage();
+
+
+
+
 // restart function
 
 function refreshPage(){
@@ -3087,9 +3034,9 @@ document.getElementById("defenseC").addEventListener("click", defenseC);
 // Event listener for player1 pokemonchange on line 890-1700
 
 
-document.getElementById("Charmander_sel").addEventListener("click", player1CH.switchPokemon);
-document.getElementById("Blastoise_sel").addEventListener("click", player1CH.switchPokemon);
-document.getElementById("Pikachu_sel").addEventListener("click", player1CH.switchPokemon);
+document.getElementById("Charmander_sel").addEventListener("click", loadCharmander);
+document.getElementById("Blastoise_sel").addEventListener("click", loadBlastoise);
+document.getElementById("Pikachu_sel").addEventListener("click", loadPikachu);
 
 
 
@@ -3307,6 +3254,39 @@ function defenseC() {
 
 
 
+
+
+}
+
+
+
+
+
+
+
+
+function loadCharmander () {
+
+
+  player1CH.chrPokeImage();
+
+
+}
+
+
+function loadPikachu () {
+
+
+  player1CH.pikPokeImage();
+
+
+}
+
+
+function loadBlastoise () {
+
+
+  player1CH.blaPokeImage();
 
 
 }
