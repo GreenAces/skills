@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (10/14/2021)
+Lastest update: (10/15/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) Add computer pokemon each time player selects a pokemon. [10% completed]
+2) finish editing onixMoves on lines 4074 to 4404 and create logic to work on scytherMoves on line 4451 ***************************************************************************************** 10/15/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -2824,18 +2824,18 @@ class player1Moves {
             //debugging here -- delete when neccessary
             console.log("pikachuFunction1of6 is: " + player1.pikachuMoves[0].pikachuFunction1of6);
 
-           //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+           //reflect the changes to scytherHealthBar AND scytherBackup array as well.
            //thunderShockMove does -20 damage to scyther
-            a3.pikachuHealthBar.push(-20);
-            a3.pikachuBackup.push(-20);
+            a3.scytherHealthBar.push(-20);
+            a3.scytherBackup.push(-20);
 
           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
             pikachuProgressBar.decreaseComputerHP2();
 
 
            //debugging here -----------------------------------
-            console.log("pikachuHealthBar array is " + a3.pikachuHealthBar);
-            console.log("pikachuBackup array is " + a3.pikachuBackup);
+            console.log("scytherHealthBar array is " + a3.scytherHealthBar);
+            console.log("scytherBackup array is " + a3.scytherBackup);
 
 
              //attack image for pikachu
@@ -2866,16 +2866,16 @@ class player1Moves {
          console.log("pikachuFunction2of6 is: " + player1.pikachuMoves[0].pikachuFunction2of6);
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
-        //Blaze does -10 damage on squirtle
-         a3.pikachuHealthBar.push(-10);
-         a3.pikachuBackup.push(-10);
+        //Blaze does -10 damage to scyther
+         a3.scytherHealthBar.push(-10);
+         a3.scytherBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("pikachuHealthBar array is " + a3.pikachuHealthBar);
-         console.log("pikachuBackup array is " + a3.pikachuBackup);
+         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
+         console.log("scytherBackup array is " + a3.scytherBackup);
 
          // show image
           player1Img.chrAtkImage2();
@@ -2906,15 +2906,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //thunderBolt does -45 damage to scyther
-         a3.pikachuHealthBar.push(-45);
-         a3.pikachuBackup.push(-45);
+         a3.scytherHealthBar.push(-45);
+         a3.scytherBackup.push(-45);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("pikachuHealthBar array is " + a3.pikachuHealthBar);
-         console.log("pikachuBackup array is " + a3.pikachuBackup);
+         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
+         console.log("scytherBackup array is " + a3.scytherBackup);
 
          // show image
           player1Img.chrAtkImage3();
@@ -2947,15 +2947,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //growl2 does -10 damage to scyther
-         a3.pikachuHealthBar.push(-10);
-         a3.pikachuBackup.push(-10);
+         a3.scytherHealthBar.push(-10);
+         a3.scytherBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("pikachuHealthBar array is " + a3.pikachuHealthBar);
-         console.log("pikachuBackup array is " + a3.pikachuBackup);
+         console.log("pikachuHealthBar array is " + a3.scytherHealthBar);
+         console.log("pikachuBackup array is " + a3.scytherBackup);
 
          // show image
           player1Img.chrAtkImage4();
@@ -2990,15 +2990,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //headButt does -20 damage to scyther
-         a3.pikachuHealthBar.push(-20);
-         a3.pikachuBackup.push(-20);
+         a3.scytherHealthBar.push(-20);
+         a3.scytherBackup.push(-20);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("pikachuHealthBar array is " + a3.pikachuHealthBar);
-         console.log("pikachuBackup array is " + a3.pikachuBackup);
+         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
+         console.log("scytherBackup array is " + a3.scytherBackup);
 
          // show image
           player1Img.chrAtkImage5();
@@ -3338,53 +3338,7 @@ class computerMoves {
    constructor () {
      this.pokemonName = ["Charmander","Scyther","Blastoise","onix","Squirtle", "Pikachu"];
      this.compMenu =  ["attackA","attackB","attackC","defenseA","defenseB","defenseC"];
-     this.ScytherMoves = function () {
 
-       confirm.makeMove[0].computerMove = true;
-
-       //if statement1
-
-    if(confirm.makeMove[0].player1Move === false && confirm.makeMove[0].computerMove === true
-      && player1CH.pokemonType[3].isSelected === true) {
-
-        // display and save computer pokemon name to savedPokemonName2 on line 445
-       document.getElementById("cpuPokemonName").innerHTML = "Scyther";
-       computerCH.savedPokemonName2.push("Scyther");
-
-      //verifying changes -- delete if neccessary
-       console.log(computerCH.savedPokemonName2);
-
-
-      // does -10 damage to player1
-       document.getElementById("player1HP").value -= 10;
-
-
-     // changes need to be reflected in healthBar array as well
-         p1.healthBar.push(-10);
-
-     // get the status of health for player1 and computer pokemon
-
-        console.log(p1.healthBar);
-
-
-      // inform player1 of attack from computer
-      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1]+ " attacked "+player1.pokemonName[6]+" with Slash!";
-
-      // show attack image
-      computerImg.scyAtkImage1();
-
-      //Change boolean state so that player1 can make a move
-      confirm.makeMove[0].computerMove = false;
-      console.log(confirm.makeMove[0]);
-      confirm.enableMoves();
-      console.log(confirm.makeMove[0]);
-
-
-
-
-     } // end of if statement1
-
-   } // end of scytherMoves function
 
    this.squirtleMovesActivated = [{
 
@@ -3458,11 +3412,11 @@ class computerMoves {
 
    console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-   // get the status of health for player1 and computer pokemon
+   // get the status of health for player1
 
    console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-   // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+   // inform player1 of attack from computer
    document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
 
    //show attack image
@@ -3506,11 +3460,11 @@ class computerMoves {
 
   console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-  // get the status of health for player1 and computer pokemon
+  // get the status of health for player1
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+  // inform player1 of attack from computer
   document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
 
   //show attack image
@@ -3555,11 +3509,11 @@ class computerMoves {
 
   console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-  // get the status of health for player1 and computer pokemon
+  // get the status of health for player1
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+  // inform player1 of attack from computer
   document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
 
   //show attack image
@@ -3606,11 +3560,11 @@ class computerMoves {
 
     console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-    // get the status of health for player1 and computer pokemon
+    // get the status of health for player1
 
     console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-    // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+    // inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tackle!";
 
     //show attack image
@@ -3657,11 +3611,11 @@ class computerMoves {
 
       console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
 
-      // get the status of health for player1 and computer pokemon
+      // get the status of health for player1
 
       console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-      // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
+      // inform player1 of attack from computer
       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
 
       //show attack image
@@ -3758,8 +3712,8 @@ class computerMoves {
 
      case (player1.scytherMoves[0].scytherFunction1of6 === true):
 
-       //squirtle attack move: Bubble Beam
-      //confirm attack move for squirtle pokemon was activated
+       //scyther attack move: slash
+      //confirm attack move for scyther pokemon was activated
       computer.scytherMovesActivated[0].scytherFunction1of6 = true;
 
       //debugging here -- delete when neccessary
@@ -3770,7 +3724,7 @@ class computerMoves {
       a3.pikachuBackup.push(-20);
 
 
-      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
       scytherProgressBar.decreasePlayerHP();
 
       // This is the function that applies the filter to the arrays listed above. It also calls other functions
@@ -3778,17 +3732,17 @@ class computerMoves {
 
       //debugging here------------------------------------------------------
 
-      console.log("ScytherHealthBar array is "+a3.pikachuHealthBar);
+      console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
-      // get the status of health for player1 and computer pokemon
+      // get the status of health for player1
 
-      console.log("ScytherBackup array is " +a3.pikachuHealthBar);
+      console.log("pikachuBackup array is " +a3.pikachuHealthBar);
 
-      // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Slash!";
+      // inform player1 of attack from computer
+      document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
 
       //show attack image
-      computerImg.squAtkImage1();
+      computerImg.scyAtkImage1();
 
 
 
@@ -3805,20 +3759,20 @@ class computerMoves {
 
      case (player1.scytherMoves[0].scytherFunction2of6 === true):
 
-     //scyther attack move: Tail Whip
+     //scyther attack move: Quick Attack
      //confirm attack move for scyther pokemon was activated
      computer.scytherMovesActivated[0].scytherFunction2of6 = true;
 
      //debugging here -- delete when neccessary
      console.log("scytherMoves Function2of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction2of6);
 
-     //Tail Whip does -5 damage to charmander
-     //reflect the changes to scytherHealthBar AND scytherBackup array as well.
-     a3.scytherHealthBar.push(-5);
-     a3.scytherBackup.push(-5);
+     //Quick Attack does -5 damage to pikachu
+     //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+     a3.pikachuHealthBar.push(-5);
+     a3.pikachuBackup.push(-5);
 
 
-     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
      scytherProgressBar.decreasePlayerHP();
 
      // This is the function that applies the filter to the arrays listed above. It also calls other functions
@@ -3826,14 +3780,14 @@ class computerMoves {
 
      //debugging here------------------------------------------------------
 
-     console.log("scytherHealthBar array is "+a3.charmanderHealthBar);
+     console.log("pikachuHealthBar array is "+a3.charmanderHealthBar);
 
-     // get the status of health for player1 and computer pokemon
+     // get the status of health for player1
 
-     console.log("scytherBackup array is " +a3.scytherBackup);
+     console.log("pikachuBackup array is " +a3.scytherBackup);
 
-     // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
+     // inform player1 of attack from computer
+     document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Quick Attack!";
 
      //show attack image
      computerImg.squAtkImage2();
@@ -3851,38 +3805,38 @@ class computerMoves {
 
 
 
-     case (player1.charmanderMoves[0].charmanderFunction3of6 === true):
+     case (player1.scytherMoves[0].scytherFunction3of6 === true):
 
 
-     //squirtle attack move: Water Pulse
+     //scyther attack move: X-Scissor
      //confirm attack move for squirtle pokemon was activated
-     computer.squirtleMovesActivated[0].squirtleFunction3of6 = true;
+     computer.scytherMovesActivated[0].scytherFunction3of6 = true;
 
      //debugging here -- delete when neccessary
-     console.log("squirtleMoves Function3of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction3of6);
+     console.log("scytherMoves Function3of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction3of6);
 
-     //Tail Whip does -60 damage to charmander
-     //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-     a1.charmanderHealthBar.push(-60);
-     a1.charmanderBackup.push(-60);
+     //scyther does -60 damage to pikachu
+     //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+     a3.pikachuHealthBar.push(-60);
+     a3.pikachuBackup.push(-60);
 
 
-     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-     squirtleProgressBar.decreasePlayerHP();
+     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
+     scytherProgressBar.decreasePlayerHP();
 
      // This is the function that applies the filter to the arrays listed above. It also calls other functions
      array1.checkTheStatus();
 
      //debugging here------------------------------------------------------
 
-     console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+     console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
-     // get the status of health for player1 and computer pokemon
+     // get the status of health for player1
 
-     console.log("charmanderBackup array is " +a1.charmanderBackup);
+     console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-     // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
+     // inform player1 of attack from computer
+     document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2]  +" with X-Scissor!";
 
      //show attack image
      computerImg.squAtkImage3();
@@ -3902,38 +3856,38 @@ class computerMoves {
 
 
 
-       case (player1.charmanderMoves[0].charmanderFunction4of6 === true):
+       case (player1.scytherMoves[0].scytherFunction4of6 === true):
 
 
-       //squirtle attack move: tackle
+       //scyther attack move: Fury Cutter
        //confirm attack move for squirtle pokemon was activated
-       computer.squirtleMovesActivated[0].squirtleFunction4of6 = true;
+       computer.scytherMovesActivated[0].scytherFunction4of6 = true;
 
        //debugging here -- delete when neccessary
-       console.log("squirtleMoves Function4of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction4of6);
+       console.log("scytherMoves Function4of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction4of6);
 
-       //tackle does -10 damage to charmander
-       //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-       a1.charmanderHealthBar.push(-10);
-       a1.charmanderBackup.push(-10);
+       //Fury Cutter does -10 damage to pikachu
+       //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+       a3.pikachuHealthBar.push(-10);
+       a3.pikachuBackup.push(-10);
 
 
-       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-       squirtleProgressBar.decreasePlayerHP();
+       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
+       scytherProgressBar.decreasePlayerHP();
 
        // This is the function that applies the filter to the arrays listed above. It also calls other functions
        array1.checkTheStatus();
 
        //debugging here------------------------------------------------------
 
-       console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+       console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
-       // get the status of health for player1 and computer pokemon
+       // get the status of health for player1
 
-       console.log("charmanderBackup array is " +a1.charmanderBackup);
+       console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-       // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tackle!";
+       // inform player1 of attack from computer
+       document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Fury Cutter!";
 
        //show attack image
        computerImg.squAtkImage4();
@@ -3953,38 +3907,38 @@ class computerMoves {
 
 
 
-         case (player1.charmanderMoves[0].charmanderFunction5of6 === true):
+         case (player1.scytherMoves[0].scytherFunction5of6 === true):
 
 
-         //squirtle attack move: water gun
-         //confirm attack move for squirtle pokemon was activated
-         computer.squirtleMovesActivated[0].squirtleFunction5of6 = true;
+         //scyther attack move: Wing Attack
+         //confirm attack move for scyther pokemon was activated
+         computer.scytherMovesActivated[0].scytherFunction5of6 = true;
 
          //debugging here -- delete when neccessary
-         console.log("squirtleMoves Function5of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction5of6);
+         console.log("scytherMoves Function5of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction5of6);
 
-         //water gun does -30 damage to charmander
-         //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-         a1.charmanderHealthBar.push(-30);
-         a1.charmanderBackup.push(-30);
+         //Wing Attack does -30 damage to charmander
+         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+         a3.pikachuHealthBar.push(-30);
+         a3.pikachuBackup.push(-30);
 
 
-         //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-         squirtleProgressBar.decreasePlayerHP();
+         //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
+         scytherProgressBar.decreasePlayerHP();
 
          // This is the function that applies the filter to the arrays listed above. It also calls other functions
          array1.checkTheStatus();
 
          //debugging here------------------------------------------------------
 
-         console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+         console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
-         // get the status of health for player1 and computer pokemon
+         // get the status of health for player1
 
-         console.log("charmanderBackup array is " +a1.charmanderBackup);
+         console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-         // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
+         // inform player1 of attack from computer
+         document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Wing Attack!";
 
          //show attack image
          computerImg.squAtkImage5();
@@ -4006,35 +3960,35 @@ class computerMoves {
            case (player1.charmanderMoves[0].charmanderFunction6of6 === true):
 
 
-           //squirtle attack move: rest
-           //confirm attack move for squirtle pokemon was activated
-           computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
+           //scyther attack move: rest2
+           //confirm attack move for scyther pokemon was activated
+           computer.scytherMovesActivated[0].scytherFunction6of6 = true;
 
            //debugging here -- delete when neccessary
-           console.log("squirtleMoves Function6of6 was activated : " + computer.squirtleMovesActivated[0].squirtleFunction6of6);
+           console.log("scytherMoves Function6of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction6of6);
 
-           //rest recovers 30 HP to squirtle
-           //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-           a1.charmanderHealthBar.push(30);
-           a1.charmanderBackup.push(30);
+           //rest2 recovers 30 HP to scyther (its-self)
+           //reflect the changes to scytherHealthBar AND scytherBackup array as well.
+           a4.scytherHealthBar.push(30);
+           a4.scytherBackup.push(30);
 
 
-           //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-           squirtleProgressBar.decreasePlayerHP();
+           //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers scyther when pikachu attacks)
+           scytherProgressBar.decreasePlayerHP();
 
            // This is the function that applies the filter to the arrays listed above. It also calls other functions
            array1.checkTheStatus();
 
            //debugging here------------------------------------------------------
 
-           console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+           console.log("scytherHealthBar array is "+a4.scytherHealthBar);
 
-           // get the status of health for player1 and computer pokemon
+           // get the status of health for player1
 
-           console.log("charmanderBackup array is " +a1.charmanderBackup);
+           console.log("scytherBackup array is " +a4.scytherBackup);
 
-           // inform player1 of attack from computer  <-- try to create a function to make this code better -- make it more abstract so all pokemon can use this function
-           document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
+           // inform player1 of attack from computer
+           document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+  " used rest to recover!";
 
            //show attack image
            computerImg.squAtkImage5();
@@ -4051,7 +4005,7 @@ class computerMoves {
 
 
      default:
-       console.log("squirtleMoves default switch function was activated -- evaluate cases to fix error.");
+       console.log("scytherMoves default switch function was activated -- evaluate cases to fix error.(2)");
 
 
 
@@ -4495,7 +4449,7 @@ if(confirm.makeMove[0].player1Move === false){
 
     computer.squirtleMoves();
     computer.scytherMoves();
-    computer.onixMoves();
+  //  computer.onixMoves();
 
 
   },2000); // computer attacks after 2 secs
