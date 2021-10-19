@@ -1,18 +1,18 @@
 
 /*
 NOTE:
-Lastest update: (10/18/2021)
+Lastest update: (10/19/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
 x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
-x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 -- onixMoves on lines 4074 to 4404 -- finish editing those to make switch functionale for other pokemon
+x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 -- onixMoves on lines 4074 to 4404
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) troubleshoot progressbar for pikachu and blastoise and also edit checkTheStatus function on line 2438 ***************************************************************************************** 10/18/2021
+2) troubleshoot deadPokemonImage on line 538 and add other pokemon functions  ******************************************************************************************************************* 10/19/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -369,6 +369,10 @@ class referee {
 
       let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP9 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP9 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP9 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP9 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP9 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
       console.log("disableDeadPokemon was activated.");
 
@@ -376,7 +380,39 @@ class referee {
 
       if (charmanderHP10 === 0 && p1.deadPokemon[0] === "Charmander") {
 
-        // change font color to red to let player know that pokemon is no longer active and disable all pokemon functions
+        // change font color to red to let the player know that pokemon is no longer active and disable all pokemon functions
+
+        // same conditions for other player1 pokemon
+        if (pikachuHP9 === 0 && p1.deadPokemon[0] === "Pikachu") {
+
+
+          document.getElementById("Pikachu_sel").style.color = "#C91212";
+          document.getElementById("Pikachu_sel").removeEventListener("click", player1CH.pikPokeImage);
+          document.getElementById("attackA").removeEventListener("click", attackA);
+          document.getElementById("attackB").removeEventListener("click", attackB);
+          document.getElementById("attackC").removeEventListener("click", attackC);
+          document.getElementById("defenseA").removeEventListener("click", defenseA);
+          document.getElementById("defenseB").removeEventListener("click", defenseB);
+          document.getElementById("defenseC").removeEventListener("click", defenseC);
+
+        } //end of 2nd if statement
+
+        if (blastoiseHP9 === 0 && p1.deadPokemon[0] === "Blastoise") {
+
+
+          document.getElementById("Blastoise_sel").style.color = "#C91212";
+          document.getElementById("Blastoise_sel").removeEventListener("click", player1CH.blaPokeImage);
+          document.getElementById("attackA").removeEventListener("click", attackA);
+          document.getElementById("attackB").removeEventListener("click", attackB);
+          document.getElementById("attackC").removeEventListener("click", attackC);
+          document.getElementById("defenseA").removeEventListener("click", defenseA);
+          document.getElementById("defenseB").removeEventListener("click", defenseB);
+          document.getElementById("defenseC").removeEventListener("click", defenseC);
+
+        }// end of 3rd if statement
+
+
+        //below is the original if statment
 
 
         document.getElementById("Charmander_sel").style.color = "#C91212";
@@ -389,6 +425,58 @@ class referee {
         document.getElementById("defenseC").removeEventListener("click", defenseC);
 
       } else if (squirtleHP9 === 0 && p1.deadPokemon[0] === "Squirtle") {
+
+        //cross-out computer pokemon icon if conditions are valid.
+
+        //same condition for other computer icons
+        if (scytherHP9 === 0 && p1.deadPokemon[0] === "Scyther") {
+
+
+          // remove scyther icon
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("ScytherIcon").appendChild(elem);
+          document.getElementById("ScytherIcon").style.width = 34;
+          document.getElementById("ScytherIcon").style.height = 46;
+
+          // replace with new squirtle icon
+
+          document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHeadDead.png" </img>';
+          document.getElementById("ScytherIcon").style.width = 34;
+          document.getElementById("ScytherIcon").style.height = 46;
+
+          // load another computer pokemon
+          computerCH.loadOnixOnly(); // this pokemone has no attack function right now -- work on that later
+
+        }//end of 2nd statement
+
+        if (onixHP9 === 0 && p1.deadPokemon[0] === "Onix") {
+
+
+
+          // remove onix icon
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("OnixIcon").appendChild(elem);
+          document.getElementById("OnixIcon").style.width = 34;
+          document.getElementById("OnixIcon").style.height = 46;
+
+          // replace with new squirtle icon
+
+          document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHeadDead.png" </img>';
+          document.getElementById("OnixIcon").style.width = 34;
+          document.getElementById("OnixIcon").style.height = 46;
+
+          // load another computer pokemon
+          computerCH.loadOnixOnly(); // this pokemone has no attack function right now -- work on that later
+
+
+
+        }//end of 3rd statement
+
+        //below is the original if statement
 
         // remove squirtle icon
 
@@ -458,13 +546,32 @@ class referee {
       // variable declartions
       let charmanderHP7 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP7 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP8 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP8 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP8 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP8 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
       //load pokemon tombstone image based on certain conditions.
 
       if (charmanderHP7 === 0 && squirtleHP7 >= 5) {
 
-        //Inform player that pokemon is dead but let the game continue
-          document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please choose next pokemon.");
+          //Inform player that pokemon is dead but let the game continue
+
+          //same conditions for other player1 pokemon
+          if (pikachuHP8 === 0 && scytherHP8 >= 5) {
+            document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please choose next pokemon.");
+
+          }//end of 2nd if statement
+
+
+          if (blastoiseHP8  === 0 && onixHP8 >= 5) {
+            document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please choose next pokemon.");
+
+          }//end of 3rd if statement
+
+
+        //orginal if statement is below
+        document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please choose next pokemon.");
 
 
         // remove previous player1 Pokemon image
@@ -508,8 +615,23 @@ class referee {
       }else if (squirtleHP7 === 0 && charmanderHP7 >= 5) {
 
         //Inform player that pokemon is dead but let the game continue
-        document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select the next pokemon.");
 
+
+        //same conditions for other computer pokemon
+        if (scytherHP8 === 0 && pikachuHP8 >= 5) {
+          document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select the next pokemon.");
+
+        }//end of 2nd if statement
+
+
+        if (onixHP8  === 0 && blastoiseHP8 >= 5) {
+          document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select the next pokemon.");
+
+        }//end of 3rd if statement
+
+
+        //original if statement is below
+        document.getElementById("statusProgress").innerHTML=(p1.deadPokemon +" died. Please wait for computer to select the next pokemon.");
 
         // remove previous computer Pokemon image
 
@@ -559,14 +681,18 @@ class referee {
 }; // end of deadPokemonImage function
 
 
-    this.getHealth = function() {
+    this.isCharmanderDead = function() {
 
-      console.log("getHealth was started");
+      console.log("isCharmanderDead was started");
 
       // new variable declartions to avoid reference error
 
       let charmanderHP4 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP4 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP5 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP5 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP5 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP5 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
 
@@ -629,6 +755,153 @@ class referee {
 
 
 
+this.isPikachuDead = function() {
+
+  console.log("isPikachuDead was started");
+
+  // new variable declartions to avoid reference error
+
+  let charmanderHP4 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+  let squirtleHP4 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+  let pikachuHP6 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+  let scytherHP6 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+  let blastoiseHP6 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+  let onixHP6 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+
+
+
+
+    if (pikachuHP6 === 0 && scytherHP6 >= 5) {
+
+      // confirm dead pokemon
+      p1.deathValidator.pokemonDied = true;
+
+      //confirm that the pokemon can no longer be selected
+      player1CH.pokemonType[2].isSelected = false; // pikachu
+
+      //record data to deadPokemon array as well
+      p1.deadPokemon.push("Pikachu");
+
+      //debugging here. Delete when neccessary
+      console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+
+      //display player1 deadPokemon
+      p1.deadPokemonImage();
+
+      //make changes to pokemon indicator icon NOTE: only do this for player1
+      player1CH.pokemonIndicator();
+
+      // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit. UPDATE: fix this later as there should be no limit instead use filter
+
+      p1.deadPokemon.length = 6;
+
+
+    } else if (pikachuHP6 >= 5 && scytherHP6 === 0) {
+
+
+      // confirm dead pokemon
+      p1.deathValidator.pokemonDied = true;
+
+      //confirm that the pokemon can no longer be selected
+      computerCH.pokemonType[3].isSelected = false; // Scyther
+
+      // record data to deadPokemon array as well
+      p1.deadPokemon.push("Scyther");
+
+      //debugging here. Delete when neccessary
+      console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+
+      // display computer deadPokemon
+      p1.deadPokemonImage();
+
+      // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
+
+      p1.deadPokemon.length = 6;
+
+
+
+    } // end of if statements
+
+
+} // end of isPikachuDead function
+
+
+
+
+
+
+this.isBlastoiseDead = function() {
+
+  console.log("isBlastoiseDead was started");
+
+  // new variable declartions to avoid reference error
+
+  let charmanderHP4 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+  let squirtleHP4 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+  let pikachuHP7 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+  let scytherHP7 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+  let blastoiseHP7 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+  let onixHP7 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+
+
+
+    if (blastoiseHP7 === 0 && onixHP7 >= 5) {
+
+      // confirm dead pokemon
+      p1.deathValidator.pokemonDied = true;
+
+      //confirm that the pokemon can no longer be selected
+      player1CH.pokemonType[1].isSelected = false; // blastoise
+
+      //record data to deadPokemon array as well
+      p1.deadPokemon.push("Blastoise");
+
+      //debugging here. Delete when neccessary
+      console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+
+      //display player1 deadPokemon
+      p1.deadPokemonImage();
+
+      //make changes to pokemon indicator icon NOTE: only do this for player1
+      player1CH.pokemonIndicator();
+
+      // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit. UPDATE: fix this later as there should be no limit instead use filter
+
+      p1.deadPokemon.length = 6;
+
+
+    } else if (blastoiseHP7 >= 5 && onixHP7 === 0) {
+
+
+      // confirm dead pokemon
+      p1.deathValidator.pokemonDied = true;
+
+      //confirm that the pokemon can no longer be selected
+      computerCH.pokemonType[4].isSelected = false; // onix
+
+      // record data to deadPokemon array as well
+      p1.deadPokemon.push("Onix");
+
+      //debugging here. Delete when neccessary
+      console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+
+      // display computer deadPokemon
+      p1.deadPokemonImage();
+
+      // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
+
+      p1.deadPokemon.length = 6;
+
+
+
+    } // end of if statements
+
+
+} // end of isBlastoiseDead function
+
+
+
+
     this.isPokemonAlive = function () { // NOTE: function NOT called yet...
 
       if (JSON.stringify(player1CH.charmanderHealthBar != 0) ) {
@@ -674,8 +947,13 @@ class referee {
 
       let charmanderHP2 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP2 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP3 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP3 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP3 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP3 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
-              if (charmanderHP2 <= 40 ) {
+
+              if (charmanderHP2 <= 40 || pikachuHP3 <= 40 ||blastoiseHP3 <= 40) {
 
 
 
@@ -684,7 +962,7 @@ class referee {
              // update html progress bar --- see line on 232 for more details
                 console.log("insert code here if needed on this line ");
 
-        } else if (squirtleHP2 <= 40) {
+        } else if (squirtleHP2 <= 40|| scytherHP3 <= 40 || onixHP3 <= 40) {
 
 
 
@@ -713,38 +991,86 @@ class referee {
 
       let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP3 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP4 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP4 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP4 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP4 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
 
-          if (charmanderHP3 === 0 && squirtleHP3 >= 1 ){
+          if (charmanderHP3 === 0 && squirtleHP3 >= 1){
+
+
+          if (pikachuHP4 === 0 && scytherHP4 >= 1) {
+
+            console.log("debuggin--player1 pokemon is dead.");
+
+            document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
+
+            p1.isPikachuDead();
+
+          }//end of 2nd if statement
+
+          if (blastoiseHP4 === 0 && onixHP4 >= 1) {
+
+            console.log("debuggin--player1 pokemon is dead.");
+
+            document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
+
+            p1.isBlastoiseDead();
+
+          }//end of 3rd if statement
+
+
+
+          //original if statement is below
 
           console.log("debuggin--player1 pokemon is dead.");
 
           document.getElementById("statusProgress").innerHTML=("Your pokemon died. Pick another one to continue the battle.");
 
-          p1.getHealth();
+          p1.isCharmanderDead();
+
+
 
 
         } else if (charmanderHP3 >= 1 && squirtleHP3 === 0) {
 
+
+
+          if (pikachuHP4 >= 1 && scytherHP4 === 0) {
+
+            console.log("debuggin--player1 won the match");
+
+            document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart automatically (fix this later).");
+
+            p1.isPikachuDead();
+
+          }//end of 2nd if statement
+
+
+
+          if (blastoiseHP4 >= 1 && onixHP4 === 0) {
+
+            console.log("debuggin--player1 won the match");
+
+            document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart automatically (fix this later).");
+
+            p1.isBlastoiseDead();
+
+          }//end of 3rd if statement
+
+
+
+
+          //original if statement is below
           console.log("debuggin--player1 won the match");
 
-          document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart in 10 secs...");
+          document.getElementById("statusProgress").innerHTML=("Player1 won the match... Game will restart automatically (fix this later).");
 
-          p1.getHealth();
-
-          /* --- disabled the restart function to work on line 222
-          setTimeout (function(){
-
-            //reload page
-
-            window.location.reload();
+          p1.isCharmanderDead();
 
 
-
-          },10000); // reloads page after 10 secs
-
-          */// --- delete this tag as well
 
       } // end of if statements
 
@@ -896,12 +1222,12 @@ class changePokemon {
       //varible declartions
       let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let squirtleHP8 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-      let demopokemon = 1; // replace demopokemon with actual pokemon name -- work on this later
-      let demopokemon2 =2; // replace demopokemon with actual pokemon name -- work on this later
-      let demopokemon3 =3; // replace demopokemon with actual pokemon name -- work on this later
-      let demopokemon4 =4; // replace demopokemon with actual pokemon name -- work on this later
+      let pikachuHP10 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP10 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP10 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP10 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
-        if (charmanderHP8 >= 5 && squirtleHP8 >= 5) {
+        if (charmanderHP8 >= 5 && squirtleHP8 >= 5 || pikachuHP10 >= 5 && scytherHP10 >= 5 || blastoiseHP10 >= 5 && onixHP10 >= 5) {
 
           // show default icon if both pokemon are live
 
@@ -951,7 +1277,7 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
-        }else if (demopokemon === 0 && demopokemon2 >= 5) {
+        }else if (pikachuHP10 === 0 && scytherHP10 >= 5) {
 
           // remove previous icon
 
@@ -967,7 +1293,7 @@ class changePokemon {
           document.getElementById("PikachuIcon").style.width = 34;
           document.getElementById("PikachuIcon").style.height = 46;
 
-        }else if (demopokemon3 === 0 && demopokemon4 >= 0) {
+        }else if (blastoiseHP10 === 0 && onixHP10 >= 5) {
 
           // remove previous icon
 
@@ -1011,6 +1337,10 @@ class changePokemon {
 
           console.log("debuggingOperation successful : if statment was triggered.");
           console.log("----------------------------------------------------------");
+
+
+
+
 
 
 
@@ -1448,7 +1778,7 @@ this.loadSquirtleOnly = function () {
 
   setTimeout(function() {
 
-    let onixHP = a2.onixHealthBar.reduce(array2.PokemonHPReduced);
+    let onixHP = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
     //if Onix dies than squirtle is loaded up -- no attacks are programmed as of now
 
@@ -1734,12 +2064,19 @@ class objectofArrays {
   } // end of constructor class
 } // end of objectofArrays class
 
-a1 = new objectofArrays;
-a2 = new objectofArrays;
-a3 = new objectofArrays;
-a4 = new objectofArrays;
-a5 = new objectofArrays;
-a6 = new objectofArrays;
+a1 = new objectofArrays; //charmanderHealthBar
+a2 = new objectofArrays; //squirtleHealthBar
+a3 = new objectofArrays; //pikachuHealthBar
+a4 = new objectofArrays; //scytherHealthBar
+a5 = new objectofArrays; //blastoiseHealthBar
+a6 = new objectofArrays; //onixHealthBar
+a7 = new objectofArrays; //charmanderHpRecovered
+a8 = new objectofArrays; //squirtleHpRecovered
+a9 = new objectofArrays; //pikachuHpRecovered
+a10 = new objectofArrays; //scytherHpRecovered
+a11 = new objectofArrays; //blastoiseHpRecovered
+a12 = new objectofArrays; //onixHpRecovered
+
 
 
 
@@ -1863,7 +2200,7 @@ class progressBar {
 
 
       let hpDamage = 0;
-      let hpRecovered = a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
+      let hpRecovered = a8.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
       let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
@@ -1921,8 +2258,8 @@ class progressBar {
 
 
               let hpDamage5 = 0;
-              let hpRecovered6 = a4.onixHpRecovered.reduce(array2.PokemonRestoredReducer);
-              let onixHP2 = a3.onixHealthBar.reduce(array2.PokemonHPReduced);
+              let hpRecovered6 = a12.onixHpRecovered.reduce(array2.PokemonRestoredReducer);
+              let onixHP2 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
               let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -1983,8 +2320,8 @@ class progressBar {
 
 
                 let hpDamage6 = 0;
-                let hpRecovered7 = a6.scytherHpRecovered.reduce(array2.PokemonRestoredReducer);
-                let scytherHP2 = a5.scytherHealthBar.reduce(array2.PokemonHPReduced);
+                let hpRecovered7 = a10.scytherHpRecovered.reduce(array2.PokemonRestoredReducer);
+                let scytherHP2 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
                 let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -2042,7 +2379,7 @@ class progressBar {
 
 
       let hpDamage2 = 0;
-      let hpRecovered2 = a1.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
+      let hpRecovered2 = a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
       let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let player1LowHealthIndicator = document.querySelector('.player1HP');
 
@@ -2100,7 +2437,7 @@ class progressBar {
 
 
             let hpDamage3 = 0;
-            let hpRecovered3 = a4.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
+            let hpRecovered3 = a9.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
             let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
             let player1LowHealthIndicator = document.querySelector('.player1HP');
 
@@ -2164,7 +2501,7 @@ class progressBar {
 
 
             let hpDamage4 = 0;
-            let hpRecovered4 = a6.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
+            let hpRecovered4 = a11.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
             let blastoiseHP2 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
             let player1LowHealthIndicator = document.querySelector('.player1HP');
 
@@ -2222,7 +2559,7 @@ this.increaseComputerHP = function () {
 
   let hpDamage = 0;
   let speedReduced = 0;
-  let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a2.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
+  let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a8.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
   let computerSPD =  a1.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   // let computerSPD2,3,4 etc = other SpeedProgressBar -- that you can recycle the code and not have to re-create a new function
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
@@ -2296,7 +2633,7 @@ this.increasePlayerHP = function () {
 
   let hpDamage2 = 0;
   let speedReduced2 = 0;
-  let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced) + a1.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
+  let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced) + a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
   let player1SPD    = a1.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
   // let player1SPD2,3,4 etc.. = other SpeedProgressBar so that you can recycle the code and not have to re-create a new function.
   let player1LowHealthIndicator2 = document.querySelector('.player1HP');
@@ -2440,21 +2777,25 @@ class arrayFunctions {
       // varible declartions
 
       let charmanderHP = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let squirtleHP = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let pikachuHP = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let scytherHP = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let blastoiseHP = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let onixHP = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
-      // create a reduce function for charmanderHealthBar and squirtleHealthBar
-      console.log("charmanderHealthBar array was reduced to: " + charmanderHP);
-      console.log("squirtleHealthBar array was reduced to: "+ squirtleHP);
+      //This function will check the progressBar status and call another function if conditions are met
 
-      //create a logic based on the output for the reduce function and call other functions if conditions are true
-
-      if(charmanderHP >= 20 &&  charmanderHP <= 40 || squirtleHP >= 20 &&  squirtleHP <= 40){
+      if(charmanderHP >= 20 &&  charmanderHP <= 40 || squirtleHP >= 20 &&  squirtleHP <= 40 ||
+      pikachuHP >= 20 &&  pikachuHP <= 40 || scytherHP >= 20 &&  scytherHP <= 40  ||
+    blastoiseHP >= 20 &&  blastoiseHP <= 40 || onixHP >= 20 &&  onixHP <= 40){
 
           p1.informStatus();
 
 
-      }else if (charmanderHP >= 1 && squirtleHP >= 1 ) {
+      }else if (charmanderHP >= 1 && squirtleHP >= 1 ||
+      pikachuHP >= 1 && scytherHP >= 1 ||
+    blastoiseHP >= 1 && onixHP >= 1) {
 
         //debugging here -- delete when neccessary
         console.log("retreiverAndResolver function was commented out on this line : ");
@@ -2767,10 +3108,10 @@ class player1Moves {
        player1.charmanderMoves.charmanderFunction6of6 = true;
 
        //reflect the changes to the charmanderHpRecovered array only because charmanderHealthBarBackup will eventually have this data when the array is reduced.
-       a1.charmanderHpRecovered.push(45);
+       a7.charmanderHpRecovered.push(45);
 
        // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-       a1.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
+       a7.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
 
        //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
        charmanderProgressBar.increasePlayerHP();
@@ -2826,8 +3167,8 @@ class player1Moves {
 
            //reflect the changes to scytherHealthBar AND scytherBackup array as well.
            //thunderShockMove does -20 damage to scyther
-            a3.scytherHealthBar.push(-20);
-            a3.scytherBackup.push(-20);
+            a4.scytherHealthBar.push(-20);
+            a4.scytherBackup.push(-20);
 
           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
             pikachuProgressBar.decreaseComputerHP3();
@@ -2835,8 +3176,8 @@ class player1Moves {
 
 
            //debugging here -----------------------------------
-            console.log("scytherHealthBar array is " + a3.scytherHealthBar);
-            console.log("scytherBackup array is " + a3.scytherBackup);
+            console.log("scytherHealthBar array is " + a4.scytherHealthBar);
+            console.log("scytherBackup array is " + a4.scytherBackup);
 
 
              //attack image for pikachu
@@ -2868,15 +3209,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //Blaze does -10 damage to scyther
-         a3.scytherHealthBar.push(-10);
-         a3.scytherBackup.push(-10);
+         a4.scytherHealthBar.push(-10);
+         a4.scytherBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP3();
 
         //debugging here -----------------------------------
-         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
-         console.log("scytherBackup array is " + a3.scytherBackup);
+         console.log("scytherHealthBar array is " + a4.scytherHealthBar);
+         console.log("scytherBackup array is " + a4.scytherBackup);
 
          // show image
           player1Img.chrAtkImage2();
@@ -2907,15 +3248,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //thunderBolt does -45 damage to scyther
-         a3.scytherHealthBar.push(-45);
-         a3.scytherBackup.push(-45);
+         a4.scytherHealthBar.push(-45);
+         a4.scytherBackup.push(-45);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP3();
 
         //debugging here -----------------------------------
-         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
-         console.log("scytherBackup array is " + a3.scytherBackup);
+         console.log("scytherHealthBar array is " + a4.scytherHealthBar);
+         console.log("scytherBackup array is " + a4.scytherBackup);
 
          // show image
           player1Img.chrAtkImage3();
@@ -2948,15 +3289,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //growl2 does -10 damage to scyther
-         a3.scytherHealthBar.push(-10);
-         a3.scytherBackup.push(-10);
+         a4.scytherHealthBar.push(-10);
+         a4.scytherBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP3();
 
         //debugging here -----------------------------------
-         console.log("pikachuHealthBar array is " + a3.scytherHealthBar);
-         console.log("pikachuBackup array is " + a3.scytherBackup);
+         console.log("pikachuHealthBar array is " + a4.scytherHealthBar);
+         console.log("pikachuBackup array is " + a4.scytherBackup);
 
          // show image
           player1Img.chrAtkImage4();
@@ -2991,15 +3332,15 @@ class player1Moves {
 
         //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
         //headButt does -20 damage to scyther
-         a3.scytherHealthBar.push(-20);
-         a3.scytherBackup.push(-20);
+         a4.scytherHealthBar.push(-20);
+         a4.scytherBackup.push(-20);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP3();
 
         //debugging here -----------------------------------
-         console.log("scytherHealthBar array is " + a3.scytherHealthBar);
-         console.log("scytherBackup array is " + a3.scytherBackup);
+         console.log("scytherHealthBar array is " + a4.scytherHealthBar);
+         console.log("scytherBackup array is " + a4.a4.scytherBackup);
 
          // show image
           player1Img.chrAtkImage5();
@@ -3026,10 +3367,10 @@ class player1Moves {
        player1.pikachuMoves.pikachuFunction6of6 = true;
 
        //reflect the changes to the pikachuHpRecovered array only because pikachuHealthBarBackup will eventually have this data when the array is reduced.
-       a4.pikachuHpRecovered.push(45);
+       a9.pikachuHpRecovered.push(45);
 
        // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-       a1.pikSpeedProgressBar.push(-50); // Sets pikachu's speedbar to 50%
+       a9.pikSpeedProgressBar.push(-50); // Sets pikachu's speedbar to 50%
 
        //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
        pikachuProgressBar.increasePlayerHP();
@@ -3078,7 +3419,7 @@ class player1Moves {
 
 
 
-     // copy and edit 2of2 of blastoise
+
 
      this.aquaJetMove = function () {
 
@@ -3094,15 +3435,15 @@ class player1Moves {
 
            //reflect the changes to blastoiseHealthBar AND squirtleBackup array as well.
            //aquaJet does -20 damage to onix
-            a5.blastoiseHealthBar.push(-20);
-            a5.blastoiseBackup.push(-20);
+            a6.onixHealthBar.push(-20);
+            a6.onixBackup.push(-20);
 
           //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
             blastoiseProgressBar.decreaseComputerHP2();
 
            //debugging here -----------------------------------
-            console.log("blastoiseHealthBar array is " + a5.blastoiseHealthBar);
-            console.log("blastoiseBackup array is " + a5.blastoiseBackup);
+            console.log("onixHealthBar array is " + a6.onixHealthBar);
+            console.log("onixBackup array is " + a6.onixBackup);
 
             // show image
              player1Img.chrAtkImage1();
@@ -3133,15 +3474,15 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //Bubble does -10 damage to onix
-         a5.blastoiseHealthBar.push(-10);
-         a5.blastoiseBackup.push(-10);
+         a6.onixHealthBar.push(-10);
+         a6.onixBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("blastoiseHealthBar array is " + a5.blastoiseHealthBar);
-         console.log("blastoiseBackup array is " + a5.blastoiseBackup);
+         console.log("onixHealthBar array is " + a6.onixHealthBar);
+         console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
           player1Img.chrAtkImage2();
@@ -3173,15 +3514,15 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //hydroPump does -45 damage to onix
-         a5.blastoiseHealthBar.push(-45);
-         a5.blastoiseBackup.push(-45);
+         a6.onixHealthBar.push(-45);
+         a6.onixBackup.push(-45);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("blastoiseHealthBar array is " + a5.blastoiseHealthBar);
-         console.log("blastoiseBackup array is " + a5.blastoiseBackup);
+         console.log("onixHealthBar array is " + a6.onixHealthBar);
+         console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
           player1Img.chrAtkImage3();
@@ -3214,15 +3555,15 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //Protect does -10 damage to onix
-         a5.blastoiseHealthBar.push(-10);
-         a5.blastoiseBackup.push(-10);
+         a6.onixHealthBar.push(-10);
+         a6.onixBackup.push(-10);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("blastoiseHealthBar array is " + a5.blastoiseHealthBar);
-         console.log("blastoiseBackup array is " + a5.blastoiseBackup);
+         console.log("onixHealthBar array is " + a6.onixHealthBar);
+         console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
           player1Img.chrAtkImage4();
@@ -3257,15 +3598,15 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //headButt2 does -20 damage to onix
-         a5.blastoiseHealthBar.push(-20);
-         a5.blastoiseBackup.push(-20);
+         a6.onixHealthBar.push(-20);
+         a6.onixBackup.push(-20);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
 
         //debugging here -----------------------------------
-         console.log("blastoiseHealthBar array is " + a5.blastoiseHealthBar);
-         console.log("blastoiseBackup array is " + a5.blastoiseBackup);
+         console.log("onixHealthBar array is " + a6.onixHealthBar);
+         console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
           player1Img.chrAtkImage5();
@@ -3292,10 +3633,10 @@ class player1Moves {
        player1.blastoiseMoves.blastoiseFunction6of6 = true;
 
        //reflect the changes to the blastoiseHpRecovered array only because blastoiseHealthBarBackup will eventually have this data when the array is reduced.
-       a6.blastoiseHpRecovered.push(45);
+       a11.blastoiseHpRecovered.push(45);
 
        // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-       a6.blaSpeedProgressBar.push(-50); // Sets blastoises speedbar to 50%
+       a11.blaSpeedProgressBar.push(-50); // Sets blastoises speedbar to 50%
 
        //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
        blastoiseProgressBar.increasePlayerHP();
@@ -3721,12 +4062,12 @@ class computerMoves {
       console.log("scytherMoves Function1of6 is : " + computer.scytherMovesActivated[0].scytherFunction1of6);
 
       //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
-      a3.pikachuHealthBar.push(-20);
-      a3.pikachuBackup.push(-20);
+      a3.pikachuHealthBar.push(-5);
+      a3.pikachuBackup.push(-5);
 
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-      scytherProgressBar.decreasePlayerHP();
+      scytherProgressBar.decreasePlayerHP2();
 
       // This is the function that applies the filter to the arrays listed above. It also calls other functions
       array1.checkTheStatus();
@@ -3774,18 +4115,18 @@ class computerMoves {
 
 
      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-     scytherProgressBar.decreasePlayerHP();
+     scytherProgressBar.decreasePlayerHP2();
 
      // This is the function that applies the filter to the arrays listed above. It also calls other functions
      array1.checkTheStatus();
 
      //debugging here------------------------------------------------------
 
-     console.log("pikachuHealthBar array is "+a3.charmanderHealthBar);
+     console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
      // get the status of health for player1
 
-     console.log("pikachuBackup array is " +a3.scytherBackup);
+     console.log("pikachuBackup array is " +a3.pikachuBackup);
 
      // inform player1 of attack from computer
      document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Quick Attack!";
@@ -3823,7 +4164,7 @@ class computerMoves {
 
 
      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-     scytherProgressBar.decreasePlayerHP();
+     scytherProgressBar.decreasePlayerHP2();
 
      // This is the function that applies the filter to the arrays listed above. It also calls other functions
      array1.checkTheStatus();
@@ -3874,7 +4215,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP();
+       scytherProgressBar.decreasePlayerHP2();
 
        // This is the function that applies the filter to the arrays listed above. It also calls other functions
        array1.checkTheStatus();
@@ -3925,7 +4266,7 @@ class computerMoves {
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-         scytherProgressBar.decreasePlayerHP();
+         scytherProgressBar.decreasePlayerHP2();
 
          // This is the function that applies the filter to the arrays listed above. It also calls other functions
          array1.checkTheStatus();
@@ -3969,13 +4310,13 @@ class computerMoves {
            console.log("scytherMoves Function6of6 was activated : " + computer.scytherMovesActivated[0].scytherFunction6of6);
 
            //rest2 recovers 30 HP to scyther (its-self)
-           //reflect the changes to scytherHealthBar AND scytherBackup array as well.
-           a4.scytherHealthBar.push(30);
-           a4.scytherBackup.push(30);
+           //reflect the changes to scytherHealthBar AND scySpeedProgressBar array as well.
+           a10.scytherHpRecovered.push(30);
+           a10.scySpeedProgressBar.push(-50);
 
 
            //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers scyther when pikachu attacks)
-           scytherProgressBar.decreasePlayerHP();
+           scytherProgressBar.decreasePlayerHP2();
 
            // This is the function that applies the filter to the arrays listed above. It also calls other functions
            array1.checkTheStatus();
@@ -4048,12 +4389,12 @@ class computerMoves {
          console.log("onixMoves Function1of6 is : " + computer.onixMovesActivated[0].onixFunction1of6);
 
          //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
-         a5.blastoiseHealthBar.push(-20);
-         a5.blastoiseBackup.push(-20);
+         a5.blastoiseHealthBar.push(-5);
+         a5.blastoiseBackup.push(-5);
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-         onixProgressBar.decreasePlayerHP();
+         onixProgressBar.decreasePlayerHP3();
 
          // This is the function that applies the filter to the arrays listed above. It also calls other functions
          array1.checkTheStatus();
@@ -4101,7 +4442,7 @@ class computerMoves {
 
 
         //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-        onixProgressBar.decreasePlayerHP();
+        onixProgressBar.decreasePlayerHP3();
 
         // This is the function that applies the filter to the arrays listed above. It also calls other functions
         array1.checkTheStatus();
@@ -4150,7 +4491,7 @@ class computerMoves {
 
 
         //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-        onixProgressBar.decreasePlayerHP();
+        onixProgressBar.decreasePlayerHP3();
 
         // This is the function that applies the filter to the arrays listed above. It also calls other functions
         array1.checkTheStatus();
@@ -4201,7 +4542,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP();
+          onixProgressBar.decreasePlayerHP3();
 
           // This is the function that applies the filter to the arrays listed above. It also calls other functions
           array1.checkTheStatus();
@@ -4252,7 +4593,7 @@ class computerMoves {
 
 
             //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-            onixProgressBar.decreasePlayerHP();
+            onixProgressBar.decreasePlayerHP3();
 
             // This is the function that applies the filter to the arrays listed above. It also calls other functions
             array1.checkTheStatus();
@@ -4297,26 +4638,26 @@ class computerMoves {
 
               //rest recovers 30 HP to onix
               //reflect the changes to onixHealthBar AND onixBackup array as well.
-              a5.onixHealthBar.push(30);
-              a5.onixBackup.push(30);
+              a12.onixHealthBar.push(30);
+              a12.onixBackup.push(30);
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix recovers health when blastoise attacks)
-              onixProgressBar.decreasePlayerHP();
+              onixProgressBar.decreasePlayerHP3();
 
               // This is the function that applies the filter to the arrays listed above. It also calls other functions
               array1.checkTheStatus();
 
               //debugging here------------------------------------------------------
 
-              console.log("onixHealthBar array is "+a5.onixHealthBar);
+              console.log("onixHealthBar array is "+a6.onixHealthBar);
 
               // get the status of health for player1 and computer pokemon
 
-              console.log("onixBackup array is " +a5.onixBackup);
+              console.log("onixBackup array is " +a6.onixBackup);
 
               // inform player1 of attack from computer
-              document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " rested."
+              document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " used rest to recover!"
 
               //show attack image
               computerImg.squAtkImage5();
