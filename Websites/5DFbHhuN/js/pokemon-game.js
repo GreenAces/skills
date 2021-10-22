@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (10/21/2021)
+Lastest update: (10/22/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) troubleshoot defaultHPSetting on line 2272  ************************************************************************************************************************************************* 10/21/2021
+2) troubleshoot defaultHPSetting on line 2272 + squirtleMoves + loadPikachu functions and make switching pokemon possible by loading the correct array for each pokemon the player selects  ***** 10/22/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -1936,8 +1936,8 @@ this.loadSquirtleOnly = function () {
 
         setTimeout(function() {
 
-        //This function restores the default settings of the progress for player1 and computer
-        defaultProgressBar.newHPSetting();
+        //This function resets the defaultHP color settings of the progress for player1 and computer
+        defaultProgressBar.resetHpColorSetting();
 
       },1000); // 1 sec wait time for loading new progressBar for Scyther
 
@@ -2013,8 +2013,8 @@ this.loadOnixOnly = function () {
 
         setTimeout(function() {
 
-        //This function restores the default settings of the progress for player1 and computer
-        defaultProgressBar.newHPSetting();
+        //This function resets the defaultHP color settings of the progress for player1 and computer
+        defaultProgressBar.resetHpColorSetting();
 
       },3000); // 3 sec wait time for loading new progressBar for Scyther
 
@@ -2093,8 +2093,8 @@ this.loadScytherOnly = function () {
 
         setTimeout(function() {
 
-        //This function restores the default settings of the progress for player1 and computer
-        defaultProgressBar.newHPSetting();
+        //This function resets the defaultHP color settings of the progress for player1 and computer
+        defaultProgressBar.resetHpColorSetting();
 
       },1000); // 1 sec wait time for loading new progressBar for Scyther
 
@@ -2271,8 +2271,9 @@ class progressBar {
 
     this.defaultHPSetting = function () {
 
-      let score3 = a1.player1Score.reduce(array1.PokemonHPReduced);
-      let score4 = a2.computerScore.reduce(array2.PokemonHPReduced);
+      //default settings for array when no pokemon battle occur
+
+      //varible declartions
 
 
       let player1DefaultHP = 100;
@@ -2287,7 +2288,7 @@ class progressBar {
       let blastoiseHP12 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
       let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
-      //default settings for array when no pokemon battle occur
+
       if (charmanderHP6 === 100 || squirtleHP6 === 100) {
 
 
@@ -2313,46 +2314,73 @@ class progressBar {
         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
 
-      //any changes to array implies a pokemon battle occured and therefore array needs to be preserved.
-      }else if (charmanderHP6 < 100 || squirtleHP6 < 100) {
 
+    }// end of if statements
 
-        document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
-        document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-
-      }else if (pikachuHP12 < 100 || scytherHP12 < 100) {
-
-
-        document.querySelector(".player1HP").style.width = pikachuHP12 +   "%";
-        document.querySelector(".cpuHP").style.width = scytherHP12 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-
-
-      }else if (blastoiseHP12 < 100 || onixHP12 < 100) {
-
-
-        document.querySelector(".player1HP").style.width = blastoiseHP12 +   "%";
-        document.querySelector(".cpuHP").style.width = onixHP12 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-
-
-      }//end of multiple if statements
+                  }// end of defaultHPSetting
 
 
 
+         this.perserveHpSetting = function () {
+
+          //any changes to array implies a pokemon battle occured and therefore the array needs to be preserved before switching pokemon.
+
+         // variable declartions
+
+         let score3 = a1.player1Score.reduce(array1.PokemonHPReduced);
+         let score4 = a2.computerScore.reduce(array2.PokemonHPReduced);
+
+         let player1DefaultHP = 100;
+         let computerDefaultHP = 100;
+         let player1DefaultSpeed = 100;
+         let computerDefaultSpeed = 100;
+         let player1LowHealthIndicator2 = document.querySelector('.player1HP');
+         let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
+
+         let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+         let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+         let pikachuHP13 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+         let scytherHP13 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+         let blastoiseHP13 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+         let onixHP13 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
+         if (charmanderHP6 < 100 || squirtleHP6 < 100) {
 
 
-    }// end of defaultHPSetting
+         document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
+         document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
+         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
 
-      this.newHPSetting = function () {
+         }else if (pikachuHP12 < 100 || scytherHP12 < 100) {
+
+
+         document.querySelector(".player1HP").style.width = pikachuHP12 +   "%";
+         document.querySelector(".cpuHP").style.width = scytherHP12 +   "%";
+         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+
+         }else if (blastoiseHP12 < 100 || onixHP12 < 100) {
+
+
+         document.querySelector(".player1HP").style.width = blastoiseHP12 +   "%";
+         document.querySelector(".cpuHP").style.width = onixHP12 +   "%";
+         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+
+          }//end of if statements
+
+                  }//end of perserveHpSetting function
+
+
+      this.resetHpColorSetting = function () {
 
       //restores the color of the pokemon progressbar from red to blue
+
+      //varible declartions
 
       let player1DefaultHP = 100;
       let computerDefaultHP = 100;
@@ -2384,9 +2412,9 @@ class progressBar {
 
       }// end of if statements
 
+          }//end resetHpColorSetting function
 
 
-    }// end of newHPSetting
 
     this.decreaseComputerHP = function () {
 
@@ -3926,6 +3954,18 @@ class computerMoves {
 
   case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
+  if (player1CH.pokemonType[0].isSelected === true && player1CH.pokemonType[2].isSelected === true) {
+
+    player1.charmanderMoves[0].charmanderFunction1of6 = false;
+    computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+
+  } else if (player1CH.pokemonType[0].isSelected === true && player1CH.pokemonType[1].isSelected === true) {
+
+    player1.charmanderMoves[0].charmanderFunction1of6 = false;
+    computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+
+  }//end if else if statements
+
     //squirtle attack move: Bubble Beam
    //confirm attack move for squirtle pokemon was activated
    computer.squirtleMovesActivated[0].squirtleFunction1of6 = true;
@@ -4966,16 +5006,15 @@ document.getElementById("restartYES").addEventListener("click", refreshPage);
 function attackA() {
 
 console.log(confirm.makeMove[0]);
-player1.aquaJetMove();
-player1.thunderShockMove();
-player1.fireBlasterMove();
 confirm.enableMoves();
 confirm.disableMoves();
 player1CH.debuggingOperation();
 
 
 
-if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true ){
+if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true ){ // charmander
+
+  player1.fireBlasterMove();
 
   setTimeout (function(){
 
@@ -4986,8 +5025,9 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
   },2000); // computer attacks after 2 secs
 
-}else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) {
+}else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
+  player1.aquaJetMove();
 
   setTimeout (function(){
 
@@ -5000,7 +5040,9 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
 
 
-}else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) {
+}else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
+
+  player1.thunderShockMove();
 
   setTimeout (function(){
 
@@ -5269,41 +5311,57 @@ console.log("loadCharmander default switch was activated on this line: ");
 
 function loadPikachu () {
 
-  //pikachu + scyther battle
+  //pikachu + scyther battle starts only when previous player1 pokemon functions are disabled
+  //if charmander and blastoise is selected then the cases will disable their functions
+
   player1CH.pikPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true) {
 
 
-    switch(pikachuHP11 < 0 || pikachuHP11 >= 0) {
+    switch(player1CH.pokemonType[0].isSelected === true && player1CH.pokemonType[2].isSelected === true) {
 
 
-case (pikachuHP11 === 0):
+case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
-hpDamage7 = pikachuHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
+player1.charmanderMoves[0].charmanderFunction1of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+player1CH.pikPokeImage();
 break;
 
-case (pikachuHP11 > 0 && pikachuHP11 <= 20):
+case (player1.charmanderMoves[0].charmanderFunction2of6 === true):
 
-hpDamage7 = pikachuHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
+player1.charmanderMoves[0].charmanderFunction2of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction2of6 = false;
+player1CH.pikPokeImage();
 break;
 
-case (pikachuHP11 > 20 && pikachuHP11 <= 40):
+case (player1.charmanderMoves[0].charmanderFunction3of6 === true):
 
-hpDamage7 = pikachuHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
+player1.charmanderMoves[0].charmanderFunction3of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction3of6 = false;
+player1CH.pikPokeImage();
 break;
 
-case (pikachuHP11 > 40 && pikachuHP11 <= 100):
+case (player1.charmanderMoves[0].charmanderFunction4of6 === true):
 
-hpDamage7 = pikachuHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#A6EDED"; //blue
+player1.charmanderMoves[0].charmanderFunction4of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction4of6 = false;
+player1CH.pikPokeImage();
+break;
+
+case (player1.charmanderMoves[0].charmanderFunction5of6 === true):
+
+player1.charmanderMoves[0].charmanderFunction5of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction5of6 = false;
+player1CH.pikPokeImage();
+break;
+
+case (player1.charmanderMoves[0].charmanderFunction6of6 === true):
+
+player1.charmanderMoves[0].charmanderFunction6of6 = false;
+computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
+player1CH.pikPokeImage();
 break;
 
 default:
