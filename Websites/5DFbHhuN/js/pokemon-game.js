@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (11/01/2021)
+Lastest update: (11/04/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) troubleshoot defaultHPSetting on line 2272 + squirtleMoves + loadPikachu functions and make switching pokemon possible by loading the correct array for each pokemon the player selects  ***** 10/22/2021
+2) troubleshoot defaultHPSetting on line 2272 + squirtleMoves + loadPikachu functions and make switching pokemon possible by loading the correct array for each pokemon the player selects  ***** 11/04/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -2037,7 +2037,8 @@ class changePokemon {
 
 
 
-       }//end of multiple if statements
+
+      }//end of multiple else if statements
 
 
 
@@ -4099,17 +4100,7 @@ class computerMoves {
 
   case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
-  if (player1CH.pokemonType[0].isSelected === true && player1CH.pokemonType[2].isSelected === true) {
 
-    player1.charmanderMoves[0].charmanderFunction1of6 = false;
-    computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-
-  } else if (player1CH.pokemonType[0].isSelected === true && player1CH.pokemonType[1].isSelected === true) {
-
-    player1.charmanderMoves[0].charmanderFunction1of6 = false;
-    computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-
-  }//end if else if statements
 
     //squirtle attack move: Bubble Beam
    //confirm attack move for squirtle pokemon was activated
@@ -5469,10 +5460,13 @@ function loadPikachu () {
 
 case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
+console.log("squirtleFunction1of6 and charmanderFunction1of6 was turned off.");
+console.log("switching from charmander to pikachu is acknowledged -- add more code here.");
 player1.charmanderMoves[0].charmanderFunction1of6 = false;
 computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-confirm.makeMove[0].player1Move = false;
-console.log("squirtleFunction1of6 was turned off.");
+
+//this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
+scytherProgressBar.decreasePlayerHP2();
 player1CH.pikPokeImage();
 break;
 
