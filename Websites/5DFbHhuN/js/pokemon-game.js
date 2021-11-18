@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (11/16/2021)
+Lastest update: (11/18/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) if cycleNumber is 1 or greater then no changes will be made to pokemon progressbar + troubleshoot why charmander is taking damage when switching from charmander to pikachu ****************** 11/16/2021
+2) continue troubleshooting delayedAttackedNumber on line 4170 + troubleshoot why charmander is taking damage when switching from charmander to pikachu ****************** 11/18/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -367,6 +367,7 @@ class referee {
     this.deadPokemonBackup = []; // exact duplicate of deadPokemon array but with a size limit of 6 indexes
     this.deathValidator = {pokemonDied:false};
     this.regularSettings = true; //default setting
+    this.delayAttackCounter = 0; //delayAttackCounter data gets pushed to delayAttackArray
     this.disableDeadPokemon = function () {
 
       let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
@@ -2346,6 +2347,7 @@ class objectofArrays {
     this.pikSpeedProgressBar =  [100];
     this.player1Score =         [0];
     this.computerScore =        [0];
+    this.delayAttackArray =     [0];
 
 
 
@@ -3315,7 +3317,6 @@ class player1Moves {
 
           if(player1CH.pokemonType[0].isSelected === true) {
 
-
             //confirm attack move for pokemon was clicked
             player1.charmanderMoves[0].charmanderFunction1of6 = true;
 
@@ -4155,20 +4156,50 @@ class computerMoves {
 
 
 
-// original squirtle moves -- do note modify lines 3425 to 3739
+    //switch that controls how squirtle attacks charmander
 
    this.squirtleMoves = function () {
 
+     //varible declartions
+
+     let delayedAttackedNumber = a1.delayAttackArray.reduce(array1.PokemonHPReduced);
+
+
+     //solution to computer attacking player1 too early at the beginning of the battle
+
+     if(p1.delayAttackCounter === 0 || p1.delayAttackCounter === 1) {
+
+       p1.delayAttackCounter ++;
+
+
+       //debugging here -- delete when neccessary
+       console.log("squirtleMoves delayAttackCounter is: " + p1.delayAttackCounter);
+
+
+
+     }else if (p1.delayAttackCounter === 2) {
+
+
+       a1.delayAttackArray.push(2);
+
+       //debugging here -- delete when neccessary
+       console.log("squirtleMoves delayAttackArray is: "  +  delayedAttackedNumber);
+
+     }//end of if statements
+
+
      //SquirtleMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-     switch  (player1.charmanderMoves[0].charmanderFunction1of6 === true
-        || player1.charmanderMoves[0].charmanderFunction2of6 === true || player1.charmanderMoves[0].charmanderFunction3of6 === true
-        || player1.charmanderMoves[0].charmanderFunction4of6 === true || player1.charmanderMoves[0].charmanderFunction5of6 === true
-        || player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+     switch  (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
+              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
+              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
+              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
+              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction5of6 === true ||
+              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-  case (player1.charmanderMoves[0].charmanderFunction1of6 === true):
+  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
-
+  console.log("squirtleMoves delayAttackArray(2) is: "  +  delayedAttackedNumber);
 
     //squirtle attack move: Bubble Beam
    //disable attack move for squirtle pokemon and charmander
@@ -4232,7 +4263,7 @@ class computerMoves {
 
 
 
-  case (player1.charmanderMoves[0].charmanderFunction2of6 === true):
+  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction2of6 === true):
 
   //squirtle attack move: Tail Whip
   //disable attack move for squirtle pokemon and charmander
@@ -4296,7 +4327,7 @@ class computerMoves {
 
 
 
-  case (player1.charmanderMoves[0].charmanderFunction3of6 === true):
+  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction3of6 === true):
 
 
   //squirtle attack move: Water Pulse
@@ -4363,7 +4394,7 @@ class computerMoves {
 
 
 
-    case (player1.charmanderMoves[0].charmanderFunction4of6 === true):
+    case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction4of6 === true):
 
 
     //squirtle attack move: tackle
@@ -4430,7 +4461,7 @@ class computerMoves {
 
 
 
-      case (player1.charmanderMoves[0].charmanderFunction5of6 === true):
+      case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction5of6 === true):
 
 
       //squirtle attack move: water gun
@@ -4496,7 +4527,7 @@ class computerMoves {
 
 
 
-        case (player1.charmanderMoves[0].charmanderFunction6of6 === true):
+        case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction6of6 === true):
 
 
         //squirtle attack move: rest
