@@ -366,6 +366,7 @@ class referee {
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details. It has a size limit of 1 index only
     this.deadPokemonBackup = []; // exact duplicate of deadPokemon array but with a size limit of 6 indexes
     this.deathValidator = {pokemonDied:false};
+    this.regularSettings = true; //default setting
     this.disableDeadPokemon = function () {
 
       let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
@@ -1628,8 +1629,8 @@ class changePokemon {
       //load pokemon sound
       //computerSD.squirtleVO.play();
 
-      //This function restores the default settings of the progress for player1 and computer
-        //defaultProgressBar.defaultHPSetting();
+
+
 
 
       //Display and save computer pokemon name to savedPokemonName2
@@ -1821,8 +1822,8 @@ class changePokemon {
              //load pokemon sound
              computerSD.onixVO.play();
 
-             //This function restores the default settings of the progress for player1 and computer
-              //defaultProgressBar.defaultHPSetting();
+
+
 
              //Display and save computer pokemon name to savedPokemonName2 on line 445
              document.getElementById("cpuPokemonName").innerHTML = "Onix";
@@ -2010,8 +2011,8 @@ class changePokemon {
             //load pokemon sound
             computerSD.scytherVO.play();
 
-            //This function restores the default settings of the progress for player1 and computer
-            //defaultProgressBar.defaultHPSetting();
+
+
 
             //Display and save computer pokemon name to savedPokemonName2 on line 445
             document.getElementById("cpuPokemonName").innerHTML = "Scyther";
@@ -2345,7 +2346,7 @@ class objectofArrays {
     this.pikSpeedProgressBar =  [100];
     this.player1Score =         [0];
     this.computerScore =        [0];
-    this.cycleNumber =          [0];
+
 
 
   } // end of constructor class
@@ -3314,6 +3315,7 @@ class player1Moves {
 
           if(player1CH.pokemonType[0].isSelected === true) {
 
+
             //confirm attack move for pokemon was clicked
             player1.charmanderMoves[0].charmanderFunction1of6 = true;
 
@@ -4196,13 +4198,13 @@ class computerMoves {
 
    console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-   if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+   if (p1.regularSettings === false) {
 
      //remove previous comment
      document.getElementById("statusProgress2").innerHTML =  "";
 
      //default setting
-   }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+   }else if (p1.regularSettings === true) {
 
      //inform player1 of attack from computer
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
@@ -4260,13 +4262,13 @@ class computerMoves {
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+  if (p1.regularSettings === false) {
 
     //remove previous comment
     document.getElementById("statusProgress2").innerHTML =  "";
 
     //default setting
-  }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+  }else if (p1.regularSettings === true) {
 
     //inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
@@ -4325,13 +4327,13 @@ class computerMoves {
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+  if (p1.regularSettings === false) {
 
     //remove previous comment
     document.getElementById("statusProgress2").innerHTML =  "";
 
     //default setting
-  }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+  }else if (p1.regularSettings === true) {
 
     //inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
@@ -4392,13 +4394,13 @@ class computerMoves {
 
     console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-    if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+    if (p1.regularSettings === false) {
 
       //remove previous comment
       document.getElementById("statusProgress2").innerHTML =  "";
 
       //default setting
-    }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+    }else if (p1.regularSettings === true) {
 
       //inform player1 of attack from computer
       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tackle!";
@@ -4459,13 +4461,13 @@ class computerMoves {
 
       console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-      if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+      if (p1.regularSettings === false) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML =  "";
 
         //default setting
-      }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+      }else if (p1.regularSettings === true) {
 
         //inform player1 of attack from computer
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
@@ -4525,13 +4527,13 @@ class computerMoves {
 
         console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-        if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+        if (p1.regularSettings === false) {
 
           //remove previous comment
           document.getElementById("statusProgress2").innerHTML =  "";
 
           //default setting
-        }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+        }else if (p1.regularSettings === true) {
 
           //inform player1 of attack from computer
           document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
@@ -4614,13 +4616,13 @@ class computerMoves {
 
       console.log("pikachuBackup array is " +a3.pikachuHealthBar);
 
-      if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+      if (p1.regularSettings === false) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML =  "";
 
         //default setting
-      }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+      }else if (p1.regularSettings === true) {
 
         //inform player1 of attack from computer
         document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
@@ -4677,13 +4679,13 @@ class computerMoves {
 
      console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-     if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+     if (p1.regularSettings === false) {
 
        //remove previous comment
        document.getElementById("statusProgress2").innerHTML =  "";
 
        //default setting
-     }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+     }else if (p1.regularSettings === true) {
 
        //inform player1 of attack from computer
        document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" Quick Attack!";
@@ -4741,13 +4743,13 @@ class computerMoves {
 
      console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-     if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+     if (p1.regularSettings === false) {
 
        //remove previous comment
        document.getElementById("statusProgress2").innerHTML =  "";
 
        //default setting
-     }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+     }else if (p1.regularSettings === true) {
 
        //inform player1 of attack from computer
        document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2]  +" with X-Scissor!";
@@ -4807,13 +4809,13 @@ class computerMoves {
 
        console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-       if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+       if (p1.regularSettings === false) {
 
          //remove previous comment
          document.getElementById("statusProgress2").innerHTML =  "";
 
          //default setting
-       }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+       }else if (p1.regularSettings === true) {
 
          //inform player1 of attack from computer
          document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Fury Cutter!";
@@ -4873,13 +4875,13 @@ class computerMoves {
 
          console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-         if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+         if (p1.regularSettings === false) {
 
            //remove previous comment
            document.getElementById("statusProgress2").innerHTML =  "";
 
            //default setting
-         }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+         }else if (p1.regularSettings === true) {
 
            //inform player1 of attack from computer
            document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Wing Attack!";
@@ -4938,13 +4940,13 @@ class computerMoves {
 
            console.log("scytherBackup array is " +a4.scytherBackup);
 
-           if (a1.cycleNumber.reduce(array1.PokemonHPReduced) >= 1) {
+           if (p1.regularSettings === false) {
 
              //remove previous comment
              document.getElementById("statusProgress2").innerHTML =  "";
 
              //default setting
-           }else if (a1.cycleNumber.reduce(array1.PokemonHPReduced) === 0) {
+           }else if (p1.regularSettings === true) {
 
              //inform player1 of attack from computer
              document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+  " used rest to recover!";
@@ -5647,66 +5649,82 @@ function defenseC() {
 
 //varible declartions
 
-let cycle = 0;
-let nextPokemon = 0;
+let pokemonChanges = 0;
+let noChanges = p1.regularSettings === true;
 let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-let loadCharmanderBackup = a1.charmanderBackup.reduce(array1.PokemonHPReduced);
 let squirtleHP11 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-let loadPikachuBackup = a3.pikachuBackup.reduce(array1.PokemonHPReduced);
 let scytherHP11 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
 let blastoiseHP11 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-let loadBlastoiseBackup = a5.blastoiseBackup.reduce(array1.PokemonHPReduced);
 let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-let player1LowHealthIndicator3 = document.querySelector('.player1HP');
-let makeChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
-let noChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
-
-
 
 
 
 
 function loadCharmander () {
 
-  // variable declartions
-
-let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-let squirtleHP3 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-let pikachuHP4 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-let scytherHP4 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
-let blastoiseHP4 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-let onixHP4 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-
-
-  //make changes to pokemon progress bar
-  defaultProgressBar.defaultHPSetting();
+  //change boolean state
+  confirm.makeMove[0].computerMove = false;
+  confirm.makeMove[0].player1Move = true;
 
   //charmander + squirtle battle
   player1CH.chrPokeImage();
 
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && pokemonChanges >= 0) {
 
-  cycle++;
+    //disable non-selected pokemon first
+    player1CH.pokemonType[2].isSelected = false; // pikachu
+    player1CH.pokemonType[1].isSelected = false; // blastoise
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && cycle >= 2 ) {
+    //disable non-selected pokemon functions
+    player1.pikachuMoves[0].pikachuFunction1of6 = false;
+    player1.pikachuMoves[0].pikachuFunction2of6 = false;
+    player1.pikachuMoves[0].pikachuFunction3of6 = false;
+    player1.pikachuMoves[0].pikachuFunction4of6 = false;
+    player1.pikachuMoves[0].pikachuFunction5of6 = false;
+    player1.pikachuMoves[0].pikachuFunction6of6 = false;
 
-    a1.cycleNumber.push(1);
-    console.log("Charmander cycle " + a1.cycleNumber.reduce(array1.PokemonHPReduced) + " has started.");
-    console.log("Charmander cycle number: "+a1.cycleNumber.reduce(array1.PokemonHPReduced));
+    player1.blastoiseMoves[0].blastoiseFunction1of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction2of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction3of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction4of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction5of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
+
+
+    switch(pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
+           noChanges  >= 1   || pokemonChanges === 0) {
+
+
+case (pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1):
+
+//clear previous comment as it becomes irrelavent
+document.getElementById("statusProgress").innerHTML=("");
+
+
+setTimeout (function(){
+
+
+  computer.squirtleMoves();
+
+
+},2000); // computer attacks after 2 secs
+
+break;
 
 
 
+case (pokemonChanges ===  0):
 
+//count the number of pokemonChanges
+ pokemonChanges++;
 
-    switch(loadCharmanderBackup > 0) {
+//save these changes so it can be used later
+noChanges = false;
+console.log("Charmander changes: "+ p1.regularSettings);
 
-
-case (loadCharmanderBackup > 0 && loadCharmanderBackup <= 20):
-
-console.log("loadCharmanderBackup > 0 && loadCharmanderBackup <= 20 case executed");
-
-//Don't make changes to pokemon progressbar
-defaultProgressBar.perserveHpSetting();
+//if pokemonChanges is 0 then 100% health is given to each pokemon
+defaultProgressBar.defaultHPSetting();
 
 
 
@@ -5720,37 +5738,13 @@ setTimeout (function(){
 
 
 
-
 break;
 
-case (loadCharmanderBackup > 20 && loadCharmanderBackup <= 40):
-
-console.log("loadCharmanderBackup > 20 && loadCharmanderBackup <= 40 case executed");
 
 
+case (noChanges  >= 1):
 
-//Don't make changes to pokemon progressbar
-defaultProgressBar.perserveHpSetting();
-
-
-
-setTimeout (function(){
-
-
-  computer.squirtleMoves();
-
-
-},2000); // computer attacks after 2 secs
-
-
-
-break;
-
-case (loadCharmanderBackup > 40 && loadCharmanderBackup <= 100):
-
-console.log("loadCharmanderBackup > 40 && loadCharmanderBackup <= 100 case executed");
-
-//Don't make changes to pokemon progressbar
+//if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
 defaultProgressBar.perserveHpSetting();
 
 
@@ -5772,39 +5766,24 @@ default:
 console.log("loadCharmander default switch was activated on this line: ");
 
 
-      }// end of switch statement
+                    }// end of switch statement
 
 
-}//end of if statement
-
-
-
+          }//end of if statement
 
 }//end of loadCharmander function
 
 
+
+
+
+
 function loadPikachu () {
 
-  // variable declartions
-
-let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-let squirtleHP3 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-let pikachuHP4 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-let scytherHP4 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
-let blastoiseHP4 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-let onixHP4 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-let makeChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
-let noChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
-
-  //pikachu + scyther battle starts only when previous player1 pokemon functions are disabled
-  //if charmander and blastoise is selected then the cases will disable their functions
-
+  //pikachu + sycther battle
   player1CH.pikPokeImage();
 
-
-  cycle++;
-
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && cycle >= 2) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && pokemonChanges >= 0) {
 
     //disable non-selected pokemon first
     player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5825,17 +5804,11 @@ let noChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
     player1.blastoiseMoves[0].blastoiseFunction5of6 = false;
     player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
 
-    //count the number of cycles
-    a1.cycleNumber.push(1);
-    console.log("Pikachu cycle " + a1.cycleNumber.reduce(array1.PokemonHPReduced) + " has started.");
-    console.log("Pikachu cycle number: "+a1.cycleNumber.reduce(array1.PokemonHPReduced));
 
+    switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
+           noChanges  >= 1   || pokemonChanges === 0) {
 
-
-    switch(charmanderHP3 === 0 && squirtleHP3 >= 1 || blastoiseHP4 === 0 && onixHP4 >= 1 ||
-           makeChanges  >= 1   || noChanges === 0) {
-
-      case (charmanderHP3 === 0 && squirtleHP3 >= 1 || blastoiseHP4 === 0 && onixHP4 >= 1):
+      case (charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1):
 
       //clear previous comment as it becomes irrelavent
       document.getElementById("statusProgress").innerHTML=("");
@@ -5851,9 +5824,16 @@ let noChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
 
       break;
 
-      case (noChanges ===  0):
+      case (pokemonChanges ===  0):
 
-      //if cycleNumber is 0 then 100% health is given to each pokemon
+      //count the number of pokemonChanges
+       pokemonChanges++;
+
+      //save these changes so it can be used later
+      noChanges = false;
+      console.log("Pikachu changes: " + p1.regularSettings);
+
+      //if pokemonChanges is 0 then 100% health is given to each pokemon
       defaultProgressBar.defaultHPSetting();
 
       setTimeout (function(){
@@ -5867,9 +5847,9 @@ let noChanges = a1.cycleNumber.reduce(array1.PokemonHPReduced);
 
       break;
 
-      case (makeChanges  >= 1):
+      case (noChanges  >= 1):
 
-      //if cycleNumber is 1 or greater then no changes will be made to pokemon progressbar
+      //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
       defaultProgressBar.perserveHpSetting();
 
       setTimeout (function(){
@@ -5888,78 +5868,114 @@ default:
 console.log("loadPikachu default switch was activated on this line: ");
 
 
-    }// end of switch statement
+                }// end of switch statement
 
 
-}//end of if statement
-
+        }//end of if statement
 
 
 
 }//end of loadPikachu function
 
 
+
+
+
+
 function loadBlastoise () {
-
-  // variable declartions
-
-let charmanderHP3 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-let squirtleHP3 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-let pikachuHP4 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-let scytherHP4 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
-let blastoiseHP4 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-let onixHP4 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
   //blastoise + onix battle
   player1CH.blaPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && pokemonChanges >= 0) {
+
+//disable non-selected pokemon first
+player1CH.pokemonType[0].isSelected = false; // charmander
+player1CH.pokemonType[2].isSelected = false; // pikachu
+
+//disable non-selected pokemon functions
+player1.charmanderMoves[0].charmanderFunction1of6 = false;
+player1.charmanderMoves[0].charmanderFunction2of6 = false;
+player1.charmanderMoves[0].charmanderFunction3of6 = false;
+player1.charmanderMoves[0].charmanderFunction4of6 = false;
+player1.charmanderMoves[0].charmanderFunction5of6 = false;
+player1.charmanderMoves[0].charmanderFunction6of6 = false;
+
+player1.pikachuMoves[0].pikachuFunction1of6 = false;
+player1.pikachuMoves[0].pikachuFunction2of6 = false;
+player1.pikachuMoves[0].pikachuFunction3of6 = false;
+player1.pikachuMoves[0].pikachuFunction4of6 = false;
+player1.pikachuMoves[0].pikachuFunction5of6 = false;
+player1.pikachuMoves[0].pikachuFunction6of6 = false;
 
 
+switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
+       noChanges  >= 1   || pokemonChanges === 0) {
 
-    switch(blastoiseHP11 < 0 || blastoiseHP11 >= 0) {
+  case (charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1):
+
+  //clear previous comment as it becomes irrelavent
+  document.getElementById("statusProgress").innerHTML=("");
+
+  setTimeout (function(){
 
 
-case (blastoiseHP11 === 0):
+    computer.onixMoves();
 
-hpDamage7 = blastoiseHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
-break;
 
-case (blastoiseHP11 > 0 && blastoiseHP11 <= 20):
+  },2000); // computer attacks after 2 secs
 
-hpDamage7 = blastoiseHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
-break;
 
-case (blastoiseHP11 > 20 && blastoiseHP11 <= 40):
+  break;
 
-hpDamage7 = blastoiseHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#FD0202"; //red
-break;
+  case (pokemonChanges ===  0):
 
-case (blastoiseHP11 > 40 && blastoiseHP11 <= 100):
+  //count the number of pokemonChanges
+   pokemonChanges++;
 
-hpDamage7 = blastoiseHP11;
-document.querySelector(".player1HP").style.width = hpDamage7 +   "%";
-player1LowHealthIndicator3.style.backgroundColor = "#A6EDED"; //blue
-break;
+  //save these changes so it can be used later
+  noChanges = false;
+  console.log("Blastoise changes: "+ p1.regularSettings);
+
+  //if pokemonChanges is 0 then 100% health is given to each pokemon
+  defaultProgressBar.defaultHPSetting();
+
+
+  setTimeout (function(){
+
+
+    computer.onixMoves();
+
+
+  },2000); // computer attacks after 2 secs
+
+
+  break;
+
+  case (noChanges  >= 1):
+
+  //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
+  defaultProgressBar.perserveHpSetting();
+
+  setTimeout (function(){
+
+
+    computer.onixMoves();
+
+
+  },2000); // computer attacks after 2 secs
+
+
+  break;
 
 default:
 
 console.log("loadBlastoise default switch was activated on this line: ");
 
 
-    }// end of switch statement
+              }// end of switch statement
 
 
-}//end of if statement
-
-
-
-
+      }//end of if statement
 
 }//end of loadBlastoise function
