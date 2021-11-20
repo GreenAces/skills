@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (11/18/2021)
+Lastest update: (11/19/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) continue troubleshooting delayedAttackedNumber on line 4170 + troubleshoot why charmander is taking damage when switching from charmander to pikachu ****************** 11/18/2021
+2) continue troubleshooting perserveHpSetting on line 2537 + solved why charmander was taking damage when switching from charmander to pikachu ************************************************** 11/19/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -367,7 +367,6 @@ class referee {
     this.deadPokemonBackup = []; // exact duplicate of deadPokemon array but with a size limit of 6 indexes
     this.deathValidator = {pokemonDied:false};
     this.regularSettings = true; //default setting
-    this.delayAttackCounter = 0; //delayAttackCounter data gets pushed to delayAttackArray
     this.delayPokemonSwitch = false; // default setting -- player1 has ablility to switch pokemon if conditions are valid
     this.delayPokemonChange =  function () {
 
@@ -2368,7 +2367,7 @@ class objectofArrays {
     this.pikSpeedProgressBar =  [100];
     this.player1Score =         [0];
     this.computerScore =        [0];
-    this.delayAttackArray =     [0];
+
 
 
 
@@ -2810,6 +2809,8 @@ class progressBar {
 
     this.decreasePlayerHP = function () {
 
+
+
       // variable declartions
 
 
@@ -2820,16 +2821,17 @@ class progressBar {
 
 
 
-      if(charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true
-        || player1.charmanderMoves[0].charmanderFunction2of6 === true
-        || player1.charmanderMoves[0].charmanderFunction3of6 === true
-        || player1.charmanderMoves[0].charmanderFunction4of6 === true
-        || player1.charmanderMoves[0].charmanderFunction5of6 === true) {
+
+      if(charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
+         charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
+         charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
+         charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
+         charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction5of6 === true) {
 
         //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-        switch(charmanderHP5 < 0 || charmanderHP5 >= 0) {
+        switch (charmanderHP5 < 0 || charmanderHP5 >= 0) {
 
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
@@ -3335,8 +3337,8 @@ class player1Moves {
      this.fireBlasterMove = function () {
 
 
-
           if(player1CH.pokemonType[0].isSelected === true) {
+
 
             //confirm attack move for pokemon was clicked
             player1.charmanderMoves[0].charmanderFunction1of6 = true;
@@ -4183,30 +4185,27 @@ class computerMoves {
 
 
 
-
      //SquirtleMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-     switch  (computer.squirtleMovesActivated[0].squirtleFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true && p1.delayAttackCounter === 3 ||
+     switch  (computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
               computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
               computer.squirtleMovesActivated[0].squirtleFunction3of6 === true && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
               computer.squirtleMovesActivated[0].squirtleFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
               computer.squirtleMovesActivated[0].squirtleFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true ||
               computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-  case (computer.squirtleMovesActivated[0].squirtleFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true && p1.delayAttackCounter === 3):
+  case (computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
     //squirtle attack move: Bubble Beam
    //disable attack move for squirtle pokemon and charmander
    computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
 
-
-
    //debugging here -- delete when neccessary
    console.log("squirtleMoves Function1of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction1of6);
 
    //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-   a1.charmanderHealthBar.push(-20);
-   a1.charmanderBackup.push(-20);
+     a1.charmanderHealthBar.push(-20);
+     a1.charmanderBackup.push(-20);
 
 
    //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
@@ -5453,7 +5452,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
   setTimeout (function(){
 
 
-    computer.squirtleMoves();
+  computer.squirtleMoves();
 
 
 
@@ -5688,10 +5687,6 @@ let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 function loadCharmander () {
 
-  //start delayAttackCounter
-  p1.delayAttackCounter ++;
-  console.log("Charmander delayAttackCounter: " +p1.delayAttackCounter);
-
   //if conditions are valid, then switching pokemon will not be possible
   p1.delayPokemonChange();
 
@@ -5700,9 +5695,6 @@ function loadCharmander () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && pokemonChanges >= 0) {
 
-    //save data to delayAttackArray and reset delayAttackCounter to 0
-    a1.delayAttackArray.push(1);
-    p1.delayAttackCounter = 0;
 
     //disable non-selected pokemon first
     player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -5734,18 +5726,6 @@ case (pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >
 document.getElementById("statusProgress").innerHTML=("");
 
 
-setTimeout (function(){
-
-
-  computer.squirtleMoves();
-
-
-},2000); // computer attacks after 2 secs
-
-break;
-
-
-
 case (pokemonChanges ===  0):
 
 //count the number of pokemonChanges
@@ -5760,15 +5740,6 @@ defaultProgressBar.defaultHPSetting();
 
 
 
-setTimeout (function(){
-
-
-  computer.squirtleMoves();
-
-
-},2000); // computer attacks after 2 secs
-
-
 
 break;
 
@@ -5778,15 +5749,6 @@ case (noChanges  >= 1):
 
 //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
 defaultProgressBar.perserveHpSetting();
-
-
-setTimeout (function(){
-
-
-  computer.squirtleMoves();
-
-
-},2000); // computer attacks after 2 secs
 
 
 
@@ -5812,10 +5774,6 @@ console.log("loadCharmander default switch was activated on this line: ");
 
 function loadPikachu () {
 
-  //start delayAttackCounter
-  p1.delayAttackCounter ++;
-  console.log("Pikachu delayAttackCounter: " +p1.delayAttackCounter);
-
   //if conditions are valid, then switching pokemon will not be possible
   p1.delayPokemonChange();
 
@@ -5824,9 +5782,6 @@ function loadPikachu () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && pokemonChanges >= 0) {
 
-    //save data to delayAttackArray and reset delayAttackCounter to 0
-    a1.delayAttackArray.push(1);
-    p1.delayAttackCounter = 0;
 
     //disable non-selected pokemon first
     player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5856,14 +5811,6 @@ function loadPikachu () {
       //clear previous comment as it becomes irrelavent
       document.getElementById("statusProgress").innerHTML=("");
 
-      setTimeout (function(){
-
-
-        computer.scytherMoves();
-
-
-      },2000); // computer attacks after 2 secs
-
 
       break;
 
@@ -5879,14 +5826,6 @@ function loadPikachu () {
       //if pokemonChanges is 0 then 100% health is given to each pokemon
       defaultProgressBar.defaultHPSetting();
 
-      setTimeout (function(){
-
-
-        computer.scytherMoves();
-
-
-      },2000); // computer attacks after 2 secs
-
 
       break;
 
@@ -5894,14 +5833,6 @@ function loadPikachu () {
 
       //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
       defaultProgressBar.perserveHpSetting();
-
-      setTimeout (function(){
-
-
-        computer.scytherMoves();
-
-
-      },2000); // computer attacks after 2 secs
 
 
       break;
@@ -5927,10 +5858,6 @@ console.log("loadPikachu default switch was activated on this line: ");
 
 function loadBlastoise () {
 
-  //start delayAttackCounter
-  p1.delayAttackCounter ++;
-  console.log("Blastoise delayAttackCounter: " +p1.delayAttackCounter);
-
   //if conditions are valid, then switching pokemon will not be possible
   p1.delayPokemonChange();
 
@@ -5939,9 +5866,6 @@ function loadBlastoise () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && pokemonChanges >= 0) {
 
- //save data to delayAttackArray and reset delayAttackCounter to 0
- a1.delayAttackArray.push(1);
- p1.delayAttackCounter = 0;
 
 //disable non-selected pokemon first
 player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5971,14 +5895,6 @@ switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoi
   //clear previous comment as it becomes irrelavent
   document.getElementById("statusProgress").innerHTML=("");
 
-  setTimeout (function(){
-
-
-    computer.onixMoves();
-
-
-  },2000); // computer attacks after 2 secs
-
 
   break;
 
@@ -5995,30 +5911,12 @@ switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoi
   defaultProgressBar.defaultHPSetting();
 
 
-  setTimeout (function(){
-
-
-    computer.onixMoves();
-
-
-  },2000); // computer attacks after 2 secs
-
-
   break;
 
   case (noChanges  >= 1):
 
   //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
   defaultProgressBar.perserveHpSetting();
-
-  setTimeout (function(){
-
-
-    computer.onixMoves();
-
-
-  },2000); // computer attacks after 2 secs
-
 
   break;
 
