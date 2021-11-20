@@ -368,6 +368,39 @@ class referee {
     this.deathValidator = {pokemonDied:false};
     this.regularSettings = true; //default setting
     this.delayAttackCounter = 0; //delayAttackCounter data gets pushed to delayAttackArray
+    this.delayPokemonSwitch = false; // default setting -- player1 has ablility to switch pokemon if conditions are valid
+    this.delayPokemonChange =  function () {
+
+      //this function enables/disables the ablility for switching pokemon based on certain conditions
+      if (p1.delayPokemonSwitch === false) {
+
+      //false implies the button is NOT disabled which is the default setting
+      document.getElementById("Charmander_sel").disabled = false;
+      document.getElementById("Blastoise_sel").disabled = false;
+      document.getElementById("Pikachu_sel").disabled = false;
+
+
+
+
+    }else if (p1.delayPokemonSwitch === true) {
+
+      //true implies the button is disabled
+      document.getElementById("Charmander_sel").disabled = true;
+      document.getElementById("Blastoise_sel").disabled = true;
+      document.getElementById("Pikachu_sel").disabled = true;
+
+
+
+    }
+
+
+
+
+    }//end of delayPokemonChange function
+
+
+
+
     this.disableDeadPokemon = function () {
 
       let charmanderHP10 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
@@ -1265,6 +1298,11 @@ class wait {
           document.getElementById("defenseB").addEventListener("click", defenseB);
           document.getElementById("defenseC").addEventListener("click", defenseC);
 
+          //enable ablility for player1 to switch pokemon
+          p1.delayPokemonSwitch =  false;
+          console.log("delayPokemonSwitch: " + p1.delayPokemonSwitch);
+
+
 
           // Change boolean state so computer can make a move
             confirm.makeMove[0].player1Move = false;
@@ -1304,8 +1342,13 @@ class wait {
           document.getElementById("defenseB").removeEventListener("click", defenseB);
           document.getElementById("defenseC").removeEventListener("click", defenseC);
 
-          // Change boolean state so player1 can make a move
-            confirm.makeMove[0].computerMove = false;
+          //disable ablility for player1 to switch pokemon during computers turn
+          comp.delayPokemonSwitch =  true;
+          console.log("delayPokemonSwitch: " + p1.delayPokemonSwitch);
+
+
+          //Change boolean state so player1 can make a move
+          confirm.makeMove[0].computerMove = false;
 
         } // end of else if statement
 
@@ -1506,9 +1549,7 @@ class changePokemon {
 
       let score0 = a1.player1Score.reduce(array1.PokemonHPReduced);
 
-
       confirm.makeMove[0].player1Move = true;
-
 
       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
 
@@ -1638,12 +1679,7 @@ class changePokemon {
       document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
       computerCH.savedPokemonName2.push("Squirtle");
 
-      //change boolean state
-      confirm.makeMove[0].computerMove = false;
-      confirm.makeMove[0].player1Move = true;
 
-      //Change boolean state so computer can make a move
-      confirm.makeMove[0].player1Move = false;
 
        //verify that computer selected a pokemon
       computerCH.pokemonType[2].isSelected = true; // squirtle
@@ -1830,9 +1866,6 @@ class changePokemon {
              document.getElementById("cpuPokemonName").innerHTML = "Onix";
              computerCH.savedPokemonName2.push("Onix");
 
-             //change boolean state
-             confirm.makeMove[0].computerMove = false;
-             confirm.makeMove[0].player1Move = true;
 
              //verify that computer selected a pokemon
              computerCH.pokemonType[4].isSelected = true; //onix
@@ -2019,9 +2052,6 @@ class changePokemon {
             document.getElementById("cpuPokemonName").innerHTML = "Scyther";
             computerCH.savedPokemonName2.push("Scyther");
 
-            //change boolean state
-            confirm.makeMove[0].computerMove = false;
-            confirm.makeMove[0].player1Move = true;
 
             //verify that computer selected a pokemon
             computerCH.pokemonType[3].isSelected = true; //Scyther
@@ -2108,9 +2138,6 @@ this.loadSquirtleOnly = function () {
        document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
        computerCH.savedPokemonName2.push("Squirtle");
 
-       //change boolean state
-       confirm.makeMove[0].computerMove = false;
-       confirm.makeMove[0].player1Move = true;
 
        //verify that computer selected a pokemon
        computerCH.pokemonType[5].isSelected = true; //Squirtle
@@ -2185,9 +2212,6 @@ this.loadOnixOnly = function () {
        document.getElementById("cpuPokemonName").innerHTML = "Onix";
        computerCH.savedPokemonName2.push("Onix");
 
-       //change boolean state
-       confirm.makeMove[0].computerMove = false;
-       confirm.makeMove[0].player1Move = true;
 
        //verify that computer selected a pokemon
        computerCH.pokemonType[4].isSelected = true; //Onix
@@ -2265,9 +2289,6 @@ this.loadScytherOnly = function () {
        document.getElementById("cpuPokemonName").innerHTML = "Scyther";
        computerCH.savedPokemonName2.push("Scyther");
 
-       //change boolean state
-       confirm.makeMove[0].computerMove = false;
-       confirm.makeMove[0].player1Move = true;
 
        //verify that computer selected a pokemon
        computerCH.pokemonType[3].isSelected = true; //Scyther
@@ -4160,46 +4181,19 @@ class computerMoves {
 
    this.squirtleMoves = function () {
 
-     //varible declartions
 
-     let delayedAttackedNumber = a1.delayAttackArray.reduce(array1.PokemonHPReduced);
-
-
-     //solution to computer attacking player1 too early at the beginning of the battle
-
-     if(p1.delayAttackCounter === 0 || p1.delayAttackCounter === 1) {
-
-       p1.delayAttackCounter ++;
-
-
-       //debugging here -- delete when neccessary
-       console.log("squirtleMoves delayAttackCounter is: " + p1.delayAttackCounter);
-
-
-
-     }else if (p1.delayAttackCounter === 2) {
-
-
-       a1.delayAttackArray.push(2);
-
-       //debugging here -- delete when neccessary
-       console.log("squirtleMoves delayAttackArray is: "  +  delayedAttackedNumber);
-
-     }//end of if statements
 
 
      //SquirtleMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-     switch  (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
-              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
-              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
-              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
-              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction5of6 === true ||
-              delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+     switch  (computer.squirtleMovesActivated[0].squirtleFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true && p1.delayAttackCounter === 3 ||
+              computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction3of6 === true && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction1of6 === true):
-
-  console.log("squirtleMoves delayAttackArray(2) is: "  +  delayedAttackedNumber);
+  case (computer.squirtleMovesActivated[0].squirtleFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true && p1.delayAttackCounter === 3):
 
     //squirtle attack move: Bubble Beam
    //disable attack move for squirtle pokemon and charmander
@@ -4263,7 +4257,7 @@ class computerMoves {
 
 
 
-  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction2of6 === true):
+  case (computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true):
 
   //squirtle attack move: Tail Whip
   //disable attack move for squirtle pokemon and charmander
@@ -4327,7 +4321,7 @@ class computerMoves {
 
 
 
-  case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction3of6 === true):
+  case (computer.squirtleMovesActivated[0].squirtleFunction3of6 === true && player1.charmanderMoves[0].charmanderFunction3of6 === true):
 
 
   //squirtle attack move: Water Pulse
@@ -4394,7 +4388,7 @@ class computerMoves {
 
 
 
-    case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction4of6 === true):
+    case (computer.squirtleMovesActivated[0].squirtleFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true ):
 
 
     //squirtle attack move: tackle
@@ -4461,7 +4455,7 @@ class computerMoves {
 
 
 
-      case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction5of6 === true):
+      case (computer.squirtleMovesActivated[0].squirtleFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true ):
 
 
       //squirtle attack move: water gun
@@ -4527,7 +4521,7 @@ class computerMoves {
 
 
 
-        case (delayedAttackedNumber === 2 && player1.charmanderMoves[0].charmanderFunction6of6 === true):
+        case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true ):
 
 
         //squirtle attack move: rest
@@ -5694,14 +5688,21 @@ let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 function loadCharmander () {
 
-  //change boolean state
-  confirm.makeMove[0].computerMove = false;
-  confirm.makeMove[0].player1Move = true;
+  //start delayAttackCounter
+  p1.delayAttackCounter ++;
+  console.log("Charmander delayAttackCounter: " +p1.delayAttackCounter);
+
+  //if conditions are valid, then switching pokemon will not be possible
+  p1.delayPokemonChange();
 
   //charmander + squirtle battle
   player1CH.chrPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && pokemonChanges >= 0) {
+
+    //save data to delayAttackArray and reset delayAttackCounter to 0
+    a1.delayAttackArray.push(1);
+    p1.delayAttackCounter = 0;
 
     //disable non-selected pokemon first
     player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -5811,10 +5812,21 @@ console.log("loadCharmander default switch was activated on this line: ");
 
 function loadPikachu () {
 
+  //start delayAttackCounter
+  p1.delayAttackCounter ++;
+  console.log("Pikachu delayAttackCounter: " +p1.delayAttackCounter);
+
+  //if conditions are valid, then switching pokemon will not be possible
+  p1.delayPokemonChange();
+
   //pikachu + sycther battle
   player1CH.pikPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && pokemonChanges >= 0) {
+
+    //save data to delayAttackArray and reset delayAttackCounter to 0
+    a1.delayAttackArray.push(1);
+    p1.delayAttackCounter = 0;
 
     //disable non-selected pokemon first
     player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5915,10 +5927,21 @@ console.log("loadPikachu default switch was activated on this line: ");
 
 function loadBlastoise () {
 
+  //start delayAttackCounter
+  p1.delayAttackCounter ++;
+  console.log("Blastoise delayAttackCounter: " +p1.delayAttackCounter);
+
+  //if conditions are valid, then switching pokemon will not be possible
+  p1.delayPokemonChange();
+
   //blastoise + onix battle
   player1CH.blaPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && pokemonChanges >= 0) {
+
+ //save data to delayAttackArray and reset delayAttackCounter to 0
+ a1.delayAttackArray.push(1);
+ p1.delayAttackCounter = 0;
 
 //disable non-selected pokemon first
 player1CH.pokemonType[0].isSelected = false; // charmander
