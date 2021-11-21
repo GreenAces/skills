@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (11/19/2021)
+Lastest update: (11/20/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -30,7 +30,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
 13) on line 1568 defaultProgressBar.catchErrorFromSwitch(); needs to be updated to reflect changes to player1 and computer speed progressbars *low priority*
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
-15) add a tip section that changes based on cases from the switch. This should be next to pokomon logo at top left corner. *low priority*
+15) add <= 0 attributes for pikachu and blastoise on this.decreasePlayerHP + this.decreaseComputerHP + this.deathValidator --- charmander was already completed ****low priority**************** 11/20/2021
 16) pokRecImage2 on line 58 is the recovery image for computer -- to include this code in the function *low priority* ************************************************************************** 9/15/2021
 
 */
@@ -368,6 +368,9 @@ class referee {
     this.deathValidator = {pokemonDied:false};
     this.regularSettings = true; //default setting
     this.delayPokemonSwitch = false; // default setting -- player1 has ablility to switch pokemon if conditions are valid
+    this.charmanderSelected = false;
+    this.pikachuSelected = false;
+    this.blastoiseSelected = false;
     this.delayPokemonChange =  function () {
 
       //this function enables/disables the ablility for switching pokemon based on certain conditions
@@ -413,7 +416,7 @@ class referee {
 
       // consider upgrading this statement to a switch later
 
-      if (charmanderHP10 === 0 && p1.deadPokemonBackup[0] === "Charmander") {
+      if (charmanderHP10 <= 0 && p1.deadPokemonBackup[0] === "Charmander") {
 
         // change font color to red to let the player know that their pokemon is no longer active and disable all pokemon functions
 
@@ -484,7 +487,7 @@ class referee {
 
 
 
-        else if (squirtleHP9 === 0 && p1.deadPokemonBackup[0] === "Squirtle") {
+        else if (squirtleHP9 <= 0 && p1.deadPokemonBackup[0] === "Squirtle") {
 
         //cross-out computer pokemon icon if conditions are valid.
 
@@ -583,7 +586,7 @@ class referee {
 
       //load pokemon tombstone image based on certain conditions.
 
-      if (charmanderHP7 === 0 && squirtleHP7 >= 5 && lastDeadPokemon1 === "Charmander") {
+      if (charmanderHP7 <= 0 && squirtleHP7 >= 1 && lastDeadPokemon1 === "Charmander") {
 
 
           //Inform player that pokemon is dead but let the game continue
@@ -715,7 +718,7 @@ class referee {
 
          //load computer pokemon tombstone image based on certain conditions.
 
-        else if (squirtleHP7 === 0 && charmanderHP7 >= 5 && lastDeadPokemon1 === "Squirtle") {
+        else if (squirtleHP7 <= 0 && charmanderHP7 >= 1 && lastDeadPokemon1 === "Squirtle") {
 
         //Inform player computer pokemon died but let the game continue
 
@@ -1167,24 +1170,24 @@ this.isBlastoiseDead = function() {
 
   //conditions to execute if computer defeats player1 pokemon are below
 
-  switch(charmanderHP3 === 0 && squirtleHP3 >= 1 || pikachuHP4 === 0 && scytherHP4 >= 1 || blastoiseHP4 === 0 && onixHP4 >= 1 ||
-         charmanderHP3 >= 1 && squirtleHP3 === 0 || pikachuHP4 >= 1 && scytherHP4 === 0 || blastoiseHP4 >= 1 && onixHP4 === 0) {
+  switch(charmanderHP3 <= 0 && squirtleHP3 >= 1 || pikachuHP4 <= 0 && scytherHP4 >= 1 || blastoiseHP4 <= 0 && onixHP4 >= 1 ||
+         charmanderHP3 >= 1 && squirtleHP3 <= 0 || pikachuHP4 >= 1 && scytherHP4 <= 0 || blastoiseHP4 >= 1 && onixHP4 <= 0) {
 
 
-  case (charmanderHP3 === 0 && squirtleHP3 >= 1):
+  case (charmanderHP3 <= 0 && squirtleHP3 >= 1):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
 
   p1.isCharmanderDead();
     break;
 
 
-  case (pikachuHP4 === 0 && scytherHP4 >= 1):
+  case (pikachuHP4 <= 0 && scytherHP4 >= 1):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] + " died. Pick another pokemon to continue the battle.");
 
   p1.isPikachuDead();
     break;
 
-  case (blastoiseHP4 === 0 && onixHP4 >= 1):
+  case (blastoiseHP4 <= 0 && onixHP4 >= 1):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" died. Pick another pokemon to continue the battle.");
 
   p1.isBlastoiseDead();
@@ -1192,20 +1195,20 @@ this.isBlastoiseDead = function() {
 
     //conditions to execute if player1 defeats computer pokemon are below
 
-  case (charmanderHP3 >= 1 && squirtleHP3 === 0):
+  case (charmanderHP3 >= 1 && squirtleHP3 <= 0):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
 
   p1.isCharmanderDead();
     break;
 
 
-  case (pikachuHP4 >= 1 && scytherHP4 === 0):
+  case (pikachuHP4 >= 1 && scytherHP4 <= 0):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
 
   p1.isPikachuDead();
     break;
 
-  case (blastoiseHP4 >= 1 && onixHP4 === 0):
+  case (blastoiseHP4 >= 1 && onixHP4 <= 0):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
 
   p1.isBlastoiseDead();
@@ -1697,7 +1700,7 @@ class changePokemon {
      });
 
 
-     },6000); // 6 sec wait time to load computer pokemon
+   },3000); // 3 sec wait time to load computer pokemon
 
 
 
@@ -1783,7 +1786,7 @@ class changePokemon {
 
            computerCH.loadOnixOnly();
 
-           },6000); // 6 sec wait time to load computer pokemon
+         },3000); // 3 sec wait time to load computer pokemon
 
 
 
@@ -1881,7 +1884,7 @@ class changePokemon {
         });
 
 
-      },6000); // 6 sec wait time to load computer pokemon
+      },3000); // 3 sec wait time to load computer pokemon
 
 
         }//end of multiple if statements
@@ -2462,72 +2465,61 @@ class progressBar {
       let scytherHP12 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
       let blastoiseHP12 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
       let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-      let player1LowHealthIndicator4 = document.querySelector('.player1HP');
+      let player1HealthIndicator4 = document.querySelector('.player1HP');
 
-      //no changes to pokemon progress bars will be 100% health (default setting) whenever pokemon is selected
+      //during first pokemon battle, no changes to pokemon progress bars will be made (default setting) whenever pokemon is selected
 
       if (charmanderHP6 === 100 || squirtleHP6 === 100) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
-        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+        player1HealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+
+        setTimeout(function() {
+
+          document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
+          document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+         }, 3000); // 3 sec delay to load computer progressbar
+
+
+
 
 
       }else if (pikachuHP12 === 100 || scytherHP12 === 100) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
-        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+        player1HealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+
+        setTimeout(function() {
+
+          document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
+          document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+         }, 3000); // 3 sec delay to load computer progressbar
+
 
       }else if (blastoiseHP12 === 100 || onixHP12 === 100) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
-        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+        player1HealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
+
+        setTimeout(function() {
+
+          document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
+          document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+         }, 3000); // 3 sec delay to load computer progressbar
 
 
-        //changes to pokemon progress bars need to be reflected with the array
 
-      }else if (charmanderHP6 < 100 || squirtleHP6 < 100) {
 
-        console.log("testing_1of3: charmanderHP6 < 100 || squirtleHP6 < 100");
-
-        document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
-        document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
-
-      }else if (pikachuHP12 < 100 || scytherHP12 < 100) {
-
-        console.log("testing_2of3: pikachuHP12 < 100 || scytherHP12 < 100");
-
-        document.querySelector(".player1HP").style.width = pikachuHP12 +   "%";
-        document.querySelector(".cpuHP").style.width = scytherHP12 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
-
-      }else if (blastoiseHP12 < 100 || onixHP12 < 100) {
-
-        console.log("testing_3of3: blastoiseHP12 < 100 || onixHP12 < 100");
-
-        document.querySelector(".player1HP").style.width = blastoiseHP12 +   "%";
-        document.querySelector(".cpuHP").style.width = onixHP12 +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        player1LowHealthIndicator4.style.backgroundColor = "#A6EDED"; //blue
-
-      }//end of multiple if statements
+      }//end of if statements
 
                   }// end of defaultHPSetting
 
@@ -2651,6 +2643,11 @@ class progressBar {
 
         switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
 
+        case (squirtleHP5 < 0): //debugging: try attacking with solar power 3 times to test this out
+        hpDamage = 1;
+        document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+        p1.informWinner();
+        break;
 
         case (squirtleHP5 === 0):
         hpDamage = squirtleHP5;
@@ -2832,6 +2829,12 @@ class progressBar {
 
 
         switch (charmanderHP5 < 0 || charmanderHP5 >= 0) {
+
+        case (charmanderHP5 < 0): //debugging: use solar power to test this out
+        hpDamage2 = 0;
+        document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+        comp.informWinner();
+        break;
 
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
@@ -3425,7 +3428,7 @@ class player1Moves {
          //confirm attack move for pokemon was clicked
          player1.charmanderMoves[0].charmanderFunction3of6 = true;
 
-         computer.squirtleMovesActivated[0].squirtleFunction2of6 = true;
+         computer.squirtleMovesActivated[0].squirtleFunction3of6 = true;
 
          //debugging here -- delete when neccessary
          console.log("charmanderFunction3of6 is: " + player1.charmanderMoves[0].charmanderFunction3of6);
@@ -5674,7 +5677,7 @@ function defenseC() {
 //varible declartions
 
 let pokemonChanges = 0;
-let noChanges = p1.regularSettings === true;
+let noChanges = p1.regularSettings === true; // default is true
 let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 let squirtleHP11 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
@@ -5695,10 +5698,16 @@ function loadCharmander () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && pokemonChanges >= 0) {
 
+    //confirm selected pokemon first
+    p1.charmanderSelected = true;
+    console.log("charmander selected: " + p1.charmanderSelected);
 
-    //disable non-selected pokemon first
+    //disable non-selected pokemon
     player1CH.pokemonType[2].isSelected = false; // pikachu
     player1CH.pokemonType[1].isSelected = false; // blastoise
+    p1.pikachuSelected = false;
+    p1.blastoiseSelected = false;
+    console.log("non-selected pokemon are pikachu: " + p1.pikachuSelected + " and blastoise: " + p1.blastoiseSelected);
 
     //disable non-selected pokemon functions
     player1.pikachuMoves[0].pikachuFunction1of6 = false;
@@ -5733,7 +5742,7 @@ case (pokemonChanges ===  0):
 
 //save these changes so it can be used later
 noChanges = false;
-console.log("Charmander changes: "+ p1.regularSettings);
+console.log("regular settings: "+ noChanges);
 
 //if pokemonChanges is 0 then 100% health is given to each pokemon
 defaultProgressBar.defaultHPSetting();
@@ -5782,10 +5791,16 @@ function loadPikachu () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && pokemonChanges >= 0) {
 
+    //confirm selected pokemon first
+    p1.pikachuSelected = true;
+    console.log("pikachu selected: " + p1.pikachuSelected);
 
-    //disable non-selected pokemon first
+    //disable non-selected pokemon
     player1CH.pokemonType[0].isSelected = false; // charmander
     player1CH.pokemonType[1].isSelected = false; // blastoise
+    p1.charmanderSelected = false;
+    p1.blastoiseSelected = false;
+    console.log("non-selected pokemon are charmander: " + p1.charmanderSelected + " and blastoise: " + p1.blastoiseSelected);
 
     //disable non-selected pokemon functions
     player1.charmanderMoves[0].charmanderFunction1of6 = false;
@@ -5821,7 +5836,7 @@ function loadPikachu () {
 
       //save these changes so it can be used later
       noChanges = false;
-      console.log("Pikachu changes: " + p1.regularSettings);
+      console.log("regular settings: " + noChanges);
 
       //if pokemonChanges is 0 then 100% health is given to each pokemon
       defaultProgressBar.defaultHPSetting();
@@ -5866,10 +5881,16 @@ function loadBlastoise () {
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && pokemonChanges >= 0) {
 
+//confirm selected pokemon first
+p1.blastoiseSelected = true;
+console.log("blastoise selected: " + p1.blastoiseSelected);
 
-//disable non-selected pokemon first
+//disable non-selected pokemon
 player1CH.pokemonType[0].isSelected = false; // charmander
 player1CH.pokemonType[2].isSelected = false; // pikachu
+p1.charmanderSelected = false;
+p1.pikachuSelected = false;
+console.log("non-selected pokemon are charmander: " + p1.charmanderSelected + " and pikachu: " + p1.pikachuSelected);
 
 //disable non-selected pokemon functions
 player1.charmanderMoves[0].charmanderFunction1of6 = false;
@@ -5905,7 +5926,7 @@ switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoi
 
   //save these changes so it can be used later
   noChanges = false;
-  console.log("Blastoise changes: "+ p1.regularSettings);
+  console.log("regular settings: "+ noChanges);
 
   //if pokemonChanges is 0 then 100% health is given to each pokemon
   defaultProgressBar.defaultHPSetting();
