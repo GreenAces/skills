@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (11/20/2021)
+Lastest update: (11/22/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) continue troubleshooting perserveHpSetting on line 2537 + solved why charmander was taking damage when switching from charmander to pikachu ************************************************** 11/19/2021
+2) continue troubleshooting preserveHpSetting on line 2537 +  ************************************************** 11/22/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -366,11 +366,21 @@ class referee {
     this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details. It has a size limit of 1 index only
     this.deadPokemonBackup = []; // exact duplicate of deadPokemon array but with a size limit of 6 indexes
     this.deathValidator = {pokemonDied:false};
-    this.regularSettings = true; //default setting
+    this.preserveDefaultHP = true // if this is set to false then preserveHPChanges must be set to true
+    this.preserveHPChanges = false; // if this is set to true, it will call preserveHpSetting(); however default is false
     this.delayPokemonSwitch = false; // default setting -- player1 has ablility to switch pokemon if conditions are valid
     this.charmanderSelected = false;
     this.pikachuSelected = false;
     this.blastoiseSelected = false;
+    this.squirtleSelected = false;
+    this.scytherSelected = false;
+    this.onixSelected = false;
+    this.charmanderCounts = 0;
+    this.pikachuCounts = 0;
+    this.blastoiseCounts = 0;
+    this.squirtleCounts = 0;
+    this.scytherCounts = 0;
+    this.onixCounts = 0;
     this.delayPokemonChange =  function () {
 
       //this function enables/disables the ablility for switching pokemon based on certain conditions
@@ -2525,7 +2535,7 @@ class progressBar {
 
 
 
-         this.perserveHpSetting = function () {
+         this.preserveHpSetting = function () {
 
           //any changes to array implies a pokemon battle occured and therefore the array needs to be preserved before switching pokemon.
 
@@ -2577,7 +2587,7 @@ class progressBar {
 
           }//end of if statements
 
-                  }//end of perserveHpSetting function
+                  }//end of preserveHpSetting function
 
 
       this.resetHpColorSetting = function () {
@@ -4225,13 +4235,13 @@ class computerMoves {
 
    console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-   if (p1.regularSettings === false) {
+   if (p1.preserveHPChanges === false) {
 
      //remove previous comment
      document.getElementById("statusProgress2").innerHTML =  "";
 
      //default setting
-   }else if (p1.regularSettings === true) {
+   }else if (p1.preserveHPChanges === true) {
 
      //inform player1 of attack from computer
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
@@ -4289,13 +4299,13 @@ class computerMoves {
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  if (p1.regularSettings === false) {
+  if (p1.preserveHPChanges === false) {
 
     //remove previous comment
     document.getElementById("statusProgress2").innerHTML =  "";
 
     //default setting
-  }else if (p1.regularSettings === true) {
+  }else if (p1.preserveHPChanges === true) {
 
     //inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
@@ -4354,13 +4364,13 @@ class computerMoves {
 
   console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-  if (p1.regularSettings === false) {
+  if (p1.preserveHPChanges === false) {
 
     //remove previous comment
     document.getElementById("statusProgress2").innerHTML =  "";
 
     //default setting
-  }else if (p1.regularSettings === true) {
+  }else if (p1.preserveHPChanges === true) {
 
     //inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
@@ -4421,13 +4431,13 @@ class computerMoves {
 
     console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-    if (p1.regularSettings === false) {
+    if (p1.preserveHPChanges === false) {
 
       //remove previous comment
       document.getElementById("statusProgress2").innerHTML =  "";
 
       //default setting
-    }else if (p1.regularSettings === true) {
+    }else if (p1.preserveHPChanges === true) {
 
       //inform player1 of attack from computer
       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tackle!";
@@ -4488,13 +4498,13 @@ class computerMoves {
 
       console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-      if (p1.regularSettings === false) {
+      if (p1.preserveHPChanges === false) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML =  "";
 
         //default setting
-      }else if (p1.regularSettings === true) {
+      }else if (p1.preserveHPChanges === true) {
 
         //inform player1 of attack from computer
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
@@ -4554,13 +4564,13 @@ class computerMoves {
 
         console.log("charmanderBackup array is " +a1.charmanderBackup);
 
-        if (p1.regularSettings === false) {
+        if (p1.preserveHPChanges === false) {
 
           //remove previous comment
           document.getElementById("statusProgress2").innerHTML =  "";
 
           //default setting
-        }else if (p1.regularSettings === true) {
+        }else if (p1.preserveHPChanges === true) {
 
           //inform player1 of attack from computer
           document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
@@ -4643,13 +4653,13 @@ class computerMoves {
 
       console.log("pikachuBackup array is " +a3.pikachuHealthBar);
 
-      if (p1.regularSettings === false) {
+      if (p1.preserveHPChanges === false) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML =  "";
 
         //default setting
-      }else if (p1.regularSettings === true) {
+      }else if (p1.preserveHPChanges === true) {
 
         //inform player1 of attack from computer
         document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
@@ -4706,13 +4716,13 @@ class computerMoves {
 
      console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-     if (p1.regularSettings === false) {
+     if (p1.preserveHPChanges === false) {
 
        //remove previous comment
        document.getElementById("statusProgress2").innerHTML =  "";
 
        //default setting
-     }else if (p1.regularSettings === true) {
+     }else if (p1.preserveHPChanges === true) {
 
        //inform player1 of attack from computer
        document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" Quick Attack!";
@@ -4770,13 +4780,13 @@ class computerMoves {
 
      console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-     if (p1.regularSettings === false) {
+     if (p1.preserveHPChanges === false) {
 
        //remove previous comment
        document.getElementById("statusProgress2").innerHTML =  "";
 
        //default setting
-     }else if (p1.regularSettings === true) {
+     }else if (p1.preserveHPChanges === true) {
 
        //inform player1 of attack from computer
        document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2]  +" with X-Scissor!";
@@ -4836,13 +4846,13 @@ class computerMoves {
 
        console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-       if (p1.regularSettings === false) {
+       if (p1.preserveHPChanges === false) {
 
          //remove previous comment
          document.getElementById("statusProgress2").innerHTML =  "";
 
          //default setting
-       }else if (p1.regularSettings === true) {
+       }else if (p1.preserveHPChanges === true) {
 
          //inform player1 of attack from computer
          document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Fury Cutter!";
@@ -4902,13 +4912,13 @@ class computerMoves {
 
          console.log("pikachuBackup array is " +a3.pikachuBackup);
 
-         if (p1.regularSettings === false) {
+         if (p1.preserveHPChanges === false) {
 
            //remove previous comment
            document.getElementById("statusProgress2").innerHTML =  "";
 
            //default setting
-         }else if (p1.regularSettings === true) {
+         }else if (p1.preserveHPChanges === true) {
 
            //inform player1 of attack from computer
            document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+ " attacked "+ player1CH.player1PokemonChoices[2] +" with Wing Attack!";
@@ -4967,13 +4977,13 @@ class computerMoves {
 
            console.log("scytherBackup array is " +a4.scytherBackup);
 
-           if (p1.regularSettings === false) {
+           if (p1.preserveHPChanges === false) {
 
              //remove previous comment
              document.getElementById("statusProgress2").innerHTML =  "";
 
              //default setting
-           }else if (p1.regularSettings === true) {
+           }else if (p1.preserveHPChanges === true) {
 
              //inform player1 of attack from computer
              document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+  " used rest to recover!";
@@ -5676,8 +5686,8 @@ function defenseC() {
 
 //varible declartions
 
-let pokemonChanges = 0;
-let noChanges = p1.regularSettings === true; // default is true
+let keepDefault = p1.preserveDefaultHP = true // default is true, but if keepChanges is true then keepDefault must be false
+let keepChanges = p1.preserveHPChanges = false; // default is false, but if keepDefault is true then keepChanges must be false
 let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 let squirtleHP11 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
@@ -5696,11 +5706,12 @@ function loadCharmander () {
   //charmander + squirtle battle
   player1CH.chrPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && pokemonChanges >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && charmanderCounts >= 0) {
 
     //confirm selected pokemon first
     p1.charmanderSelected = true;
-    console.log("charmander selected: " + p1.charmanderSelected);
+    comp.squirtleSelected = true;
+    console.log("charmander selected: " + p1.charmanderSelected + "   squirtle selected: " + comp.squirtleSelected);
 
     //disable non-selected pokemon
     player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -5726,7 +5737,7 @@ function loadCharmander () {
 
 
     switch(pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
-           noChanges  >= 1   || pokemonChanges === 0) {
+           keepDefault === true && p1.charmanderCounts === 0  || keepChanges  === true  && p1.charmanderCounts >= 1) {
 
 
 case (pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1):
@@ -5735,29 +5746,31 @@ case (pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >
 document.getElementById("statusProgress").innerHTML=("");
 
 
-case (pokemonChanges ===  0):
+case (keepDefault === true && p1.charmanderCounts === 0):
 
-//count the number of pokemonChanges
- pokemonChanges++;
+//count the number of times charmander and squirtle was selected
+ p1.charmanderCounts++;
+ comp.squirtleCounts++;
 
 //save these changes so it can be used later
-noChanges = false;
-console.log("regular settings: "+ noChanges);
+keepDefault = false;
+keepChanges = true;
+console.log("keepDefault: "+ keepDefault);
+console.log("keepChanges: "+ keepChanges);
+console.log("charmanderCounts: " + p1.charmanderCounts);
+console.log("squirtleCounts: " + p1.squirtleCounts);
 
-//if pokemonChanges is 0 then 100% health is given to each pokemon
+//if charmanderCounts is 0 then 100% health is given charmander and squirtle
 defaultProgressBar.defaultHPSetting();
-
-
-
 
 break;
 
 
 
-case (noChanges  >= 1):
+case (keepChanges  === true  && p1.charmanderCounts >= 1):
 
-//if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
-defaultProgressBar.perserveHpSetting();
+//if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
+defaultProgressBar.preserveHpSetting();
 
 
 
@@ -5789,11 +5802,12 @@ function loadPikachu () {
   //pikachu + sycther battle
   player1CH.pikPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && pokemonChanges >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && charmanderCounts >= 0) {
 
     //confirm selected pokemon first
     p1.pikachuSelected = true;
-    console.log("pikachu selected: " + p1.pikachuSelected);
+    comp.scytherSelected = true;
+    console.log("pikachu selected: " + p1.pikachuSelected + "   scyther selected: " + comp.scytherSelected);
 
     //disable non-selected pokemon
     player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5819,7 +5833,7 @@ function loadPikachu () {
 
 
     switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
-           noChanges  >= 1   || pokemonChanges === 0) {
+           keepChanges  >= 1   || charmanderCounts === 0) {
 
       case (charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1):
 
@@ -5829,25 +5843,25 @@ function loadPikachu () {
 
       break;
 
-      case (pokemonChanges ===  0):
+      case (charmanderCounts ===  0):
 
-      //count the number of pokemonChanges
-       pokemonChanges++;
+      //count the number of charmanderCounts
+       charmanderCounts++;
 
       //save these changes so it can be used later
-      noChanges = false;
-      console.log("regular settings: " + noChanges);
+      keepChanges = false;
+      console.log("keepDefault: " + keepChanges);
 
-      //if pokemonChanges is 0 then 100% health is given to each pokemon
+      //if charmanderCounts is 0 then 100% health is given to each pokemon
       defaultProgressBar.defaultHPSetting();
 
 
       break;
 
-      case (noChanges  >= 1):
+      case (keepChanges  >= 1):
 
-      //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
-      defaultProgressBar.perserveHpSetting();
+      //if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
+      defaultProgressBar.preserveHpSetting();
 
 
       break;
@@ -5879,11 +5893,12 @@ function loadBlastoise () {
   //blastoise + onix battle
   player1CH.blaPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && pokemonChanges >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && charmanderCounts >= 0) {
 
 //confirm selected pokemon first
 p1.blastoiseSelected = true;
-console.log("blastoise selected: " + p1.blastoiseSelected);
+comp.onixSelected = true;
+console.log("blastoise selected: " + p1.blastoiseSelected + "   onix selected: " + comp.onixSelected);
 
 //disable non-selected pokemon
 player1CH.pokemonType[0].isSelected = false; // charmander
@@ -5909,7 +5924,7 @@ player1.pikachuMoves[0].pikachuFunction6of6 = false;
 
 
 switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
-       noChanges  >= 1   || pokemonChanges === 0) {
+       keepChanges  >= 1   || charmanderCounts === 0) {
 
   case (charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1):
 
@@ -5919,25 +5934,25 @@ switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoi
 
   break;
 
-  case (pokemonChanges ===  0):
+  case (charmanderCounts ===  0):
 
-  //count the number of pokemonChanges
-   pokemonChanges++;
+  //count the number of charmanderCounts
+   charmanderCounts++;
 
   //save these changes so it can be used later
-  noChanges = false;
-  console.log("regular settings: "+ noChanges);
+  keepChanges = false;
+  console.log("keepDefault: "+ keepChanges);
 
-  //if pokemonChanges is 0 then 100% health is given to each pokemon
+  //if charmanderCounts is 0 then 100% health is given to each pokemon
   defaultProgressBar.defaultHPSetting();
 
 
   break;
 
-  case (noChanges  >= 1):
+  case (keepChanges  >= 1):
 
-  //if pokemonChanges is 1 or greater then no changes will be made to pokemon progressbar
-  defaultProgressBar.perserveHpSetting();
+  //if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
+  defaultProgressBar.preserveHpSetting();
 
   break;
 
