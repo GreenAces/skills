@@ -12,7 +12,7 @@ x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 --
 y) Created debuggingOperation() on line 741 -- working on switching pokemon --
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) continue troubleshooting preserveHpSetting on line 2537 +  ************************************************** 11/22/2021
+2) continue troubleshooting preserveHpSetting on line 2539 + find a way to make the health load instantly after switching pokemon *************************************************************** 11/22/2021
 2.1) Add new waiting mechanism for when computer selects a pokemon [42% completed]
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -2132,7 +2132,7 @@ this.loadSquirtleOnly = function () {
         setTimeout(function() {
 
         //This function resets the defaultHP color settings of the progress for player1 and computer
-        defaultProgressBar.resetHpColorSetting();
+
 
       },1000); // 1 sec wait time for loading new progressBar for Scyther
 
@@ -2206,7 +2206,7 @@ this.loadOnixOnly = function () {
         setTimeout(function() {
 
         //This function resets the defaultHP color settings of the progress for player1 and computer
-        defaultProgressBar.resetHpColorSetting();
+
 
       },3000); // 3 sec wait time for loading new progressBar for Scyther
 
@@ -2283,7 +2283,7 @@ this.loadScytherOnly = function () {
         setTimeout(function() {
 
         //This function resets the defaultHP color settings of the progress for player1 and computer
-        defaultProgressBar.resetHpColorSetting();
+
 
       },1000); // 1 sec wait time for loading new progressBar for Scyther
 
@@ -2380,6 +2380,7 @@ class objectofArrays {
     this.pikSpeedProgressBar =  [100];
     this.player1Score =         [0];
     this.computerScore =        [0];
+    this.fullHealth =           [100];
 
 
 
@@ -2479,7 +2480,7 @@ class progressBar {
 
       //during first pokemon battle, no changes to pokemon progress bars will be made (default setting) whenever pokemon is selected
 
-      if (charmanderHP6 === 100 || squirtleHP6 === 100) {
+      if (charmanderHP6 === 100 && squirtleHP6 === 100 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
@@ -2497,7 +2498,7 @@ class progressBar {
 
 
 
-      }else if (pikachuHP12 === 100 || scytherHP12 === 100) {
+      }else if (pikachuHP12 === 100 && scytherHP12 === 100 && p1.pikachuSelected === true && comp.scytherSelected === true) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
@@ -2512,7 +2513,7 @@ class progressBar {
          }, 3000); // 3 sec delay to load computer progressbar
 
 
-      }else if (blastoiseHP12 === 100 || onixHP12 === 100) {
+      }else if (blastoiseHP12 === 100 && onixHP12 === 100 && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
 
         document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
@@ -2559,30 +2560,49 @@ class progressBar {
          let onixHP13 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
-         if (charmanderHP6 < 100 || squirtleHP6 < 100) {
+         if (charmanderHP6 < 100 && squirtleHP6 < 100 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
 
          document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
-         document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
          document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
 
-        }else if (pikachuHP13 < 100 || scytherHP13 < 100) {
+
+         setTimeout(function() {
+
+           document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
+           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+          }, 3000); // 3 sec delay to load computer progressbar
+
+
+       }else if (pikachuHP13 < 100 && scytherHP13 < 100 && p1.pikachuSelected === true && comp.scytherSelected === true) {
 
 
          document.querySelector(".player1HP").style.width = pikachuHP13 +   "%";
-         document.querySelector(".cpuHP").style.width = scytherHP13 +   "%";
          document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
 
 
-        }else if (blastoiseHP13 < 100 || onixHP13 < 100) {
+         setTimeout(function() {
+
+           document.querySelector(".cpuHP").style.width = scytherHP13 +   "%";
+           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+          }, 3000); // 3 sec delay to load computer progressbar
+
+
+       }else if (blastoiseHP13 < 100 && onixHP13 < 100 && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
 
          document.querySelector(".player1HP").style.width = blastoiseHP13 +   "%";
-         document.querySelector(".cpuHP").style.width = onixHP13 +   "%";
          document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-         document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+
+         setTimeout(function() {
+
+           document.querySelector(".cpuHP").style.width = onixHP13 +   "%";
+           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+
+          }, 3000); // 3 sec delay to load computer progressbar
 
 
           }//end of if statements
@@ -2590,43 +2610,6 @@ class progressBar {
                   }//end of preserveHpSetting function
 
 
-      this.resetHpColorSetting = function () {
-
-      //restores the color of the pokemon progressbar from red to blue
-
-      //varible declartions
-
-      let player1DefaultHP = 100;
-      let computerDefaultHP = 100;
-      let player1DefaultSpeed = 100;
-      let computerDefaultSpeed = 100;
-      let player1LowHealthIndicator2 = document.querySelector('.player1HP');
-      let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
-
-      let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-      let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let pikachuHP13 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-      let scytherHP13 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
-      let blastoiseHP13 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
-      let onixHP13 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-
-      if (squirtleHP6 === 0 || scytherHP13 === 0 || onixHP13 === 0 ) {
-
-        //computer HP and speed css settings
-        document.querySelector(".cpuHP").style.width = computerDefaultHP +   "%";
-        document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
-        computerLowHealthIndicator2.style.backgroundColor = "#A6EDED"; // blue
-
-      }else if (charmanderHP6 === 0 || pikachuHP13 === 0 || blastoiseHP13 === 0) {
-
-        //player1 HP and speed css settings
-        document.querySelector(".player1HP").style.width = player1DefaultHP +   "%";
-        document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
-        player1LowHealthIndicator2.style.backgroundColor = "#A6EDED"; //blue
-
-      }// end of if statements
-
-          }//end resetHpColorSetting function
 
 
 
@@ -2657,28 +2640,37 @@ class progressBar {
         hpDamage = 1;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         p1.informWinner();
+
+        computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 === 0):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         p1.informWinner();
         break;
 
         case (squirtleHP5 > 0 && squirtleHP5 <= 20):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 > 20 && squirtleHP5 <= 40):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-        computerLowHealthIndicator.style.backgroundColor = "#FD0202";
+        computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 > 40 && squirtleHP5 <= 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
         break;
 
         default:
@@ -2721,22 +2713,29 @@ class progressBar {
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
                 p1.informWinner();
+
+                computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
                 case (onixHP2 > 0 && onixHP2 <= 20):
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
+
+                computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
                 case (onixHP2 > 20 && onixHP2 <= 40):
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
-                computerLowHealthIndicator.style.backgroundColor = "#FD0202";
+
+                computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
                 case (onixHP2 > 40 && onixHP2 <= 100):
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
+
+                computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
                 break;
 
                 default:
@@ -2782,23 +2781,29 @@ class progressBar {
                   case (scytherHP2 === 0):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+                  computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   p1.informWinner();
                   break;
 
                   case (scytherHP2 > 0 && scytherHP2 <= 20):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+                  computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   break;
 
                   case (scytherHP2 > 20 && scytherHP2 <= 40):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
-                  computerLowHealthIndicator.style.backgroundColor = "#FD0202";
+                  computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   break;
 
                   case (scytherHP2 > 40 && scytherHP2 <= 100):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+                  computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
                   break;
 
                   default:
@@ -2843,29 +2848,46 @@ class progressBar {
         case (charmanderHP5 < 0): //debugging: use solar power to test this out
         hpDamage2 = 0;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+
+
+
         comp.informWinner();
         break;
 
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+        player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
         comp.informWinner();
         break;
 
         case (charmanderHP5 > 0 && charmanderHP5 <= 20):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+        player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
         break;
 
         case (charmanderHP5 > 20 && charmanderHP5 <= 40):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-        player1LowHealthIndicator.style.backgroundColor = "#FD0202";
+        player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
         break;
 
         case (charmanderHP5 > 40 && charmanderHP5 <= 100):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+        player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
+
+
         break;
 
         default:
@@ -2907,23 +2929,38 @@ class progressBar {
               case (pikachuHP2 === 0):
               hpDamage3 = pikachuHP2;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               comp.informWinner();
               break;
 
               case (pikachuHP2 > 0 && pikachuHP2 <= 20):
               hpDamage3 = pikachuHP2;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               break;
 
               case (pikachuHP2 > 20 && pikachuHP2 <= 40):
               hpDamage3 = pikachuHP2;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
-              player1LowHealthIndicator.style.backgroundColor = "#FD0202";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               break;
 
               case (pikachuHP2 > 40 && pikachuHP2 <= 100):
               hpDamage3 = pikachuHP2;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
+
+
               break;
 
               default:
@@ -2971,23 +3008,38 @@ class progressBar {
               case (blastoiseHP2 === 0):
               hpDamage4 = blastoiseHP2;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               comp.informWinner();
               break;
 
               case (blastoiseHP2 > 0 && blastoiseHP2 <= 20):
               hpDamage4 = blastoiseHP2;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               break;
 
               case (blastoiseHP2 > 20 && blastoiseHP2 <= 40):
               hpDamage4 = blastoiseHP2;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
-              player1LowHealthIndicator.style.backgroundColor = "#FD0202";
+              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+
+
               break;
 
               case (blastoiseHP2 > 40 && blastoiseHP2 <= 100):
               hpDamage4 = blastoiseHP2;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
+              player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
+
+
               break;
 
               default:
@@ -3039,13 +3091,15 @@ this.increaseComputerHP = function () {
 
     speedReduced = computerSPD;
     document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+    computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
     break;
 
     case (squirtleHP5 > 20 && squirtleHP5 <= 40 || computerSPD > 20 && computerSPD <= 40):
 
     hpDamage = squirtleHP5;
     document.querySelector(".cpuHP").style.width = hpDamage +   "%";
-    computerLowHealthIndicator2.style.backgroundColor = "#A6EDED";
+    computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
 
     speedReduced = computerSPD;
     document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
@@ -3055,6 +3109,7 @@ this.increaseComputerHP = function () {
 
     hpDamage = squirtleHP5
     document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+    computerLowHealthIndicator2.style.backgroundColor = "#A6EDED";//blue
 
     speedReduced = computerSPD;
     document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
@@ -3101,6 +3156,7 @@ this.increasePlayerHP = function () {
    hpDamage2 = charmanderHP5;
    document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
    comp.informWinner();
+   computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
    speedReduced = player1SPD;
    document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
@@ -5694,6 +5750,8 @@ let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
 let scytherHP11 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
 let blastoiseHP11 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
 let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+let fullHealthData = a1.fullHealth.reduce(array1.PokemonHPReduced);
+
 
 
 
@@ -5706,7 +5764,7 @@ function loadCharmander () {
   //charmander + squirtle battle
   player1CH.chrPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && charmanderCounts >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && p1.charmanderCounts >= 0) {
 
     //confirm selected pokemon first
     p1.charmanderSelected = true;
@@ -5758,7 +5816,7 @@ keepChanges = true;
 console.log("keepDefault: "+ keepDefault);
 console.log("keepChanges: "+ keepChanges);
 console.log("charmanderCounts: " + p1.charmanderCounts);
-console.log("squirtleCounts: " + p1.squirtleCounts);
+console.log("squirtleCounts: " + comp.squirtleCounts);
 
 //if charmanderCounts is 0 then 100% health is given charmander and squirtle
 defaultProgressBar.defaultHPSetting();
@@ -5771,6 +5829,8 @@ case (keepChanges  === true  && p1.charmanderCounts >= 1):
 
 //if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
 defaultProgressBar.preserveHpSetting();
+
+
 
 
 
@@ -5802,7 +5862,7 @@ function loadPikachu () {
   //pikachu + sycther battle
   player1CH.pikPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && charmanderCounts >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && p1.pikachuCounts >= 0) {
 
     //confirm selected pokemon first
     p1.pikachuSelected = true;
@@ -5833,7 +5893,7 @@ function loadPikachu () {
 
 
     switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
-           keepChanges  >= 1   || charmanderCounts === 0) {
+           keepDefault === true && p1.pikachuCounts === 0  || keepChanges  === true  && p1.pikachuCounts >= 1) {
 
       case (charmanderHP11 === 0 && squirtleHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1):
 
@@ -5843,25 +5903,31 @@ function loadPikachu () {
 
       break;
 
-      case (charmanderCounts ===  0):
+      case (keepDefault === true && p1.pikachuCounts === 0):
 
-      //count the number of charmanderCounts
-       charmanderCounts++;
+      //count the number of times pikachu and scyther was selected
+       p1.pikachuCounts++;
+       comp.scytherCounts++;
 
       //save these changes so it can be used later
-      keepChanges = false;
-      console.log("keepDefault: " + keepChanges);
+      keepDefault = false;
+      keepChanges = true;
+      console.log("keepDefault: "+ keepDefault);
+      console.log("keepChanges: "+ keepChanges);
+      console.log("pikachuCounts: " + p1.pikachuCounts);
+      console.log("scytherCounts: " + comp.scytherCounts);
 
-      //if charmanderCounts is 0 then 100% health is given to each pokemon
+      //if pikachuCounts is 0 then 100% health is given to pikachu and scyther
       defaultProgressBar.defaultHPSetting();
 
 
       break;
 
-      case (keepChanges  >= 1):
+      case (keepChanges  === true  && p1.pikachuCounts >= 1):
 
-      //if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
+      //if pikachuCounts is 1 or greater then no changes will be made to pokemon progressbar
       defaultProgressBar.preserveHpSetting();
+
 
 
       break;
@@ -5893,7 +5959,7 @@ function loadBlastoise () {
   //blastoise + onix battle
   player1CH.blaPokeImage();
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && charmanderCounts >= 0) {
+  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && p1.blastoiseCounts >= 0) {
 
 //confirm selected pokemon first
 p1.blastoiseSelected = true;
@@ -5924,7 +5990,7 @@ player1.pikachuMoves[0].pikachuFunction6of6 = false;
 
 
 switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
-       keepChanges  >= 1   || charmanderCounts === 0) {
+       keepDefault === true && p1.blastoiseCounts === 0  || keepChanges  === true  && p1.blastoiseCounts >= 1) {
 
   case (charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1):
 
@@ -5934,25 +6000,31 @@ switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoi
 
   break;
 
-  case (charmanderCounts ===  0):
+  case (keepDefault === true && p1.blastoiseCounts === 0):
 
-  //count the number of charmanderCounts
-   charmanderCounts++;
+  //count the number of times blastoise and onix was selected
+  p1.blastoiseCounts++;
+  comp.onixCounts++;
 
   //save these changes so it can be used later
-  keepChanges = false;
-  console.log("keepDefault: "+ keepChanges);
+  keepDefault = false;
+  keepChanges = true;
+  console.log("keepDefault: "+ keepDefault);
+  console.log("keepChanges: "+ keepChanges);
+  console.log("blastoiseCounts: " + p1.blastoiseCounts);
+  console.log("onixCounts: " + comp.onixCounts);
 
-  //if charmanderCounts is 0 then 100% health is given to each pokemon
+  //if blastoiseCounts is 0 then 100% health is given to blastoise and onix
   defaultProgressBar.defaultHPSetting();
 
 
   break;
 
-  case (keepChanges  >= 1):
+  case (keepChanges  === true  && p1.blastoiseCounts >= 1):
 
-  //if charmanderCounts is 1 or greater then no changes will be made to pokemon progressbar
+  //if blastoiseCounts is 1 or greater then no changes will be made to pokemon progressbar
   defaultProgressBar.preserveHpSetting();
+
 
   break;
 
