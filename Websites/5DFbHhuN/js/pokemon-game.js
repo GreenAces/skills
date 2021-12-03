@@ -374,18 +374,24 @@ class referee {
     this.preserveDefaultHP = true; // if this is set to false then preserveHPChanges must be set to true
     this.preserveHPChanges = false; // if this is set to true, it will call preserveHpSetting(); however default is false
     this.delayPokemonSwitch = false; // default setting -- player1 has ablility to switch pokemon if conditions are valid
-    this.charmanderSelected = false;
-    this.pikachuSelected = false;
-    this.blastoiseSelected = false;
-    this.squirtleSelected = false;
-    this.scytherSelected = false;
-    this.onixSelected = false;
-    this.charmanderCounts = 0;
-    this.pikachuCounts = 0;
-    this.blastoiseCounts = 0;
-    this.squirtleCounts = 0;
-    this.scytherCounts = 0;
-    this.onixCounts = 0;
+    this.charmanderSelected = false; // default
+    this.pikachuSelected = false; // default
+    this.blastoiseSelected = false; // default
+    this.squirtleSelected = false; // default
+    this.scytherSelected = false; // default
+    this.onixSelected = false; // default
+    this.charmanderCounts = 0; // default
+    this.pikachuCounts = 0; // default
+    this.blastoiseCounts = 0; // default
+    this.squirtleCounts = 0;// default
+    this.scytherCounts = 0; // default
+    this.onixCounts = 0; // default
+    this.battle1Player1 = false; // default
+    this.battle1Computer = false;// default
+    this.battle2Player1 = false; // default
+    this.battle2Computer = false;// default
+    this.battle3Player1 = false; // default
+    this.battle3Computer = false;// default
     this.delayPokemonChange =  function () {
 
       //this function enables/disables the ablility for switching pokemon based on certain conditions
@@ -425,7 +431,7 @@ class referee {
 
       // consider upgrading this statement to a switch later
 
-      if (p1.charmanderDied === true) {
+      if (p1.charmanderDied === true && comp.squirtleDied === false) {
 
         // change font color to red to let the player know that their pokemon is no longer active and disable all pokemon functions
 
@@ -452,8 +458,7 @@ class referee {
       }// end of 1st if statement
 
         // same conditions for other player1 pokemon
-        else if (p1.pikachuDied === true) {
-
+        else if (p1.pikachuDied === true && comp.scytherDied === false) {
 
           document.getElementById("p1PokemonName").innerHTML = "";
           document.getElementById("Pikachu_sel").style.color = "#C91212";
@@ -473,7 +478,7 @@ class referee {
 
         }//end of 2nd if statement
 
-        else if (p1.blastoiseDied === true) {
+        else if (p1.blastoiseDied === true && comp.onixDied === false) {
 
           document.getElementById("p1PokemonName").innerHTML = "";
           document.getElementById("Blastoise_sel").style.color = "#C91212";
@@ -631,9 +636,11 @@ class referee {
 
          // give score to computer array
 
+         comp.battle1Computer = true;
          a2.computerScore.push(1);
          let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
          console.log("Computer Score: " + score2);
+         console.log("battle1Computer: " + comp.battle1Computer);
 
 
 
@@ -673,9 +680,11 @@ class referee {
 
            // give score to computer array
 
+           comp.battle2Computer = true;
            a2.computerScore.push(1);
            let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
            console.log("Computer Score: " + score2);
+           console.log("battle2Computer: " + comp.battle2Computer);
 
 
 
@@ -715,9 +724,11 @@ class referee {
 
            // give score to computer array
 
+           comp.battle3Computer = true;
            a2.computerScore.push(1);
            let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
            console.log("Computer Score: " + score2);
+           console.log("battle2Computer: " + comp.battle3Computer);
 
 
 
@@ -769,9 +780,11 @@ class referee {
 
        // give score to player1 array
 
+       p1.battle1Player = true;
        a1.player1Score.push(1);
        let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
        console.log("Player1 Score: " + score1);
+       consol.log("battle1Player: " + p1.battle1Player);
 
 
 
@@ -818,9 +831,11 @@ class referee {
 
          // give score to player1 array
 
+         p1.battle2Player1 = true;
          a1.player1Score.push(1);
          let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
          console.log("Player1 Score: " + score1);
+         console.log("battle2Player1: " + p1.battle2Player1);
 
 
 
@@ -864,9 +879,11 @@ class referee {
 
          // give score to player1 array
 
+         p1.battle3Player1 = true;
          a1.player1Score.push(1);
          let score1 = a1.player1Score.reduce(array1.PokemonHPReduced);
          console.log("Player1 Score: " + score1);
+         console.log("battle3Player1: " + p1.battle3Player1);
 
 
            },3000); // 3 sec wait time for computer to select pokemon
@@ -1190,49 +1207,62 @@ this.isBlastoiseDead = function() {
 
   //conditions to execute if computer defeats player1 pokemon are below
 
-  switch(charmanderHP3 <= 0 && squirtleHP3 >= 1 || pikachuHP4 <= 0 && scytherHP4 >= 1 || blastoiseHP4 <= 0 && onixHP4 >= 1 ||
-         charmanderHP3 >= 1 && squirtleHP3 <= 0 || pikachuHP4 >= 1 && scytherHP4 <= 0 || blastoiseHP4 >= 1 && onixHP4 <= 0) {
+
+  switch(charmanderHP3 <= 0 && squirtleHP3 >= 1 && comp.battle1Computer === true || pikachuHP4 <= 0 && scytherHP4 >= 1 && comp.battle2Computer === true || blastoiseHP4 <= 0 && onixHP4 >= 1 && comp.battle3Computer === true ||
+         charmanderHP3 >= 1 && squirtleHP3 <= 0 && p1.battle1Player1 === true    || pikachuHP4 >= 1 && scytherHP4 <= 0 && p1.battle2Player1 === true    || blastoiseHP4 >= 1 && onixHP4 <= 0 && p1.battle3Player1 === true) {
 
 
-  case (charmanderHP3 <= 0 && squirtleHP3 >= 1):
+  case (charmanderHP3 <= 0 && squirtleHP3 >= 1 && comp.battle1Computer === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
-
+  p1.battle1Player1 = false;
+  comp.battle1Computer = false;
+  console.log("battle1Player1: " + p1.battle1Player1);
   p1.isCharmanderDead();
-    break;
+  break;
 
 
-  case (pikachuHP4 <= 0 && scytherHP4 >= 1):
+  case (pikachuHP4 <= 0 && scytherHP4 >= 1 && comp.battle2Computer === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] + " died. Pick another pokemon to continue the battle.");
-
+  p1.battle2Player1 = false;
+  comp.battle2Computer = false;
+  console.log("battle2Player1: " + p1.battle2Player1);
   p1.isPikachuDead();
-    break;
+  break;
 
-  case (blastoiseHP4 <= 0 && onixHP4 >= 1):
+  case (blastoiseHP4 <= 0 && onixHP4 >= 1 && comp.battle3Computer === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" died. Pick another pokemon to continue the battle.");
-
+  p1.battle3Player1 = false;
+  comp.battle3Computer = false;
+  console.log("battle3Player1: " + p1.battle3Player1);
   p1.isBlastoiseDead();
-    break;
+  break;
 
     //conditions to execute if player1 defeats computer pokemon are below
 
-  case (charmanderHP3 >= 1 && squirtleHP3 <= 0):
+  case (charmanderHP3 >= 1 && squirtleHP3 <= 0 && p1.battle1Player1 === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
-
+  comp.battle1Computer = false;
+  p1.battle1Player1 = false;
+  console.log("battle1Computer: " + comp.battle1Computer);
   p1.isCharmanderDead();
-    break;
+  break;
 
 
-  case (pikachuHP4 >= 1 && scytherHP4 <= 0):
+  case (pikachuHP4 >= 1 && scytherHP4 <= 0 && p1.battle2Player1 === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
-
+  comp.battle2Computer = false;
+  p1.battle2Player1 = false;
+  console.log("battle2Computer: " + comp.battle2Computer);
   p1.isPikachuDead();
-    break;
+  break;
 
-  case (blastoiseHP4 >= 1 && onixHP4 <= 0):
+  case (blastoiseHP4 >= 1 && onixHP4 <= 0 && p1.battle3Player1 === true):
   document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
-
+  comp.battle3Computer = false;
+  p1.battle3Player1 = false;
+  console.log("battle3Computer: " + comp.battle3Computer);
   p1.isBlastoiseDead();
-    break;
+  break;
 
 
   default:
