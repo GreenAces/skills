@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (12/09/2021)
+Lastest update: (12/13/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -17,7 +17,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
 3a) why is Computer health status is undefined on line 1149? maybe because it's a function?
-3b) if onix is the only pokemon left and blastoise eliminates it then match is won by player1 -- create a new image and inform player1 of winning the game. Also change deadPokemonBackup to accomadate all index for all 3 functions starting with loadScytherOnly ** 12/09/2021
+3b) if onix is the only pokemon left and blastoise eliminates it then match is won by player1 -- create a new image and inform player1 of winning the game. Also change deadPokemonBackup to accomadate all index for all 3 functions starting with loadScytherOnly ** 12/13/2021
 3c) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
@@ -501,7 +501,7 @@ class referee {
 
 
 
-        else if (comp.squirtleDied === true) {
+        else if (comp.squirtleDied === true && p1.charmanderDied === false) {
 
         //cross-out computer pokemon icon if conditions are valid.
 
@@ -527,7 +527,7 @@ class referee {
       }// end of 4th if statement
 
         //same condition for other computer icons
-        else if (comp.scytherDied === true) {
+        else if (comp.scytherDied === true && p1.pikachuDied === false) {
 
 
           // remove scyther icon
@@ -551,7 +551,7 @@ class referee {
 
         }//end of 5th if statement
 
-        else if (comp.onixDied === true) {
+        else if (comp.onixDied === true && p1.blastoiseDied === false) {
 
 
 
@@ -1105,6 +1105,7 @@ this.isBlastoiseDead = function() {
       // display computer deadPokemon
       p1.deadPokemonImage();
 
+
       // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
 
       p1.deadPokemon.length = 1;
@@ -1215,7 +1216,7 @@ this.isBlastoiseDead = function() {
 
   }else if (charmanderHP3 >= 1 && squirtleHP3 === 0  && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
-    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle1Computer = false;
     p1.battle1Player1 = true;
     console.log("battle1Player1: " + p1.battle1Player1);
@@ -1224,7 +1225,7 @@ this.isBlastoiseDead = function() {
 
   }else if (pikachuHP4 >= 1 && scytherHP4 === 0  && p1.pikachuSelected === true && comp.scytherSelected === true ) {
 
-    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle2Computer = false;
     p1.battle2Player1 = true;
     console.log("battle2Player1: " + p1.battle2Player1);
@@ -1233,16 +1234,18 @@ this.isBlastoiseDead = function() {
 
   }else if (blastoiseHP4 >= 1 && onixHP4 === 0  && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
-    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle3Computer = false;
     p1.battle3Player1 = true;
     console.log("battle3Player1: " + p1.battle3Player1);
     console.log("battle3Computer: " + comp.battle3Computer);
     p1.isBlastoiseDead();
 
-  }else if (p1.battle3Player1 === true && p1.battle2Player1 === true && p1.battle1Player1 === true && a1.player1Score === 3) {
+  }else if (p1.battle3Player1 === true && p1.battle2Player1 === true && p1.battle1Player1 === true) {
 
-    document.getElementById("statusProgress").innerHTML=("congratulations, you won the match!");
+    console.log("statusProgress3 not reporting victory to player1 -- fix on this line");
+
+    document.getElementById("statusProgress3").innerHTML=("congratulations, you won the match!");
 
 
 
