@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (12/13/2021)
+Lastest update: (12/20/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -9,7 +9,7 @@ x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- f
 x2) retreiverAndResolver formula on line 2952 needs to corrected. *low priority*
 x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 -- onixMoves on lines 4074 to 4404
-y) Created debuggingOperation() on line 741 -- working on switching pokemon --
+y) created feedback link to receive feedback from pokemon game when player1 wins the battle but need to create the feedback form  ************************************************************  12/20/2021
 z) disabled the restart function on line 361 informWinner() to work on line 222
 1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
 2) add code here for when pikachu lives and sycther dies and fix logic for other pokemon pairs. + find a way to make the health load instantly after switching pokemon *********************** 12/09/2021
@@ -17,7 +17,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
 3a) why is Computer health status is undefined on line 1149? maybe because it's a function?
-3b) if onix is the only pokemon left and blastoise eliminates it then match is won by player1 -- create a new image and inform player1 of winning the game. Also change deadPokemonBackup to accomadate all index for all 3 functions starting with loadScytherOnly ** 12/13/2021
+3b) if onix is the only pokemon left and blastoise eliminates it then match is won by player1 -- create a new image and inform player1 of winning the game. Also change deadPokemonBackup to accomadate all index for all 3 functions starting with loadScytherOnly ** 12/20/2021
 3c) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
@@ -1241,18 +1241,80 @@ this.isBlastoiseDead = function() {
     console.log("battle3Computer: " + comp.battle3Computer);
     p1.isBlastoiseDead();
 
-  }else if (p1.battle3Player1 === true && p1.battle2Player1 === true && p1.battle1Player1 === true) {
-
-    console.log("statusProgress3 not reporting victory to player1 -- fix on this line");
-
-    document.getElementById("statusProgress3").innerHTML=("congratulations, you won the match!");
-
-
-
   }//end of multiple if statements for informWinner function
 
 
+//if statement below needs to be seperated from the first one because two scenarios become true at the same time but only one statement can be executed if true.
 
+  if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player1 === true) {
+
+
+//remove previous Pokemon image
+
+let elem =  document.createElement("img");
+elem.src ="";
+document.getElementById("CpuPokeImage").appendChild(elem);
+document.getElementById("CpuPokeImage").style.width = 100;
+document.getElementById("CpuPokeImage").style.height = 100;
+
+//replace with new pokemon
+
+document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/winner.jpg" </img>';
+document.getElementById("CpuPokeImage").style.width = 320;
+document.getElementById("CpuPokeImage").style.height = 380;
+
+setTimeout(function() {
+
+//Inform player1 of victory
+
+document.getElementById("statusProgress").innerHTML=("<b>Congratulations, you won the match!</b>");
+
+document.getElementById("statusProgress2").innerHTML=("");
+
+document.getElementById("statusProgress3").innerHTML = "Click the link below to leave feedback. ";
+document.getElementById("sendLink").innerHTML = "Give feedback";
+document.getElementById("sendLink").href = "https://greenaces.site/index3.html";
+document.getElementById("sendLink").target = "_blank";
+
+
+
+},3000); // 3 sec wait time for changing statusProgress messages
+
+
+
+
+
+}else if (comp.battle1Computer === true && comp.battle2Computer === true && comp.battle3Computer === true) {
+
+  //remove previous Pokemon image
+
+  let elem =  document.createElement("img");
+  elem.src ="";
+  document.getElementById("CpuPokeImage").appendChild(elem);
+  document.getElementById("CpuPokeImage").style.width = 100;
+  document.getElementById("CpuPokeImage").style.height = 100;
+
+  //replace with new pokemon
+
+  document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/gamelost.jpg" </img>';
+  document.getElementById("CpuPokeImage").style.width = 320;
+  document.getElementById("CpuPokeImage").style.height = 380;
+
+  setTimeout(function() {
+
+  //Inform player1 of defeat
+
+  document.getElementById("statusProgress").innerHTML=("You lost the battle, but you can restart the game and try again!");
+
+  document.getElementById("statusProgress2").innerHTML=("");
+
+  document.getElementById("statusProgress3").innerHTML=("");
+
+
+},3000); // 3 sec wait time for changing statusProgress messages
+
+
+}//end of 2nd if statement for informWinner function
 
 
 
