@@ -22,16 +22,16 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
-7) Remove the stars *** for the following comment: "please wait for computer to attack or switch(***)" but only after fixing new mechanism
+7)
 8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
 10) investigate this this.squPokeImage2() on line 411 *low priority*
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
-12) Make all the pokemon functional -- currently only charmander and squirtle only work together.
-13) on line 1568 defaultProgressBar.catchErrorFromSwitch(); needs to be updated to reflect changes to player1 and computer speed progressbars *low priority*
+12)
+13) fix decreasePlayerHP2 and decreasePlayerHP3 to match decreasePlayerHP (ensure that === 0 is changed to <= 0 ) *************************************************************** low priority (12/21/2021)
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 15) add <= 0 attributes for pikachu and blastoise on this.decreasePlayerHP + this.decreaseComputerHP + this.deathValidator --- charmander was already completed ****low priority**************** 11/20/2021
-16) pokRecImage2 on line 58 is the recovery image for computer -- to include this code in the function *low priority* ************************************************************************** 9/15/2021
+16)
 
 */
 
@@ -648,7 +648,7 @@ class referee {
          }//end of 1st if statement
 
           //same conditions for other player1 pokemon
-          else if (pikachuHP8 === 0 && scytherHP8 >= 1 && p1.pikachuDied === true && comp.scytherSelected === true) {
+          else if (pikachuHP8 <= 0 && scytherHP8 >= 1 && p1.pikachuDied === true && comp.scytherSelected === true) {
             document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please choose next pokemon.");
 
             // remove previous player1 Pokemon image
@@ -688,7 +688,7 @@ class referee {
           }//end of 2nd if statement
 
 
-          else if (blastoiseHP8  === 0 && onixHP8 >= 1 && p1.blastoiserDied === true && comp.onixSelected === true) {
+          else if (blastoiseHP8  <= 0  && onixHP8 >= 1 && p1.blastoiserDied === true && comp.onixSelected === true) {
             document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please choose next pokemon.");
 
             // remove previous player1 Pokemon image
@@ -733,7 +733,7 @@ class referee {
 
          //load computer pokemon tombstone image based on certain conditions.
 
-        else if (squirtleHP7 === 0 && charmanderHP7 >= 1 && comp.squirtleDied === true && p1.charmanderSelected === true) {
+        else if (squirtleHP7 <= 0 && charmanderHP7 >= 1 && comp.squirtleDied === true && p1.charmanderSelected === true) {
 
         //Inform player computer pokemon died but let the game continue
 
@@ -783,7 +783,7 @@ class referee {
 
 
           //same conditions for other computer pokemon
-          else if (scytherHP8 === 0 && pikachuHP8 >= 1 && comp.scytherDied === true && p1.pikachuSelected === true) {
+          else if (scytherHP8 <= 0 && pikachuHP8 >= 1 && comp.scytherDied === true && p1.pikachuSelected === true) {
 
 
           document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please wait for computer to select the next pokemon.");
@@ -827,7 +827,7 @@ class referee {
         }//end of 5th if statement
 
 
-          else if (onixHP8  === 0 && blastoiseHP8 >= 1 && comp.onixDied === true && p1.blastoiseSelected === true) {
+          else if (onixHP8  <= 0 && blastoiseHP8 >= 1 && comp.onixDied === true && p1.blastoiseSelected === true) {
 
 
           document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please wait for computer to select the next pokemon.");
@@ -893,7 +893,7 @@ class referee {
 
 
 
-        if (charmanderHP4 === 0 && squirtleHP4 >= 1) {
+        if (charmanderHP4  <= 0 && squirtleHP4 >= 1) {
 
           // confirm dead pokemon
           p1.charmanderDied = true;
@@ -923,7 +923,7 @@ class referee {
 
 
 
-        } else if (charmanderHP4 >= 1 && squirtleHP4 === 0) {
+        } else if (charmanderHP4 >= 1 && squirtleHP4  <= 0) {
 
 
           // confirm dead pokemon
@@ -977,7 +977,7 @@ this.isPikachuDead = function() {
 
 
 
-    if (pikachuHP6 === 0 && scytherHP6 >= 1) {
+    if (pikachuHP6 <= 0 && scytherHP6 >= 1) {
 
       // confirm dead pokemon
       p1.pikachuDied = true;
@@ -1005,7 +1005,7 @@ this.isPikachuDead = function() {
       p1.deadPokemonBackup.length = 6;
 
 
-    } else if (pikachuHP6 >= 1 && scytherHP6 === 0) {
+    } else if (pikachuHP6 >= 1 && scytherHP6 <= 0) {
 
 
       // confirm dead pokemon
@@ -1057,7 +1057,7 @@ this.isBlastoiseDead = function() {
 
 
 
-    if (blastoiseHP7 === 0 && onixHP7 >= 1) {
+    if (blastoiseHP7 <= 0  && onixHP7 >= 1) {
 
       // confirm dead pokemon
       p1.blastoiseDied = true;
@@ -1085,7 +1085,7 @@ this.isBlastoiseDead = function() {
       p1.deadPokemonBackup.length = 6;
 
 
-    } else if (blastoiseHP7 >= 1 && onixHP7 === 0) {
+    } else if (blastoiseHP7 >= 1 && onixHP7 <= 0) {
 
 
       // confirm dead pokemon
@@ -1187,7 +1187,7 @@ this.isBlastoiseDead = function() {
   //conditions to execute if computer defeats player1 pokemon are below
 
 
-  if (charmanderHP3 === 0 && squirtleHP3 >= 1 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
+  if (charmanderHP3 <= 0 && squirtleHP3 >= 1 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
     document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
     p1.battle1Player1 = false;
@@ -1196,7 +1196,7 @@ this.isBlastoiseDead = function() {
     console.log("battle1Computer: " + comp.battle1Computer);
     p1.isCharmanderDead();
 
-  }else if (pikachuHP4 === 0 && scytherHP4 >= 1  && p1.pikachuSelected === true && comp.scytherSelected === true) {
+  }else if (pikachuHP4 <= 0 && scytherHP4 >= 1  && p1.pikachuSelected === true && comp.scytherSelected === true) {
 
     document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] + " died. Pick another pokemon to continue the battle.");
     p1.battle2Player1 = false;
@@ -1205,7 +1205,7 @@ this.isBlastoiseDead = function() {
     console.log("battle2Computer: " + comp.battle2Computer);
     p1.isPikachuDead();
 
-  }else if (blastoiseHP4 === 0 && onixHP4 >= 1  && p1.blastoiseSelected === true && comp.onixSelected === true) {
+  }else if (blastoiseHP4 <= 0 && onixHP4 >= 1  && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
     document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" died. Pick another pokemon to continue the battle.");
     p1.battle3Player1 = false;
@@ -1214,7 +1214,7 @@ this.isBlastoiseDead = function() {
     console.log("battle3Computer: " + comp.battle3Computer);
     p1.isBlastoiseDead();
 
-  }else if (charmanderHP3 >= 1 && squirtleHP3 === 0  && p1.charmanderSelected === true && comp.squirtleSelected === true) {
+  }else if (charmanderHP3 >= 1 && squirtleHP3 <= 0  && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
     document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle1Computer = false;
@@ -1223,7 +1223,7 @@ this.isBlastoiseDead = function() {
     console.log("battle1Computer: " + comp.battle1Computer);
     p1.isCharmanderDead();
 
-  }else if (pikachuHP4 >= 1 && scytherHP4 === 0  && p1.pikachuSelected === true && comp.scytherSelected === true ) {
+  }else if (pikachuHP4 >= 1 && scytherHP4 <= 0  && p1.pikachuSelected === true && comp.scytherSelected === true ) {
 
     document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle2Computer = false;
@@ -1232,7 +1232,7 @@ this.isBlastoiseDead = function() {
     console.log("battle2Computer: " + comp.battle2Computer);
     p1.isPikachuDead();
 
-  }else if (blastoiseHP4 >= 1 && onixHP4 === 0  && p1.blastoiseSelected === true && comp.onixSelected === true) {
+  }else if (blastoiseHP4 >= 1 && onixHP4 <= 0  && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
     document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle3Computer = false;
@@ -2644,54 +2644,6 @@ a12 = new objectofArrays; //onixHpRecovered
 class progressBar {
   constructor () {
 
-    this.catchErrorFromSwitch = function () {
-
-      //varible declartions
-
-      let squirtleHP8 = a2.squirtleHealthBar.reduce(array1.PokemonHPReduced);
-      let charmanderHP9 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-
-
-  if ( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100 ) {
-
-    throw 'Error: Attack range is out of bounds. Review switch cases.';
-
-  }else if (isNaN(squirtleHP8) || isNaN(charmanderHP9)) {
-
-     throw "Error: The array(s) only accepts numbers.";
-
-  } // end of else if statements
-
-
-  try {
-
-  // attempt to fix the problem and end the game.
-
-    if( squirtleHP8 < 0 || squirtleHP8 > 100 || charmanderHP9 < 0 || charmanderHP9 > 100) {
-
-        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated. Error code 142";
-
-        console.log("getCharmanderHP: " + array1.getCharmanderHP());
-        console.log("getSquirtleHP: "   + array2.getSquirtleHP());
-
-    }else if (isNaN(squirtleHP8) || isNaN(charmanderHP9)) {
-
-        document.getElementById("statusProgress3").innerHTML = "An error occured in the game. Therefore it was terminated. Error code 143";
-
-
-
-    }// end of if statements
-
-
-} catch (reportError) {
-
-  console.error(reportError);
-
-}
-
-    }// end of catchErrorFromSwitch function
-
-
     this.defaultHPSetting = function () {
 
       //default settings for array when no pokemon battle occur
@@ -2870,8 +2822,8 @@ class progressBar {
 
         switch(squirtleHP5 < 0 || squirtleHP5 >= 0) {
 
-        case (squirtleHP5 < 0): //debugging: try attacking with solar power 3 times to test this out
-        hpDamage = 1;
+        case (squirtleHP5 < 0):
+        hpDamage = 0;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         p1.informWinner();
 
@@ -2908,8 +2860,8 @@ class progressBar {
         break;
 
         default:
-      //  defaultProgressBar.catchErrorFromSwitch();
-      console.log("decreaseComputerHP default function was commented out for troubleshooting purposes. Fix this later.");
+
+        console.log("decreaseComputerHP default function was called. Look at the switch cases.");
 
   }// end of switch statement
 
@@ -2973,8 +2925,8 @@ class progressBar {
                 break;
 
                 default:
-              //  defaultProgressBar.catchErrorFromSwitch();
-              console.log("decreaseComputerHP2 default function was commented out for troubleshooting purposes. Fix this later. (2-2)");
+
+                console.log("decreaseComputerHP2 default function was called. Look at the switch cases. (2-2)");
 
           }// end of switch statement
 
@@ -3041,10 +2993,10 @@ class progressBar {
                   break;
 
                   default:
-                //  defaultProgressBar.catchErrorFromSwitch();
-                console.log("decreaseComputerHP3 default function was commented out for troubleshooting purposes. Fix this later. (3-3)");
 
-            }// end of switch statement
+                 console.log("decreaseComputerHP3 default function was called. Look at the switch cases. (3-3)");
+
+                    }// end of switch statement
 
                   }// end of if statement
 
@@ -3125,8 +3077,8 @@ class progressBar {
         break;
 
         default:
-        //defaultProgressBar.catchErrorFromSwitch();
-        console.log("decreasePlayerHP default function was commented out for troubleshooting purposes. Fix this later.");
+
+        console.log("decreasePlayerHP default function was called. Look at the switch cases (1).");
 
 
 }// end of switch statement
@@ -3198,8 +3150,8 @@ class progressBar {
               break;
 
               default:
-              //defaultProgressBar.catchErrorFromSwitch();
-              console.log("decreasePlayerHP2 default function was commented out for troubleshooting purposes. Fix this later.(2)");
+
+              console.log("decreasePlayerHP2 default function was called. Look at the switch cases. (2)");
 
 
       }// end of switch statement
@@ -3277,8 +3229,8 @@ class progressBar {
               break;
 
               default:
-              //defaultProgressBar.catchErrorFromSwitch();
-              console.log("decreasePlayerHP3 default function was commented out for troubleshooting purposes. Fix this later.(3)");
+
+              console.log("decreasePlayerHP3 default function was called. Look at the switch cases. (3)");
 
 
       }// end of switch statement
@@ -3296,8 +3248,7 @@ this.increaseComputerHP = function () {
   let hpDamage = 0;
   let speedReduced = 0;
   let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a8.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
-  let computerSPD =  a1.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
-  // let computerSPD2,3,4 etc = other SpeedProgressBar -- that you can recycle the code and not have to re-create a new function
+  let computerSPD =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
   if (squirtleHP5 < 0 || squirtleHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true && computerSPD >= 0) {
@@ -3314,8 +3265,19 @@ this.increaseComputerHP = function () {
     speedReduced = computerSPD;
     document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
     p1.informWinner();
-    //create code here for when computer speed progress bar is 0.
-    console.log("no code at line 1536");
+
+    if (computerSPD === 0) {
+
+      //Inform player1 when computer speed progress bar is 0.
+      document.getElementById("statusProgress").innerHTML=("Squirtle's speed is too low and can no longer rest.");
+
+      document.getElementById("statusProgress2").innerHTML=("");
+
+      document.getElementById("statusProgress3").innerHTML=("");
+
+    }//this if statement doesn't get triggered
+
+
     break;
 
     case (squirtleHP5 > 0 && squirtleHP5 <= 20 || computerSPD > 0 && computerSPD <= 20):
@@ -3350,8 +3312,8 @@ this.increaseComputerHP = function () {
     break;
 
     default:
-    //defaultProgressBar.catchErrorFromSwitch();
-    console.log("increaseComputerHP default function was commented out for troubleshooting purposes. Fix this later.");
+
+    console.log("increaseComputerHP default function was called. Look at the switch cases. (1)");
 
   }// end of switch statement
 
@@ -3373,77 +3335,62 @@ this.increasePlayerHP = function () {
   let hpDamage2 = 0;
   let speedReduced2 = 0;
   let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced) + a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
-  let player1SPD    = a1.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
-  // let player1SPD2,3,4 etc.. = other SpeedProgressBar so that you can recycle the code and not have to re-create a new function.
+  let player1SPD    = a7.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
   let player1LowHealthIndicator2 = document.querySelector('.player1HP');
 
   console.log("charmanderHP5 output:" + charmanderHP5);
   console.log("player1SPD output:" + player1SPD);
 
-  if (charmanderHP5 < 0 || charmanderHP5 >= 0  && player1.charmanderMoves[0].charmanderFunction6of6 === true && player1SPD >= 0) {
 
+    if (charmanderHP5 > 40 && charmanderHP5 <= 100 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-   switch(charmanderHP5 < 0 || charmanderHP5 >= 0 || player1SPD < 0  || player1SPD >= 0) {
+      //load an invalid sound here (optional)
 
-   case (charmanderHP5 === 0 || player1SPD === 0):
+      //inform player that this move is not allowed at this time
+      document.getElementById("statusProgress").innerHTML=("Resting is not allowed at this time.");
 
-   hpDamage2 = charmanderHP5;
-   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-   comp.informWinner();
-   computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+      document.getElementById("statusProgress2").innerHTML=("Wait for pokemon health to be critical.");
 
-   speedReduced = player1SPD;
-   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
-   //create a code here for when player1speedbar is 0.
-   console.log("no code added for line 1605");
-   break;
+      document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon.");
 
-   case (charmanderHP5 > 0 && charmanderHP5 <= 20 || player1SPD > 0  && player1SPD <= 20):
+    }else if (charmanderHP5 >= 1 && charmanderHP5 < 40 && player1SPD > 1  && player1SPD < 100 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-   hpDamage2 = charmanderHP5;
-   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+      hpDamage2 = charmanderHP5;
+      document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+      player1LowHealthIndicator2.style.backgroundColor = "#A6EDED"; //blue
 
-   speedReduced = player1SPD;
-   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
-   break;
+      speedReduced2 = player1SPD;
+      document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
 
-   case (charmanderHP5 > 20 && charmanderHP5 <= 40 || player1SPD > 20  && player1SPD <= 40):
+    }else if (player1SPD === 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-   hpDamage2 = charmanderHP5;
-   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
-   player1LowHealthIndicator2.style.backgroundColor = "#A6EDED";
+      //load an invalid sound here (optional)
 
-   speedReduced = player1SPD;
-   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
-   break;
+      //inform player that this move is not allowed at this time
+      document.getElementById("statusProgress").innerHTML=("Resting is not allowed at this time.");
 
-   case (charmanderHP5 > 40 && charmanderHP5 <= 100 || player1SPD > 40  && player1SPD <= 100):
+      document.getElementById("statusProgress2").innerHTML=("Pokemon speed is too low.");
 
-   hpDamage2 = charmanderHP5;
-   document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+      document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon.");
 
-   speedReduced = player1SPD;
-   document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
-   break;
+      player1.charmanderMoves[0].charmanderFunction6of6 = false;
 
-   default:
-   //defaultProgressBar.catchErrorFromSwitch();
-   console.log("increasePlayerHP default function was commented out for troubleshooting purposes. Fix this later.");
+      console.log("charmanderFunction6of6 is: " + player1.charmanderMoves[0].charmanderFunction6of6);
 
-
- }// end if switch statement
-
-
-       }// end of if statements
-
-
-            }// end of increasePlayerHP
+    }//end of multiple if statements
 
 
 
-        } // end of progressBar constructor
 
-          } // end of prograssBar class
+
+
+
+                }//end of increasePlayerHP
+
+
+          }//end of progressBar constructor
+
+  }//end of prograssBar class
 
 
 
@@ -3804,7 +3751,7 @@ class player1Moves {
        console.log("The rest function started on this line: ");
 
        //confirm attack move for pokemon was clicked
-       player1.charmanderMoves.charmanderFunction6of6 = true;
+       player1.charmanderMoves[0].charmanderFunction6of6 = true;
 
        computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
 
@@ -3826,7 +3773,7 @@ class player1Moves {
        //debugging--------------------------------------
        console.log("The following pokemon health was restored: " + restore.restedPokemonArray);
        console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
-       console.log("charmanderBackup array BEFORE health was restored (commented out on line 1934): " + a1.charmanderBackup);
+       console.log("charmanderBackup array BEFORE health was restored (commented out on this line): " + a1.charmanderBackup);
 
        // show recovery image
        player1Img.chrAtkImage6();
@@ -4783,25 +4730,29 @@ class computerMoves {
         //debugging here -- delete when neccessary
         console.log("squirtleMoves Function6of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction6of6);
 
-        //rest recovers 30 HP to squirtle
-        //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-        a1.charmanderHealthBar.push(30);
-        a1.charmanderBackup.push(30);
+        //rest recovers 10 HP to squirtle
+
+        //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
+        a2.squirtleHealthBar.push(10);
+        a2.squirtleBackup.push(10);
+
+        //reflect the changes to squirtle speedbar as well
+        a8.squSpeedProgressBar.push(-50);
 
 
-        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-        squirtleProgressBar.decreasePlayerHP();
+        //this function changes the HTML progress bar that displays the pokemon HP (increases computers health if player1 restores health)
+        squirtleProgressBar.increaseComputerHP();
 
         // This is the function that applies the filter to the arrays listed above. It also calls other functions
         array1.checkTheStatus();
 
         //debugging here------------------------------------------------------
 
-        console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+        console.log("squirtleHealthBar array is "+ a2.squirtleHealthBar);
 
         //get the status of health for player1 and computer pokemon
 
-        console.log("charmanderBackup array is " +a1.charmanderBackup);
+        console.log("squirtleBackup array is " + a2.squirtleBackup);
 
         if (p1.preserveHPChanges === false) {
 
@@ -4812,14 +4763,15 @@ class computerMoves {
         }else if (p1.preserveHPChanges === true) {
 
           //inform player1 of attack from computer
-          document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
+          document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!(***)";
 
         }//end of if statements
 
 
 
         //show attack image
-        computerImg.squAtkImage5();
+        computerImg.squAtkImage6();
+
 
 
 
