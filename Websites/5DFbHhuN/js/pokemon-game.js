@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (12/20/2021)
+Lastest update: (12/22/2021)
 
 
 x0) pokemon-game.js:1292 Uncaught Error: Attack range is out of bounds. Review switch cases. Comment out this line so you can troubleshoot charmander attack function 1,2 and 3.
@@ -31,7 +31,7 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 13) fix decreasePlayerHP2 and decreasePlayerHP3 to match decreasePlayerHP (ensure that === 0 is changed to <= 0 ) *************************************************************** low priority (12/21/2021)
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 15) add <= 0 attributes for pikachu and blastoise on this.decreasePlayerHP + this.decreaseComputerHP + this.deathValidator --- charmander was already completed ****low priority**************** 11/20/2021
-16)
+16) create an invalid sound for increasePlayerHP function (optional) *********************************************************************************************************** low priority*** 12/22/2021
 
 */
 
@@ -3247,7 +3247,7 @@ this.increaseComputerHP = function () {
 
   let hpDamage = 0;
   let speedReduced = 0;
-  let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced) + a8.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
+  let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
   let computerSPD =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
@@ -3268,15 +3268,12 @@ this.increaseComputerHP = function () {
 
     if (computerSPD === 0) {
 
+      //disable rest function for squirtle
+      computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
+
       //Inform player1 when computer speed progress bar is 0.
-      document.getElementById("statusProgress").innerHTML=("Squirtle's speed is too low and can no longer rest.");
 
-      document.getElementById("statusProgress2").innerHTML=("");
-
-      document.getElementById("statusProgress3").innerHTML=("");
-
-    }//this if statement doesn't get triggered
-
+    }//end of if statement
 
     break;
 
@@ -3309,6 +3306,16 @@ this.increaseComputerHP = function () {
 
     speedReduced = computerSPD;
     document.querySelector(".cpuSpeed").style.width = speedReduced +   "%";
+
+    if (computer.squirtleMovesActivated[0].squirtleFunction6of6 === false && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+
+        //Inform player1 of computers pokemon mood if computer rest function is disabled
+        
+
+
+    }//end of 2nd if statment
+
+
     break;
 
     default:
@@ -3334,26 +3341,37 @@ this.increasePlayerHP = function () {
 
   let hpDamage2 = 0;
   let speedReduced2 = 0;
-  let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced) + a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
+  let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
   let player1SPD    = a7.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
   let player1LowHealthIndicator2 = document.querySelector('.player1HP');
 
-  console.log("charmanderHP5 output:" + charmanderHP5);
-  console.log("player1SPD output:" + player1SPD);
+    //prevent health restoration if player1 pokemon health is greater than 40
+    if (charmanderHP5 > 40 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+
+      document.getElementById("defenseC").removeEventListener("click", defenseC);
+      document.getElementById("defenseC").style.color = "#C91212";
+      player1.charmanderMoves[0].charmanderFunction6of6 = false;
+      computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
 
-    if (charmanderHP5 > 40 && charmanderHP5 <= 100 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
       //load an invalid sound here (optional)
 
       //inform player that this move is not allowed at this time
-      document.getElementById("statusProgress").innerHTML=("Resting is not allowed at this time.");
 
-      document.getElementById("statusProgress2").innerHTML=("Wait for pokemon health to be critical.");
 
-      document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon.");
 
-    }else if (charmanderHP5 >= 1 && charmanderHP5 < 40 && player1SPD > 1  && player1SPD < 100 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+
+    }//end of if statement
+
+
+    //enable health restoration if player1 pokemon health is between 1 and 40
+    if (charmanderHP5 >= 1 && charmanderHP5 < 40  && player1.charmanderMoves[0].charmanderFunction6of6 === false) {
+
+      document.getElementById("defenseC").addEventListener("click", defenseC);
+      document.getElementById("defenseC").style.color = "#000000";
+      player1.charmanderMoves[0].charmanderFunction6of6 = true;
+      computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
 
       hpDamage2 = charmanderHP5;
       document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
@@ -3362,22 +3380,32 @@ this.increasePlayerHP = function () {
       speedReduced2 = player1SPD;
       document.querySelector(".playerSpeed").style.width = speedReduced2 +   "%";
 
-    }else if (player1SPD === 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
-      //load an invalid sound here (optional)
+    }//end of if statement
 
-      //inform player that this move is not allowed at this time
-      document.getElementById("statusProgress").innerHTML=("Resting is not allowed at this time.");
 
-      document.getElementById("statusProgress2").innerHTML=("Pokemon speed is too low.");
 
-      document.getElementById("statusProgress3").innerHTML=("You can now attack or switch pokemon.");
+    //disable health restoration if speed is 0.
+    if (player1SPD === 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
+
+      document.getElementById("defenseC").removeEventListener("click", defenseC);
+      document.getElementById("defenseC").style.color = "#C91212";
       player1.charmanderMoves[0].charmanderFunction6of6 = false;
+      computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
-      console.log("charmanderFunction6of6 is: " + player1.charmanderMoves[0].charmanderFunction6of6);
 
-    }//end of multiple if statements
+
+        //load an invalid sound here (optional)
+
+        console.log("charmanderFunction6of6 is: " + player1.charmanderMoves[0].charmanderFunction6of6);
+
+
+
+
+
+
+    }//end of if statement
 
 
 
@@ -3755,11 +3783,12 @@ class player1Moves {
 
        computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
 
-       //reflect the changes to the charmanderHpRecovered array only because charmanderHealthBarBackup will eventually have this data when the array is reduced.
-       a7.charmanderHpRecovered.push(45);
+       //reflect the changes to the charmanderHealthBar array
+       a1.charmanderHealthBar.push(45);
 
-       // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-       a7.chaSpeedProgressBar.push(-50); // Sets charmanders speedbar to 50%
+       //reflect speedbar progress to chaSpeedProgressBar array to create limit of health restoration
+       a7.chaSpeedProgressBar.push(-50);
+
 
        //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
        charmanderProgressBar.increasePlayerHP();
@@ -3767,7 +3796,6 @@ class player1Moves {
        //record rest action that was taken as it will be used later.
        restore.restedPokemon = true;
        restore.restedPokemonArray.push("Charmander");
-      // a1.charmanderBackup.push(45); this is the regular backup for hpDamage -- delete it when neccessary
        restore.charmanderRestoredHPBackup.push(45);
 
        //debugging--------------------------------------
