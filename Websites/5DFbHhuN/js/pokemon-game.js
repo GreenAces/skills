@@ -1,10 +1,10 @@
 
 /*
 NOTE:
-Lastest update: (12/27/2021)
+Lastest update: (12/28/2021)
 
 
-x0)
+x0) make restoring health for charmander and squirtle instant. Then fix logic regarding health restoration when health is <=40 for the rest function ********* high priority ***************** 12/28/2021
 x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2)
 x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
@@ -270,8 +270,25 @@ this.chrAtkImage6 = function () {  // image 6 of 6 attack image needs to show on
     }
 
 
+    this.player1TauntImage = function () { // image 1 of 1 for taunting player1 when attemping to use health restoration when health is > 40
 
-  } // end of constructor
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/laughandpoint.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove taunt image after 4 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+        }, 4000); // 4 sec wait time
+
+    }
+
+
+
+
+        } // end of constructor
 
 } // end of images class
 
@@ -283,7 +300,9 @@ computerImg = new images;
 
 
 class sound {
-  constructor (){
+
+  constructor () {
+
      this.charmanderVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/CharmanderVoice.mp3');
      this.blastoiseVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/BlastoiseVoice.wav');
      this.onixVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/OnixVoice.mp3');
@@ -293,6 +312,12 @@ class sound {
      this.scytherVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/ScytherVoice.wav');
      this.squirtleVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/SquirtleVoicezzz.mp3');
      this.soundConfirmer = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/soundConfirmer.wav');
+     this.invalidAction =  new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/invalidAction.mp3');
+     this.congratulationsTheme = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/congratulationsTheme.mp3');
+
+
+
+
 
     this.soundSettingsOn = function() {
 
@@ -1247,6 +1272,9 @@ this.isBlastoiseDead = function() {
 //if statement below needs to be seperated from the first one because two scenarios become true at the same time but only one statement can be executed if true.
 
   if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player1 === true) {
+
+//load victory theme if player1 wins the match
+player1SD.congratulationsTheme.play();
 
 
 //remove previous Pokemon image
@@ -2588,10 +2616,10 @@ class objectofArrays {
 
   constructor () {
 
-    this.charmanderHealthBar =  [100];
-    this.charmanderBackup =     [100];
-    this.charmanderHpRecovered = [0];
-    this.chaSpeedProgressBar =  [100];
+    this.charmanderHealthBar =  [100]; //This array will contain hp damage and health restoration data for charmander -- same is true for other pokemon arrays
+    this.charmanderBackup =     [100];//This array will only contain hp damage data for charmander -- same is true for other pokemon arrays
+    this.charmanderHpRecovered = [0]; //This array will only contain retored hp data for charmander -- same is true for other pokemon arrays
+    this.chaSpeedProgressBar =  [100]; //This array will be used as a limit to prevent health restoration for charmander -- ex: if speed is 0 then health resotration is disabled -- same is true for other pokemon arrays
     this.squirtleHealthBar =    [100];
     this.squirtleBackup =       [100];
     this.squirtleHpRecovered =  [0];
@@ -3251,7 +3279,7 @@ this.increaseComputerHP = function () {
   let computerSPD =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
-  if (squirtleHP5 <= 40 && player1.charmanderMoves[0].charmanderFunction6of6 === true || squirtleHP5 > 40 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+  if (player1.charmanderMoves[0].charmanderFunction6of6 === true && computer.squirtleMovesActivated[0].squirtleFunction6of6 === true) {
 
 
 
@@ -3284,6 +3312,7 @@ this.increaseComputerHP = function () {
     computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
     restore.restedSquirtle = true;
+    a8.squirtleHpRecovered.push(10);
 
     //inform player1 of computer pokemon resting
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
@@ -3291,6 +3320,7 @@ this.increaseComputerHP = function () {
     //player1.charmanderMoves[0].charmanderFunction6of6 = true;
     //computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
     console.log("restedSquirtle when < 40: " + restore.restedSquirtle);
+    console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
     console.log("code was commented out *debugging*(3-1-1)");
 
 
@@ -3307,6 +3337,7 @@ this.increaseComputerHP = function () {
     document.querySelector(".cpuSpeed").style.width = computerSPD +   "%";
 
     restore.restedSquirtle = true;
+    a8.squirtleHpRecovered.push(10);
 
     //inform player1 of computer pokemon resting
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
@@ -3314,6 +3345,7 @@ this.increaseComputerHP = function () {
     //player1.charmanderMoves[0].charmanderFunction6of6 = true;
     //computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
     console.log("restedSquirtle when < 40: " + restore.restedSquirtle);
+    console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
     console.log("code was commented out *debugging*(2-1-1)");
 
 
@@ -3322,23 +3354,26 @@ this.increaseComputerHP = function () {
     case (squirtleHP5 > 40):
 
     //prevent health restoration if computer pokemon health is greater than 40
-
     restore.restedSquirtle = false;
 
-    //taunt player1 for using health restoration pre-maturely
-
-    document.getElementById("statusProgress3").innerHTML=("Squirtle is laughing at Charmander...");
 
     //player1.charmanderMoves[0].charmanderFunction6of6 = false;
     //computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
     console.log("restedSquirtle: when > 40 is " + restore.restedSquirtle);
     console.log("code was commented out *debugging*(1-1-1)");
 
+    setTimeout(function() {
+
+    //inform player that this move is not allowed at this time and taunt player1 for using health restoration pre-maturely
+    document.getElementById("statusProgress3").innerHTML=("Squirtle is laughing at Charmander...");
+    document.getElementById("statusProgress2").innerHTML=("Charmander can't rest at this time.");
+
+    //load pointandlaugh.png to taunt player1  (see images class for more details)
+    computerImg.player1TauntImage();
 
 
-    //load an invalid sound here (optional)
 
-    //inform player that this move is not allowed at this time
+        },3000); // 3 sec wait for message to display
 
 
     break;
@@ -3359,8 +3394,6 @@ this.increaseComputerHP = function () {
 
 this.increasePlayerHP = function () {
 
-  console.log("increasePlayerHP was called.");
-
     // variable declartions
 
     let hpRestore = 0;
@@ -3369,7 +3402,7 @@ this.increasePlayerHP = function () {
     let player1SPD    = a7.chaSpeedProgressBar.reduce(array1.PokemonSpeedReduced);
     let player1LowHealthIndicator2 = document.querySelector('.player1HP');
 
-    if (charmanderHP5 <= 40 && player1.charmanderMoves[0].charmanderFunction6of6 === true ||charmanderHP5 > 40 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+    if (player1.charmanderMoves[0].charmanderFunction6of6 === true && computer.squirtleMovesActivated[0].squirtleFunction6of6 === true) {
 
 
 
@@ -3408,6 +3441,7 @@ this.increasePlayerHP = function () {
 
 
       restore.restedCharmander = true;
+      restore.charmanderRestoredHPBackup.push(45);
 
       //document.getElementById("defenseC").addEventListener("click", defenseC);
       //document.getElementById("defenseC").style.color = "#000000";
@@ -3422,6 +3456,13 @@ this.increasePlayerHP = function () {
 
     //  speedReduced3 = player1SPD;
     //  document.querySelector(".playerSpeed").style.width = player1SPD +   "%";
+
+    //record rest action that was taken as it can be used later for troubleshooting errors later.
+    //debugging-----delete when neccessary------------
+    console.log("restedCharmander: " + restore.restedCharmander);
+    console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
+    console.log("charmanderBackup array BEFORE health was restored (commented out on this line): " + a1.charmanderBackup);
+
 
       break;
 
@@ -3439,6 +3480,7 @@ this.increasePlayerHP = function () {
 
 
       restore.restedCharmander = true;
+      restore.charmanderRestoredHPBackup.push(45);
 
       //document.getElementById("defenseC").addEventListener("click", defenseC);
       //document.getElementById("defenseC").style.color = "#000000";
@@ -3453,6 +3495,13 @@ this.increasePlayerHP = function () {
 
     //  speedReduced3 = player1SPD;
     //  document.querySelector(".playerSpeed").style.width = player1SPD +   "%";
+
+    //record rest action that was taken as it can be used later for troubleshooting errors later.
+    //debugging-----delete when neccessary------------
+    console.log("restedCharmander: " + restore.restedCharmander);
+    console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
+    console.log("charmanderBackup array BEFORE health was restored (commented out on this line): " + a1.charmanderBackup);
+
 
 
       break;
@@ -3469,13 +3518,6 @@ this.increasePlayerHP = function () {
       //computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
       console.log("restedCharmander: when > 40 is " + restore.restedCharmander);
       console.log("code was commented out *debugging*(1)");
-
-
-
-      //load an invalid sound here (optional)
-
-      //inform player that this move is not allowed at this time
-
 
       break;
 
@@ -3881,30 +3923,50 @@ class player1Moves {
 
      this.rest = function() {
 
-       console.log("The rest function started on this line: ");
+       //varible declartion
+
+       let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
 
        //confirm attack move for pokemon was clicked
        player1.charmanderMoves[0].charmanderFunction6of6 = true;
 
        computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
 
-       //changes are made below this line
-
        //debugging here -- delete when neccessary
       console.log("squirtleMoves Function6of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction6of6);
 
-      //rest recovers 10 HP to squirtle
+      //rest recovers 10 HP to squirtle if conditions are true
 
-      //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
-      a2.squirtleHealthBar.push(10);
-      a2.squirtleBackup.push(10);
+      if (squirtleHP5 <= 40) {
 
-      //reflect the changes to squirtle speedbar as well
-      a8.squSpeedProgressBar.push(-50);
+        //show recovery image for player1 pokemon
+        player1Img.chrAtkImage6();
+
+        //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
+
+        a2.squirtleHealthBar.push(10);
+        a2.squirtleBackup.push(10);
+
+        //reflect the changes to squirtle speedbar as well
+        a8.squSpeedProgressBar.push(-50);
+
+      }else if (squirtleHP5 > 40) {
+
+        //load invalid sound is loaded if player1 health is > 40
+        player1SD.invalidAction.play();
+
+        //make no changes to squirtleHealthBar AND squirtleBackup array as well.
+        a2.squirtleHealthBar.push(0);
+        a2.squirtleBackup.push(0);
+
+        //make no the changes to squirtle speedbar as well
+        a8.squSpeedProgressBar.push(0);
+
+
+      }//end of if statements
 
 
       //this function changes the HTML progress bar that displays the pokemon HP (increases computers health if player1 restores health)
-      //adding if statement here can be helpful -- determine weather to increase or prevent health restoration for player1 pokemon here?
       squirtleProgressBar.increaseComputerHP();
 
       //This is the function that applies the filter to the arrays listed above. It also calls other functions
@@ -3917,19 +3979,6 @@ class player1Moves {
       //get the status of health for player1 and computer pokemon
 
       console.log("squirtleBackup array is " + a2.squirtleBackup);
-
-      //show recovery image for computer pokemon
-      computerImg.squAtkImage6();
-
-
-
-       //stop here
-       //cut here
-
-
-
-       //stop here ?
-
 
 
        //change boolean state so that computer can attack
@@ -4891,36 +4940,41 @@ class computerMoves {
 
         case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true ):
 
+        //varible declartion
+
+        let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
 
         //squirtle attack move: rest (restores health to charmander)
         //disable attack move for squirtle pokemon and charmander
         computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
-        //changes below this line are needed
-        //paste here
+        //charmander gets 45 HP if conditions are true
 
+        if (charmanderHP5 <= 40) {
 
-        //reflect the changes to the charmanderHealthBar array
-        a1.charmanderHealthBar.push(45);
+          //show recovery image for computer pokemon
+          computerImg.squAtkImage6();
 
-        //reflect speedbar progress to chaSpeedProgressBar array to create limit of health restoration
-        a7.chaSpeedProgressBar.push(-50);
+          //reflect the changes to the charmanderHealthBar array
+          a1.charmanderHealthBar.push(45);
+
+          //reflect speedbar progress to chaSpeedProgressBar array to create limit for health restoration
+          a7.chaSpeedProgressBar.push(-50);
+
+        }else if(charmanderHP5 > 40) {
+
+          //make no changes to the charmanderHealthBar array
+          a1.charmanderHealthBar.push(0);
+
+          //make no changes to chaSpeedProgressBar array
+          a7.chaSpeedProgressBar.push(0);
+
+        }//end of if statements
 
 
         //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
         charmanderProgressBar.increasePlayerHP();
 
-        //record rest action that was taken as it will be used later.
-        restore.restedCharmander = true;
-        restore.charmanderRestoredHPBackup.push(45);
-
-        //debugging--------------------------------------
-        console.log("restedCharmander: " + restore.restedCharmander);
-        console.log("This is how much HP was restored: " + restore.charmanderRestoredHPBackup);
-        console.log("charmanderBackup array BEFORE health was restored (commented out on this line): " + a1.charmanderBackup);
-
-
-        //stop here
 
         //default setting
         if (p1.preserveHPChanges === false) {
@@ -4934,18 +4988,10 @@ class computerMoves {
           //remove previous comment
           document.getElementById("statusProgress2").innerHTML =  "";
 
-        }else if (restore.squirtleRestoredHPBackup.reduce(array2.PokemonHPReduced) === 0 &&  restore.restedSquirtle === false && restore.restedCharmander === true) {
-
-        //Inform player1 of computers pokemon mood if computer rest function is disabled
-
-        document.getElementById("statusProgress3").innerHTML =  "Squirtle is angry...";
-
-        }//end of multiple if statements
+        }//end of if statements
 
 
 
-        //show recovery image for player1 pokemon
-        player1Img.chrAtkImage6();
 
 
         //Change boolean state so that player1 can make a move
