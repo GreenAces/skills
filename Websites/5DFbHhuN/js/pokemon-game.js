@@ -1,9 +1,9 @@
 
 /*
 NOTE:
-Lastest update: (12/31/2021)
+Lastest update: (01/04/2022)
 
-x0) fix rest2() and remove scyther and replace it with pikachu then make rest3() work for blastoise  *************************************************** high priority ***************** 12/30/2021
+x0) add more features to rest function for when pokemon health is > 40  ************************************************************************************************************************************************* high priority ***************** 01/04/2022
 x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
 x2) delay in pokemon health displaying correctly the first time it's called. This problem is similar to x0 ******************************************************************** high priority ***************** 12/30/2021
 x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
@@ -3245,72 +3245,226 @@ this.increaseComputerHP = function () {
   let hpRestore2 = 0;
   let speedReduced2 = 0;
   let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+  let scytherHP8 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+  let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
   let computerSPD =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  let computerSPD2 = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  let computerSPD3 = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
 
-  if (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true) {
+  if (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true || computer.scytherMovesActivated[0].scytherFunction6of6 === true || computer.onixMovesActivated[0].onixFunction6of6 === true) {
 
 
 
-    switch (computerSPD <= 0 || squirtleHP5 <= 40 || squirtleHP5 > 40) {
+    switch (computerSPD <= 0 || squirtleHP5 <= 40 || squirtleHP5 > 40 || computerSPD2 <= 0 || scytherHP8 <= 40 || scytherHP8 > 40 || computerSPD3 <= 0 || onixHP12 <= 40 || onixHP12 > 40) {
 
-    case (computerSPD <= 0):
+    case (computerSPD <= 0 ||  computerSPD2 <= 0 ||  computerSPD3 <= 0):
 
-    //prevent health restoration if computer pokemon speed is 0.
+    //set all pokemon speed to true here (changes will be made when if statement is triggered):
 
     restore.squirtleSpeedDecreased = true;
+    restore.scytherSpeedDecreased = true;
+    restore.onixSpeedDecreased = true;
 
-    speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
-    document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-    computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && computerSPD <= 0) {
+
+      //prevent health restoration if computer pokemon speed is 0.
+
+      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
-    console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
-    console.log("code was commented out *debugging*(4-1-1)");
+      console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-1)");
 
-    //inform player1 of computer inablility to use the rest function
-    document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is too low to rest...";
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is too low to rest...";
+
+      //turn off pokemon speed for non-selected pokemon here:
+      restore.scytherSpeedDecreased = false;
+      restore.onixSpeedDecreased = false;
+
+
+    }//end of if statement for squirtleSpeedDecreased
+
+    if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && computerSPD2 <= 0) {
+
+      //prevent health restoration if computer pokemon speed is 0.
+
+      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+
+      console.log("scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-2)");
+
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Scyther's speed is too low to rest...";
+
+      //turn off pokemon speed for non-selected pokemon here:
+      restore.squirtleSpeedDecreased = false;
+      restore.onixSpeedDecreased = false;
+
+    }//end of if statement for scytherSpeedDecreased
+
+    if (comp.onixSelected === true && restore.onixSpeedDecreased === true && computerSPD3 <= 0) {
+
+      //prevent health restoration if computer pokemon speed is 0.
+
+      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+
+      console.log("onixSpeedDecreased: " + restore.onixSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-3)");
+
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Onix's speed is too low to rest...";
+
+      //turn off pokemon speed for non-selected pokemon here:
+      restore.squirtleSpeedDecreased = false;
+      restore.scytherSpeedDecreased = false;
+
+
+    }//end of if statement for onixSpeedDecreasedS
+
 
 
 
     break;
 
-    case (squirtleHP5 <= 40 ):
+    case (squirtleHP5 <= 40 || scytherHP8 <= 40 || onixHP12 <= 40):
 
-    //enable health restoration if computer pokemon health is <= 40
+    if (comp.squirtleSelected === true && squirtleHP5 <= 40) {
 
-    hpRestore2 = squirtleHP5;
-    document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
+      //enable health restoration if computer pokemon health is <= 40
 
-    speedReduced2 = computerSPD;
-    document.querySelector(".cpuSpeed").style.width = computerSPD +   "%";
-    computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+      hpRestore2 = squirtleHP5;
+      document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
 
-    restore.restedSquirtle = true;
-    a8.squirtleHpRecovered.push(10);
+      speedReduced2 = computerSPD;
+      document.querySelector(".cpuSpeed").style.width = computerSPD +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
-    //inform player1 of computer pokemon resting
-    document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
+      restore.restedSquirtle = true;
+      a8.squirtleHpRecovered.push(10);
 
-    //player1.charmanderMoves[0].charmanderFunction6of6 = true;
-    //computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
-    console.log("restedSquirtle when < 40: " + restore.restedSquirtle);
-    console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
-    console.log("code was commented out *debugging*(3-1-1)");
+      //inform player1 of computer pokemon resting
+      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
+
+
+      console.log("restedSquirtle hp when < 40: " + restore.restedSquirtle);
+      console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
+      console.log("code was commented out *debugging*(3-1-1)");
+
+
+    }//end of if statement for when squirtle hp < 40
+
+    if (comp.scytherSelected === true  && scytherHP8 <= 40) {
+
+      //enable health restoration if computer pokemon health is <= 40
+
+      hpRestore2 = scytherHP8;
+      document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
+
+      speedReduced2 = computerSPD2;
+      document.querySelector(".cpuSpeed").style.width = computerSPD2 +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+      restore.restedScyther = true;
+      a10.scytherHpRecovered.push(10);
+
+      //inform player1 of computer pokemon resting
+      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1]+ " is "+" resting!";
+
+
+      console.log("restedScyther hp when < 40: " + restore.restedScyther);
+      console.log("scytherHpRecovered: " + a10.scytherHpRecovered);
+      console.log("code was commented out *debugging*(3-1-2)");
+
+
+
+    }//end of if statement for when scyther hp < 40
+
+    if (comp.onixSelected === true && onixHP12 <= 40) {
+
+
+      //enable health restoration if computer pokemon health is <= 40
+
+      hpRestore2 = onixHP12;
+      document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
+
+      speedReduced2 = computerSPD3;
+      document.querySelector(".cpuSpeed").style.width = computerSPD3 +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+      restore.restedOnix = true;
+      a6.onixHpRecovered.push(10);
+
+      //inform player1 of computer pokemon resting
+      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[3]+ " is "+" resting!";
+
+
+      console.log("restedOnix hp when < 40: " + restore.restedOnix);
+      console.log("onixHpRecovered: " +   a6.onixHpRecovered);
+      console.log("code was commented out *debugging*(3-1-3)");
+
+
+
+
+    }//end of if statement for when onix hp is < 40
+
 
 
     break;
 
-    case (squirtleHP5 > 40):
+    case (squirtleHP5 > 40 || scytherHP8 > 40 || onixHP12 > 40):
 
-    //prevent health restoration if computer pokemon health is > 40
-    restore.restedSquirtle = false;
+    if (comp.squirtleSelected === true && squirtleHP5 > 40) {
+
+      //prevent health restoration if computer pokemon health is > 40
+      restore.restedSquirtle = false;
 
 
-    //player1.charmanderMoves[0].charmanderFunction6of6 = false;
-    //computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
-    console.log("restedSquirtle: when > 40 is " + restore.restedSquirtle);
-    console.log("code was commented out *debugging*(1-1-1)");
+      console.log("restedSquirtle hp: when > 40 is " + restore.restedSquirtle);
+      console.log("code was commented out *debugging*(1-1-1)");
+
+
+    }//end of if statement for when squirtle hp > 40
+
+
+    if (comp.scytherSelected === true && scytherHP8 > 40) {
+
+
+      //prevent health restoration if computer pokemon health is > 40
+      restore.restedScyther = false;
+
+
+      console.log("restedScyther hp: when > 40 is " + restore.restedScyther);
+      console.log("code was commented out *debugging*(1-1-2)");
+
+
+    }//end of if statement for when scyther hp is > 40
+
+
+    if (comp.onixSelected === true && onixHP12 > 40) {
+
+
+      //prevent health restoration if computer pokemon health is > 40
+      restore.restedOnix = false;
+
+
+      console.log("restedOnix hp: when > 40 is " + restore.restedOnix);
+      console.log("code was commented out *debugging*(1-1-3)");
+
+
+    }//end of if statement when onix hp is > 40
+
+
+
 
 
 
@@ -3320,13 +3474,13 @@ this.increaseComputerHP = function () {
 
     console.log("increaseComputerHP default function was called. Look at the switch cases. (1)");
 
-  }// end of switch statement
+  }//end of switch statement
 
 
-        }// end if statements
+            }//end of primary if statement
 
 
-            }// end of increaseComputerHP
+                }// end of increaseComputerHP
 
 
 
@@ -3742,7 +3896,7 @@ class player1Moves {
         restore.restedSquirtle = false;
 
         //debugging
-        console.log("restedSquirtle status when > 40: " + restore.restedSquirtle)
+        console.log("restedSquirtle status when hp > 40: " + restore.restedSquirtle);
 
         //load invalid sound is loaded if player1 health is > 40
         player1SD.invalidAction.play();
@@ -3758,19 +3912,16 @@ class player1Moves {
       }//end of if statements
 
 
-       //this function changes the HTML progress bar that displays the pokemon HP (increases computers health if player1 restores health)
+       //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to charmander if certain conditions are true.
         squirtleProgressBar.increaseComputerHP();
 
 
-      //This is the function that applies the filter to the arrays listed above. It also calls other functions
+      //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
 
       //debugging here------------------------------------------------------
 
       console.log("squirtleHealthBar array is "+ a2.squirtleHealthBar);
-
-      //get the status of health for player1 and computer pokemon
-
       console.log("squirtleBackup array is " + a2.squirtleBackup);
 
 
@@ -4013,7 +4164,7 @@ class player1Moves {
        console.log("The rest function started on this line: (2) ");
 
        //variable declartion
-       let scytherHP14 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+        let scytherHP14 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
 
        //confirm attack move for pokemon was clicked
        player1.pikachuMoves.pikachuFunction6of6 = true;
@@ -4035,14 +4186,13 @@ class player1Moves {
          //reflect the changes to scySpeedProgressBar as well
          a10.scySpeedProgressBar.push(-50);
 
-
        }else if (scytherHP14 > 40) {
 
          //if health is > 40 then this implies that scyther didn't restore health
          restore.restedScyther = false;
 
          //debugging
-         console.log("restedScyther status when > 40: " + restore.restedScyther);
+         console.log("restedScyther status when hp > 40: " + restore.restedScyther);
 
          //load invalid sound is loaded if player1 health is > 40
          player1SD.invalidAction.play();
@@ -4058,13 +4208,17 @@ class player1Moves {
        }//end of if statements
 
 
-       //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
+       //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to pikachu if certain conditions are true.
+       scytherProgressBar.increaseComputerHP();
 
-       pikachuProgressBar.decreasePlayerHP2(); //actually increases hp for pikachu
+       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
+       array1.checkTheStatus();
 
 
        //debugging--------------------------------------
-       console.log("restedPikachu: " + restore.restedPikachu);
+
+      console.log("scytherHealthBar array is "+ a4.scytherHealthBar);
+      console.log("scytherBackup array is " + a4.scytherBackup);
 
 
        // show recovery image
@@ -4076,7 +4230,7 @@ class player1Moves {
 
        console.log(confirm.makeMove[0]);
 
-     } // end of rest2 function
+     }// end of rest2 function
 
 
 
@@ -4316,26 +4470,60 @@ class player1Moves {
 
        console.log("The rest function started on this line:(3) ");
 
+       let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+
        //confirm attack move for pokemon was clicked
        player1.blastoiseMoves.blastoiseFunction6of6 = true;
        computer.onixMovesActivated[0].onixFunction6of6 = true;
 
-       //reflect the changes to the blastoiseHpRecovered array only because blastoiseHealthBarBackup will eventually have this data when the array is reduced.
-       a11.blastoiseHpRecovered.push(45);
+       //rest recovers 10 HP to onix if conditions are true
 
-       // player1 speed progressbar needs to reflect changes if the rest function was clicked.
-       a11.blaSpeedProgressBar.push(-50); // Sets blastoises speedbar to 50%
+       if (onixHP11 <= 40) {
 
-       //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
-       blastoiseProgressBar.decreasePlayerHP3(); //actually increases hp for blastoise
+         //show recovery image for player1 pokemon
+         player1Img.chrAtkImage6();
 
-       //record rest action that was taken as it will be used later.
-       restore.restedBlastoise = true;
+         //reflect the changes to onixHealthBar AND onixBackup array as well.
 
+         a6.onixHealthBar.push(10);
+         a6.onixBackup.push(10);
+
+         //reflect the changes to onixSpeedProgressBar as well
+         a12.onixSpeedProgressBar.push(-50);
+
+       }else if (onixHP11 > 40) {
+
+         //if health is > 40 then this implies that onix didn't restore health
+         restore.restedOnix = false;
+
+         //debugging
+         console.log("restedOnix status when hp > 40: " + restore.restedOnix);
+
+         //load invalid sound is loaded if player1 health is > 40
+         player1SD.invalidAction.play();
+
+         //make no changes to onixHealthBar AND onixBackup array
+         a6.onixHealthBar.push(0);
+         a6.onixBackup.push(0);
+
+         //make no the changes to onixSpeedProgressBar
+         a12.onixSpeedProgressBar.push(0);
+
+
+       }//end of if statements
+
+
+       //This is the function that applies the reduce method to the arrays listed above. Computer gives HP to blastoise if conditions are true
+       onixProgressBar.increaseComputer();
+
+       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
+       array1.checkTheStatus();
 
 
        //debugging--------------------------------------
-       console.log("restedBlastoise: " + restore.restedBlastoise);
+
+       console.log("onixHealthBar array is "+ a6.onixHealthBar);
+       console.log("onixBackup array is " + a6.onixBackup);
 
 
        // show recovery image
@@ -4437,7 +4625,7 @@ class computerMoves {
    //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
    squirtleProgressBar.decreasePlayerHP();
 
-   // This is the function that applies the filter to the arrays listed above. It also calls other functions
+   //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
    array1.checkTheStatus();
 
    //debugging here------------------------------------------------------
@@ -4506,16 +4694,16 @@ class computerMoves {
   //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
   squirtleProgressBar.decreasePlayerHP();
 
-  // This is the function that applies the filter to the arrays listed above. It also calls other functions
+  //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
   array1.checkTheStatus();
 
   //debugging here------------------------------------------------------
 
-  console.log("CharmanderHealthBar array is "+a1.charmanderHealthBar);
+  console.log("CharmanderHealthBar array is "+ a1.charmanderHealthBar);
 
   // get the status of health for player1
 
-  console.log("charmanderBackup array is " +a1.charmanderBackup);
+  console.log("charmanderBackup array is " + a1.charmanderBackup);
 
     //default setting
 
@@ -4573,7 +4761,7 @@ class computerMoves {
   //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
   squirtleProgressBar.decreasePlayerHP();
 
-  // This is the function that applies the filter to the arrays listed above. It also calls other functions
+  //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
   array1.checkTheStatus();
 
   //debugging here------------------------------------------------------
@@ -4644,7 +4832,7 @@ class computerMoves {
     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
     squirtleProgressBar.decreasePlayerHP();
 
-    // This is the function that applies the filter to the arrays listed above. It also calls other functions
+    //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
     array1.checkTheStatus();
 
     //debugging here------------------------------------------------------
@@ -4715,7 +4903,7 @@ class computerMoves {
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
       squirtleProgressBar.decreasePlayerHP();
 
-      // This is the function that applies the filter to the arrays listed above. It also calls other functions
+      //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
 
       //debugging here------------------------------------------------------
@@ -4885,14 +5073,14 @@ class computerMoves {
       console.log("scytherMoves Function1of6 is : " + computer.scytherMovesActivated[0].scytherFunction1of6);
 
       //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
-      a3.pikachuHealthBar.push(-5);
-      a3.pikachuBackup.push(-5);
+      a3.pikachuHealthBar.push(-25); //default attack was -5 hp but change to  -25 hp to make pikachu lose
+      a3.pikachuBackup.push(-25);
 
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
       scytherProgressBar.decreasePlayerHP2();
 
-      // This is the function that applies the filter to the arrays listed above. It also calls other functions
+      //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
 
       //debugging here------------------------------------------------------
@@ -4955,7 +5143,7 @@ class computerMoves {
      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
      scytherProgressBar.decreasePlayerHP2();
 
-     // This is the function that applies the filter to the arrays listed above. It also calls other functions
+     //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
      array1.checkTheStatus();
 
      //debugging here------------------------------------------------------
@@ -5019,7 +5207,7 @@ class computerMoves {
      //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
      scytherProgressBar.decreasePlayerHP2();
 
-     // This is the function that applies the filter to the arrays listed above. It also calls other functions
+     //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
      array1.checkTheStatus();
 
      //debugging here------------------------------------------------------
@@ -5085,7 +5273,7 @@ class computerMoves {
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
        scytherProgressBar.decreasePlayerHP2();
 
-       // This is the function that applies the filter to the arrays listed above. It also calls other functions
+       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
 
        //debugging here------------------------------------------------------
@@ -5151,7 +5339,7 @@ class computerMoves {
          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
          scytherProgressBar.decreasePlayerHP2();
 
-         // This is the function that applies the filter to the arrays listed above. It also calls other functions
+         //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
          array1.checkTheStatus();
 
          //debugging here------------------------------------------------------
@@ -5204,6 +5392,7 @@ class computerMoves {
            let pikachuHP14 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
 
 
+
            //scyther attack move: rest2
            //disable attack move for scyther pokemon and pikachu
            computer.scytherMovesActivated[0].scytherFunction6of6 = true;
@@ -5226,6 +5415,8 @@ class computerMoves {
              //reflect the changes to the pikachuHealthBar array
             a3.pikachuHealthBar.push(45);
 
+            //reflect the changes to the pikachuBackup array
+            a3.pikachuBackup.push(45);
 
              //reflect speedbar progress to pikSpeedProgressBar array to create limit for health restoration
             a9.pikSpeedProgressBar.push(-50);
@@ -5247,19 +5438,19 @@ class computerMoves {
            }//end of if statements
 
 
-           //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers scyther when pikachu attacks)
-           scytherProgressBar.decreasePlayerHP2();
+           //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers pikachu when scyther attacks)
+           pikachuProgressBar.decreasePlayerHP2();
 
-           // This is the function that applies the filter to the arrays listed above. It also calls other functions
+           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
            array1.checkTheStatus();
 
            //debugging here------------------------------------------------------
 
-           console.log("scytherHealthBar array is "+a4.scytherHealthBar);
+           console.log("pikachuHealthBar array is "+ a3.pikachuBackup);
 
            // get the status of health for player1
 
-           console.log("scytherBackup array is " +a4.scytherBackup);
+           console.log("pikachuBackup array is " + hpRecovered3);
 
            if (p1.preserveHPChanges === false) {
 
@@ -5277,7 +5468,7 @@ class computerMoves {
 
 
            //show attack image
-           computerImg.squAtkImage5();
+           computerImg.squAtkImage6();
 
 
 
@@ -5342,7 +5533,7 @@ class computerMoves {
          //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
          onixProgressBar.decreasePlayerHP3();
 
-         // This is the function that applies the filter to the arrays listed above. It also calls other functions
+         //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
          array1.checkTheStatus();
 
          //debugging here------------------------------------------------------
@@ -5393,7 +5584,7 @@ class computerMoves {
         //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
         onixProgressBar.decreasePlayerHP3();
 
-        // This is the function that applies the filter to the arrays listed above. It also calls other functions
+        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
         array1.checkTheStatus();
 
         //debugging here------------------------------------------------------
@@ -5445,7 +5636,7 @@ class computerMoves {
         //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
         onixProgressBar.decreasePlayerHP3();
 
-        // This is the function that applies the filter to the arrays listed above. It also calls other functions
+        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
         array1.checkTheStatus();
 
         //debugging here------------------------------------------------------
@@ -5499,7 +5690,7 @@ class computerMoves {
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
           onixProgressBar.decreasePlayerHP3();
 
-          // This is the function that applies the filter to the arrays listed above. It also calls other functions
+          //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
 
           //debugging here------------------------------------------------------
@@ -5553,7 +5744,7 @@ class computerMoves {
             //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
             onixProgressBar.decreasePlayerHP3();
 
-            // This is the function that applies the filter to the arrays listed above. It also calls other functions
+            //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
             array1.checkTheStatus();
 
             //debugging here------------------------------------------------------
@@ -5639,7 +5830,7 @@ class computerMoves {
               //this function changes the HTML progress bar that displays the pokemon HP (onix recovers health when blastoise attacks)
               onixProgressBar.decreasePlayerHP3();
 
-              // This is the function that applies the filter to the arrays listed above. It also calls other functions
+              //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
               array1.checkTheStatus();
 
               //debugging here------------------------------------------------------
