@@ -1,12 +1,12 @@
 
 /*
 NOTE:
-Lastest update: (01/04/2022)
+Lastest update: (01/05/2022)
 
-x0) add more features to rest function for when pokemon health is > 40  ************************************************************************************************************************************************* high priority ***************** 01/04/2022
-x1) Troubleshoot line 2079 (squirleMoves) and line 1581 (increasePlayerHP) --- find out why charmander speed progress bar is NOT decreasing and why charmander's health is not increasing when rest function is called.  *high priority*
-x2) delay in pokemon health displaying correctly the first time it's called. This problem is similar to x0 ******************************************************************** high priority ***************** 12/30/2021
-x3) on line 1069 chrPokeImage -- you need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
+x0) rest function partially working for pikachu and bastoise. Make it work fully.   ***************************************************************************** high priority ***************** 01/05/2022
+x1)
+x2)
+x3) on line 1069 chrPokeImage -- need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 -- onixMoves on lines 4074 to 4404
 y) created feedback link to receive feedback from pokemon game when player1 wins the battle but need to create the feedback form  ************************************************************  12/20/2021
 z) disabled the restart function on line 361 informWinner() to work on line 222
@@ -497,7 +497,7 @@ class referee {
 
 
 
-        else if (comp.squirtleDied === true && p1.charmanderDied === false) {
+        if (comp.squirtleDied === true && p1.charmanderDied === false) {
 
         //cross-out computer pokemon icon if conditions are valid.
 
@@ -520,10 +520,10 @@ class referee {
 
 
 
-      }// end of 4th if statement
+      }//end of if statement
 
         //same condition for other computer icons
-        else if (comp.scytherDied === true && p1.pikachuDied === false) {
+      if (comp.scytherDied === true && p1.pikachuDied === false) {
 
 
           // remove scyther icon
@@ -545,9 +545,10 @@ class referee {
 
 
 
-        }//end of 5th if statement
+        }//end of if statement
 
-        else if (comp.onixDied === true && p1.blastoiseDied === false) {
+
+       if (comp.onixDied === true && p1.blastoiseDied === false) {
 
 
 
@@ -569,7 +570,7 @@ class referee {
           computerCH.loadOnixOnly();
 
 
-        }//end multiple if statements
+        }//end of if statement
 
 
 
@@ -684,7 +685,7 @@ class referee {
           }//end of 2nd if statement
 
 
-          else if (blastoiseHP8  <= 0  && onixHP8 >= 1 && p1.blastoiserDied === true && comp.onixSelected === true) {
+          else if (blastoiseHP8  <= 0  && onixHP8 >= 1 && p1.blastoiseDied === true && comp.onixSelected === true) {
             document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please choose next pokemon.");
 
             // remove previous player1 Pokemon image
@@ -1497,7 +1498,7 @@ class changePokemon {
           document.getElementById("OnixIcon").style.width = 34;
           document.getElementById("OnixIcon").style.height = 46;
 
-        }// end of if statement
+        }//end of if statement
 
         if (p1.charmanderDied === true && comp.squirtleDied === false) {
 
@@ -1515,7 +1516,9 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
-        }else if (p1.pikachuDied === true && comp.scytherDied === false) {
+        }//end of if statement
+
+         if (p1.pikachuDied === true && comp.scytherDied === false) {
 
           // remove previous icon
 
@@ -1531,7 +1534,9 @@ class changePokemon {
           document.getElementById("PikachuIcon").style.width = 34;
           document.getElementById("PikachuIcon").style.height = 46;
 
-        }else if  (p1.blastoiseDied === true && comp.onixDied === false) {
+        }//end of if statement
+
+         if  (p1.blastoiseDied === true && comp.onixDied === false) {
 
           // remove previous icon
 
@@ -1547,7 +1552,7 @@ class changePokemon {
           document.getElementById("BlastoiseIcon").style.width = 34;
           document.getElementById("BlastoiseIcon").style.height = 46;
 
-        }//end of multiple if statements
+        }//end of if statement
 
 
 
@@ -2871,7 +2876,6 @@ class progressBar {
 
 
               let hpDamage5 = 0;
-              let hpRecovered6 = a12.onixHpRecovered.reduce(array2.PokemonRestoredReducer);
               let onixHP2 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
               let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
@@ -2881,7 +2885,8 @@ class progressBar {
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction2of6 === true ||
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction3of6 === true ||
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction4of6 === true ||
-                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction5of6 === true) {
+                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction5of6 === true ||
+                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction6of6 === true) {
 
                 //if statement ensures that some funtions are activated before making changes to the progress bar
 
@@ -2940,7 +2945,6 @@ class progressBar {
 
 
                 let hpDamage6 = 0;
-                let hpRecovered7 = a10.scytherHpRecovered.reduce(array2.PokemonRestoredReducer);
                 let scytherHP2 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
                 let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
@@ -2950,7 +2954,8 @@ class progressBar {
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction2of6 === true ||
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction3of6 === true ||
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction4of6 === true ||
-                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction5of6 === true) {
+                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction5of6 === true ||
+                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction6of6 === true) {
 
                   //if statement ensures that some funtions are activated before making changes to the progress bar
 
@@ -3005,13 +3010,9 @@ class progressBar {
 
       // variable declartions
 
-
       let hpDamage2 = 0;
-      let hpRecovered2 = a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
       let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
       let player1LowHealthIndicator = document.querySelector('.player1HP');
-
-
 
 
       if(charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
@@ -3030,20 +3031,19 @@ class progressBar {
         hpDamage2 = 0;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
 
-
-
         comp.informWinner();
         break;
+
+
 
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
 
-
-
         comp.informWinner();
         break;
+
 
         case (charmanderHP5 > 0 && charmanderHP5 <= 20):
         hpDamage2 = charmanderHP5;
@@ -3088,25 +3088,31 @@ class progressBar {
 
             // variable declartions
 
-
             let hpDamage3 = 0;
-            let hpRecovered3 = a9.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
             let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
             let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
 
-            if(pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction1of6 === true
-              || player1.pikachuMoves[0].pikachuFunction2of6 === true
-              || player1.pikachuMoves[0].pikachuFunction3of6 === true
-              || player1.pikachuMoves[0].pikachuFunction4of6 === true
-              || player1.pikachuMoves[0].pikachuFunction5of6 === true
-              || player1.pikachuMoves[0].pikachuFunction6of6 === true) {
+            if(pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction1of6 === true ||
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction2of6 === true ||
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction3of6 === true ||
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction4of6 === true ||
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction5of6 === true ||
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
 
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
               switch(pikachuHP2 < 0 || pikachuHP2 >= 0) {
+
+              case (pikachuHP2 < 0):
+              hpDamage3 = 0;
+              document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+
+              comp.informWinner();
+              break;
+
 
               case (pikachuHP2 === 0):
               hpDamage3 = pikachuHP2;
@@ -3168,25 +3174,31 @@ class progressBar {
 
             // variable declartions
 
-
             let hpDamage4 = 0;
-            let hpRecovered4 = a11.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
             let blastoiseHP2 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
             let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
-
-            if(blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction1of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction2of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction3of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction4of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction5of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
+            if(blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction1of6 === true ||
+               blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction2of6 === true ||
+               blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction3of6 === true ||
+               blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction4of6 === true ||
+               blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction5of6 === true ||
+               blastoiseHP2 < 0 || blastoiseHP2 >= 0 && player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
 
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
               switch(blastoiseHP2 < 0 || blastoiseHP2 >= 0) {
+
+              case (blastoiseHP2 < 0):
+              hpDamage4 = 0;
+              document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
+
+              comp.informWinner();
+              break;
+
+
 
               case (blastoiseHP2 === 0):
               hpDamage4 = blastoiseHP2;
@@ -3881,12 +3893,13 @@ class player1Moves {
         //show recovery image for player1 pokemon
         player1Img.chrAtkImage6();
 
-        //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
-
+        //reflect the changes to squirtleHealthBar
         a2.squirtleHealthBar.push(10);
-        a2.squirtleBackup.push(10);
 
-        //reflect the changes to squirtle speedbar as well
+        //backup array for health restoration needs to be updated
+        a2.squirtleHpRecovered.push(10);
+
+        //reflect the changes to squirtle speedbar
         a8.squSpeedProgressBar.push(-50);
 
 
@@ -3901,9 +3914,11 @@ class player1Moves {
         //load invalid sound is loaded if player1 health is > 40
         player1SD.invalidAction.play();
 
-        //make no changes to squirtleHealthBar AND squirtleBackup array as well.
+        //make no changes to squirtleHealthBar
         a2.squirtleHealthBar.push(0);
-        a2.squirtleBackup.push(0);
+
+        //make no changes to squirtleHpRecovered
+        a2.squirtleHpRecovered.push(0);
 
         //make no the changes to squirtle speedbar as well
         a8.squSpeedProgressBar.push(0);
@@ -3922,7 +3937,7 @@ class player1Moves {
       //debugging here------------------------------------------------------
 
       console.log("squirtleHealthBar array is "+ a2.squirtleHealthBar);
-      console.log("squirtleBackup array is " + a2.squirtleBackup);
+      console.log("squirtleHP_recovered array is " + a2.squirtleHpRecovered);
 
 
        //change boolean state so that computer can attack
@@ -4168,7 +4183,11 @@ class player1Moves {
 
        //confirm attack move for pokemon was clicked
        player1.pikachuMoves.pikachuFunction6of6 = true;
+
        computer.scytherMovesActivated[0].scytherFunction6of6 = true;
+
+       //debugging here -- delete when neccessary
+       console.log("scytherMoves Function6of6 is : " + computer.scytherMovesActivated[0].scytherFunction6of6);
 
 
        //rest recovers 10 HP to scyther if conditions are true
@@ -4178,12 +4197,13 @@ class player1Moves {
          //show recovery image for player1 pokemon
          player1Img.chrAtkImage6();
 
-         //reflect the changes to scytherHealthBar AND scytherBackup array as well.
-
+         //reflect the changes to scytherHealthBar
          a4.scytherHealthBar.push(10);
-         a4.scytherBackup.push(10);
 
-         //reflect the changes to scySpeedProgressBar as well
+         //backup array for health restoration needs to be updated
+         a4.scytherHpRecovered.push(10);
+
+         //reflect the changes to scySpeedProgressBar
          a10.scySpeedProgressBar.push(-50);
 
        }else if (scytherHP14 > 40) {
@@ -4197,9 +4217,11 @@ class player1Moves {
          //load invalid sound is loaded if player1 health is > 40
          player1SD.invalidAction.play();
 
-         //make no changes to scytherHealthBar AND scytherBackup array
+         //make no changes to scytherHealthBar
          a4.scytherHealthBar.push(0);
-         a4.scytherBackup.push(0);
+
+         //make no changes to scytherHpRecovered
+         a4.scytherHpRecovered.push(0);
 
          //make no the changes to scySpeedProgressBar
          a10.scySpeedProgressBar.push(0);
@@ -4209,7 +4231,7 @@ class player1Moves {
 
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to pikachu if certain conditions are true.
-       scytherProgressBar.increaseComputerHP();
+       scytherProgressBar.decreaseComputerHP3();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -4218,7 +4240,7 @@ class player1Moves {
        //debugging--------------------------------------
 
       console.log("scytherHealthBar array is "+ a4.scytherHealthBar);
-      console.log("scytherBackup array is " + a4.scytherBackup);
+      console.log("scytherHP_recovered array is " + a4.scytherHpRecovered);
 
 
        // show recovery image
@@ -4474,7 +4496,11 @@ class player1Moves {
 
        //confirm attack move for pokemon was clicked
        player1.blastoiseMoves.blastoiseFunction6of6 = true;
+
        computer.onixMovesActivated[0].onixFunction6of6 = true;
+
+       //debugging here -- delete when neccessary
+       console.log("onixMoves Function6of6 is : " + computer.onixMovesActivated[0].onixFunction6of6);
 
        //rest recovers 10 HP to onix if conditions are true
 
@@ -4483,12 +4509,13 @@ class player1Moves {
          //show recovery image for player1 pokemon
          player1Img.chrAtkImage6();
 
-         //reflect the changes to onixHealthBar AND onixBackup array as well.
-
+         //reflect the changes to onixHealthBar
          a6.onixHealthBar.push(10);
-         a6.onixBackup.push(10);
 
-         //reflect the changes to onixSpeedProgressBar as well
+         //backup array for health restoration needs to be updated
+         a6.onixHpRecovered.push(10);
+
+         //reflect the changes to onixSpeedProgressBar
          a12.onixSpeedProgressBar.push(-50);
 
        }else if (onixHP11 > 40) {
@@ -4502,9 +4529,11 @@ class player1Moves {
          //load invalid sound is loaded if player1 health is > 40
          player1SD.invalidAction.play();
 
-         //make no changes to onixHealthBar AND onixBackup array
+         //make no changes to onixHealthBar
          a6.onixHealthBar.push(0);
-         a6.onixBackup.push(0);
+
+         //make no changes to onixHpRecovered
+         a6.onixHpRecovered.push(0);
 
          //make no the changes to onixSpeedProgressBar
          a12.onixSpeedProgressBar.push(0);
@@ -4514,7 +4543,7 @@ class player1Moves {
 
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives HP to blastoise if conditions are true
-       onixProgressBar.increaseComputer();
+       onixProgressBar.decreaseComputerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -4523,7 +4552,7 @@ class player1Moves {
        //debugging--------------------------------------
 
        console.log("onixHealthBar array is "+ a6.onixHealthBar);
-       console.log("onixBackup array is " + a6.onixBackup);
+       console.log("onixHpRecovered array is " + a6.onixHpRecovered);
 
 
        // show recovery image
@@ -4812,7 +4841,7 @@ class computerMoves {
 
 
 
-    case (computer.squirtleMovesActivated[0].squirtleFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true ):
+    case (computer.squirtleMovesActivated[0].squirtleFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true):
 
 
     //squirtle attack move: tackle
@@ -4883,7 +4912,7 @@ class computerMoves {
 
 
 
-      case (computer.squirtleMovesActivated[0].squirtleFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true ):
+      case (computer.squirtleMovesActivated[0].squirtleFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true):
 
 
       //squirtle attack move: water gun
@@ -4951,12 +4980,12 @@ class computerMoves {
 
 
 
-        case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true ):
+        case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true):
 
         //varible declartion
+
         let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-
-
+        let hpRecovered2 = a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
 
         //squirtle attack move: rest (restores health to charmander)
         //disable attack move for squirtle pokemon and charmander
@@ -4975,6 +5004,8 @@ class computerMoves {
           //reflect the changes to the charmanderHealthBar array
          a1.charmanderHealthBar.push(45);
 
+         //backup array for health restoration needs to be updated as well
+         a7.charmanderHpRecovered.push(45);
 
           //reflect speedbar progress to chaSpeedProgressBar array to create limit for health restoration
          a7.chaSpeedProgressBar.push(-50);
@@ -4986,9 +5017,11 @@ class computerMoves {
           //make no changes to the charmanderHealthBar array
           a1.charmanderHealthBar.push(0);
 
+          //make no changes to charmanderHpRecovered array
+          a7.charmanderHpRecovered.push(0);
 
-          //make no changes to chaSpeedProgressBar array
-         a7.chaSpeedProgressBar.push(0);
+          //make no changes to the chaSpeedProgressBa array
+          a7.chaSpeedProgressBar.push(0);
 
 
 
@@ -5000,21 +5033,23 @@ class computerMoves {
           charmanderProgressBar.decreasePlayerHP(); //actually increases hp for charmander
 
 
+          //debugging here------------------------------------------------------
 
+          console.log("charmanderHealthBar array is "+ a1.charmanderHealthBar);
+          console.log("charmanderHP_recovered array is " + hpRecovered2);
 
 
 
         //default setting
         if (p1.preserveHPChanges === false) {
 
-          //default response for rest function can go here
-          console.log("what code can you add here when charmander uses rest?");
-
+          //remove previous comment
+          document.getElementById("statusProgress2").innerHTML =  "";
 
         }else if (p1.preserveHPChanges === true) {
 
-          //remove previous comment
-          document.getElementById("statusProgress2").innerHTML =  "";
+          //inform player1 of attack from computer
+          document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!***";
 
         }//end of if statements
 
@@ -5057,12 +5092,14 @@ class computerMoves {
 
         //scytherMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-        switch (player1.pikachuMoves[0].pikachuFunction1of6 === true
-           || player1.pikachuMoves[0].pikachuFunction2of6 === true || player1.pikachuMoves[0].pikachuFunction3of6 === true
-           || player1.pikachuMoves[0].pikachuFunction4of6 === true || player1.pikachuMoves[0].pikachuFunction5of6 === true
-           || player1.pikachuMoves[0].pikachuFunction6of6 === true) {
+        switch (computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.pikachuMoves[0].pikachuFunction1of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction2of6 === true && player1.pikachuMoves[0].pikachuFunction2of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction3of6 === true && player1.pikachuMoves[0].pikachuFunction3of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction4of6 === true && player1.pikachuMoves[0].pikachuFunction4of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction5of6 === true && player1.pikachuMoves[0].pikachuFunction5of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction6of6 === true && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
 
-     case (player1.pikachuMoves[0].pikachuFunction1of6 === true):
+     case (computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.pikachuMoves[0].pikachuFunction1of6 === true):
 
        //scyther attack move: slash
       //disable attack move for scyther pokemon and pikachu
@@ -5125,7 +5162,7 @@ class computerMoves {
 
 
 
-     case (player1.pikachuMoves[0].pikachuFunction2of6 === true):
+     case (computer.scytherMovesActivated[0].scytherFunction2of6 === true && player1.pikachuMoves[0].pikachuFunction2of6 === true):
 
      //scyther attack move: Quick Attack
      //disable attack move for scyther pokemon and pikachu
@@ -5188,7 +5225,7 @@ class computerMoves {
 
 
 
-     case (player1.pikachuMoves[0].pikachuFunction3of6 === true):
+     case (computer.scytherMovesActivated[0].scytherFunction3of6 === true && player1.pikachuMoves[0].pikachuFunction3of6 === true):
 
 
      //scyther attack move: X-Scissor
@@ -5254,7 +5291,7 @@ class computerMoves {
 
 
 
-       case (player1.pikachuMoves[0].pikachuFunction4of6 === true):
+       case (computer.scytherMovesActivated[0].scytherFunction4of6 === true && player1.pikachuMoves[0].pikachuFunction4of6 === true):
 
 
        //scyther attack move: Fury Cutter
@@ -5320,7 +5357,7 @@ class computerMoves {
 
 
 
-         case (player1.pikachuMoves[0].pikachuFunction5of6 === true):
+         case (computer.scytherMovesActivated[0].scytherFunction5of6 === true && player1.pikachuMoves[0].pikachuFunction5of6 === true):
 
 
          //scyther attack move: Wing Attack
@@ -5385,17 +5422,16 @@ class computerMoves {
 
 
 
-           case (player1.pikachuMoves[0].pikachuFunction6of6 === true):
+           case (computer.scytherMovesActivated[0].scytherFunction6of6 === true && player1.pikachuMoves[0].pikachuFunction6of6 === true):
 
            //varible declartion
 
            let pikachuHP14 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-
-
+           let hpRecovered3 = a9.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
 
            //scyther attack move: rest2
            //disable attack move for scyther pokemon and pikachu
-           computer.scytherMovesActivated[0].scytherFunction6of6 = true;
+           computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
            //debugging here -- delete when neccessary
            console.log("scytherMoves Function6of6 is : " + computer.scytherMovesActivated[0].scytherFunction6of6);
@@ -5415,8 +5451,8 @@ class computerMoves {
              //reflect the changes to the pikachuHealthBar array
             a3.pikachuHealthBar.push(45);
 
-            //reflect the changes to the pikachuBackup array
-            a3.pikachuBackup.push(45);
+            //backup array for health restoration needs to be updated as well
+            a9.pikachuHpRecovered.push(45);
 
              //reflect speedbar progress to pikSpeedProgressBar array to create limit for health restoration
             a9.pikSpeedProgressBar.push(-50);
@@ -5428,9 +5464,11 @@ class computerMoves {
              //make no changes to the pikachuHealthBar array
              a3.pikachuHealthBar.push(0);
 
+             //make no changes to pikachuHpRecovered array
+             a9.pikachuHpRecovered.push(0);
 
              //make no changes to pikSpeedProgressBar array
-            a9.pikSpeedProgressBar.push(0);
+             a9.pikSpeedProgressBar.push(0);
 
 
 
@@ -5439,7 +5477,7 @@ class computerMoves {
 
 
            //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers pikachu when scyther attacks)
-           pikachuProgressBar.decreasePlayerHP2();
+           pikachuProgressBar.decreasePlayerHP2(); //actually increases hp for pikachu
 
            //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
            array1.checkTheStatus();
@@ -5447,10 +5485,8 @@ class computerMoves {
            //debugging here------------------------------------------------------
 
            console.log("pikachuHealthBar array is "+ a3.pikachuBackup);
+           console.log("pikachuHP_recovered array is " + hpRecovered3);
 
-           // get the status of health for player1
-
-           console.log("pikachuBackup array is " + hpRecovered3);
 
            if (p1.preserveHPChanges === false) {
 
@@ -5461,7 +5497,7 @@ class computerMoves {
            }else if (p1.preserveHPChanges === true) {
 
              //inform player1 of attack from computer
-             document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0]+  " used rest to recover!";
+             document.getElementById("statusProgress2").innerHTML =   "Scyther used rest to recover!***";
 
            }//end of if statements
 
@@ -5511,12 +5547,14 @@ class computerMoves {
 
            //onixMoves needs to evalute the selection that player1 makes and take neccessary action based on that info
 
-           switch (player1.blastoiseMoves[0].blastoiseFunction1of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction2of6 === true || player1.blastoiseMoves[0].blastoiseFunction3of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction4of6 === true || player1.blastoiseMoves[0].blastoiseFunction5of6 === true
-              || player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
+           switch (computer.onixMovesActivated[0].onixFunction1of6 === true && player1.blastoiseMoves[0].blastoiseFunction1of6 === true
+              ||   computer.onixMovesActivated[0].onixFunction2of6 === true && player1.blastoiseMoves[0].blastoiseFunction2of6 === true
+              ||   computer.onixMovesActivated[0].onixFunction3of6 === true && player1.blastoiseMoves[0].blastoiseFunction3of6 === true
+              ||   computer.onixMovesActivated[0].onixFunction4of6 === true && player1.blastoiseMoves[0].blastoiseFunction4of6 === true
+              ||   computer.onixMovesActivated[0].onixFunction5of6 === true && player1.blastoiseMoves[0].blastoiseFunction5of6 === true
+              ||   computer.onixMovesActivated[0].onixFunction6of6 === true && player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
 
-        case (player1.blastoiseMoves[0].blastoiseFunction1of6 === true):
+        case (computer.onixMovesActivated[0].onixFunction1of6 === true && player1.blastoiseMoves[0].blastoiseFunction1of6 === true):
 
           //onix attack move: Rock Throw
          //disable attack move for onix pokemon and blastoise
@@ -5526,8 +5564,8 @@ class computerMoves {
          console.log("onixMoves Function1of6 is : " + computer.onixMovesActivated[0].onixFunction1of6);
 
          //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
-         a5.blastoiseHealthBar.push(-5);
-         a5.blastoiseBackup.push(-5);
+         a5.blastoiseHealthBar.push(-25); //default attack was -5 hp but change to -25 hp to make blastoise lose
+         a5.blastoiseBackup.push(-25);
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
@@ -5566,7 +5604,7 @@ class computerMoves {
 
 
 
-        case (player1.blastoiseMoves[0].blastoiseFunction2of6 === true):
+        case (computer.onixMovesActivated[0].onixFunction2of6 === true && player1.blastoiseMoves[0].blastoiseFunction2of6 === true):
 
         //onix attack move: Smack Down
         //disable attack move for onix pokemon and blastoise
@@ -5617,7 +5655,7 @@ class computerMoves {
 
 
 
-        case (player1.blastoiseMoves[0].blastoiseFunction3of6 === true):
+        case (computer.onixMovesActivated[0].onixFunction3of6 === true && player1.blastoiseMoves[0].blastoiseFunction3of6 === true):
 
 
         //onix attack move: Rock Slide
@@ -5671,7 +5709,7 @@ class computerMoves {
 
 
 
-          case (player1.blastoiseMoves[0].blastoiseFunction4of6 === true):
+          case (computer.onixMovesActivated[0].onixFunction4of6 === true && player1.blastoiseMoves[0].blastoiseFunction4of6 === true):
 
 
           //onix attack move: Screech
@@ -5725,7 +5763,7 @@ class computerMoves {
 
 
 
-            case (player1.blastoiseMoves[0].blastoiseFunction5of6 === true):
+            case (computer.onixMovesActivated[0].onixFunction5of6 === true && player1.blastoiseMoves[0].blastoiseFunction5of6 === true):
 
 
             //onix attack move: Stone Edge
@@ -5778,11 +5816,12 @@ class computerMoves {
 
 
 
-              case (player1.blastoiseMoves[0].blastoiseFunction6of6 === true):
+              case (computer.onixMovesActivated[0].onixFunction6of6 === true && player1.blastoiseMoves[0].blastoiseFunction6of6 === true):
 
               //varible declartion
 
               let blastoiseHP15 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+              let hpRecovered4 = a11.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
 
 
               //onix attack move: rest3
@@ -5806,6 +5845,10 @@ class computerMoves {
                a11.blastoiseHealthBar.push(45);
 
 
+               //backup array for health restoration needs to be updated as well
+               a11.blastoiseHpRecovered.push(45);
+
+
                 //reflect speedbar progress to blaSpeedProgressBar array to create limit for health restoration
                a11.blaSpeedProgressBar.push(-50);
 
@@ -5815,6 +5858,10 @@ class computerMoves {
 
                 //make no changes to the pikachuHealthBar array
                 a11.blastoiseHealthBar.push(0);
+
+
+                //make no changes to the blastoiseHpRecovered array
+                a11.blastoiseHpRecovered.push(0);
 
 
                 //make no changes to pikSpeedProgressBar array
@@ -5828,21 +5875,32 @@ class computerMoves {
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix recovers health when blastoise attacks)
-              onixProgressBar.decreasePlayerHP3();
+              onixProgressBar.decreasePlayerHP3(); //actually increases hp for blastoise
 
               //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
               array1.checkTheStatus();
 
               //debugging here------------------------------------------------------
 
-              console.log("onixHealthBar array is "+a6.onixHealthBar);
+              console.log("blastoiseHealthBar array is "+ a11.blastoiseHealthBar);
+              console.log("blastoiseHP_recovered array is " + a11.blastoiseHpRecovered);
 
-              // get the status of health for player1 and computer pokemon
 
-              console.log("onixBackup array is " +a6.onixBackup);
+              //default setting
+              if (p1.preserveHPChanges === false) {
 
-              // inform player1 of attack from computer
-              document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " used rest to recover!"
+                //remove previous comment
+                document.getElementById("statusProgress2").innerHTML =  "";
+
+
+              }else if (p1.preserveHPChanges === true) {
+
+                //inform player1 of attack from computer
+                document.getElementById("statusProgress2").innerHTML =  "Onix used rest to recover!***"
+
+              }//end of if statements
+
+
 
               //show attack image
               computerImg.squAtkImage5();
