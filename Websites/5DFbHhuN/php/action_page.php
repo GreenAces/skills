@@ -5,14 +5,13 @@
 <?php
 
   $servername = "localhost";
-  $username = "greenace_databaseDemo.table1";
+  $username = "AdminDemo";
   $pass = "ujDl9b$.Mxy";
-  $dbname = "AdminDemo";
+  $dbname = "greenace_databaseDemo";
   $conn = mysqli_connect($servername,$username,$pass,$dbname);
 
   $firstName = $_POST['fname'];
   $lastName = $_POST['lname'];
-
 
   if ($conn) {
 
