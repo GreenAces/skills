@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <title>GreenAces Pokemon Feedback</title>
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Bootstrap CSS -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="https://greenaces.site/5DFbHhuN/css/pokemon_form.css">
 
-      <title>GreenAces Testing Area 1</title>
     </head>
 <body>
   <div id="header"><!--div tag 1 of 3 opened -->
@@ -52,7 +53,7 @@
             <li><hr class="dropdown-divider1"></li>
             <li><a class="dropdown-item" href="https://greenaces.site/practice.html">Test 2</a></li>
             <li><hr class="dropdown-divider2"></li>
-            <li><a class="dropdown-item" href="#">Test 3</a></li>
+            <li><a class="dropdown-item" href="https://greenaces.site/pokemon_form.html">Test 3</a></li>
           </ul>
         </li>
       </ul>
@@ -66,20 +67,80 @@
 <div class="row">
   <div class="col align-self-start">
 
-    <h2>HTML Forms Practice</h2>
+    <h1>Pokemon Feedback form</h1>
 
 
-      <p>Enter your full name and hit submit.</p>
+    <p>Please answer questions honestly. WARNING: This is in testing mode. DO NOT SUBMIT THE FORM.</p>
+
+  <form action="https://greenaces.site/5DFbHhuN/php/pokemon_php.php" method="POST">
+
+      <p><b>Did you find the game fun or enjoyable?</b></p>
+      <input type="radio" id="enjoyable_Yes" name="enjoyable" value="enjoyable_Yes">
+      <label for="enjoyable">Yes</label><br>
+      <input type="radio" id="enjoyable_No" name="enjoyable" value="enjoyable_No">
+      <label for="enjoyable">No</label><br>
+      <input type="radio" id="enjoyable_alright" name="enjoyable" value="enjoyable_alright">
+      <label for="enjoyable">It's alright</label>
+
+      <br></br>
+
+      <p><b>Please select your age:</b></p>
+      <input type="radio" id="age1" name="age" value="30">
+      <label for="age1">0 - 30</label><br>
+      <input type="radio" id="age2" name="age" value="60">
+      <label for="age2">31 - 60</label><br>
+      <input type="radio" id="age3" name="age" value="100">
+      <label for="age3">61 - 100</label>
 
 
+      <br></br>
 
-    <form method="post" action="https://greenaces.site/5DFbHhuN/php/action_page.php">
-      <label for="fname">First name:</label><br>
-      <input type="text" id="fname" name="fname" value="John"><br>
-      <label for="lname">Last name:</label><br>
-      <input type="text" id="lname" name="lname" value="Doe"><br><br>
+      <p><b>Did you experience any bugs or errors during gameplay?</b></p>
+      <input type="radio" id="errors_Yes" name="errors" value="errors_Yes">
+      <label for="errors_Yes">Yes</label><br>
+      <input type="radio" id="errors_No" name="errors" value="errors_No">
+      <label for="errors_No">No</label>
+
+      <br></br>
+
+      <p><b>If you answered Yes to the previous question, did the errors or bugs impact your gameplay?</b></p>
+      <input type="radio" id="bugImpactGameplay_Yes" name="bugImpactGameplay" value="bugImpactGameplay_Yes">
+      <label for="bugImpactGameplay_Yes">Yes, the bugs effected my gameplay</label><br>
+      <input type="radio" id="bugImpactGameplay_No" name="bugImpactGameplay" value="bugImpactGameplays_No">
+      <label for="bugImpactGameplay_No">No, I didn't find any bugs during gameplay that ruined my experience</label>
+
+      <br></br>
+
+      <p><b>Would you recommened this game to a friend?</b></p>
+      <input type="radio" id="recommenedGame_Yes" name="recommenedGame" value="recommenedGame_Yes">
+      <label for="recommenedGame_Yes">Yes</label><br>
+      <input type="radio" id="recommenedGame_No" name="recommenedGame" value="recommenedGame_No">
+      <label for="recommenedGame_No">Nope</label>
+
+      <br></br>
+
+      <p><b>From 1 to 5, with 1 being poor, 3 being average, and 5 being the best, how would you rate this game?</b></p>
+      <input type="radio" id="rateGame_1" name="rateGame" value="rateGame_1">
+      <label for="rateGame_1">1</label><br></br>
+      <input type="radio" id="rateGame_2" name="rateGame" value="rateGame_2">
+      <label for="rateGame_2">2</label><br></br>
+      <input type="radio" id="recommenedGame_No" name="rateGame" value="rateGame_3">
+      <label for="rateGame_3">3</label><br></br>
+      <input type="radio" id="recommenedGame_No" name="rateGame" value="rateGame_4">
+      <label for="rateGame_4">4</label><br></br>
+      <input type="radio" id="recommenedGame_No" name="rateGame" value="rateGame_5">
+      <label for="rateGame_5">5</label><br></br>
+
+      <br></br>
+     
+
       <input type="submit" value="Submit">
     </form>
+
+
+</div>
+
+
     <br></br>
 
   </div>
