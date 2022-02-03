@@ -70,11 +70,11 @@
     <h1>Pokemon Feedback form</h1>
 
 
-    <p>Please answer questions honestly. WARNING: This is in testing mode. DO NOT SUBMIT THE FORM.</p>
+    <p>Please answer questions honestly. WARNING: This form is being tested. DO NOT SUBMIT THE FORM.</p>
 
-  <form action="https://greenaces.site/5DFbHhuN/php/pokemon_php.php" method="POST">
+  <form action="https://greenaces.site/5DFbHhuN/php/pokemon_php.php" method="POST" onsubmit="return validateForm()">
 
-      <p><b>Did you find the game fun or enjoyable?</b></p>
+      <p>1)&nbsp;<b>Did you find the game fun or enjoyable?</b></p>
       <input type="radio" id="enjoyable_Yes" name="enjoyable" value="enjoyable_Yes">
       <label for="enjoyable">Yes</label><br>
       <input type="radio" id="enjoyable_No" name="enjoyable" value="enjoyable_No">
@@ -84,7 +84,7 @@
 
       <br></br>
 
-      <p><b>Please select your age:</b></p>
+      <p>2)&nbsp;<b>Please select your age:</b></p>
       <input type="radio" id="age1" name="age" value="30">
       <label for="age1">0 - 30</label><br>
       <input type="radio" id="age2" name="age" value="60">
@@ -95,7 +95,7 @@
 
       <br></br>
 
-      <p><b>Did you experience any bugs or errors during gameplay?</b></p>
+      <p>3)&nbsp;<b>Did you experience any bugs or errors during gameplay?</b></p>
       <input type="radio" id="errors_Yes" name="errors" value="errors_Yes">
       <label for="errors_Yes">Yes</label><br>
       <input type="radio" id="errors_No" name="errors" value="errors_No">
@@ -103,7 +103,7 @@
 
       <br></br>
 
-      <p><b>If you answered Yes to the previous question, did the errors or bugs impact your gameplay?</b></p>
+      <p>4)&nbsp;<b>If you answered "Yes" to the previous question, did the errors or bugs impact your gameplay?</b></p>
       <input type="radio" id="bugImpactGameplay_Yes" name="bugImpactGameplay" value="bugImpactGameplay_Yes">
       <label for="bugImpactGameplay_Yes">Yes, the bugs effected my gameplay</label><br>
       <input type="radio" id="bugImpactGameplay_No" name="bugImpactGameplay" value="bugImpactGameplays_No">
@@ -111,7 +111,7 @@
 
       <br></br>
 
-      <p><b>Would you recommened this game to a friend?</b></p>
+      <p>5)&nbsp;<b>Would you recommened this game to a friend?</b></p>
       <input type="radio" id="recommenedGame_Yes" name="recommenedGame" value="recommenedGame_Yes">
       <label for="recommenedGame_Yes">Yes</label><br>
       <input type="radio" id="recommenedGame_No" name="recommenedGame" value="recommenedGame_No">
@@ -119,7 +119,15 @@
 
       <br></br>
 
-      <p><b>From 1 to 5, with 1 being poor, 3 being average, and 5 being the best, how would you rate this game?</b></p>
+      <p>6)&nbsp;<b>Would you play this game if was available as an Andriod app or would you rather play with a browser?</b></p>
+      <input type="radio" id="andriod_Yes" name="AndriodORBrowser" value="andriod_Yes">
+      <label for="recommenedGame_Yes">Yes. I would like to play this game on Andriod</label><br>
+      <input type="radio" id="andriod_No" name="AndriodORBrowser" value="andriod_No">
+      <label for="recommenedGame_No">No. I would rather play using a browser</label>
+
+      <br></br>
+
+      <p>7)&nbsp;<b>From 1 to 5, with 1 being poor, 3 being average, and 5 being the best, how would you rate this game?</b></p>
       <input type="radio" id="rateGame_1" name="rateGame" value="rateGame_1">
       <label for="rateGame_1">1</label><br></br>
       <input type="radio" id="rateGame_2" name="rateGame" value="rateGame_2">
@@ -132,8 +140,12 @@
       <label for="rateGame_5">5</label><br></br>
 
       <br></br>
-     
 
+      <p>8)&nbsp;<b>Please enter any suggestions or complaints in the text area below:</b></p>
+      <input type="text" id="textarea" name="textarea" rows="1" cols="1">
+      <label for="text"></label>
+     
+      <br></br>
       <input type="submit" value="Submit">
     </form>
 
@@ -168,7 +180,7 @@
 </div>
 
 <!--JS file here -->
-<script src="https://greenaces.site/5DFbHhuN/js/test2.js"></script>
+<script src="https://greenaces.site/5DFbHhuN/js/pokemon-validationForm.js"></script>
 
 <!-- Optional JavaScript; choose one of the two! -->
 

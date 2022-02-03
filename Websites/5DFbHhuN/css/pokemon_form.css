@@ -1,0 +1,7 @@
+#textarea {
+    height: 136px;
+    width: 373px;
+    word-wrap: break-word;
+    maxlength: 250;
+    placeholder:"Comment";
+}

@@ -7,11 +7,18 @@
   //varible declartions
 
   $servername = "localhost:3306";
-  $username = "greenace_AdminDemo";
-  $password = "BRI7t^vWQO#1";
-  $dbname = "greenace_databaseDemo";
-  $firstName = $_POST['fname'];
-  $lastName = $_POST['lname'];
+  $username = "greenace_pokemonFormAdmin";
+  $password = "rwKB;6fMm;G6";
+  $dbname = "greenace_pokemonFormDatabase";
+  $enjoyable = $_POST['enjoyable'];
+  $age = $_POST['age'];
+  $errors = $_POST['errors'];
+  $bugImpactGameplay = $_POST['bugImpactGameplay'];
+  $recommenedGame = $_POST['recommenedGame'];
+  $AndriodORBrowser =  $_POST['AndriodORBrowser'];
+  $rateGame = $_POST['rateGame'];
+  $textarea = $_POST['textarea'];
+
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
@@ -21,11 +28,16 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "INSERT INTO table1 (fname, lname)
-  VALUES ('$firstName', '$lastName')";
 
+  //push data from array to mysql if conditions are valid
+
+  $sql = "INSERT INTO feedback_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
+  VALUES ('$enjoyable','$age', '$errors', '$bugImpactGameplay', '$recommenedGame', '$AndriodORBrowser', '$rateGame', '$textarea' )";
+
+
+//check database connection and provide client feedback for submitting the form or show cause of error
   if ($conn->query($sql) === TRUE) {
-    echo "Your name was added successfully.";
+    echo "Thank you for your feedback.";
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
