@@ -5,3 +5,7 @@
     maxlength: 250;
     placeholder:"Comment";
 }
+
+.error {
+  color: #FF0000;
+}
