@@ -1,19 +1,19 @@
 <?php
 
-  //varible declartions
+//varible declartions
 
-  $servername = "localhost:3306";
-  $username = "greenace_pokemonFormAdmin";
-  $password = "rwKB;6fMm;G6";
-  $dbname = "greenace_pokemonFormDatabase";
-  $enjoyable = $_POST['enjoyable'];
-  $age = $_POST['age'];
-  $errors = $_POST['errors'];
-  $bugImpactGameplay = $_POST['bugImpactGameplay'];
-  $recommenedGame = $_POST['recommenedGame'];
-  $AndriodORBrowser =  $_POST['AndriodORBrowser'];
-  $rateGame = $_POST['rateGame'];
-  $textarea = $_POST['textarea'];
+$servername = "localhost:3306";
+$username = "greenace_rabbit";
+$password = "6B7LQ;0N&~un";
+$dbname = "greenace_DatabaseForms";
+$enjoyable = $_POST['enjoyable'];
+$age = $_POST['age'];
+$errors = $_POST['errors'];
+$bugImpactGameplay = $_POST['bugImpactGameplay'];
+$recommenedGame = $_POST['recommenedGame'];
+$AndriodORBrowser =  $_POST['AndriodORBrowser'];
+$rateGame = $_POST['rateGame'];
+$textarea = $_POST['textarea'];
 
 
   // Create connection
@@ -27,7 +27,7 @@
 
   //push data from array to mysql if conditions are valid
 
-  $sql = "INSERT INTO feedback_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
+  $sql = "INSERT INTO pokemon_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
   VALUES ('$enjoyable','$age', '$errors', '$bugImpactGameplay', '$recommenedGame', '$AndriodORBrowser', '$rateGame', '$textarea' )";
 
 

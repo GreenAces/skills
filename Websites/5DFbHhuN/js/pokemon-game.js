@@ -1273,7 +1273,7 @@ document.getElementById("statusProgress2").innerHTML=("");
 
 document.getElementById("statusProgress3").innerHTML = "Click the link below to leave feedback. ";
 document.getElementById("sendLink").innerHTML = "Give feedback";
-document.getElementById("sendLink").href = "https://greenaces.site/index3.html";
+document.getElementById("sendLink").href = "https://greenaces.site/pokemonForm.php";
 document.getElementById("sendLink").target = "_blank";
 
 
