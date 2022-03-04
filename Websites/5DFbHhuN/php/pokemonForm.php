@@ -27,7 +27,7 @@ $textarea = $_POST['textarea'];
 
   //push data from array to mysql if conditions are valid
 
-  $sql = "INSERT INTO pokemon_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
+  $sql = "INSERT INTO greenace_DatabaseForms.pokemon_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
   VALUES ('$enjoyable','$age', '$errors', '$bugImpactGameplay', '$recommenedGame', '$AndriodORBrowser', '$rateGame', '$textarea' )";
 
 
@@ -361,8 +361,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
   </div>
 
-  <!--JS file here -->
-  <script src="https://greenaces.site/5DFbHhuN/js/pokemon-validationForm.js"></script>
 
   <!-- Optional JavaScript; choose one of the two! -->
 

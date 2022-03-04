@@ -3,41 +3,62 @@
 
 
 
+
+//function setups here:
 // This generates random number that is range bound from 1 to 10.
 
 
 
-function play() {
+
+function rollDice() {
+
+  console.log("roll button clicked.");
+
+  //variable declartions
+
   let number = Math.ceil((Math.random() * 10));
   let text ="";
   let text2 ="";
+  let text3 ="";
   let mouseClickSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/MouseDoubleClick.wav');
   let applauseSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav');
   mouseClickSound.play();
 
   if (number === 7) {
 
-    
+
 
     text = "Congratulations you won!!!";
+    text2 = "Click the link below to leave feedback."
+    text3 = "https://greenaces.site/lucky7Form.php"
 
     //play applauseSound if the user won
     applauseSound.play();
 
-    //disable button if player won
-    document.getElementById("myBtn").disabled = true;
+    //disable roll button if player won
+    document.getElementById("rollButton").disabled = true;
 
     //give the user the option to start the game over without refreshing the page.
-    document.getElementById("PlayAgainButton").innerHTML = '<button onclick="refreshPage()">Play Again?</button>';
+    getRounds();
+
+
 
   } else {
-    text2 = "Better luck next time...";
+
   }
+
+  //enable roll button if player lost
+  document.getElementById("rollButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/roll_button.png" </img>';
+
+  text2 = "Better luck next time...";
+
   document.getElementById("displayRandomNumber").innerHTML = number;
   document.getElementById("InformPlayerWon").innerHTML = text;
   document.getElementById("InformPlayerLoss").innerHTML = text2;
   return number;
-}
+
+
+}// end of rollButton function
 
 // This function will determine if number is odd or even.
 
@@ -61,7 +82,7 @@ function oddOrEven() {
 
 
 
-}
+}//end of oddOrEven function
 
 
 
@@ -79,26 +100,32 @@ function getRounds() {
           text = "The game is over because you reached the maximum number of rounds ("+ count +")";
           // disable button to prevent more mouse clicks.
           document.getElementById("myBtn").disabled = true;
+
           // give the user the option to start the game over without refreshing the page.
-          document.getElementById("PlayAgainButton").innerHTML = '<button onclick="refreshPage()">Play Again?</button>';
+          document.getElementById("PlayAgainButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/play-again-button.png" </img>';
+        //  document.getElementById("PlayAgainButton").innerHTML = '<button onclick="refreshPage()">Play Again?</button>';
+
        }
 
         document.getElementById("displayGameAlert").innerHTML = text;
 
-}
-
-// create a button that refreshes the page as this will be needed to start the game over.
-
-function refreshPage(){
-
-    window.location.reload();
-}
+}//end of getRounds function
 
 
-// create a function that calls all functions so that the button on the html page can use it.
 
-function callAllFunctions(){
-    play();
-    oddOrEven();
-    getRounds();
+
+ // Event listeners
+document.getElementById("rollButton").addEventListener("click", rollButton);
+
+
+
+//calling all functions here
+
+
+
+function rollButton() {
+
+  rollDice();
+
+
 }

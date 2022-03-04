@@ -27,7 +27,7 @@
 
   //push data from array to mysql if conditions are valid
 
-  $sql = "INSERT INTO lucky7_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
+  $sql = "INSERT INTO greenace_DatabaseForms.lucky7_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea)
   VALUES ('$enjoyable','$age', '$errors', '$bugImpactGameplay', '$recommenedGame', '$AndriodORBrowser', '$rateGame', '$textarea' )";
 
 //check database connection and provide client feedback for submitting the form or show cause of error
@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <html lang="en">
       <head>
-        <title>GreenAces Pokemon Feedback</title>
+        <title>GreenAces Lucky7 Feedback</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -360,8 +360,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
   </div>
 
-  <!--JS file here -->
-  <script src="https://greenaces.site/5DFbHhuN/js/pokemon-validationForm.js"></script>
 
   <!-- Optional JavaScript; choose one of the two! -->
 
