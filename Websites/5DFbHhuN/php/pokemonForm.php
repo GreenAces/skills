@@ -65,47 +65,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($fields as $field) {
 
         if ($field === "enjoyable") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+               printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+               printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
         if ($field === "age") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
         if ($field === "errors") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
         if ($field === "bugImpactGameplay") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
         if ($field === "recommenedGame") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
 
         if ($field === "AndriodORBrowser") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
 
         if ($field === "rateGame") {
-            printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
+             printf("%s: %s<br />", $field, var_export($_POST[$field], TRUE));
         } else {
-            printf("%s: %s<br />", $field, $_POST[$field]);
+             printf("%s: %s<br />", $field, $_POST[$field]);
         }
 
 
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <li><hr class="dropdown-divider1"></li>
               <li><a class="dropdown-item" href="https://greenaces.site/practice.html">Test 2</a></li>
               <li><hr class="dropdown-divider2"></li>
-              <li><a class="dropdown-item" href="https://greenaces.site/pokemon_php.php">Test 3</a></li>
+              <li><a class="dropdown-item" href="https://greenaces.site/pokemonForm.php">Test 3</a></li>
             </ul>
           </li>
         </ul>
@@ -208,11 +208,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
         <p>1)&nbsp;<b>Did you find the game fun or enjoyable?</b></p>
-        <input type="radio" id="enjoyable_Yes" name="enjoyable"  <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_Yes") echo "checked"; ?> value="enjoyable_Yes">
+        <input type="radio" id="enjoyable_Yes" name="enjoyable"  <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_Yes"); ?> value="enjoyable_Yes">
         <label for="enjoyable">Yes</label><br>
-        <input type="radio" id="enjoyable_No" name="enjoyable"   <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_No") echo "checked"; ?> value="enjoyable_No">
+        <input type="radio" id="enjoyable_No" name="enjoyable"   <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_No"); ?> value="enjoyable_No">
         <label for="enjoyable">No</label><br>
-        <input type="radio" id="enjoyable_alright" name="enjoyable" <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_alright") echo "checked"; ?> value="enjoyable_alright">
+        <input type="radio" id="enjoyable_alright" name="enjoyable" <?php if (isset($values['enjoyable']) && $values['enjoyable'] == "enjoyable_alright"); ?> value="enjoyable_alright">
         <label for="enjoyable">It's alright</label>
 
         <div>
@@ -224,11 +224,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>2)&nbsp;<b>Please select your age:</b></p>
-        <input type="radio" id="age1" name="age" <?php if (isset($values['age']) && $values['age'] == "30") echo "checked"; ?> value="30">
+        <input type="radio" id="age1" name="age" <?php if (isset($values['age']) && $values['age'] == "30"); ?> value="30">
         <label for="age1">0 - 30</label><br>
-        <input type="radio" id="age2" name="age" <?php if (isset($values['age']) && $values['age'] == "60") echo "checked"; ?> value="60">
+        <input type="radio" id="age2" name="age" <?php if (isset($values['age']) && $values['age'] == "60"); ?> value="60">
         <label for="age2">31 - 60</label><br>
-        <input type="radio" id="age3" name="age" <?php if (isset($values['age']) && $values['age'] == "100") echo "checked"; ?> value="100">
+        <input type="radio" id="age3" name="age" <?php if (isset($values['age']) && $values['age'] == "100"); ?> value="100">
         <label for="age3">61 - 100</label>
 
         <div>
@@ -241,9 +241,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>3)&nbsp;<b>Did you experience any bugs or errors during gameplay?</b></p>
-        <input type="radio" id="errors_Yes" name="errors" <?php if (isset($values['errors']) && $values['errors'] == "errors_Yes") echo "checked"; ?> value="errors_Yes">
+        <input type="radio" id="errors_Yes" name="errors" <?php if (isset($values['errors']) && $values['errors'] == "errors_Yes"); ?> value="errors_Yes">
         <label for="errors_Yes">Yes</label><br>
-        <input type="radio" id="errors_No" name="errors"  <?php if (isset($values['errors']) && $values['errors'] == "errors_No") echo "checked"; ?> value="errors_No">
+        <input type="radio" id="errors_No" name="errors"  <?php if (isset($values['errors']) && $values['errors'] == "errors_No"); ?> value="errors_No">
         <label for="errors_No">No</label>
 
         <div>
@@ -255,9 +255,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>4)&nbsp;<b>If you answered "Yes" to the previous question, did the errors or bugs impact your gameplay?</b></p>
-        <input type="radio" id="bugImpactGameplay_Yes" name="bugImpactGameplay" <?php if (isset($values['bugImpactGameplay']) && $values['bugImpactGameplay'] == "bugImpactGameplay_Yes") echo "checked"; ?> value="bugImpactGameplay_Yes">
+        <input type="radio" id="bugImpactGameplay_Yes" name="bugImpactGameplay" <?php if (isset($values['bugImpactGameplay']) && $values['bugImpactGameplay'] == "bugImpactGameplay_Yes"); ?> value="bugImpactGameplay_Yes">
         <label for="bugImpactGameplay_Yes">Yes, the bugs effected my gameplay</label><br>
-        <input type="radio" id="bugImpactGameplay_No" name="bugImpactGameplay"  <?php if (isset($values['bugImpactGameplay']) && $values['bugImpactGameplay'] == "bugImpactGameplays_No") echo "checked"; ?> value="bugImpactGameplays_No">
+        <input type="radio" id="bugImpactGameplay_No" name="bugImpactGameplay"  <?php if (isset($values['bugImpactGameplay']) && $values['bugImpactGameplay'] == "bugImpactGameplays_No"); ?> value="bugImpactGameplays_No">
         <label for="bugImpactGameplay_No">No, I didn't find any bugs during gameplay that ruined my experience</label>
 
         <div>
@@ -269,9 +269,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>5)&nbsp;<b>Would you recommened this game to a friend?</b></p>
-        <input type="radio" id="recommenedGame_Yes" name="recommenedGame" <?php if (isset($values['recommenedGame']) && $values['recommenedGame'] == "recommenedGame_Yes") echo "checked"; ?> value="recommenedGame_Yes">
+        <input type="radio" id="recommenedGame_Yes" name="recommenedGame" <?php if (isset($values['recommenedGame']) && $values['recommenedGame'] == "recommenedGame_Yes"); ?> value="recommenedGame_Yes">
         <label for="recommenedGame_Yes">Yes</label><br>
-        <input type="radio" id="recommenedGame_No" name="recommenedGame"  <?php if (isset($values['recommenedGame']) && $values['recommenedGame'] == "recommenedGame_No") echo "checked"; ?> value="recommenedGame_No">
+        <input type="radio" id="recommenedGame_No" name="recommenedGame"  <?php if (isset($values['recommenedGame']) && $values['recommenedGame'] == "recommenedGame_No"); ?> value="recommenedGame_No">
         <label for="recommenedGame_No">Nope</label>
 
         <div>
@@ -283,9 +283,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>6)&nbsp;<b>Would you play this game if was available as an Andriod app or would you rather play with a browser?</b></p>
-        <input type="radio" id="andriod_Yes" name="AndriodORBrowser"  <?php if (isset($values['AndriodORBrowser']) && $values['AndriodORBrowser'] == "andriod_Yes") echo "checked"; ?> value="andriod_Yes">
+        <input type="radio" id="andriod_Yes" name="AndriodORBrowser"  <?php if (isset($values['AndriodORBrowser']) && $values['AndriodORBrowser'] == "andriod_Yes"); ?> value="andriod_Yes">
         <label for="recommenedGame_Yes">Yes. I would like to play this game on Andriod</label><br>
-        <input type="radio" id="andriod_No" name="AndriodORBrowser"   <?php if (isset($values['AndriodORBrowser']) && $values['AndriodORBrowser'] == "andriod_No") echo "checked"; ?> value="andriod_No">
+        <input type="radio" id="andriod_No" name="AndriodORBrowser"   <?php if (isset($values['AndriodORBrowser']) && $values['AndriodORBrowser'] == "andriod_No"); ?> value="andriod_No">
         <label for="recommenedGame_No">No. I would rather play using a browser</label>
 
         <div>
@@ -297,15 +297,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br></br>
 
         <p>7)&nbsp;<b>From 1 to 5, with 1 being poor, 3 being average, and 5 being the best, how would you rate this game?</b></p>
-        <input type="radio" id="rateGame_1" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_1") echo "checked"; ?> value="rateGame_1">
+        <input type="radio" id="rateGame_1" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_1"); ?> value="rateGame_1">
         <label for="rateGame_1">1</label><br></br>
-        <input type="radio" id="rateGame_2" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_2") echo "checked"; ?> value="rateGame_2">
+        <input type="radio" id="rateGame_2" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_2"); ?> value="rateGame_2">
         <label for="rateGame_2">2</label><br></br>
-        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_3") echo "checked"; ?> value="rateGame_3">
+        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_3"); ?> value="rateGame_3">
         <label for="rateGame_3">3</label><br></br>
-        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_4") echo "checked"; ?> value="rateGame_4">
+        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_4"); ?> value="rateGame_4">
         <label for="rateGame_4">4</label><br></br>
-        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_5") echo "checked"; ?> value="rateGame_5">
+        <input type="radio" id="recommenedGame_No" name="rateGame"  <?php if (isset($values['rateGame']) && $values['rateGame'] == "rateGame_5"); ?> value="rateGame_5">
         <label for="rateGame_5">5</label><br></br>
 
          <div>
@@ -320,16 +320,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="textarea" name="textarea" rows="1" cols="1" value="<?php echo htmlspecialchars($values['textarea']);?>">
         <label for="text"></label>
 
+
+      
+        <?php
+        include "redirect.php";
+        ?>
+
        
         <br></br>
         <input type="submit" value="Submit">
 
 
-      <?php // Including PHP File Here
-      include "include/redirect.php";
-      ?>
+
 
       </form>
+
 
 
   </div>

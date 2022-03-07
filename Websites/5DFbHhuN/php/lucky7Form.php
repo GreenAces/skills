@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <li><hr class="dropdown-divider1"></li>
               <li><a class="dropdown-item" href="https://greenaces.site/practice.html">Test 2</a></li>
               <li><hr class="dropdown-divider2"></li>
-              <li><a class="dropdown-item" href="https://greenaces.site/pokemon_php.php">Test 3</a></li>
+              <li><a class="dropdown-item" href="https://greenaces.site/lucky7Form.php">Test 3</a></li>
             </ul>
           </li>
         </ul>
@@ -319,16 +319,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="textarea" name="textarea" rows="1" cols="1" value="<?php echo htmlspecialchars($values['textarea']);?>">
         <label for="text"></label>
 
+        
+        <?php
+        include "redirect.php";
+        ?>
+
        
         <br></br>
         <input type="submit" value="Submit">
 
 
-      <?php // Including PHP File Here
-      include "include/redirect.php";
-      ?>
+
 
       </form>
+
+
+
 
 
   </div>

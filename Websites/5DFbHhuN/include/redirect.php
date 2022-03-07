@@ -11,10 +11,11 @@ $rateGame = $_POST['rateGame'];
 if($enjoyable !=''&& $age !=''&& $errors !=''&& $bugImpactGameplay !='' && $recommenedGame !='' && $AndriodORBrowser !='' && $rateGame !='')
 {
 //  To redirect form on a particular page
-header("Location:https://greenaces.site/");
+header("Location: index.php");
 }
 else{
-?><span><?php echo "Please answer all questions Before submitting the form. You may leave the last question blank.";?></span> <?php
+?>
+<span><?php echo "Please answer all questions Before submitting the form. You may leave the last question blank.";?></span> <?php
 }
 }
 ?>
