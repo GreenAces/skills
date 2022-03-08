@@ -31,7 +31,10 @@ function rollDice() {
     //inform player1 of victory and get feedback
     document.getElementById("InformPlayerWon").innerHTML=("Congratulations you won!!!");
     document.getElementById("InformPlayerWonDetails").innerHTML=("Click the link below to leave feedback: ");
-    document.getElementById("sendLink").innerHTML=("https://greenaces.site/lucky7Form.php");
+    document.getElementById("sendLink").innerHTML = "Give feedback";
+    document.getElementById("sendLink").href = "https://greenaces.site/lucky7Form.php";
+    document.getElementById("sendLink").target = "_blank";
+
 
     //play applauseSound if the user won
     applauseSound.play();
