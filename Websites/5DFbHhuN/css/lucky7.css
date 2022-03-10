@@ -23,6 +23,8 @@
 
 /*table properties */
 
+
+/*table 1 properties */
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
@@ -32,12 +34,35 @@ th, td {
     text-align: left;
 }
 
+/*table 1 properties */
+
 #t01 {
     width: 40%;
     background-color: #00FFFF;
 
 
 }
+
+/*table 2 properties */
+
+#t02 {
+    width: 40%;
+
+
+
+}
+
+/*table 2 properties */
+
+table, th, td {
+
+  
+}
+th, td {
+
+}
+
+
 body {
 
     background-image: url("https://greenaces.site/5DFbHhuN/images/lucky7_game_images/Black-wallpapers-33.jpg");
@@ -118,5 +143,35 @@ p {
   font-weight: bold;
   text-align: center;
   font-size: 90px
+
+}
+
+
+
+#PlayAgainButton img {
+
+  display: block;
+  margin: 0 auto;
+  width: 160px;
+  height: 77px;
+
+}
+
+
+#dice1 img {
+
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+
+}
+
+#dice2 img {
+
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
 
 }
