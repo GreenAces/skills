@@ -4,23 +4,22 @@
 
 
 
-//function setups here:
-// Each dice is range bound from 1 to 6.
-
-
-
-
 // Event listeners
 document.getElementById("rollButton").addEventListener("click", allFunctions);
 document.getElementById("PlayAgainButton").addEventListener("click", reload);
 
 
 
+
+// Each dice is range bound from 1 to 6.
 function rollDice() {
 
   console.log("rollDice function started.");
 
   //variable declartions
+  count = parseInt(count) + parseInt(1);
+  let x = document.getElementById("data2");
+   x.innerHTML= "Round#" + count;
   let dice1 = Math.ceil((Math.random() * 6));
   let dice2 = Math.ceil((Math.random() * 6));
   let mouseClickSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/MouseDoubleClick.wav');
@@ -273,26 +272,40 @@ function rollDice() {
 
   }
 
-  if (!dice1 + dice2 === 7) {
+
+  //inform player of loss if these conditions are true
+  if (dice1 + dice2 < 7 || dice1 + dice2 > 7) {
+
+    document.getElementById("InformPlayerLoss").innerHTML=("Better luck next time...");
 
   }
 
-  //enable roll button if player lost
-  document.getElementById("rollButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/roll_button.png" </img>';
-
-  document.getElementById("InformPlayerLoss").innerHTML=("Better luck next time...");
-
-  document.getElementById("displayRandomNumber").innerHTML = dice1+dice2;
-
-  //give the user the option to start the game over without refreshing the page.
 
 
-  //debugging here:
-  console.log("dice1*: " +dice1);
-  console.log("dice2*: " +dice2);
 
 
-  return dice1+dice2;
+  if (!dice1 + dice2 === 7) {
+
+    //enable roll button if player lost
+    document.getElementById("rollButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/roll_button.png" </img>';
+
+    document.getElementById("displayRandomNumber").innerHTML = dice1+dice2;
+
+    //give the user the option to start the game over without refreshing the page.
+
+
+    //debugging here:
+    console.log("dice1*: " +dice1);
+    console.log("dice2*: " +dice2);
+
+
+    return dice1+dice2;
+
+
+  }
+
+
+
 
 
 }// end of rollButton function
@@ -302,39 +315,42 @@ function rollDice() {
 
 //count the number of rounds -- game ends when round is 3
 
-
-let count = 0; // This variable needs to be kept outside or it will not work properly...
+let count = 0; // keep this varible outside getRounds function
 
 function getRounds() {
 
-       console.log("getRounds function started.");
 
-        //varible declartions
-       count = parseInt(count) + parseInt(1);
-       let x = document.getElementById("data2");
-       x.innerHTML= "Round#" + count;
+  if (count == 3) {
 
+    console.log("getRounds function started.")
 
+     // inform the user first that the game is over.
+     document.getElementById("displayGameAlert").innerHTML=("The game is over because you reached the maximum number of rounds. " + "(" + count + ")");
 
-       if (count == 3) {
+     // disable button to prevent more mouse clicks.
+     document.getElementById("rollButton").disabled = true;
 
-          // inform the user first that the game is over.
-          document.getElementById("displayGameAlert").innerHTML=("The game is over because you reached the maximum number of rounds. " + "(" + count + ")");
+     // give the user the option to start the game over without refreshing the page.
+     document.getElementById("PlayAgainButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/play-again-button.png" </img>';
+     document.getElementById("PlayAgainButton").style.width = 160;
+     document.getElementById("PlayAgainButton").style.height = 77;
 
-          // disable button to prevent more mouse clicks.
-          document.getElementById("rollButton").disabled = true;
-
-          // give the user the option to start the game over without refreshing the page.
-          document.getElementById("PlayAgainButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/play-again-button.png" </img>';
-          document.getElementById("PlayAgainButton").style.width = 160;
-          document.getElementById("PlayAgainButton").style.height = 77;
+     //reset count to zero
+     count = 0;
 
 
-       }
+  }
+
+  //remove comment regarding "Better Luck Next Time" when player wins on the 3rd round.
+  if (dice1 + dice2 < 7 && count === 3 || dice1 + dice2 > 7 && count === 3 ) {
+
+    document.getElementById("InformPlayerLoss").innerHTML=("");
+
+  }
+
+
 
 }//end of getRounds function
-
-
 
 
 
@@ -353,7 +369,7 @@ function reload() {
 
 
 
-//calling all functions here
+//All functions are called here:
 function allFunctions() {
 
   rollDice();

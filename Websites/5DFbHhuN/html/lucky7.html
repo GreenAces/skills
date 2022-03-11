@@ -94,16 +94,29 @@
   <div id="GameButtonAndText">
   <input id="rollButton" type="image" name="rollButton" src="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/roll_button.png"  width="105" height="90" alt="Roll dice!">
   </input>
-  <table id="t02" style="width:50%" align = center>
-  <tr>
-    <th><p id="dice1"></p></th>
-    <th><p id="dice2"></p></th>
-  </tr>
-</table>
+
+
+  <!-- Dice 1 and Dice 2 sepearted with div tag containers-->
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-sm-4"><p id="dice1"></p></div>
+        <div class="col-6 col-sm-4"><p id="dice2"></p></div>
+
+        <!-- Force next columns to break to new line at md breakpoint and up -->
+        <div class="w-100 d-none d-md-block"></div>
+
+        <div class="col-6 col-sm-4"></div>
+        <div class="col-6 col-sm-4"></div>
+      </div>
+    </div>
+
+
   <p id= "displayGameAlert"></p>
   <p id= "InformPlayerLoss"></p>
+  <br></br>
   <p id= "InformPlayerWon"></p>
   <p id="InformPlayerWonDetails"></p><a id="sendLink" href="#"></a>
+  <br></br>
   <p id="PlayAgainButton"></p>
   </input>
   </div>
