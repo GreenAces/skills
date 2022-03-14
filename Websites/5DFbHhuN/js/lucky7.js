@@ -10,21 +10,57 @@ document.getElementById("PlayAgainButton").addEventListener("click", reload);
 
 
 
+//variable declartions
+let count = 0;
+let displayRounds = document.getElementById("data2");
+let mouseClickSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/MouseDoubleClick.wav');
+let applauseSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav');
+let diceSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/RollDiceSound.wav');
 
-// Each dice is range bound from 1 to 6.
+
+//Each dice has a range from 1 to 6.
 function rollDice() {
+
+  //variable declartions II (keep inside function)
+  let dice1 = Math.ceil((Math.random() * 6));
+  let dice2 = Math.ceil((Math.random() * 6));
 
   console.log("rollDice function started.");
 
-  //variable declartions
-  count = parseInt(count) + parseInt(1);
-  let x = document.getElementById("data2");
-   x.innerHTML= "Round#" + count;
-  let dice1 = Math.ceil((Math.random() * 6));
-  let dice2 = Math.ceil((Math.random() * 6));
-  let mouseClickSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/MouseDoubleClick.wav');
-  let applauseSound = new Audio('https://greenaces.site/5DFbHhuN/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav');
+
+  //play mouse clicking sound when user clicks roll button
   mouseClickSound.play();
+
+  //increment count by 1 and display rounds
+  count++;
+  displayRounds.innerHTML= "Round#" + count;
+
+
+  //load dice animation here:
+  setTimeout(function() {
+
+      //play dice sound
+      diceSound.play();
+
+
+      // load dice animation or gif 1
+      document.getElementById("dice1").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/dice1_gif.gif" </img>';
+      document.getElementById("dice1").style.width = 95;
+      document.getElementById("dice1").style.height = 71;
+
+
+      // load dice animation or gif 2
+      document.getElementById("dice2").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/dice2_gif.gif" </img>';
+      document.getElementById("dice2").style.width = 95;
+      document.getElementById("dice2").style.height = 71;
+
+
+
+
+
+  }, 5000);//gif animation starts in 5 second.
+
+
 
   //logic for diceImages here:
 
@@ -65,6 +101,7 @@ function rollDice() {
 
   if (dice1 === 3) {
 
+
     // remove previous dice image
 
     let elem =  document.createElement("img");
@@ -82,6 +119,7 @@ function rollDice() {
 
   if (dice1 === 4) {
 
+
     // remove previous dice image
 
     let elem =  document.createElement("img");
@@ -98,6 +136,7 @@ function rollDice() {
   }
 
   if (dice1 === 5) {
+
 
     // remove previous dice image
 
@@ -134,6 +173,7 @@ function rollDice() {
   //logic for dice2
   if (dice2 === 1) {
 
+
     // remove previous dice image
 
     let elem =  document.createElement("img");
@@ -150,6 +190,7 @@ function rollDice() {
   }
 
   if (dice2 === 2) {
+
 
     // remove previous dice image
 
@@ -185,6 +226,7 @@ function rollDice() {
 
   if (dice2 === 4) {
 
+
     // remove previous dice image
 
     let elem =  document.createElement("img");
@@ -193,7 +235,7 @@ function rollDice() {
     document.getElementById("dice2").style.width = 95;
     document.getElementById("dice2").style.height = 71;
 
-    // load new dice image
+    // load dice animation or gif
     document.getElementById("dice2").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/dice4.png" </img>';
     document.getElementById("dice2").style.width = 95;
     document.getElementById("dice2").style.height = 71;
@@ -201,6 +243,7 @@ function rollDice() {
   }
 
   if (dice2 === 5) {
+
 
     // remove previous dice image
 
@@ -236,13 +279,17 @@ function rollDice() {
 
 
 
-//logic for generating numbers for each dice
+  //remove comment regarding "Better Luck Next Time" when player wins during round 1, 2, or 3.
+  if (dice1 + dice2 === 7 && count === 3 || dice1 + dice2 === 7 && count === 2 || dice1 + dice2 === 7 && count === 1) {
+
+    document.getElementById("InformPlayerLoss").innerHTML=("");
+
+  }
 
 
-
+  //inform player1 of victory and get feedback
   if (dice1 + dice2 === 7) {
 
-    //inform player1 of victory and get feedback
     document.getElementById("displayRandomNumber").innerHTML = dice1+dice2;
     document.getElementById("InformPlayerWon").innerHTML=("Congratulations you won!!!");
     document.getElementById("InformPlayerWonDetails").innerHTML=("Click the link below to leave feedback: ");
@@ -254,8 +301,10 @@ function rollDice() {
     //play applauseSound if the user won
     applauseSound.play();
 
+
     //disable roll button if player won
     document.getElementById("rollButton").disabled = true;
+
 
     //debugging here:
     console.log("dice1: " +dice1);
@@ -273,21 +322,14 @@ function rollDice() {
   }
 
 
+
   //inform player of loss if these conditions are true
   if (dice1 + dice2 < 7 || dice1 + dice2 > 7) {
 
-    document.getElementById("InformPlayerLoss").innerHTML=("Better luck next time...");
-
-  }
-
-
-
-
-
-  if (!dice1 + dice2 === 7) {
-
     //enable roll button if player lost
     document.getElementById("rollButton").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/lucky7_game_images/roll_button.png" </img>';
+
+    document.getElementById("InformPlayerLoss").innerHTML=("Better luck next time...");
 
     document.getElementById("displayRandomNumber").innerHTML = dice1+dice2;
 
@@ -314,10 +356,11 @@ function rollDice() {
 
 
 //count the number of rounds -- game ends when round is 3
-
-let count = 0; // keep this varible outside getRounds function
-
 function getRounds() {
+
+  console.log("getRounds function started.");
+
+  displayRounds.innerHTML= "Round#" + count;
 
 
   if (count == 3) {
@@ -341,12 +384,8 @@ function getRounds() {
 
   }
 
-  //remove comment regarding "Better Luck Next Time" when player wins on the 3rd round.
-  if (dice1 + dice2 < 7 && count === 3 || dice1 + dice2 > 7 && count === 3 ) {
 
-    document.getElementById("InformPlayerLoss").innerHTML=("");
 
-  }
 
 
 
@@ -358,7 +397,6 @@ function getRounds() {
 //It simply reloads the page
 
 function reload() {
-
 
   console.log("reload function started.");
 
@@ -374,6 +412,7 @@ function allFunctions() {
 
   rollDice();
   getRounds();
+
 
 
 }//end of allFunctions
