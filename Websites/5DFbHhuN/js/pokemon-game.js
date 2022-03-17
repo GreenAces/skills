@@ -1,10 +1,10 @@
 
 /*
 NOTE:
-Lastest update: (01/05/2022)
+Lastest update: (03/17/2022)
 
 x0) rest function partially working for pikachu and bastoise. Make it work fully.   ***************************************************************************** high priority ***************** 01/05/2022
-x1)
+x1) add sound for new pokemon animation ************************************************************************************************************************* high priority ***************** 03/17/2022
 x2)
 x3) on line 1069 chrPokeImage -- need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4) squirtleMoves on lines 3425 to 3744 -- scytherMoves on lines 3747 to 4063 -- onixMoves on lines 4074 to 4404
@@ -42,7 +42,7 @@ class images {
 
 
 
-    this.chrAtkImage1 = function () {  // image 1 of 6
+    this.chrAtkImage1 = function () {  // image 1 of 6 is fireblaster for charmander
 
       document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/fireBlaster.gif" </img>';
       document.getElementById("player1AttackImage").style.width = 180;
@@ -57,7 +57,7 @@ class images {
 
     }
 
-      this.chrAtkImage2 = function () {  // image 2 of 6
+      this.chrAtkImage2 = function () {  // image 2 of 6 is blaze for charmander
 
         document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blaze.png" </img>';
         document.getElementById("player1AttackImage").style.width = 180;
@@ -72,7 +72,7 @@ class images {
 
       }
 
-        this.chrAtkImage3 = function () {  // image 3 of 6
+        this.chrAtkImage3 = function () {  // image 3 of 6 solarbeam for charmander
 
           document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/solarbeam.png" </img>';
           document.getElementById("player1AttackImage").style.width = 180;
@@ -89,7 +89,7 @@ class images {
 
     }
 
-    this.chrAtkImage4 = function () {  // image 4 of 6
+    this.chrAtkImage4 = function () {  // image 4 of 6 is growl for charmander
 
       document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/growl.png" </img>';
       document.getElementById("player1AttackImage").style.width = 180;
@@ -106,7 +106,7 @@ class images {
 
 }
 
-this.chrAtkImage5 = function () {  // image 5 of 6
+this.chrAtkImage5 = function () {  // image 5 of 6 smoke screen for charmander
 
   document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/smokescreen.png" </img>';
   document.getElementById("player1AttackImage").style.width = 180;
@@ -123,7 +123,7 @@ this.chrAtkImage5 = function () {  // image 5 of 6
 
 }
 
-this.chrAtkImage6 = function () {  // image 6 of 6 attack image needs to show on player1 side because of self-healing
+this.chrAtkImage6 = function () {  // image 6 of 6 is rest for charmander -- NOTE: attack image needs to show on player1 side because of self-healing
 
   document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
   document.getElementById("computerAttackImage").style.width = 180;
@@ -139,6 +139,187 @@ this.chrAtkImage6 = function () {  // image 6 of 6 attack image needs to show on
 
 
 }
+
+
+
+
+this.squAtkImage1 = function () { // image 1 of 6 is bubbles for squirtle
+
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/bubbles-gif.gif" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("computerAttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.squAtkImage2 = function () { // image 2 of 6 is TailWhip for squirtle
+
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/TailWhip.png" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("computerAttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+
+this.squAtkImage3 = function () { // image 3 of 6 is waterPulse for squirtle
+
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/waterPulse.png" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("computerAttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+
+this.squAtkImage4 = function () { // image 4 of 6 is tackle for squirtle
+
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/tackle.png" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("computerAttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.squAtkImage5 = function () { // image 5 of 6 is watergun for squirtle
+
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/watergun.png" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("computerAttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+
+this.squAtkImage6 = function () { // image 6 of 6 rest for squirtle -- NOTE: attack image needs to show on computer side because of self-healing
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+
+
+
+
+this.pikAtkImage1 = function () { // image 1 of 6 thunderShock
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_thundershock.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.pikAtkImage2 = function () { // image 2 of 6 is doubleKick
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_doublekick.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.pikAtkImage3 = function () { // image 3 of 6 is thunderBolt -- note: consider using slash.gif for the animation for thunderBolt -- looks really good together
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_thunderbolt.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.pikAtkImage4 = function () { // image 4 of 6 is growl
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_growl.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+this.pikAtkImage5 = function () { // image 5 of 6 is headButt -- NOTE: 6of6 is rest but this is same attack move for all player1 pokemon
+
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_headbutt.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
+
+  setTimeout(function() { // This is an anonymous callback function
+
+    // remove attack image after 3 secs
+    document.getElementById("player1AttackImage").innerHTML=("");
+
+  }, 3000); // 3 sec wait time
+
+}
+
+
+
+
+
+
 
 
     this.scyAtkImage1 = function () { // image 1 of 6 is slash
@@ -218,96 +399,161 @@ this.chrAtkImage6 = function () {  // image 6 of 6 attack image needs to show on
 
 
 
-    this.squAtkImage1 = function () { // image 1 of 6 is bubbles
 
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/bubbles-gif.gif" </img>';
+
+
+    this.blaAtkImage1 = function () { // image 1 of 6 is aquaJet
+
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise_aquajet.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+    this.blaAtkImage2 = function () { // image 2 of 6 is bubble
+
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise_bubble.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+    this.blaAtkImage3 = function () { // image 3 of 6 is hydroPump
+
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise_hydropump.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+    this.blaAtkImage4 = function () { // image 4 of 6 is protect
+
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise_protect.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+    this.blaAtkImage5 = function () { // image 5 of 6 is headbutt
+
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise_headbutt.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
+
+      setTimeout(function() { // This is an anonymous callback function
+
+        // remove attack image after 3 secs
+        document.getElementById("player1AttackImage").innerHTML=("");
+
+      }, 3000); // 3 sec wait time
+
+    }
+
+
+
+
+
+
+    this.oniAtkImage1 = function () { // image 1 of 6 is rock throw
+
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix_rockthrow.png" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
       document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
-        // remove attack image after 3 secs
+        // remove attack image after 5 secs
         document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 3000); // 3 sec wait time
+      }, 5000); // 5 sec wait time
 
     }
 
-    this.squAtkImage2 = function () { // image 2 of 6 is TailWhip
+    this.oniAtkImage2 = function () { // image 2 of 6 is smack down
 
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/TailWhip.png" </img>';
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix_smackdown.png" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
       document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
-        // remove attack image after 3 secs
+        // remove attack image after 5 secs
         document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 3000); // 3 sec wait time
+      }, 5000); // 5 sec wait time
 
     }
 
+    this.oniAtkImage3 = function () { // image 3 of 6 is rock slide
 
-    this.squAtkImage3 = function () { // image 3 of 6 is waterPulse
-
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/waterPulse.png" </img>';
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix_RockSlide.jpg" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
       document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
-        // remove attack image after 3 secs
+        // remove attack image after 5 secs
         document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 3000); // 3 sec wait time
+      }, 5000); // 5 sec wait time
 
     }
 
+    this.oniAtkImage4 = function () { // image 4 of 6 is screech
 
-    this.squAtkImage4 = function () { // image 4 of 6 is tackle
-
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/tackle.png" </img>';
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix_Screech.png" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
       document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
-        // remove attack image after 3 secs
+        // remove attack image after 5 secs
         document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 3000); // 3 sec wait time
+      }, 5000); // 5 sec wait time
 
     }
 
-    this.squAtkImage5 = function () { // image 5 of 6 is watergun
+    this.oniAtkImage5 = function () { // image 5 of 6 is stone edge
 
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/watergun.png" </img>';
+      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix_StoneEdge.png" </img>';
       document.getElementById("computerAttackImage").style.width = 180;
       document.getElementById("computerAttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
-        // remove attack image after 3 secs
+        // remove attack image after 5 secs
         document.getElementById("computerAttackImage").innerHTML=("");
 
-      }, 3000); // 3 sec wait time
-
-    }
-
-
-    this.squAtkImage6 = function () { // image 6 of 6 attack image needs to show on computer side because of self-healing
-
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
+      }, 5000); // 5 sec wait time
 
     }
 
@@ -315,80 +561,7 @@ this.chrAtkImage6 = function () {  // image 6 of 6 attack image needs to show on
 
 
 
-    this.pikAtkImage1 = function () { // image 1 of 6 thunderShock
 
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_thundershock.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
-
-    }
-
-    this.pikAtkImage2 = function () { // image 2 of 6 is doubleKick
-
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_doublekick.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
-
-    }
-
-    this.pikAtkImage3 = function () { // image 3 of 6 is thunderBolt -- note: consider using slash.gif for the animation for thunderBolt -- looks really good together
-
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_thunderbolt.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
-
-    }
-
-    this.pikAtkImage4 = function () { // image 4 of 6 is growl
-
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_growl.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
-
-    }
-
-    this.pikAtkImage5 = function () { // image 5 of 6 is headButt -- NOTE: 6of6 is rest but this is same attack move for all player1 pokemon
-
-      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/pikachu_headbutt.png" </img>';
-      document.getElementById("player1AttackImage").style.width = 180;
-      document.getElementById("player1AttackImage").style.height = 100;
-
-      setTimeout(function() { // This is an anonymous callback function
-
-        // remove attack image after 3 secs
-        document.getElementById("player1AttackImage").innerHTML=("");
-
-      }, 3000); // 3 sec wait time
-
-    }
 
 
     this.player1TauntImage = function () { // image 1 of 1 for taunting player1 when attemping to use health restoration when health is > 40
@@ -4277,7 +4450,7 @@ class player1Moves {
 
         //debugging here -----------------------------------
          console.log("scytherHealthBar array is " + a4.scytherHealthBar);
-         console.log("scytherBackup array is " + a4.a4.scytherBackup);
+         console.log("scytherBackup array is " + a4.scytherBackup);
 
          // show image
           player1Img.pikAtkImage5();
@@ -4427,7 +4600,7 @@ class player1Moves {
             console.log("onixBackup array is " + a6.onixBackup);
 
             // show image
-             player1Img.chrAtkImage1();
+             player1Img.blaAtkImage1();
 
              //change boolean state so that computer can attack
              confirm.makeMove[0].player1Move = false;
@@ -4467,7 +4640,7 @@ class player1Moves {
          console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
-          player1Img.chrAtkImage2();
+          player1Img.blaAtkImage2();
 
           //change boolean state so that computer can attack
           confirm.makeMove[0].player1Move = false;
@@ -4508,7 +4681,7 @@ class player1Moves {
          console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
-          player1Img.chrAtkImage3();
+          player1Img.blaAtkImage3();
 
           //change boolean state so that computer can attack
           confirm.makeMove[0].player1Move = false;
@@ -4550,7 +4723,7 @@ class player1Moves {
          console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
-          player1Img.chrAtkImage4();
+          player1Img.blaAtkImage4();
 
           //change boolean state so that computer can attack
           confirm.makeMove[0].player1Move = false;
@@ -4594,7 +4767,7 @@ class player1Moves {
          console.log("onixBackup array is " + a6.onixBackup);
 
          // show image
-          player1Img.chrAtkImage5();
+          player1Img.blaAtkImage5();
 
           //change boolean state so that computer can attack
           confirm.makeMove[0].player1Move = false;
@@ -5708,7 +5881,7 @@ class computerMoves {
          document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[1] +" with Rock Throw!";
 
          //show attack image
-         computerImg.squAtkImage1();
+         computerImg.oniAtkImage1();
 
 
 
@@ -5759,7 +5932,7 @@ class computerMoves {
         document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[1] +" with Smack Down!";
 
         //show attack image
-        computerImg.squAtkImage2();
+        computerImg.oniAtkImage2();
 
 
 
@@ -5811,7 +5984,7 @@ class computerMoves {
         document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[1] +" with Rock Slide!";
 
         //show attack image
-        computerImg.squAtkImage3();
+        computerImg.oniAtkImage3();
 
 
 
@@ -5865,7 +6038,7 @@ class computerMoves {
           document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1] + " attacked "+ player1CH.player1PokemonChoices[1] +" with Screech!";
 
           //show attack image
-          computerImg.squAtkImage4();
+          computerImg.oniAtkImage4();
 
 
 
@@ -5919,7 +6092,7 @@ class computerMoves {
             document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[1] +" with Stone Edge!";
 
             //show attack image
-            computerImg.squAtkImage5();
+            computerImg.oniAtkImage5();
 
 
 
@@ -6221,7 +6394,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
-  //insert function here
+  player1.bubbleMove();
 
   setTimeout (function(){
 
@@ -6236,7 +6409,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
-  //insert function here
+  player1.doubleKickMove();
 
   setTimeout (function(){
 
@@ -6276,7 +6449,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
-  //insert function here
+  player1.hydroPumpMove();
 
   setTimeout (function(){
 
@@ -6291,7 +6464,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
-  //insert function here
+  player1.thunderBoltMove();
 
   setTimeout (function(){
 
@@ -6336,7 +6509,7 @@ function defenseA() {
 
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
-    //insert function here
+    player1.protectMove();
 
     setTimeout (function(){
 
@@ -6351,7 +6524,7 @@ function defenseA() {
 
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
-    //insert function here
+    player1.growl2Move();
 
     setTimeout (function(){
 
@@ -6395,7 +6568,7 @@ function defenseB() {
 
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
-    //insert function here
+    player1.headButt2Move();
 
     setTimeout (function(){
 
@@ -6410,7 +6583,7 @@ function defenseB() {
 
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
-    //insert function here
+    player1.headButtMove();
 
     setTimeout (function(){
 
