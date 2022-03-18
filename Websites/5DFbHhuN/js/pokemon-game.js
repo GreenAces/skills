@@ -597,6 +597,8 @@ class sound {
 
   constructor () {
 
+     //pokemon voices
+
      this.charmanderVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/CharmanderVoice.mp3');
      this.blastoiseVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/BlastoiseVoice.wav');
      this.onixVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/OnixVoice.mp3');
@@ -605,9 +607,65 @@ class sound {
      this.pokemonVictoryVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/victoryThemezz.mp3');
      this.scytherVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/ScytherVoice.wav');
      this.squirtleVO = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/SquirtleVoicezzz.mp3');
+
+     //other sound effects
+
      this.soundConfirmer = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/soundConfirmer.wav');
      this.invalidAction =  new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/invalidAction.mp3');
      this.congratulationsTheme = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/congratulationsTheme.mp3');
+     this.cartoonLaugh_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/cartoonLaugh_sound.mp3');
+     this.sadTrombone_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/sadTrombone_sound.mp3');
+
+
+     //pokemon sound effects
+
+     //charmander
+     this.charmanderFireBlaster_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/charmanderFireBlaster_sound.mp3');
+     this.chamanderBlaze_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/chamanderBlaze_sound.mp3');
+     this.charmanderSolarBeam_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/charmanderSolarBeam_sound.mp3');
+     this.charmanderGrowl_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/charmanderGrowl_sound.mp3');
+     this.charmanderSmokeScreen_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/charmanderSmokeScreen_sound.mp3');
+     this.pokemonRest_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
+
+     //squirtle
+     this.squirtleBubble_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleBubble_sound.mp3');
+     this.squirtleTailWhip_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleTailWhip_sound.mp3');
+     this.squirtleWaterPulse_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleWaterPulse_sound.mp3');
+     this.squirtleTackle_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleTackle_sound.mp3');
+     this.squirtleWaterGun_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleWaterGun_sound.mp3');
+     this.pokemonRest_sound2 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
+
+     //pikachu
+     this.pikachuThunderBolt_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pikachuThunderBolt_sound.mp3');
+     this.pikachuDoubleKick_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pikachuDoubleKick_sound.mp3');
+     this.pikachuThunderBolt2_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pikachuThunderBolt_sound.mp3');
+     this.charmanderGrowl_sound2 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/charmanderGrowl_sound.mp3');
+     this.onixSmackDown_sound2 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixSmackDown_sound.mp3');
+     this.pokemonRest_sound3 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
+
+     //sycther
+     this.scytherSlash_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/scytherSlash_sound.mp3');
+     this.scytherQuickAttack_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/scytherQuickAttack_sound.mp3');
+     this.scytherXScissor_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/scytherX-Scissor_sound.mp3');
+     this.scytherFuryCutter_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/scytherFuryCutter_sound.mp3');
+     this.scytherWingAttack_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/scytherWingAttack_sound.mp3');
+     this.pokemonRest_sound4 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
+
+     //blastoise
+     this.blastoiseAquaJet_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/blastoiseAquaJet_sound.mp3');
+     this.squirtleBubble_sound2 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/squirtleBubble_sound.mp3');
+     this.blastoiseHydroPump_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/blastoiseHydroPump_sound.mp3');
+     this.blastoiseProtect_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/blastoiseProtect_sound.mp3');
+     this.onixSmackDown_sound3 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixSmackDown_sound.mp3');
+     this.pokemonRest_sound5 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
+
+     //onix
+     this.onixRockThrow_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixRockThrow_sound.mp3');
+     this.onixSmackDown_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixSmackDown_sound.mp3');
+     this.onixRockSlide_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixRockSlide_sound.mp3');
+     this.onixScreech_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixScreech_sound.mp3');
+     this.onixStoneEdge_sound = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/onixStoneEdge_sound.mp3');
+     this.pokemonRest_sound6 = new Audio('https://greenaces.site/5DFbHhuN/sounds/pokemon/pokemonRest_sound.mp3');
 
 
 
@@ -916,6 +974,9 @@ class referee {
           document.getElementById("Player1PokeImage").style.width = 200;
           document.getElementById("Player1PokeImage").style.height = 180;
 
+          //play sad trombone sound effect only when player1 pokemon dies
+          player1SD.sadTrombone_sound.play();
+
 
           // Change boolean state so player1 can't make a move
           confirm.makeMove[0].computerMove = true;
@@ -956,6 +1017,10 @@ class referee {
             document.getElementById("Player1PokeImage").style.width = 200;
             document.getElementById("Player1PokeImage").style.height = 180;
 
+            //play sad trombone sound effect only when player1 pokemon dies
+            player1SD.sadTrombone_sound.play();
+
+
 
             // Change boolean state so player1 can't make a move
             confirm.makeMove[0].computerMove = true;
@@ -995,6 +1060,10 @@ class referee {
             document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/rip_pokemon.jpeg" </img>';
             document.getElementById("Player1PokeImage").style.width = 200;
             document.getElementById("Player1PokeImage").style.height = 180;
+
+            //play sad trombone sound effect only when player1 pokemon dies
+            player1SD.sadTrombone_sound.play();
+
 
 
             // Change boolean state so player1 can't make a move
@@ -1045,7 +1114,6 @@ class referee {
         document.getElementById("CpuPokeImage").style.width = 200;
         document.getElementById("CpuPokeImage").style.height = 180;
 
-
         //Change boolean state so computer move can't make a move
         confirm.makeMove[0].player1Move = true;
 
@@ -1093,7 +1161,6 @@ class referee {
           document.getElementById("CpuPokeImage").style.width = 200;
           document.getElementById("CpuPokeImage").style.height = 180;
 
-
           //Change boolean state so computer move can't make a move
           confirm.makeMove[0].player1Move = true;
 
@@ -1136,7 +1203,6 @@ class referee {
           document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/rip_pokemon.jpeg" </img>';
           document.getElementById("CpuPokeImage").style.width = 200;
           document.getElementById("CpuPokeImage").style.height = 180;
-
 
           //Change boolean state so computer move can't make a move
           confirm.makeMove[0].player1Move = true;
@@ -3735,6 +3801,12 @@ this.increaseComputerHP = function () {
       //prevent health restoration if computer pokemon health is > 40
       restore.restedSquirtle = false;
 
+      //laughandpoint image loads here
+      player1Img.player1TauntImage();
+
+      //computer laughs at player when attempting to use health restoration when health is > 40
+      computerSD.cartoonLaugh_sound.play();
+
 
       console.log("restedSquirtle hp: when > 40 is " + restore.restedSquirtle);
       console.log("code was commented out *debugging*(1-1-1)");
@@ -3749,6 +3821,12 @@ this.increaseComputerHP = function () {
       //prevent health restoration if computer pokemon health is > 40
       restore.restedScyther = false;
 
+      //laughandpoint image loads here
+      player1Img.player1TauntImage();
+
+      //computer laughs at player when attempting to use health restoration when health is > 40
+      computerSD.cartoonLaugh_sound.play();
+
 
       console.log("restedScyther hp: when > 40 is " + restore.restedScyther);
       console.log("code was commented out *debugging*(1-1-2)");
@@ -3762,6 +3840,12 @@ this.increaseComputerHP = function () {
 
       //prevent health restoration if computer pokemon health is > 40
       restore.restedOnix = false;
+
+      //laughandpoint image loads here
+      player1Img.player1TauntImage();
+
+      //computer laughs at player when attempting to use health restoration when health is > 40
+      computerSD.cartoonLaugh_sound.play();
 
 
       console.log("restedOnix hp: when > 40 is " + restore.restedOnix);
@@ -4982,6 +5066,7 @@ class computerMoves {
 
    //show attack image
    computerImg.squAtkImage1();
+   computerSD.squirtleBubble_sound.play();
 
 
 
@@ -5048,6 +5133,8 @@ class computerMoves {
 
   //show attack image
   computerImg.squAtkImage2();
+  computerSD.squirtleTailWhip_sound.play();
+
 
 
 
@@ -5117,6 +5204,7 @@ class computerMoves {
 
   //show attack image
   computerImg.squAtkImage3();
+  computerSD.squirtleWaterPulse_sound.play();
 
 
 
@@ -5188,6 +5276,7 @@ class computerMoves {
 
     //show attack image
     computerImg.squAtkImage4();
+    computerSD.squirtleTackle_sound.play();
 
 
 
@@ -5257,6 +5346,7 @@ class computerMoves {
 
       //show attack image
       computerImg.squAtkImage5();
+      computerSD.squirtleWaterGun_sound.play();
 
 
 
@@ -5295,6 +5385,7 @@ class computerMoves {
 
           //show recovery image for computer pokemon
           computerImg.squAtkImage6();
+          computerSD.pokemonRest_sound2.play();
 
           //reflect the changes to the charmanderHealthBar array
          a1.charmanderHealthBar.push(45);
@@ -5440,6 +5531,7 @@ class computerMoves {
 
       //show attack image
       computerImg.scyAtkImage1();
+      computerSD.scytherSlash_sound.play();
 
 
 
@@ -5503,6 +5595,7 @@ class computerMoves {
 
      //show attack image
      computerImg.scyAtkImage2();
+     computerSD.scytherQuickAttack_sound.play();
 
 
 
@@ -5567,6 +5660,7 @@ class computerMoves {
 
      //show attack image
      computerImg.scyAtkImage3();
+     computerSD.scytherXScissor_sound.play();
 
 
 
@@ -5633,6 +5727,7 @@ class computerMoves {
 
        //show attack image
        computerImg.scyAtkImage4();
+       computerSD.scytherFuryCutter_sound.play();
 
 
 
@@ -5699,6 +5794,7 @@ class computerMoves {
 
          //show attack image
          computerImg.scyAtkImage5();
+         computerSD.scytherWingAttack_sound.play();
 
 
 
@@ -5800,6 +5896,7 @@ class computerMoves {
 
            //show attack image
            computerImg.squAtkImage6();
+           computerSD.pokemonRest_sound4.play();
 
 
 
@@ -5882,6 +5979,7 @@ class computerMoves {
 
          //show attack image
          computerImg.oniAtkImage1();
+         computerSD.onixRockThrow_sound.play();
 
 
 
@@ -5933,6 +6031,7 @@ class computerMoves {
 
         //show attack image
         computerImg.oniAtkImage2();
+        computerSD.onixSmackDown_sound.play();
 
 
 
@@ -5985,6 +6084,7 @@ class computerMoves {
 
         //show attack image
         computerImg.oniAtkImage3();
+        computerSD.onixRockSlide_sound.play();
 
 
 
@@ -6039,6 +6139,7 @@ class computerMoves {
 
           //show attack image
           computerImg.oniAtkImage4();
+          computerSD.onixScreech_sound.play();
 
 
 
@@ -6093,6 +6194,7 @@ class computerMoves {
 
             //show attack image
             computerImg.oniAtkImage5();
+            computerSD.onixStoneEdge_sound.play();
 
 
 
@@ -6199,6 +6301,7 @@ class computerMoves {
 
               //show attack image
               computerImg.squAtkImage5();
+              computerSD.pokemonRest_sound6.play();
 
 
 
@@ -6322,6 +6425,7 @@ confirm.disableMoves();
 if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true ){ // charmander
 
   player1.fireBlasterMove();
+  player1SD.charmanderFireBlaster_sound.play();
 
   //player1CH.debuggingOperation();
 
@@ -6337,6 +6441,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
   player1.aquaJetMove();
+  player1SD.blastoiseAquaJet_sound.play();
 
   setTimeout (function(){
 
@@ -6352,6 +6457,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
   player1.thunderShockMove();
+  player1SD.pikachuThunderBolt_sound.play();
 
   setTimeout (function(){
 
@@ -6383,6 +6489,7 @@ confirm.disableMoves();
 if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
   player1.blazeMove();
+  player1SD.chamanderBlaze_sound.play();
 
   setTimeout (function(){
 
@@ -6395,6 +6502,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
   player1.bubbleMove();
+  player1SD.squirtleBubble_sound2.play();
 
   setTimeout (function(){
 
@@ -6410,6 +6518,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
   player1.doubleKickMove();
+  player1SD.pikachuDoubleKick_sound.play();
 
   setTimeout (function(){
 
@@ -6438,6 +6547,7 @@ confirm.disableMoves();
 if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
   player1.solarPowerMove();
+  player1SD.charmanderSolarBeam_sound.play();
 
   setTimeout (function(){
 
@@ -6450,6 +6560,8 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
   player1.hydroPumpMove();
+  player1SD.blastoiseHydroPump_sound.play();
+
 
   setTimeout (function(){
 
@@ -6465,6 +6577,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
   player1.thunderBoltMove();
+  player1SD.pikachuThunderBolt2_sound.play();
 
   setTimeout (function(){
 
@@ -6498,6 +6611,7 @@ function defenseA() {
   if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
   player1.growlMove();
+  player1SD.charmanderGrowl_sound.play();
 
     setTimeout (function(){
 
@@ -6510,6 +6624,7 @@ function defenseA() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
     player1.protectMove();
+    player1SD.blastoiseProtect_sound.play();
 
     setTimeout (function(){
 
@@ -6525,6 +6640,7 @@ function defenseA() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
     player1.growl2Move();
+    player1SD.charmanderGrowl_sound2.play();
 
     setTimeout (function(){
 
@@ -6557,6 +6673,7 @@ function defenseB() {
   if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
     player1.smokeScreenMove();
+    player1SD.charmanderSmokeScreen_sound.play();
 
     setTimeout (function(){
 
@@ -6569,6 +6686,7 @@ function defenseB() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
     player1.headButt2Move();
+    player1SD.onixSmackDown_sound3.play();
 
     setTimeout (function(){
 
@@ -6584,6 +6702,7 @@ function defenseB() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
     player1.headButtMove();
+    player1SD.onixSmackDown_sound2.play();
 
     setTimeout (function(){
 
@@ -6616,6 +6735,7 @@ function defenseC() {
   if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
     player1.rest();
+    player1SD.pokemonRest_sound.play();
 
     setTimeout (function(){
 
@@ -6628,6 +6748,7 @@ function defenseC() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
     player1.rest3();
+    player1SD.pokemonRest_sound5.play();
 
     setTimeout (function(){
 
@@ -6643,6 +6764,7 @@ function defenseC() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
     player1.rest2();
+    player1SD.pokemonRest_sound3.play();
 
     setTimeout (function(){
 
