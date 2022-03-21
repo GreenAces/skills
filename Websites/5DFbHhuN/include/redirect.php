@@ -11,7 +11,7 @@ $rateGame = $_POST['rateGame'];
 if($enjoyable !=''&& $age !=''&& $errors !=''&& $bugImpactGameplay !='' && $recommenedGame !='' && $AndriodORBrowser !='' && $rateGame !='')
 {
 //  To redirect form on a particular page
-header("Location: index.php");
+header("Location: https://greenaces.site/");
 }
 else{
 ?>

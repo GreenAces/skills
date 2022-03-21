@@ -688,7 +688,7 @@ class sound {
 
       }
 
-    this.soundSettingsOff = function (){
+    this.soundSettingsOff = function () {
       // inform user of audio change without audio file
       document.getElementById("statusProgress3").innerHTML=("Sound was turned off.");
 
@@ -3246,13 +3246,20 @@ class progressBar {
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction2of6 === true ||
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction3of6 === true ||
                   onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction4of6 === true ||
-                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction5of6 === true ||
-                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction6of6 === true) {
+                  onixHP2 < 0 || onixHP2 >= 0  && computer.onixMovesActivated[0].onixFunction5of6 === true) {
 
                 //if statement ensures that some funtions are activated before making changes to the progress bar
 
 
                 switch(onixHP2 < 0 || onixHP2 >= 0) {
+
+                case (onixHP2 < 0):
+                hpDamage5 = 0;
+                document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
+                p1.informWinner();
+
+                computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
+                break;
 
 
                 case (onixHP2 === 0):
@@ -3315,13 +3322,20 @@ class progressBar {
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction2of6 === true ||
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction3of6 === true ||
                     scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction4of6 === true ||
-                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction5of6 === true ||
-                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction6of6 === true) {
+                    scytherHP2 < 0 || scytherHP2 >= 0  && computer.scytherMovesActivated[0].scytherFunction5of6 === true) {
 
                   //if statement ensures that some funtions are activated before making changes to the progress bar
 
 
                   switch(scytherHP2 < 0 || scytherHP2 >= 0) {
+
+                  case (scytherHP2 < 0 ):
+                  hpDamage6 = 0;
+                  document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+                  p1.informWinner();
+
+                  computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
+                  break;
 
 
                   case (scytherHP2 === 0):
@@ -4290,7 +4304,7 @@ class player1Moves {
         //debugging
         console.log("restedSquirtle status when hp > 40: " + restore.restedSquirtle);
 
-        //load invalid sound is loaded if player1 health is > 40
+        //invalid sound is loaded if player1 health is > 40
         player1SD.invalidAction.play();
 
         //make no changes to squirtleHealthBar
@@ -4593,7 +4607,7 @@ class player1Moves {
          //debugging
          console.log("restedScyther status when hp > 40: " + restore.restedScyther);
 
-         //load invalid sound is loaded if player1 health is > 40
+         //invalid sound is loaded if player1 health is > 40
          player1SD.invalidAction.play();
 
          //make no changes to scytherHealthBar
@@ -4610,7 +4624,7 @@ class player1Moves {
 
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to pikachu if certain conditions are true.
-       scytherProgressBar.decreaseComputerHP3();
+       scytherProgressBar.increaseComputerHP();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -4905,7 +4919,7 @@ class player1Moves {
          //debugging
          console.log("restedOnix status when hp > 40: " + restore.restedOnix);
 
-         //load invalid sound is loaded if player1 health is > 40
+         //invalid sound is loaded if player1 health is > 40
          player1SD.invalidAction.play();
 
          //make no changes to onixHealthBar
@@ -4922,7 +4936,7 @@ class player1Moves {
 
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives HP to blastoise if conditions are true
-       onixProgressBar.decreaseComputerHP2();
+       onixProgressBar.increaseComputerHP();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -4934,8 +4948,7 @@ class player1Moves {
        console.log("onixHpRecovered array is " + a6.onixHpRecovered);
 
 
-       // show recovery image
-       player1Img.chrAtkImage6();
+      
 
        //change boolean state so that computer can attack
        confirm.makeMove[0].player1Move = false;
@@ -5383,7 +5396,7 @@ class computerMoves {
 
 
 
-          //show recovery image for computer pokemon
+          //show recovery image for computer pokemon and play rest sound effect
           computerImg.squAtkImage6();
           computerSD.pokemonRest_sound2.play();
 
@@ -5820,7 +5833,7 @@ class computerMoves {
            let pikachuHP14 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
            let hpRecovered3 = a9.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
 
-           //scyther attack move: rest2
+           //scyther attack move: rest2 (restores health to pikachu)
            //disable attack move for scyther pokemon and pikachu
            computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
@@ -5836,8 +5849,9 @@ class computerMoves {
 
 
 
-             //show recovery image for computer pokemon
+             //show recovery image for computer pokemon and play rest sound effect
              computerImg.squAtkImage6();
+             computerSD.pokemonRest_sound2.play();
 
              //reflect the changes to the pikachuHealthBar array
             a3.pikachuHealthBar.push(45);
@@ -5870,8 +5884,6 @@ class computerMoves {
            //this function changes the HTML progress bar that displays the pokemon HP (this attack recovers pikachu when scyther attacks)
            pikachuProgressBar.decreasePlayerHP2(); //actually increases hp for pikachu
 
-           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
-           array1.checkTheStatus();
 
            //debugging here------------------------------------------------------
 
@@ -5893,10 +5905,6 @@ class computerMoves {
            }//end of if statements
 
 
-
-           //show attack image
-           computerImg.squAtkImage6();
-           computerSD.pokemonRest_sound4.play();
 
 
 
@@ -6221,7 +6229,7 @@ class computerMoves {
               let hpRecovered4 = a11.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
 
 
-              //onix attack move: rest3
+              //onix attack move: rest3 (restores health to blastoise)
               //disable attack move for onix pokemon and blastoise
               computer.onixMovesActivated[0].onixFunction6of6 = false;
 
@@ -6235,8 +6243,9 @@ class computerMoves {
 
 
 
-                //show recovery image for computer pokemon
+                //show recovery image for computer pokemon and play rest sound effect
                 computerImg.squAtkImage6();
+                computerSD.pokemonRest_sound2.play();
 
                 //reflect the changes to the blastoiseHealthBar array
                a11.blastoiseHealthBar.push(45);
@@ -6272,15 +6281,13 @@ class computerMoves {
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix recovers health when blastoise attacks)
-              onixProgressBar.decreasePlayerHP3(); //actually increases hp for blastoise
+              blastoiseProgressBar.decreasePlayerHP3(); //actually increases hp for blastoise
 
-              //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
-              array1.checkTheStatus();
 
               //debugging here------------------------------------------------------
 
               console.log("blastoiseHealthBar array is "+ a11.blastoiseHealthBar);
-              console.log("blastoiseHP_recovered array is " + a11.blastoiseHpRecovered);
+              console.log("blastoiseHP_recovered array is " + hpRecovered4);
 
 
               //default setting
@@ -6299,12 +6306,6 @@ class computerMoves {
 
 
 
-              //show attack image
-              computerImg.squAtkImage5();
-              computerSD.pokemonRest_sound6.play();
-
-
-
               //Change boolean state so that player1 can make a move
               confirm.makeMove[0].computerMove = false;
               console.log(confirm.makeMove[0]);
@@ -6312,7 +6313,7 @@ class computerMoves {
               console.log(confirm.makeMove[0]);
 
               //disable attack move for onix pokemon and blastoise
-             player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
+              player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
                 break;
 
 
