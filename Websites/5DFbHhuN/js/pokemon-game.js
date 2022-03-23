@@ -1,17 +1,17 @@
 
 /*
 NOTE:
-Lastest update: (03/22/2022)
+Lastest update: (03/23/2022)
 
 x0) rest function partially working for pikachu and bastoise. Make it work fully.   ***************************************************************************** high priority ***************** 01/05/2022
 x1)
-x2) diagoise line 6373 (health restoration for blastoise) ******************************************************************************************************* high priority ****************  03/22/2022
+x2)
 x3) on line 1069 chrPokeImage -- need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4)
-y)
-z) disabled the restart function on line 361 informWinner() to work on line 222
-1) Work on disabling dead pokemon -- see function at line 206 -- note: this is the same problem as line 22
-2) add code here for when pikachu lives and sycther dies and fix logic for other pokemon pairs. + find a way to make the health load instantly after switching pokemon *********************** 12/09/2021
+y) DebuggingOperation is not commented out on line 6576 or attackA function -- working on a while loop problem to fix instant health when switching pokemon ********* high priority **************** 03/23/2022
+z)
+1)
+2)
 2.1)
 2.2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
 3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
@@ -21,13 +21,13 @@ z) disabled the restart function on line 361 informWinner() to work on line 222
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
-7) fix rest function for other pokemon but first continue perfecting the rest function with squirtle and charmander before moving on ************************************ high priority********** 12/23/2021
-8) improve code on line 369 -- scythers attack move -- computer attacks too fast -- it should attack every 8 secs if conditions are true
+7)
+8)
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
-10) investigate this this.squPokeImage2() on line 411 *low priority*
+10)
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
-12) two cases are true for squirtleMoves with bubble beam case -- find a unqiue case where only 1 is true to fix this problem ************************************************high priority**** 12/23/2021
-13) fix decreasePlayerHP2 and decreasePlayerHP3 to match decreasePlayerHP (ensure that === 0 is changed to <= 0 ) *************************************************************** low priority (12/21/2021)
+12)
+13)
 14) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 
 
@@ -2091,7 +2091,7 @@ class changePokemon {
         let x = 20;
 
 
-        if (x === 10) {
+        if (x === 20) {
 
 
 
@@ -2099,7 +2099,33 @@ class changePokemon {
           console.log("debuggingOperation successful : if statment was triggered.");
           console.log("----------------------------------------------------------");
 
+          //varibles
+          let proceed = false; // DO NOT MAKE THIS TRUE -- only testing here
+          let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+          let squirtleHP11 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+          let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+          let stopLoop  = false;
 
+
+          //practice with while loop here:
+
+
+          while (charmanderHP11 > 1 && proceed === true || squirtleHP11 > 1 && proceed === true  || pikachuHP11 > 1 && proceed === true) {
+
+
+
+           console.log("looping");
+
+
+          if (charmanderHP11 === 0 || squirtleHP11 === 0 || pikachuHP11 === 0) {
+
+            stopLoop  = true;
+
+            console.log("loop stopped successfully.");
+
+          }//end of if statement
+
+        }//end of while loop
 
 
 
@@ -3322,7 +3348,6 @@ class progressBar {
 
 
       let hpDamage = 0;
-      let hpRecovered = a8.squirtleHpRecovered.reduce(array2.PokemonRestoredReducer);
       let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
@@ -5541,7 +5566,7 @@ class computerMoves {
 
 
           //show recovery image for computer pokemon and play rest sound effect
-          computerImg.squAtkImage6();
+          player1Img.chrAtkImage6();
           computerSD.pokemonRest_sound2.play();
 
           //reflect the changes to the charmanderHealthBar array
@@ -6393,7 +6418,7 @@ class computerMoves {
                 computerSD.pokemonRest_sound2.play();
 
                 //reflect the changes to the blastoiseHealthBar array
-               a11.blastoiseHealthBar.push(45);
+               a5.blastoiseHealthBar.push(45);
 
 
                //backup array for health restoration needs to be updated as well
@@ -6408,7 +6433,7 @@ class computerMoves {
                }else if(blastoiseHP15 > 40) {
 
                 //make no changes to the pikachuHealthBar array
-                a11.blastoiseHealthBar.push(0);
+                a5.blastoiseHealthBar.push(0);
 
 
                 //make no changes to the blastoiseHpRecovered array
@@ -6431,7 +6456,7 @@ class computerMoves {
 
               //debugging here------------------------------------------------------
 
-              console.log("blastoiseHealthBar array is "+ a11.blastoiseHealthBar);
+              console.log("blastoiseHealthBar array is "+ a5.blastoiseHealthBar);
               console.log("blastoiseHP_recovered array is " + hpRecovered4);
 
 
@@ -6573,7 +6598,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
   player1.fireBlasterMove();
   player1SD.charmanderFireBlaster_sound.play();
 
-  //player1CH.debuggingOperation();
+  player1CH.debuggingOperation();
 
   setTimeout (function(){
 
