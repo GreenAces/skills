@@ -1,14 +1,14 @@
 
 /*
 NOTE:
-Lastest update: (03/23/2022)
+Lastest update: (03/24/2022)
 
-x0) rest function partially working for pikachu and bastoise. Make it work fully.   ***************************************************************************** high priority ***************** 01/05/2022
-x1)
+x0) pokemonLoops function created -- work on code to update healthbar when switching pokemon. It also might be useful load deadPokemon function there as well.    *** high priority *** 03/24/2022
+x1) pokemonLoops works as expected for player1 pokemon. Add the same loop function for computer pokemon so the healthbar can update whenever switching pokemon.   *** high priority *** 03/24/2022
 x2)
 x3) on line 1069 chrPokeImage -- need to figure out a way to save and restore array when switching pokemon then copy code from 1069 to pikPokeImage and blaPokeImage *high priority*
 x4)
-y) DebuggingOperation is not commented out on line 6576 or attackA function -- working on a while loop problem to fix instant health when switching pokemon ********* high priority **************** 03/23/2022
+y)
 z)
 1)
 2)
@@ -1840,6 +1840,134 @@ document.getElementById("sendLink").target = "_blank";
 
             }//end of InformWinner function
 
+  this.pokemonLoops = function () {
+
+    let updateCharmanderHP = 0;
+    let updatePikachuHP = 0;
+    let updateBlastoiseHP = 0;
+    let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+    let pikachuHP15 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+    let blastoiseHP16 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+
+
+
+
+  for (let i = 0; i < a1.charmanderHealthBar.length; i++) {
+
+    //loop #1 for charmander
+    if (charmanderHP8 >= 1 && p1.charmanderSelected === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#1 for charmander started because it was selected.");
+
+      updateCharmanderHP = charmanderHP8;
+      document.querySelector(".player1HP").style.width = updateCharmanderHP +   "%";
+
+
+      console.log(a1.charmanderHealthBar);
+
+      break;
+
+    }else if (pikachuHP15 >=1 && p1.pikachuSelected === false || p1.pikachuDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#1 for pikachu ended because it's not selected.");
+
+
+      break;
+
+    }else if (blastoiseHP16 >=1 && p1.blastoiseSelected === false || p1.blastoiseDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#1 for blastoise ended because it's not selected.");
+
+
+      break;
+
+    }//end of if statement
+
+
+
+  }//end of for-loop
+
+  //loop #2 for pikachu
+  for (let i = 0; i < a3.pikachuHealthBar.length; i++) {
+
+
+    if (pikachuHP15 >= 1 && p1.pikachuSelected === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#2 for pikachu started because it was selected.");
+
+      updatePikachuHP = pikachuHP15;
+      document.querySelector(".player1HP").style.width = updatePikachuHP +   "%";
+
+
+      console.log(a3.pikachuHealthBar);
+
+      break;
+    }else if (charmanderHP8 >=1 && p1.charmanderSelected === false || p1.charmanderDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#2 for charmander ended because it's not selected.");
+
+
+      break;
+
+    }else if (blastoiseHP16 >=1 && p1.blastoiseSelected === false || p1.blastoiseDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#2 for blastoise ended because it's not selected.");
+
+
+      break;
+
+    }//end of if statement
+
+
+
+  }//end of for-loop2
+
+  //loop #3 for blastoise
+  for (let i = 0; i < a5.blastoiseHealthBar.length; i++) {
+
+
+    if (blastoiseHP16 >= 1 && p1.blastoiseSelected === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#3 for blastoise started because it was selected.");
+
+      updateBlastoiseHP = blastoiseHP16;
+      document.querySelector(".player1HP").style.width = updateBlastoiseHP +   "%";
+
+      console.log(a5.blastoiseHealthBar);
+
+      break;
+    }else if (charmanderHP8 >=1 && p1.charmanderSelected === false || p1.charmanderDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#3 for charmander ended because it's not selected.");
+
+
+      break;
+
+    }else if (pikachuHP15 >=1 && p1.pikachuSelected === false || p1.pikachuDied === true) {
+
+      //debugging here delete if neccessary
+      console.log("loop#3 for pikachu ended because it's not selected.");
+
+
+      break;
+
+    }//end of if statement
+
+
+
+  }//end of for-loop3
+
+
+}//end of pokemonLoops function
+
 
 
 
@@ -1847,6 +1975,7 @@ document.getElementById("sendLink").target = "_blank";
 
 
 }//end of referee class
+
 
 
 
@@ -2091,7 +2220,7 @@ class changePokemon {
         let x = 20;
 
 
-        if (x === 20) {
+        if (x === 10) {
 
 
 
@@ -2099,33 +2228,6 @@ class changePokemon {
           console.log("debuggingOperation successful : if statment was triggered.");
           console.log("----------------------------------------------------------");
 
-          //varibles
-          let proceed = false; // DO NOT MAKE THIS TRUE -- only testing here
-          let charmanderHP11 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-          let squirtleHP11 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
-          let pikachuHP11 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
-          let stopLoop  = false;
-
-
-          //practice with while loop here:
-
-
-          while (charmanderHP11 > 1 && proceed === true || squirtleHP11 > 1 && proceed === true  || pikachuHP11 > 1 && proceed === true) {
-
-
-
-           console.log("looping");
-
-
-          if (charmanderHP11 === 0 || squirtleHP11 === 0 || pikachuHP11 === 0) {
-
-            stopLoop  = true;
-
-            console.log("loop stopped successfully.");
-
-          }//end of if statement
-
-        }//end of while loop
 
 
 
@@ -7019,9 +7121,12 @@ function loadCharmander () {
     computer.squirtleMovesActivated[0].squirtleFunction5of6 = false;
     computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
-    //new entry
+    //new entries below:
     //check to see if there are any deadPokemon being selected by player1
     p1.disableDeadPokemon();
+
+    //call pokemonLoops function to update healthbar when switching pokemon
+    p1.pokemonLoops();
 
 
     switch(pikachuHP11 === 0 && scytherHP11 >= 1 || blastoiseHP11 === 0 && onixHP11 >= 1 ||
@@ -7122,9 +7227,12 @@ function loadPikachu () {
     computer.scytherMovesActivated[0].scytherFunction5of6 = false;
     computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
-    //new entry
+    //new entries below:
     //check to see if there are any deadPokemon being selected by player1
     p1.disableDeadPokemon();
+
+    //call pokemonLoops function to update healthbar when switching pokemon
+    p1.pokemonLoops();
 
 
 
@@ -7229,9 +7337,12 @@ computer.onixMovesActivated[0].onixFunction4of6 = false;
 computer.onixMovesActivated[0].onixFunction5of6 = false;
 computer.onixMovesActivated[0].onixFunction6of6 = false;
 
-//new entry
+//new entries below:
 //check to see if there are any deadPokemon being selected by player1
 p1.disableDeadPokemon();
+
+//call pokemonLoops function to update healthbar when switching pokemon
+p1.pokemonLoops();
 
 
 switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
