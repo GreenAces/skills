@@ -797,7 +797,7 @@ class referee {
 
   constructor (){
     this.pokemonName = ["Charmander","Scyther","Blastoise","Onix","Squirtle","Pikachu"];
-    this.deadPokemon = []; // NOTE: This is an empty array that will be used later -- see line 370 (getHealth) for details. It has a size limit of 1 index only
+    this.deadPokemon = []; // NOTE: This is an empty array that will be used later
     this.deadPokemonBackup = []; // exact duplicate of deadPokemon array but with a size limit of 6 indexes
     this.charmanderDied = false; // default
     this.squirtleDied = false; // default
@@ -3820,7 +3820,9 @@ class progressBar {
       // variable declartions
 
       let hpDamage2 = 0;
+      let hpRecovered5 = 0;
       let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let charmanderSpeedBar =  a1.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
       let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
@@ -3834,7 +3836,7 @@ class progressBar {
         //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-        switch (charmanderHP5 < 0 || charmanderHP5 >= 0) {
+        switch (charmanderHP5 < 0 || charmanderHP5 >= 0 ||  charmanderSpeedBar <=50 || charmanderSpeedBar <= 0 || charmanderSpeedBar < 0) {
 
         case (charmanderHP5 < 0):
         hpDamage2 = 0;
@@ -3875,6 +3877,46 @@ class progressBar {
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
         player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
+        break;
+
+        case (charmanderSpeedBar <= 50):
+
+        //confirm that charmander speedbar decreased only here:
+        restore.charamanderSpeedDecreased = true;
+
+        document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
+        player1HealthIndicator.style.backgroundColor = "#A6EDED"; //blue
+
+
+
+        break;
+
+        case (charmanderSpeedBar <= 0 || charmanderSpeedBar < 0):
+
+
+        document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
+        player1HealthIndicator.style.backgroundColor = "#A6EDED"; //blue
+
+
+
+        if(charmanderSpeedBar === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+
+         //confirm that charmander rested and speedbar is at zero only here:
+         restore.restedCharmander = true;
+
+         hpRecovered5 = 1; //setting this to 1 HP looks better than setting it to zero on the progress bar
+
+         document.querySelector(".playerSpeed").style.width = hpRecovered5  +   "%";
+         player1HealthIndicator.style.backgroundColor = "#A6EDED"; //blue
+
+         //turn of rest function for charmander when speed progress bar is zero
+         console.log("restedCharmander status: " + restore.restedCharmander);
+         console.log("charmander rest function was disabled here (not yet --testing).");
+
+
+
+       }//end of if statement
 
 
 
@@ -4068,31 +4110,30 @@ this.increaseComputerHP = function () {
   let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
   let scytherHP8 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
   let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-  let computerSPD =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
-  let computerSPD2 = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
-  let computerSPD3 = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  let squirtleSpeedBar =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  let scytherSpeedBar = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+  let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
   let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
+
 
   if (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true || computer.scytherMovesActivated[0].scytherFunction6of6 === true || computer.onixMovesActivated[0].onixFunction6of6 === true) {
 
 
 
-    switch (computerSPD <= 0 || squirtleHP5 <= 40 || squirtleHP5 > 40 || computerSPD2 <= 0 || scytherHP8 <= 40 || scytherHP8 > 40 || computerSPD3 <= 0 || onixHP12 <= 40 || onixHP12 > 40) {
+    switch (squirtleSpeedBar <=50 ||  scytherSpeedBar <=50 ||  onixSpeedBar <=50 || squirtleSpeedBar <=0 || squirtleSpeedBar < 0 ||  scytherSpeedBar <=0 || scytherSpeedBar <= 0 ||  onixSpeedBar <=0 || onixSpeedBar <0 || squirtleHP5 <= 40 || squirtleHP5 > 40  || scytherHP8 <= 40 || scytherHP8 > 40  || onixHP12 <= 40 || onixHP12 > 40) {
 
-    case (computerSPD <= 0 ||  computerSPD2 <= 0 ||  computerSPD3 <= 0):
 
-    //set all pokemon speed to true here (changes will be made when if statement is triggered):
 
-    restore.squirtleSpeedDecreased = true;
-    restore.scytherSpeedDecreased = true;
-    restore.onixSpeedDecreased = true;
+    case (squirtleSpeedBar <=50 ||  scytherSpeedBar <=50 ||  onixSpeedBar <=50):
 
-    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && computerSPD <= 0) {
 
-      //prevent health restoration if computer pokemon speed is 0.
 
-      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
-      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <=50) {
+
+      //increase computer health and reduce computer speed to 50 HP
+
+      speedReduced2 = squirtleSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
@@ -4100,21 +4141,18 @@ this.increaseComputerHP = function () {
       console.log("code was commented out *debugging*(4-1-1)");
 
       //inform player1 of computer inablility to use the rest function
-      document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is too low to rest...";
+      document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is getting low...";
 
-      //turn off pokemon speed for non-selected pokemon here:
-      restore.scytherSpeedDecreased = false;
-      restore.onixSpeedDecreased = false;
 
 
     }//end of if statement for squirtleSpeedDecreased
 
-    if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && computerSPD2 <= 0) {
+    if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <=50) {
 
-      //prevent health restoration if computer pokemon speed is 0.
+     //increase computer health and reduce computer speed to 50 HP
 
-      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
-      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+      speedReduced2 = scytherSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
@@ -4122,20 +4160,18 @@ this.increaseComputerHP = function () {
       console.log("code was commented out *debugging*(4-1-2)");
 
       //inform player1 of computer inablility to use the rest function
-      document.getElementById("statusProgress2").innerHTML = "Scyther's speed is too low to rest...";
+      document.getElementById("statusProgress2").innerHTML = "Scyther's speed is getting low...";
 
-      //turn off pokemon speed for non-selected pokemon here:
-      restore.squirtleSpeedDecreased = false;
-      restore.onixSpeedDecreased = false;
+
 
     }//end of if statement for scytherSpeedDecreased
 
-    if (comp.onixSelected === true && restore.onixSpeedDecreased === true && computerSPD3 <= 0) {
+    if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <=50) {
 
-      //prevent health restoration if computer pokemon speed is 0.
+      //increase computer health and reduce computer speed to 50 HP
 
-      speedReduced2 = 1; //setting to 1 HP gives the appearence of low health on the progressbar
-      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+      speedReduced2 = onixSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
@@ -4143,19 +4179,76 @@ this.increaseComputerHP = function () {
       console.log("code was commented out *debugging*(4-1-3)");
 
       //inform player1 of computer inablility to use the rest function
-      document.getElementById("statusProgress2").innerHTML = "Onix's speed is too low to rest...";
+      document.getElementById("statusProgress2").innerHTML = "Onix's speed is getting low...";
 
-      //turn off pokemon speed for non-selected pokemon here:
-      restore.squirtleSpeedDecreased = false;
-      restore.scytherSpeedDecreased = false;
 
 
     }//end of if statement for onixSpeedDecreasedS
 
 
 
+    case (squirtleSpeedBar <=0 || squirtleSpeedBar < 0 ||  scytherSpeedBar <=0 || scytherSpeedBar <= 0 ||  onixSpeedBar <=0 || onixSpeedBar <0):
 
-    break;
+
+
+    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <=0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
+
+      //increase computer health and reduce computer speed to 50 HP
+
+      speedReduced2 = squirtleSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+
+      console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-1)");
+
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is getting low...";
+
+
+
+    }//end of if statement for squirtleSpeedDecreased
+
+    if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 0 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 0) {
+
+     //increase computer health and reduce computer speed to 50 HP
+
+      speedReduced2 = scytherSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+
+      console.log("scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-2)");
+
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Scyther's speed is getting low...";
+
+
+    }//end of if statement for scytherSpeedDecreased
+
+    if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 0 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 0) {
+
+      //increase computer health and reduce computer speed to 50 HP
+
+      speedReduced2 = onixSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+
+
+      console.log("onixSpeedDecreased: " + restore.onixSpeedDecreased);
+      console.log("code was commented out *debugging*(4-1-3)");
+
+      //inform player1 of computer inablility to use the rest function
+      document.getElementById("statusProgress2").innerHTML = "Onix's speed is getting low...";
+
+
+
+    }//end of if statement for onixSpeedDecreasedS
+
+
+
 
     case (squirtleHP5 <= 40 || scytherHP8 <= 40 || onixHP12 <= 40):
 
@@ -4166,8 +4259,8 @@ this.increaseComputerHP = function () {
       hpRestore2 = squirtleHP5;
       document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
 
-      speedReduced2 = computerSPD;
-      document.querySelector(".cpuSpeed").style.width = computerSPD +   "%";
+      speedReduced2 = squirtleSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar+   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
       restore.restedSquirtle = true;
@@ -4179,7 +4272,7 @@ this.increaseComputerHP = function () {
 
       console.log("restedSquirtle hp when < 40: " + restore.restedSquirtle);
       console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
-      console.log("code was commented out *debugging*(3-1-1)");
+      console.log("squirtleSpeedbar: "+ squirtleSpeedBar);
 
 
     }//end of if statement for when squirtle hp < 40
@@ -4191,8 +4284,8 @@ this.increaseComputerHP = function () {
       hpRestore2 = scytherHP8;
       document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
 
-      speedReduced2 = computerSPD2;
-      document.querySelector(".cpuSpeed").style.width = computerSPD2 +   "%";
+      speedReduced2 = scytherSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
       restore.restedScyther = true;
@@ -4204,7 +4297,7 @@ this.increaseComputerHP = function () {
 
       console.log("restedScyther hp when < 40: " + restore.restedScyther);
       console.log("scytherHpRecovered: " + a10.scytherHpRecovered);
-      console.log("code was commented out *debugging*(3-1-2)");
+      console.log("scytherSpeedbar: " + scytherSpeedBar);
 
 
 
@@ -4218,8 +4311,8 @@ this.increaseComputerHP = function () {
       hpRestore2 = onixHP12;
       document.querySelector(".cpuHP").style.width = hpRestore2 +   "%";
 
-      speedReduced2 = computerSPD3;
-      document.querySelector(".cpuSpeed").style.width = computerSPD3 +   "%";
+      speedReduced2 = onixSpeedBar;
+      document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
       restore.restedOnix = true;
@@ -4231,7 +4324,7 @@ this.increaseComputerHP = function () {
 
       console.log("restedOnix hp when < 40: " + restore.restedOnix);
       console.log("onixHpRecovered: " +   a6.onixHpRecovered);
-      console.log("code was commented out *debugging*(3-1-3)");
+      console.log("onixSpeedBar: " + onixSpeedBar);
 
 
 
@@ -4729,6 +4822,9 @@ class player1Moves {
         //reflect the changes to squirtle speedbar
         a8.squSpeedProgressBar.push(-50);
 
+        //squirtle speedbar is true only here:
+        restore.squirtleSpeedDecreased = true;
+
 
       }else if (squirtleHP5 > 40) {
 
@@ -5029,6 +5125,9 @@ class player1Moves {
 
          //reflect the changes to scySpeedProgressBar
          a10.scySpeedProgressBar.push(-50);
+
+         //scyther speedbar is true only here:
+         restore.scytherSpeedDecreased = true;
 
        }else if (scytherHP14 > 40) {
 
@@ -5335,6 +5434,9 @@ class player1Moves {
 
          //reflect the changes to onixSpeedProgressBar
          a12.onixSpeedProgressBar.push(-50);
+
+         //onix speedbar is true only here:
+         restore.onixSpeedDecreased = true;
 
        }else if (onixHP11 > 40) {
 
