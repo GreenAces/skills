@@ -1874,10 +1874,8 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-
-
-
-      console.log(a1.charmanderHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
 
@@ -1911,6 +1909,8 @@ document.getElementById("sendLink").target = "_blank";
 
 
 
+
+
   //loop #2 for pikachu
   for (let i = 0; i < a3.pikachuHealthBar.length; i++) {
 
@@ -1930,10 +1930,11 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-
-      console.log(a3.pikachuHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
+
     }else if (charmanderHP8 >=1 && p1.charmanderSelected === false || p1.charmanderDied === true) {
 
       //debugging here delete if neccessary
@@ -1982,7 +1983,8 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-      console.log(a5.blastoiseHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
 
@@ -2034,8 +2036,8 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2 +   "%";
       document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-
-      console.log(a2.squirtleHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
 
@@ -2080,8 +2082,8 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
       document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-
-      console.log(a4.scytherHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
 
@@ -2125,8 +2127,8 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
       document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
-
-      console.log(a6.onixHealthBar);
+      //change color of progressbar if conditions are true
+      defaultProgressBar.progressbarCorrections();
 
       break;
 
@@ -3554,6 +3556,99 @@ class progressBar {
 
 
 
+        this.progressbarCorrections = function () {
+
+          let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+          let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+          let pikachuHP12 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+          let scytherHP12 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+          let blastoiseHP12 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+          let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+
+          let charmanderSpeedBar3 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+          let pikachuSpeedBar3 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+          let blastoiseSpeedBar3 = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+          let squirtleSpeedBar3 =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+          let scytherSpeedBar3 = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+          let onixSpeedBar3 = a12.onixSpeedProgressBar.reduce(array2.PokemonHPReduced);
+
+
+          //change color of HP progress bar here:
+          if (charmanderHP6 > 40 && p1.charmanderSelected === true) {
+
+            document.querySelector(".player1HP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (charmanderSpeedBar3 <= 50 && restore.charamanderSpeedDecreased === true) {
+
+            document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #1
+
+          if (pikachuHP12 > 40 && p1.pikachuSelected === true) {
+
+            document.querySelector(".player1HP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (pikachuSpeedBar3 <= 50 && restore.pikachuSpeedDecreased === true) {
+
+            document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #2
+
+
+          if (blastoiseHP12 > 40 && p1.blastoiseSelected === true) {
+
+            document.querySelector(".player1HP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (blastoiseSpeedBar3 <= 50 && restore.blastoiseSpeedDecreased === true) {
+
+            document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #3
+
+
+          if (squirtleHP6 > 40 && comp.squirtleSelected === true) {
+
+            document.querySelector(".cpuHP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (squirtleSpeedBar3 <= 50 && restore.squirtleSpeedDecreased === true) {
+
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #4
+
+
+          if (scytherHP12 > 40 && comp.scytherSelected === true) {
+
+            document.querySelector(".cpuHP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (scytherSpeedBar3 <= 50 && restore.scytherSpeedDecreased === true) {
+
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #5
+
+          if (onixHP12 > 40 && comp.onixSelected === true) {
+
+            document.querySelector(".cpuHP").style.backgroundColor = "#A6EDED";//blue
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+          }else if (onixSpeedBar3 <= 50 && restore.onixSpeedDecreased === true) {
+
+            document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+          }//end of if statement #6
+
+
+
+        }//end of progressbarCorrections
+
+
+
          this.preserveHpSetting = function () {
 
           //any changes to array implies a pokemon battle occured and therefore the array needs to be preserved before switching pokemon.
@@ -4306,7 +4401,7 @@ this.increaseComputerHP = function () {
 
       speedReduced2 = squirtleSpeedBar;
       document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar +   "%";
-      computerLowHealthIndicator2.style.backgroundColor = "#A6EDED";//blue
+      computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
       console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
@@ -4367,8 +4462,8 @@ this.increaseComputerHP = function () {
 
       //increase computer health and reduce computer speed to 50 HP
 
-      speedReduced2 = squirtleSpeedBar;
-      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar +   "%";
+      speedReduced2 = 1;
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
@@ -4386,8 +4481,8 @@ this.increaseComputerHP = function () {
 
      //increase computer health and reduce computer speed to 50 HP
 
-      speedReduced2 = scytherSpeedBar;
-      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
+      speedReduced2 = 1;
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
@@ -4404,8 +4499,8 @@ this.increaseComputerHP = function () {
 
       //increase computer health and reduce computer speed to 50 HP
 
-      speedReduced2 = onixSpeedBar;
-      document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
+      speedReduced2 = 1;
+      document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
