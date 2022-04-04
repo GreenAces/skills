@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (03/29/2022)
+Lastest update: (04/04/2022)
 
 
 
@@ -18,7 +18,7 @@ Lastest update: (03/29/2022)
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
 12) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
-15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (03/29/2022)
+15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
 
 
 
@@ -115,14 +115,14 @@ this.chrAtkImage5 = function () {  // image 5 of 6 smoke screen for charmander
 
 this.chrAtkImage6 = function () {  // image 6 of 6 is rest for charmander -- NOTE: attack image needs to show on player1 side because of self-healing
 
-  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
-  document.getElementById("computerAttackImage").style.width = 180;
-  document.getElementById("computerAttackImage").style.height = 100;
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
 
   setTimeout(function() { // This is an anonymous callback function
 
     // remove attack image after 5 secs
-    document.getElementById("computerAttackImage").innerHTML=("");
+    document.getElementById("player1AttackImage").innerHTML=("");
 
   }, 5000); // 5 sec wait time
 
@@ -213,14 +213,14 @@ this.squAtkImage5 = function () { // image 5 of 6 is watergun for squirtle
 
 this.squAtkImage6 = function () { // image 6 of 6 rest for squirtle -- NOTE: attack image needs to show on computer side because of self-healing
 
-  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
-  document.getElementById("player1AttackImage").style.width = 180;
-  document.getElementById("player1AttackImage").style.height = 100;
+  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
+  document.getElementById("computerAttackImage").style.width = 180;
+  document.getElementById("computerAttackImage").style.height = 100;
 
   setTimeout(function() { // This is an anonymous callback function
 
     // remove attack image after 3 secs
-    document.getElementById("player1AttackImage").innerHTML=("");
+    document.getElementById("computerAttackImage").innerHTML=("");
 
   }, 3000); // 3 sec wait time
 
@@ -308,14 +308,14 @@ this.pikAtkImage5 = function () { // image 5 of 6 is headButt -- NOTE: 6of6 is r
 
 this.pikAtkImage6 = function () {  // image 6 of 6 is rest for pikachu -- NOTE: attack image needs to show on player1 side because of self-healing
 
-  document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
-  document.getElementById("computerAttackImage").style.width = 180;
-  document.getElementById("computerAttackImage").style.height = 100;
+  document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
+  document.getElementById("player1AttackImage").style.width = 180;
+  document.getElementById("player1AttackImage").style.height = 100;
 
   setTimeout(function() { // This is an anonymous callback function
 
     // remove attack image after 5 secs
-    document.getElementById("computerAttackImage").innerHTML=("");
+    document.getElementById("player1AttackImage").innerHTML=("");
 
   }, 5000); // 5 sec wait time
 
@@ -503,14 +503,14 @@ this.pikAtkImage6 = function () {  // image 6 of 6 is rest for pikachu -- NOTE: 
 
     this.blaAtkImage6 = function () {  // image 6 of 6 is rest for blastoise -- NOTE: attack image needs to show on player1 side because of self-healing
 
-      document.getElementById("computerAttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
-      document.getElementById("computerAttackImage").style.width = 180;
-      document.getElementById("computerAttackImage").style.height = 100;
+      document.getElementById("player1AttackImage").innerHTML='<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/HP-recovered.png" </img>';
+      document.getElementById("player1AttackImage").style.width = 180;
+      document.getElementById("player1AttackImage").style.height = 100;
 
       setTimeout(function() { // This is an anonymous callback function
 
         // remove attack image after 5 secs
-        document.getElementById("computerAttackImage").innerHTML=("");
+        document.getElementById("player1AttackImage").innerHTML=("");
 
       }, 5000); // 5 sec wait time
 
@@ -820,7 +820,6 @@ class referee {
     this.squirtleCounts = 0;// default
     this.scytherCounts = 0; // default
     this.onixCounts = 0; // default
-    this.startInvalidSound = 0; // default
     this.battle1Player1 = false; // default
     this.battle1Computer = false;// default
     this.battle2Player1 = false; // default
@@ -835,82 +834,23 @@ class referee {
     this.disableDeadPokemon = function () {
 
 
-      console.log("disableDeadPokemon was activated.");
+    console.log("disableDeadPokemon was activated.");
 
-      //invalid sound starts when player tries to select dead pokemon
-
-      //adding 1 to variable here
-      p1.startInvalidSound++;
+    //invalid sound starts when player tries to select dead pokemon
 
 
-      if (p1.startInvalidSound >= 1 && p1.charmanderDied === true) {
+    (p1.charmanderDied === true && p1.charmanderSelected === true) ? player1SD.invalidAction.play() : console.log("User did not select charmander while it was dead.");
 
-      //inform player1 that pokemon can no longer be selected.
-      document.getElementById("statusProgress3").innerHTML = player1CH.player1PokemonChoices[0] + " died and can no longer be selected."
+    (p1.charmanderDied === true && p1.charmanderSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Charmander died and can no longer be selected." :  console.log("User did not select charmander while it was dead. (2)");
 
-      //play invalid sound
-      player1SD.invalidAction.play();
+    (p1.pikachuDied === true && p1.pikachuSelected === true) ? player1SD.invalidAction.play() : console.log("User did not select pikachu while it was dead.");
 
-      // turn off charmander voice
-      player1SD.charmanderVO.pause();
+    (p1.pikachuDied === true && p1.pikachuSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Pikachu died and can no longer be selected." : console.log("User did not select pikachu while it was dead. (2)");
 
+    (p1.blastoiseDied === true && p1.blastoiseSelected === true) ? player1SD.invalidAction.play() : console.log("User did not select blastoise while it was dead.");
 
-      }//end of if statement #1
+    (p1.blastoiseDied === true && p1.blastoiseSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Blastoise died and can no longer be selected." : console.log("User did not select blastoise while it was dead. (2)");
 
-      //reset variable here if pikachu or blastoise is selected by player1
-      if (player1CH.pokemonType[2].isSelected === true || player1CH.pokemonType[1].isSelected === true) {
-
-        p1.startInvalidSound = 0;
-
-      }//end of if statement #2
-
-
-
-
-
-      if (p1.startInvalidSound >= 1 && p1.pikachuDied === true) {
-
-      //inform player1 that pokemon can no longer be selected.
-      document.getElementById("statusProgress3").innerHTML = player1CH.player1PokemonChoices[2] + " died and can no longer be selected."
-
-      //play invalid sound
-      player1SD.invalidAction.play();
-
-      // turn off pikachu voice
-      player1SD.pikachuVO.pause();
-
-
-      }//end of if statement #3
-
-      //reset variable here if charmander or blastoise is selected by player1
-      if (player1CH.pokemonType[0].isSelected === true || player1CH.pokemonType[1].isSelected === true) {
-
-      p1.startInvalidSound = 0;
-
-      }//end of if statement #4
-
-
-      if (p1.startInvalidSound >= 1 && p1.blastoiseDied === true) {
-
-      //inform player1 that pokemon can no longer be selected.
-      document.getElementById("statusProgress3").innerHTML = player1CH.player1PokemonChoices[1] + " died and can no longer be selected."
-
-      //play invalid sound
-      player1SD.invalidAction.play();
-
-      // turn off blastoise voice
-      player1SD.blastoiseVO.pause();
-
-
-    }//end of if statement #5
-
-     //reset variable here if charmander or pikachu is selected by player1
-     if (player1CH.pokemonType[0].isSelected === true || player1CH.pokemonType[2].isSelected === true ) {
-
-
-      p1.startInvalidSound = 0;
-
-    }//end of if statement #6
 
 
 
@@ -1873,6 +1813,7 @@ document.getElementById("sendLink").target = "_blank";
       //speedbar
       document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+
 
       //change color of progressbar if conditions are true
       defaultProgressBar.progressbarCorrections();
@@ -4043,10 +3984,13 @@ class progressBar {
           document.querySelector(".playerSpeed").style.width = hpRecovered5  +   "%";
           document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
+          //play invalid sound here:
+          player1SD.invalidAction.play();
 
           //remove event listener to prevent user from using the rest function
           document.getElementById("defenseC").style.color = "#C91212";
           document.getElementById("defenseC").removeEventListener("click", defenseC);
+          player1SD.pokemonRest_sound.pause();
 
 
           setTimeout(function() {
@@ -4181,10 +4125,14 @@ class progressBar {
                 document.querySelector(".playerSpeed").style.width = hpRecovered6  +   "%";
                 document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
+                //play invalid sound here:
+                player1SD.invalidAction.play();
+
 
                 //remove event listener to prevent user from using the rest function
                 document.getElementById("defenseC").style.color = "#C91212";
                 document.getElementById("defenseC").removeEventListener("click", defenseC);
+                player1SD.pokemonRest_sound3.pause();
 
 
                 setTimeout(function() {
@@ -4325,10 +4273,14 @@ class progressBar {
                 document.querySelector(".playerSpeed").style.width = hpRecovered7  +   "%";
                 document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
+                //play invalid sound here:
+                player1SD.invalidAction.play();
+
 
                 //remove event listener to prevent user from using the rest function
                 document.getElementById("defenseC").style.color = "#C91212";
                 document.getElementById("defenseC").removeEventListener("click", defenseC);
+                player1SD.pokemonRest_sound5.pause();
 
 
                 setTimeout(function() {
@@ -4397,6 +4349,9 @@ this.increaseComputerHP = function () {
 
     if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <=50) {
 
+      //play rest sound effect for computer
+      computerSD.pokemonRest_sound2.play();
+
       //increase computer health and reduce computer speed to 50 HP
 
       speedReduced2 = squirtleSpeedBar;
@@ -4416,6 +4371,9 @@ this.increaseComputerHP = function () {
 
     if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <=50) {
 
+      //play rest sound effect for computer
+      computerSD.pokemonRest_sound4.play();
+
      //increase computer health and reduce computer speed to 50 HP
 
       speedReduced2 = scytherSpeedBar;
@@ -4434,6 +4392,9 @@ this.increaseComputerHP = function () {
     }//end of if statement for scytherSpeedDecreased
 
     if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <=50) {
+
+      //play rest sound effect for computer
+      computerSD.pokemonRest_sound6.play();
 
       //increase computer health and reduce computer speed to 50 HP
 
@@ -4460,6 +4421,9 @@ this.increaseComputerHP = function () {
 
     if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <=0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
 
+      //pause rest sound effect for computer
+      computerSD.pokemonRest_sound2.pause();
+
       //increase computer health and reduce computer speed to 50 HP
 
       speedReduced2 = 1;
@@ -4479,6 +4443,9 @@ this.increaseComputerHP = function () {
 
     if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 0 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 0) {
 
+      //pause rest sound effect for computer
+      computerSD.pokemonRest_sound4.pause();
+
      //increase computer health and reduce computer speed to 50 HP
 
       speedReduced2 = 1;
@@ -4496,6 +4463,9 @@ this.increaseComputerHP = function () {
     }//end of if statement for scytherSpeedDecreased
 
     if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 0 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 0) {
+
+      //pause rest sound effect for computer
+      computerSD.pokemonRest_sound6.pause();
 
       //increase computer health and reduce computer speed to 50 HP
 
@@ -6189,7 +6159,7 @@ class computerMoves {
 
           //show recovery image for computer pokemon and play rest sound effect
           player1Img.chrAtkImage6();
-          computerSD.pokemonRest_sound2.play();
+          player1SD.pokemonRest_sound2.play();
 
           //reflect the changes to the charmanderHealthBar array
          a1.charmanderHealthBar.push(45);
@@ -6203,6 +6173,9 @@ class computerMoves {
 
 
        }else if(charmanderHP5 > 40) {
+
+          //turn off rest sound effect
+          player1SD.pokemonRest_sound2.pause();
 
           //make no changes to the charmanderHealthBar array
           a1.charmanderHealthBar.push(0);
@@ -6643,7 +6616,7 @@ class computerMoves {
 
              //show recovery image for computer pokemon and play rest sound effect
              player1Img.pikAtkImage6();
-             computerSD.pokemonRest_sound2.play();
+             player1SD.pokemonRest_sound3.play();
 
              //reflect the changes to the pikachuHealthBar array
             a3.pikachuHealthBar.push(45);
@@ -6657,6 +6630,9 @@ class computerMoves {
 
 
             }else if(pikachuHP14 > 40) {
+
+             //turn off rest sound effect
+             player1SD.pokemonRest_sound3.pause();
 
              //make no changes to the pikachuHealthBar array
              a3.pikachuHealthBar.push(0);
@@ -7037,7 +7013,7 @@ class computerMoves {
 
                 //show recovery image for player1 pokemon and play rest sound effect
                 player1Img.blaAtkImage6();
-                computerSD.pokemonRest_sound2.play();
+                player1SD.pokemonRest_sound5.play();
 
                 //reflect the changes to the blastoiseHealthBar array
                a5.blastoiseHealthBar.push(45);
@@ -7053,6 +7029,9 @@ class computerMoves {
 
 
                }else if(blastoiseHP15 > 40) {
+
+                //turn off rest sound effect
+                player1SD.pokemonRest_sound5.pause();
 
                 //make no changes to the pikachuHealthBar array
                 a5.blastoiseHealthBar.push(0);
@@ -7528,7 +7507,7 @@ function defenseC() {
   if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelected === true) { //charmander
 
     player1.rest();
-    player1SD.pokemonRest_sound.play();
+
 
     setTimeout (function(){
 
@@ -7541,7 +7520,7 @@ function defenseC() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[1].isSelected === true ) { // blastoise
 
     player1.rest3();
-    player1SD.pokemonRest_sound5.play();
+
 
     setTimeout (function(){
 
@@ -7557,7 +7536,7 @@ function defenseC() {
   }else if (confirm.makeMove[0].player1Move === false && player1CH.pokemonType[2].isSelected === true) { // pikachu
 
     player1.rest2();
-    player1SD.pokemonRest_sound3.play();
+
 
     setTimeout (function(){
 
