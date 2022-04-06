@@ -1814,6 +1814,9 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedPikachu === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedBlastoise === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
 
       //change color of progressbar if conditions are true
       defaultProgressBar.progressbarCorrections();
@@ -1871,6 +1874,10 @@ document.getElementById("sendLink").target = "_blank";
       document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
 
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedCharmander === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedBlastoise === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+
       //change color of progressbar if conditions are true
       defaultProgressBar.progressbarCorrections();
 
@@ -1923,6 +1930,10 @@ document.getElementById("sendLink").target = "_blank";
       //speedbar
       document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
       document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedCharmander === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedPikachu === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
 
       //change color of progressbar if conditions are true
       defaultProgressBar.progressbarCorrections();
@@ -3599,12 +3610,13 @@ class progressBar {
          let score3 = a1.player1Score.reduce(array1.PokemonHPReduced);
          let score4 = a2.computerScore.reduce(array2.PokemonHPReduced);
 
-         let player1DefaultHP = 100;
-         let computerDefaultHP = 100;
-         let player1DefaultSpeed = 100;
-         let computerDefaultSpeed = 100;
-         let player1LowHealthIndicator2 = document.querySelector('.player1HP');
-         let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
+
+         let charmanderSpeedBar4 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+         let pikachuSpeedBar4 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+         let blastoiseSpeedBar4 = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+         let squirtleSpeedBar4 =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+         let scytherSpeedBar4 = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+         let onixSpeedBar2 = a12.onixSpeedProgressBar.reduce(array2.PokemonHPReduced);
 
          let squirtleHP6 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
          let charmanderHP6 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
@@ -3618,13 +3630,21 @@ class progressBar {
 
 
          document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
-         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".playerSpeed").style.width = charmanderSpeedBar4 +   "%";
+
+         //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+         (charmanderSpeedBar4 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
 
          setTimeout(function() {
 
            document.querySelector(".cpuHP").style.width = squirtleHP6 +   "%";
-           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+           document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar4 +   "%";
+
+           //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+           (squirtleSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
 
           }, 3000); // 3 sec delay to load computer progressbar
 
@@ -3633,13 +3653,21 @@ class progressBar {
 
 
          document.querySelector(".player1HP").style.width = pikachuHP13 +   "%";
-         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".playerSpeed").style.width = pikachuSpeedBar4 +   "%";
+
+         //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+         (pikachuSpeedBar4 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
 
          setTimeout(function() {
 
            document.querySelector(".cpuHP").style.width = scytherHP13 +   "%";
-           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+           document.querySelector(".cpuSpeed").style.width = scytherSpeedBar4 +   "%";
+
+           //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+           (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
 
           }, 3000); // 3 sec delay to load computer progressbar
 
@@ -3648,13 +3676,21 @@ class progressBar {
 
 
          document.querySelector(".player1HP").style.width = blastoiseHP13 +   "%";
-         document.querySelector(".playerSpeed").style.width = player1DefaultSpeed +   "%";
+         document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar4 +   "%";
+
+         //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+         (blastoiseSpeedBar4 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
 
          setTimeout(function() {
 
            document.querySelector(".cpuHP").style.width = onixHP13 +   "%";
-           document.querySelector(".cpuSpeed").style.width = computerDefaultSpeed +   "%";
+           document.querySelector(".cpuSpeed").style.width = onixSpeedBar2 +   "%";
+
+           //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+           (onixSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
           }, 3000); // 3 sec delay to load computer progressbar
 
@@ -3674,6 +3710,7 @@ class progressBar {
 
       let hpDamage = 0;
       let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let squirtleSpeedBar5 =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
       let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -3694,12 +3731,21 @@ class progressBar {
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
         p1.informWinner();
 
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (squirtleSpeedBar5 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 === 0):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (squirtleSpeedBar5 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
 
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         p1.informWinner();
@@ -3709,18 +3755,34 @@ class progressBar {
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
 
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (squirtleSpeedBar5 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
+
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 > 20 && squirtleHP5 <= 40):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (squirtleSpeedBar5 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
+
         computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
         break;
 
         case (squirtleHP5 > 40 && squirtleHP5 <= 100):
         hpDamage = squirtleHP5;
         document.querySelector(".cpuHP").style.width = hpDamage +   "%";
+
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (squirtleSpeedBar5 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
 
         computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
 
@@ -3745,6 +3807,7 @@ class progressBar {
 
               let hpDamage5 = 0;
               let onixHP2 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+              let onixSpeedBar3 = a12.onixSpeedProgressBar.reduce(array2.PokemonHPReduced);
               let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -3765,6 +3828,11 @@ class progressBar {
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
                 p1.informWinner();
 
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (onixSpeedBar3 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
                 computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
@@ -3774,12 +3842,20 @@ class progressBar {
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
                 p1.informWinner();
 
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (onixSpeedBar3 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
                 computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
                 case (onixHP2 > 0 && onixHP2 <= 20):
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (onixSpeedBar3 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
                 computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
@@ -3788,12 +3864,20 @@ class progressBar {
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
 
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (onixSpeedBar3 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
                 computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                 break;
 
                 case (onixHP2 > 40 && onixHP2 <= 100):
                 hpDamage5 = onixHP2;
                 document.querySelector(".cpuHP").style.width = hpDamage5 +   "%";
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (onixSpeedBar3 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
                 computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
                 break;
@@ -3821,6 +3905,7 @@ class progressBar {
 
                 let hpDamage6 = 0;
                 let scytherHP2 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+                let scytherSpeedBar4 = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
                 let computerLowHealthIndicator = document.querySelector('.cpuHP');
 
 
@@ -3841,6 +3926,11 @@ class progressBar {
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
                   p1.informWinner();
 
+                  //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                  (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
+
                   computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   break;
 
@@ -3848,6 +3938,11 @@ class progressBar {
                   case (scytherHP2 === 0):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+                  //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                  (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
 
                   computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   p1.informWinner();
@@ -3857,18 +3952,35 @@ class progressBar {
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
 
+                  //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                  (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
+
                   computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   break;
 
                   case (scytherHP2 > 20 && scytherHP2 <= 40):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+
+                  //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                  (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
+
                   computerLowHealthIndicator.style.backgroundColor = "#FD0202";//red
                   break;
 
                   case (scytherHP2 > 40 && scytherHP2 <= 100):
                   hpDamage6 = scytherHP2;
                   document.querySelector(".cpuHP").style.width = hpDamage6 +   "%";
+
+                  //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                  (scytherSpeedBar4 <= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED";
+
 
                   computerLowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
                   break;
@@ -3916,6 +4028,11 @@ class progressBar {
         hpDamage2 = 0;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
 
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
         comp.informWinner();
 
         break;
@@ -3925,6 +4042,11 @@ class progressBar {
         case (charmanderHP5 === 0):
         hpDamage2 = charmanderHP5;
         document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
+
+        //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+        (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
         player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
 
         comp.informWinner();
@@ -3941,11 +4063,23 @@ class progressBar {
           document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
           player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
 
+          //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+          (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
+
         }else if (charmanderHP5 <= 40) {
 
           hpDamage2 = charmanderHP5;
           document.querySelector(".player1HP").style.width = hpDamage2 +   "%";
           player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+          //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+          (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
 
         }//end of if statement #1
 
@@ -3958,7 +4092,7 @@ class progressBar {
           restore.charamanderSpeedDecreased = true;
 
           document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-          document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+          document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
           console.log("charmander speedbar array is "+ charmanderSpeedBar);
 
@@ -3969,7 +4103,7 @@ class progressBar {
 
 
           document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-          document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+          document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
         }//end of if statement #3
@@ -3982,7 +4116,7 @@ class progressBar {
           hpRecovered5 = 1; //setting this to 1 HP to indicate low speedbar
 
           document.querySelector(".playerSpeed").style.width = hpRecovered5  +   "%";
-          document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+          document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
           //play invalid sound here:
           player1SD.invalidAction.play();
@@ -4059,6 +4193,11 @@ class progressBar {
               hpDamage3 = 0;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
 
+              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+              (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
               comp.informWinner();
 
               break;
@@ -4067,6 +4206,11 @@ class progressBar {
               case (pikachuHP2 === 0):
               hpDamage3 = pikachuHP2;
               document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+
+              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+              (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
               player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
 
               comp.informWinner();
@@ -4082,11 +4226,23 @@ class progressBar {
                 document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
 
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
+
               }else if (pikachuHP2 <= 40) {
 
                 hpDamage3 = pikachuHP2;
                 document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
 
               }//end of if statement #1
 
@@ -4099,7 +4255,7 @@ class progressBar {
                 restore.pikachuSpeedDecreased = true;
 
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
 
@@ -4110,7 +4266,7 @@ class progressBar {
 
 
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
               }//end of if statement #3
@@ -4123,7 +4279,7 @@ class progressBar {
                 hpRecovered6 = 1; //setting this to 1 HP to indicate low speedbar
 
                 document.querySelector(".playerSpeed").style.width = hpRecovered6  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 //play invalid sound here:
                 player1SD.invalidAction.play();
@@ -4206,6 +4362,11 @@ class progressBar {
               hpDamage4 = 0;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
 
+              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+              (blastoiseSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+
               comp.informWinner();
 
               break;
@@ -4215,6 +4376,11 @@ class progressBar {
               case (blastoiseHP2 === 0):
               hpDamage4 = blastoiseHP2;
               document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
+
+              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+              (blastoiseSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
               player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
 
               comp.informWinner();
@@ -4230,11 +4396,19 @@ class progressBar {
                 document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
 
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (blastoiseSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
               }else if (blastoiseHP2 <= 40) {
 
                 hpDamage4 = blastoiseHP2;
                 document.querySelector(".player1HP").style.width = hpDamage4 +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+
+                (blastoiseSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
               }//end of if statement #1
 
@@ -4247,7 +4421,7 @@ class progressBar {
                 restore.blastoiseSpeedDecreased = true;
 
                 document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 console.log("blastoise speedbar array is "+ blastoiseSpeedBar2);
 
@@ -4258,7 +4432,7 @@ class progressBar {
 
 
                 document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
               }//end of if statement #3
@@ -4271,7 +4445,7 @@ class progressBar {
                 hpRecovered7 = 1; //setting this to 1 HP to indicate low speedbar
 
                 document.querySelector(".playerSpeed").style.width = hpRecovered7  +   "%";
-                document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 //play invalid sound here:
                 player1SD.invalidAction.play();
