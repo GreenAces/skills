@@ -2365,7 +2365,6 @@ class changePokemon {
 
 
 
-
           console.log("---------------------------------------------------------");
 
 
@@ -4462,10 +4461,22 @@ this.increaseComputerHP = function () {
 
       setTimeout(function() {
 
-        //inform player1 of computer inablility to use the rest function
-        document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is getting low...";
 
-      }, 3000);
+
+        if (comp.scytherSelected === false  && comp.onixSelected === false && squirtleSpeedBar <= 0 && restore.squirtleSpeedDecreased === false) {
+
+          document.getElementById("statusProgress2").innerHTML = "";
+
+        }else {
+
+          //inform player1 of computer inablility to use the rest function
+          document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is getting low...";
+
+        }
+
+
+
+      }, 4000);
 
 
 
@@ -4486,15 +4497,25 @@ this.increaseComputerHP = function () {
 
 
       console.log("scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-2)");
+
 
       setTimeout(function() {
 
-        //inform player1 of computer inablility to use the rest function
-        document.getElementById("statusProgress2").innerHTML = "Scyther's speed is getting low...";
 
 
-      }, 3000);
+        if (comp.squirtleSelected === false  && comp.onixSelected === false && scytherSpeedBar <= 0 && restore.syctherSpeedDecreased === false) {
+
+          document.getElementById("statusProgress2").innerHTML = "";
+
+        }else {
+
+          //inform player1 of computer inablility to use the rest function
+          document.getElementById("statusProgress2").innerHTML = "Scyther's speed is getting low...";
+
+        }
+
+
+      }, 4000);
 
 
 
@@ -4514,16 +4535,26 @@ this.increaseComputerHP = function () {
 
 
       console.log("onixSpeedDecreased: " + restore.onixSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-3)");
+
 
       setTimeout(function() {
 
-        //inform player1 of computer inablility to use the rest function
-        document.getElementById("statusProgress2").innerHTML = "Onix's speed is getting low...";
 
 
-      }, 3000);
+        if (comp.squirtleSelected === false  && comp.scytherSelected === false && onixSpeedBar <= 0 && restore.onixSpeedDecreased === false) {
 
+          document.getElementById("statusProgress2").innerHTML = "";
+
+        } else {
+
+          //inform player1 of computer inablility to use the rest function
+          document.getElementById("statusProgress2").innerHTML = "Onix's speed is getting low...";
+
+        }
+
+
+
+      }, 4000);
 
 
 
@@ -4536,7 +4567,7 @@ this.increaseComputerHP = function () {
 
 
 
-    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <=0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
+    if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
 
       //pause rest sound effect for computer
       computerSD.pokemonRest_sound2.pause();
@@ -4547,19 +4578,10 @@ this.increaseComputerHP = function () {
       document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
+      //change squirtleSpeedDecreased to false
+      restore.squirtleSpeedDecreased = false;
 
       console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-1)");
-
-      setTimeout(function() {
-
-        //inform player1 of computer inablility to use the rest function
-        document.getElementById("statusProgress2").innerHTML = "Squirtle's speed is too low to rest...";
-
-
-      }, 3000);
-
-
 
 
     }//end of if statement for squirtleSpeedDecreased
@@ -4575,18 +4597,10 @@ this.increaseComputerHP = function () {
       document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
+      //change scytherSpeedDecreased to false
+      restore.scytherSpeedDecreased = false;
 
       console.log("scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-2)");
-
-      setTimeout(function() {
-
-        //inform player1 of computer inablility to use the rest function
-        document.getElementById("statusProgress2").innerHTML = "Scyther's speed is too low to rest...";
-
-      }, 3000);
-
-
 
 
     }//end of if statement for scytherSpeedDecreased
@@ -4603,17 +4617,10 @@ this.increaseComputerHP = function () {
       computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
 
 
+      //change onixSpeedDecreased to false
+      restore.onixSpeedDecreased = false;
+
       console.log("onixSpeedDecreased: " + restore.onixSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-3)");
-
-      setTimeout(function() {
-
-
-      //inform player1 of computer inablility to use the rest function
-      document.getElementById("statusProgress2").innerHTML = "Onix's speed is too low to rest...";
-
-
-      }, 3000);
 
 
 
@@ -4638,18 +4645,6 @@ this.increaseComputerHP = function () {
       restore.restedSquirtle = true;
       a8.squirtleHpRecovered.push(10);
 
-      setTimeout(function() {
-
-      //conditional ternary determines if other computer pokemon is not selected  and informs user of the current pokemon that rested recently
-      (comp.scytherSelected != true  && comp.onixSelected != true) ? document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " is "+" resting!" : document.getElementById("statusProgress2").innerHTML = "";
-
-
-
-      }, 1000);
-
-
-
-
       console.log("restedSquirtle hp when < 40: " + restore.restedSquirtle);
       console.log("squirtleHpRecovered: " + a8.squirtleHpRecovered);
       console.log("squirtleSpeedbar: "+ squirtleSpeedBar);
@@ -4670,17 +4665,6 @@ this.increaseComputerHP = function () {
 
       restore.restedScyther = true;
       a10.scytherHpRecovered.push(10);
-
-      setTimeout(function() {
-
-        //conditional ternary determines if other computer pokemon is not selected  and informs user of the current pokemon that rested recently
-        (comp.squirtleSelected != true  && comp.onixSelected != true) ? document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1]+ " is "+" resting!" : document.getElementById("statusProgress2").innerHTML = "";
-
-
-
-      }, 1000);
-
-
 
 
       console.log("restedScyther hp when < 40: " + restore.restedScyther);
@@ -4705,16 +4689,6 @@ this.increaseComputerHP = function () {
 
       restore.restedOnix = true;
       a6.onixHpRecovered.push(10);
-
-      setTimeout(function() {
-
-        //conditional ternary determines if other computer pokemon is not selected  and informs user of the current pokemon that rested recently
-        (comp.squirtleSelected != true  && comp.scytherSelected != true) ? document.getElementById("statusProgress2").innerHTML = computer.pokemonName[3]+ " is "+" resting!" : document.getElementById("statusProgress2").innerHTML = "";
-
-
-      }, 1000);
-
-
 
 
       console.log("restedOnix hp when < 40: " + restore.restedOnix);
@@ -5192,6 +5166,7 @@ class player1Moves {
 
        //varible declartion
        let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+       let squirtleSpeedBar =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
 
        //confirm attack move for pokemon was clicked
        player1.charmanderMoves[0].charmanderFunction6of6 = true;
@@ -5242,8 +5217,27 @@ class player1Moves {
       }//end of if statements
 
 
-       //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to charmander if certain conditions are true.
-        squirtleProgressBar.increaseComputerHP();
+      //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to charmander if certain conditions are true.
+      squirtleProgressBar.increaseComputerHP();
+
+
+
+      if (restore.squirtleSpeedDecreased === true) {
+
+        setTimeout(function() {
+
+           document.getElementById("statusProgress").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
+
+
+        }, 3000);
+
+      }//end of if statement
+
+      //conditional ternary does the following:
+
+      //inform player1 of computer inablility to use the rest function
+      (comp.scytherSelected === false  && comp.onixSelected === false && squirtleSpeedBar <= 0 && restore.squirtleSpeedDecreased === false) ? document.getElementById("statusProgress").innerHTML = "Squirtle's speed is too low to rest..." : document.getElementById("statusProgress").innerHTML = "";
+
 
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
@@ -5495,6 +5489,7 @@ class player1Moves {
 
        //variable declartion
         let scytherHP14 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+        let scytherSpeedBar = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
 
        //confirm attack move for pokemon was clicked
        player1.pikachuMoves[0].pikachuFunction6of6 = true;
@@ -5547,6 +5542,24 @@ class player1Moves {
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives hp to pikachu if certain conditions are true.
        scytherProgressBar.increaseComputerHP();
+
+
+       if (restore.syctherSpeedDecreased === true) {
+
+         setTimeout(function() {
+
+            document.getElementById("statusProgress").innerHTML = computer.pokemonName[1]+ " is "+" resting!";
+
+
+         }, 3000);
+
+       }//end of if statement
+
+       //conditional ternary does the following:
+
+       //inform player1 of computer inablility to use the rest function
+       (comp.squirtleSelected === false  && comp.onixSelected === false && scytherSpeedBar <= 0 && restore.syctherSpeedDecreased === false) ? document.getElementById("statusProgress").innerHTML = "Scyther's speed is too low to rest..." : document.getElementById("statusProgress").innerHTML = "";
+
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -5805,6 +5818,7 @@ class player1Moves {
        console.log("The rest function started on this line:(3) ");
 
        let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+       let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
 
        //confirm attack move for pokemon was clicked
        player1.blastoiseMoves[0].blastoiseFunction6of6 = true;
@@ -5856,6 +5870,23 @@ class player1Moves {
 
        //This is the function that applies the reduce method to the arrays listed above. Computer gives HP to blastoise if conditions are true
        onixProgressBar.increaseComputerHP();
+
+       if (restore.onixSpeedDecreased === true) {
+
+         setTimeout(function() {
+
+            document.getElementById("statusProgress").innerHTML = computer.pokemonName[3]+ " is "+" resting!";
+
+
+         }, 3000);
+
+       }//end of if statement
+
+       //conditional ternary does the following:
+
+       //inform player1 of computer inablility to use the rest function
+       (comp.squirtleSelected === false  && comp.scytherSelected === false && onixSpeedBar <= 0 && restore.onixSpeedDecreased === false) ? document.getElementById("statusProgress").innerHTML = "Onix's speed is too low to rest..." : document.getElementById("statusProgress").innerHTML = "";
+
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -7376,7 +7407,7 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
   player1.fireBlasterMove();
   player1SD.charmanderFireBlaster_sound.play();
 
-  player1CH.debuggingOperation();
+  //player1CH.debuggingOperation();
 
   setTimeout (function(){
 
@@ -7764,7 +7795,10 @@ function loadCharmander () {
 
     //confirm selected pokemon first
     p1.charmanderSelected = true;
-    comp.squirtleSelected = true;
+
+    //conditional ternary determines if charmander was selected and sets squirtle true if it was
+    (p1.charmanderSelected === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
+
     console.log("charmander selected: " + p1.charmanderSelected + "   squirtle selected: " + comp.squirtleSelected);
 
     //disable non-selected pokemon
@@ -7867,7 +7901,10 @@ function loadPikachu () {
 
     //confirm selected pokemon first
     p1.pikachuSelected = true;
-    comp.scytherSelected = true;
+
+    //conditional ternary determines if pikachu was selected and sets scyther true if it was
+    (p1.pikachuSelected === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
+
     console.log("pikachu selected: " + p1.pikachuSelected + "   scyther selected: " + comp.scytherSelected);
 
     //disable non-selected pokemon
@@ -7875,6 +7912,7 @@ function loadPikachu () {
     player1CH.pokemonType[1].isSelected = false; // blastoise
     p1.charmanderSelected = false;
     p1.blastoiseSelected = false;
+
     console.log("non-selected pokemon are charmander: " + p1.charmanderSelected + " and blastoise: " + p1.blastoiseSelected);
 
     //disable non-selected pokemon functions
@@ -7973,7 +8011,10 @@ function loadBlastoise () {
 
 //confirm selected pokemon first
 p1.blastoiseSelected = true;
-comp.onixSelected = true;
+
+//conditional ternary determines if blastoise was selected and sets onix true if it was
+(p1.blastoiseSelected === true) ? comp.onixSelected = true : comp.onixSelected = false;
+
 console.log("blastoise selected: " + p1.blastoiseSelected + "   onix selected: " + comp.onixSelected);
 
 //disable non-selected pokemon
