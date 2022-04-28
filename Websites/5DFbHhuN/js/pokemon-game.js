@@ -1,7 +1,7 @@
 
 /*
 NOTE:
-Lastest update: (04/04/2022)
+Lastest update: (04/28/2022)
 
 
 
@@ -19,6 +19,7 @@ Lastest update: (04/04/2022)
 12) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
+16) focus on line 3336                                                                               *** high priority *** (04/28/2022)
 
 
 
@@ -3283,7 +3284,7 @@ this.loadScytherOnly = function () {
 
     //if squirtle dies than Scyther is loaded up -- no attacks are programmed as of now
 
-    if(squirtleHP10 === 0 && p1.deadPokemonBackup[0] === "Squirtle") {
+    if(squirtleHP10 === 0 && p1.deadPokemonBackup[0] === "Squirtle" || squirtleHP10 === 0 && p1.deadPokemonBackup[1] === "Squirtle" || squirtleHP10 === 0 && p1.deadPokemonBackup[2] === "Squirtle") {
 
 
         //remove previous Pokemon image
@@ -3326,12 +3327,14 @@ this.loadScytherOnly = function () {
        computerCH.pokemonType[3].isSelected = true; //Scyther
 
 
-       // set boolean stats to false for non-selected pokemon
+       //set boolean stats to false for non-selected pokemon
        computerCH.pokemonType[0].isSelected = false;
        computerCH.pokemonType[1].isSelected = false;
        computerCH.pokemonType[2].isSelected = false;
        computerCH.pokemonType[4].isSelected = false;
        computerCH.pokemonType[5].isSelected = false;
+
+       //make scyther battle with charmander
 
 
 
