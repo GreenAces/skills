@@ -2,7 +2,7 @@
 /*
 NOTE:
 
-Last update: (05/02/2022)
+Last update: (05/04/2022)
 
 1) what happens when charmander defeats squirtle? or when pikachu defeats scyther, or when blastoise defeats onix? add code for that.                       *** high priority *** (03/25/2022)
 2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
@@ -18,7 +18,7 @@ Last update: (05/02/2022)
 12) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
-16) focus on squirtleMoves or line 6027  -- find out why scyther won't attack charmander. Also find out why player1Score keeps increasing when attacking scyther with charmander *** high priority *** (05/02/2022)
+16) squirtle gets the crossmark when he dies but it disappears when charmander dies -- fix this. Also make scyther health reload when battling charmader *** high priority *** (05/04/2022)
 17) on line 3111 or loadSquirtleOnly focus on new pokemon battle *** high priority *** (04/06/2022)
 18) make comp.scytherSelected != true and others to false *** high priority *** (04/06/2022)
 19) add comment during laughandpoint image s whenever player1 uses rest function or when hp is > 40 *** high priority *** (04/06/2022)
@@ -893,7 +893,37 @@ class referee {
 
 
 
-      }// end of 1st if statement
+      }// end of 1st if statement 1 of 3
+
+
+
+      if (p1.charmanderDied === true && comp.scytherDied === false) {
+
+
+        //change font color to red to let the player know that their pokemon is no longer active and disable all pokemon functions
+
+        //below is the original if statment
+
+
+        document.getElementById("p1PokemonName").innerHTML = "";
+        document.getElementById("Charmander_sel").style.color = "#C91212";
+        document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
+        document.getElementById("attackA").removeEventListener("click", attackA);
+        document.getElementById("attackB").removeEventListener("click", attackB);
+        document.getElementById("attackC").removeEventListener("click", attackC);
+        document.getElementById("defenseA").removeEventListener("click", defenseA);
+        document.getElementById("defenseB").removeEventListener("click", defenseB);
+        document.getElementById("defenseC").removeEventListener("click", defenseC);
+        document.getElementById("attackA").innerHTML = ("");
+        document.getElementById("attackB").innerHTML = ("");
+        document.getElementById("attackC").innerHTML = ("");
+        document.getElementById("defenseA").innerHTML = ("");
+        document.getElementById("defenseB").innerHTML = ("");
+        document.getElementById("defenseC").innerHTML = ("");
+
+
+
+      }// end of 1st if statement 2 of 3  (3 not yet created)
 
         // same conditions for other player1 pokemon
         if (p1.pikachuDied === true && comp.scytherDied === false) {
@@ -961,6 +991,15 @@ class referee {
         document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHeadDead.png" </img>';
         document.getElementById("squirtleIcon").style.width = 34;
         document.getElementById("squirtleIcon").style.height = 46;
+
+
+        //conditional ternary determines if charmander was selected and sets squirtle to false if squirtle died 2 of 2
+        (p1.charmanderSelected === true && comp.squirtleDied === true) ? comp.squirtleSelected = false : comp.squirtleAlive = true;
+
+
+        //conditional ternary determines if squirtle is dead and sets scyther true if it was
+        (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
+
 
         // loads scyther or onix if squirtle dies (work-in-progress)
           computerCH.loadScytherOrOnix();
@@ -1321,6 +1360,59 @@ class referee {
         }//end of 6th if statement
 
 
+        /////////////////////////////////////////////////////new entries ////////////////////////////////////////////////////////////////
+
+
+
+
+        if (charmanderHP7 <= 0 && scytherHP8 >= 1 && p1.charmanderDied === true && comp.scytherSelected === true) {
+
+            //Inform player that pokemon is dead but let the game continue
+
+            //orginal if statement is below
+            document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Please choose next pokemon.");
+
+
+            // remove previous player1 Pokemon image
+
+            let elem =  document.createElement("img");
+            elem.src ="";
+            document.getElementById("Player1PokeImage").appendChild(elem);
+            document.getElementById("Player1PokeImage").style.width = 100;
+            document.getElementById("Player1PokeImage").style.height = 100;
+
+            // load tombstone
+            document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/rip_pokemon.jpeg" </img>';
+            document.getElementById("Player1PokeImage").style.width = 200;
+            document.getElementById("Player1PokeImage").style.height = 180;
+
+            //play sad trombone sound effect only when player1 pokemon dies
+            player1SD.sadTrombone_sound.play();
+
+
+            // Change boolean state so player1 can't make a move
+            confirm.makeMove[0].computerMove = true;
+
+
+            setTimeout(function() {
+
+           // record the pokemon that died and possibly disable a dead pokemon here? -- debugging on this line
+           p1.disableDeadPokemon()
+
+           // give score to computer array
+           a2.computerScore.push(1);
+           let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
+           console.log("Computer Score: " + score2);
+
+
+
+
+
+             },3000); // 3 sec wait time for computer to select pokemon
+
+           }//end of 1st if statement
+
+
 
 
 
@@ -1344,7 +1436,7 @@ class referee {
       let onixHP5 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
 
 
-
+        // charmander vs squirtle battle (default)
         if (charmanderHP4  <= 0 && squirtleHP4 >= 1) {
 
           // confirm dead pokemon
@@ -1402,11 +1494,69 @@ class referee {
           p1.deadPokemon.length = 1;
           p1.deadPokemonBackup.length = 6;
 
-          //conditional ternary determines if squirtle is dead and sets scyther true if it was
-          (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
+
 
 
         } // end of if statements
+
+        // charmander vs scyther battle
+        if (charmanderHP4  <= 0 && scytherHP5 >= 1) {
+
+          // confirm dead pokemon
+          p1.charmanderDied = true;
+          p1.charmanderAlive = false;
+
+          //confirm that the pokemon can no longer be selected
+          player1CH.pokemonType[0].isSelected = false; // charmander
+
+          //record data to deadPokemon array as well
+          p1.deadPokemon.push("Charmander");
+          p1.deadPokemonBackup.push("Charmander");
+
+          //debugging here. Delete when neccessary
+          console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+          console.log("Dead pokemonBackup array entries: " + p1.deadPokemonBackup);
+
+          //display player1 deadPokemon
+          p1.deadPokemonImage();
+
+          //make changes to pokemon indicator icon
+          player1CH.pokemonIndicator();
+
+          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
+
+          p1.deadPokemon.length = 1;
+          p1.deadPokemonBackup.length = 6;
+
+
+        }else if (charmanderHP4 >= 1 && scytherHP5  <= 0) {
+
+          // confirm dead pokemon
+          p1.scytherDied = true;
+          p1.scytherAlive = false;
+
+
+          //record data to deadPokemon array as well
+          p1.deadPokemon.push("Scyther");
+          p1.deadPokemonBackup.push("Scyther");
+
+          //debugging here. Delete when neccessary
+          console.log("Dead pokemon saved in array: " + p1.deadPokemon);
+          console.log("Dead pokemonBackup array entries: " + p1.deadPokemonBackup);
+
+          //display player1 deadPokemon
+          p1.deadPokemonImage();
+
+          //make changes to pokemon indicator icon
+          player1CH.pokemonIndicator();
+
+          // removing duplicate entries of dead pokemon from the deadPokemon array by setting a limit.
+
+          p1.deadPokemon.length = 1;
+          p1.deadPokemonBackup.length = 6;
+
+
+        }
 
 
 } // end of isCharmanderDead function
@@ -1486,9 +1636,6 @@ this.isPikachuDead = function() {
 
       p1.deadPokemon.length = 1;
       p1.deadPokemonBackup.length = 6;
-
-      //conditional ternary determines if scyther is dead and sets onix true if it was
-      (comp.scytherDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
 
 
 
@@ -1643,6 +1790,8 @@ this.isBlastoiseDead = function() {
 
   //conditions to execute if computer defeats player1 pokemon are below
 
+  //original statement
+
 
   if (charmanderHP3 <= 0 && squirtleHP3 >= 1 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
@@ -1699,6 +1848,28 @@ this.isBlastoiseDead = function() {
     p1.isBlastoiseDead();
 
   }//end of multiple if statements for informWinner function
+
+  //modied version of pokemon battle is kept here
+
+  if (charmanderHP3 <= 0 && scytherHP4 >= 1  && p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle. (2)");
+    p1.battle1Player1 = false;
+    comp.battle1Computer = true;
+    console.log("battle1Player1: " + p1.battle1Player1);
+    console.log("battle1Computer: " + comp.battle1Computer);
+    p1.isCharmanderDead();
+
+  }else if (scytherHP4 <= 0 && charmanderHP3 >= 1  && p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon. (2)");
+    comp.battle2Computer = false;
+    p1.battle2Player1 = true;
+    console.log("battle2Player1: " + p1.battle2Player1);
+    console.log("battle2Computer: " + comp.battle2Computer);
+    p1.isPikachuDead();
+
+  }
 
 
 //if statement below needs to be seperated from the first one because two scenarios become true at the same time but only one statement can be executed if true.
@@ -2345,6 +2516,27 @@ class changePokemon {
           document.getElementById("BlastoiseIcon").style.height = 46;
 
         }//end of if statement
+
+        //new entries added here
+
+        if (p1.charmanderDied === true && comp.scytherDied === false) {
+
+          // remove previousicon
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("charmanderIcon").appendChild(elem);
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+          // replace with new icon
+
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+        }//end of if statement
+
 
 
 
@@ -3163,7 +3355,7 @@ this.loadSquirtleOnly = function () {
 
 
         //Inform player that computer selected a pokemon
-        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[2] + " and has 2 pokemon remaining.");
+        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[2] + " and has 1 pokemon remaining.");
 
        //load pokemon sound
        computerSD.squirtleVO.play();
@@ -3237,7 +3429,7 @@ this.loadOnixOnly = function () {
 
 
         //Inform player that computer selected a pokemon
-        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[1] + " and has 2 pokemon remaining.");
+        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[1] + " and has 1 pokemon remaining.");
 
        //load pokemon sound
        computerSD.onixVO.play();
@@ -3305,7 +3497,7 @@ this.loadScytherOrOnix = function () {
 
 
         //Inform player that computer selected a pokemon
-        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[0] + " and has 2 pokemon remaining.");
+        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[0] + " and has 1 pokemon remaining.");
 
        //load pokemon sound
        computerSD.scytherVO.play();
@@ -3314,6 +3506,9 @@ this.loadScytherOrOnix = function () {
        //Display and save computer pokemon name to savedPokemonName2 on line 445
        document.getElementById("cpuPokemonName").innerHTML = "Scyther";
        computerCH.savedPokemonName2.push("Scyther");
+
+
+
 
 
        //verify that computer selected a pokemon
@@ -5133,7 +5328,7 @@ class player1Moves {
      this.fireBlasterMove = function () {
 
 
-          if(player1CH.pokemonType[0].isSelected === true) {
+          if(p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
 
             //confirm attack move for pokemon was clicked
@@ -5166,7 +5361,41 @@ class player1Moves {
              console.log(confirm.makeMove[0]);
 
 
-          } // end of if statement
+          }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+            //debugging -- delete when neccessary
+            console.log("charmarnder attacking scyther confirmed");
+
+            //confirm attack move for pokemon was clicked
+            player1.charmanderMoves[0].charmanderFunction1of6 = true;
+
+            computer.scytherMovesActivated[0].scytherFunction1of6 = true;
+
+            //debugging here -- delete when neccessary
+            console.log("charmanderFunction1of6 (2) is: " + player1.charmanderMoves[0].charmanderFunction1of6);
+
+           //reflect the changes to scytherHealthBar AND scytherBackup array as well.
+           //fireBlaster does -20 damage on scyther
+           a4.scytherHealthBar.push(-20);
+           a4.scytherBackup.push(-20);
+
+          //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
+           charmanderProgressBar.decreaseComputerHP3();
+
+           //debugging here -----------------------------------
+            console.log("scytherHealthBar array (2) is " + a4.scytherHealthBar);
+            console.log("scytherBackup array (2) is " + a4.scytherBackup);
+
+            // show image
+             player1Img.chrAtkImage1();
+
+             //change boolean state so that computer can attack
+             confirm.makeMove[0].player1Move = false;
+             confirm.makeMove[0].computerMove = true;
+
+             console.log(confirm.makeMove[0]);
+
+          }//end of statements
 
 
      } // end of fireBlasterMove
@@ -6264,14 +6493,14 @@ class computerMoves {
    }else if (comp.scytherSelected === true && p1.charmanderSelected === true) {
 
      //inform player1 of attack from scyther
-      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
+      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1] + " attacked "+ player1CH.player1PokemonChoices[0] +" with Slash!";
 
 
 
    }else if (comp.onixSelected = true && p1.charmanderSelected === true) {
 
      //inform player1 of attack from onix
-    document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[1] +" with Rock Throw!";
+    document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[1]+ " attacked "+ player1CH.player1PokemonChoices[0] +" with Rock Throw!";
 
    }//end of multiple if statements
 
@@ -6701,13 +6930,22 @@ class computerMoves {
            ||   computer.scytherMovesActivated[0].scytherFunction3of6 === true && player1.pikachuMoves[0].pikachuFunction3of6 === true
            ||   computer.scytherMovesActivated[0].scytherFunction4of6 === true && player1.pikachuMoves[0].pikachuFunction4of6 === true
            ||   computer.scytherMovesActivated[0].scytherFunction5of6 === true && player1.pikachuMoves[0].pikachuFunction5of6 === true
-           ||   computer.scytherMovesActivated[0].scytherFunction6of6 === true && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
+           ||   computer.scytherMovesActivated[0].scytherFunction6of6 === true && player1.pikachuMoves[0].pikachuFunction6of6 === true
 
-     case (computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.pikachuMoves[0].pikachuFunction1of6 === true):
+           ||   computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction3of6 === true && player1.charmanderMoves[0].charmanderFunction3of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction4of6 === true && player1.charmanderMoves[0].charmanderFunction4of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction5of6 === true && player1.charmanderMoves[0].charmanderFunction5of6 === true
+           ||   computer.scytherMovesActivated[0].scytherFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true){
+
+     case (computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.pikachuMoves[0].pikachuFunction1of6 === true ||
+           computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true):
 
        //scyther attack move: slash
-      //disable attack move for scyther pokemon and pikachu
-      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+
+
+      if(p1.pikachuSelected === true && comp.scytherSelected === true) {
 
 
       //debugging here -- delete when neccessary
@@ -6721,35 +6959,70 @@ class computerMoves {
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
       scytherProgressBar.decreasePlayerHP2();
 
-      //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
-      array1.checkTheStatus();
-
       //debugging here------------------------------------------------------
-
       console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
 
       // get the status of health for player1
-
       console.log("pikachuBackup array is " +a3.pikachuHealthBar);
 
-      if (p1.preserveHPChanges === false) {
+      //show attack image
+      computerImg.scyAtkImage1();
+      computerSD.scytherSlash_sound.play();
+
+      //disable attack move for scyther pokemon and pikachu
+      player1.pikachuMoves[0].pikachuFunction1of6 = false;
+      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+
+
+      }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+      //debugging here -- delete when neccessary
+      console.log("scytherMoves Function1of6 is (2) : " + computer.scytherMovesActivated[0].scytherFunction1of6);
+
+      a1.charmanderHealthBar.push(-25);
+      a1.charmanderBackup.push(-25);
+
+      scytherProgressBar.decreasePlayerHP2();
+
+
+      //debugging here------------------------------------------------------
+      console.log("charmanderHealthBar array is (2) "+a1.charmanderHealthBar);
+
+      // get the status of health for player1
+      console.log("charmanderBackup array is (2) " +a1.charmanderBackup);
+
+      //show attack image
+      computerImg.scyAtkImage1();
+      computerSD.scytherSlash_sound.play();
+
+      //disable attack move for scyther pokemon and pikachu
+      player1.charmanderMoves[0].charmanderFunction1of6 = false;
+      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+
+
+      }
+
+
+
+
+      //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
+      array1.checkTheStatus();
+
+
+
+
+      if (p1.pikachuSelected === true && comp.scytherSelected === true) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
 
         //default setting
-      }else if (p1.preserveHPChanges === true) {
+      }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
 
-        //inform player1 of attack from computer
-        document.getElementById("statusProgress2").innerHTML = computerCH.ComputerPokemonChoices[0] + "";
+        //remove previous comment
+        document.getElementById("statusProgress2").innerHTML = computer.pokemonName[0] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
 
       }//end of if statements
-
-
-
-      //show attack image
-      computerImg.scyAtkImage1();
-      computerSD.scytherSlash_sound.play();
 
 
 
@@ -6759,8 +7032,7 @@ class computerMoves {
       confirm.enableMoves();
       console.log(confirm.makeMove[0]);
 
-      //disable attack move for scyther pokemon and pikachu
-      player1.pikachuMoves[0].pikachuFunction1of6 = false;
+
 
        break;
 
@@ -7141,11 +7413,11 @@ class computerMoves {
 
 
 
-   } // end of switch statements for scytherMoves
+   }//end of switch statements for scytherMoves
 
 
 
-         } // end of scytherMoves function
+         }//end of scytherMoves function
 
 
 
@@ -8041,7 +8313,7 @@ function loadCharmander () {
     //confirm selected pokemon first
     p1.charmanderSelected = true;
 
-    //conditional ternary determines if charmander was selected and sets squirtle true if it was
+    //conditional ternary determines if charmander was selected and sets squirtle true if it was 1 of 2
     (p1.charmanderSelected === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
 
     console.log("charmander selected: " + p1.charmanderSelected + "   squirtle selected: " + comp.squirtleSelected);
