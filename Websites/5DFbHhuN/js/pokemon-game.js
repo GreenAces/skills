@@ -962,7 +962,7 @@ class referee {
         document.getElementById("squirtleIcon").style.width = 34;
         document.getElementById("squirtleIcon").style.height = 46;
 
-        // load another computer pokemon
+        // loads scyther or onix if squirtle dies (work-in-progress)
           computerCH.loadScytherOrOnix();
 
 
@@ -987,7 +987,7 @@ class referee {
           document.getElementById("ScytherIcon").style.width = 34;
           document.getElementById("ScytherIcon").style.height = 46;
 
-          // load another computer pokemon
+          // loads squirtle or onix if scyther dies (incomplete)
           computerCH.loadSquirtleOnly();
 
 
@@ -1013,7 +1013,7 @@ class referee {
           document.getElementById("OnixIcon").style.width = 34;
           document.getElementById("OnixIcon").style.height = 46;
 
-          // load another computer pokemon
+          // loads squirtle or scyther if onix dies (incomplete)
           computerCH.loadOnixOnly();
 
 
@@ -3333,6 +3333,7 @@ this.loadScytherOrOnix = function () {
 
 
 
+
      }else if (comp.squirtleDied === true && comp.scytherDied === true && p1.charmanderAlive === true) {
 
 
@@ -4150,10 +4151,13 @@ class progressBar {
 
             // variable declartions
 
-            let hpDamage3 = 0;
+            let pikachuHPDamage = 0;
+            let charmanderHPDamage = 0;
             let hpRecovered6 = 0;
             let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
             let pikachuSpeedBar2 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+            let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+            let charmanderSpeedBar =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
             let player1LowHealthIndicator = document.querySelector('.player1HP');
 
 
@@ -4163,96 +4167,181 @@ class progressBar {
                pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction3of6 === true ||
                pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction4of6 === true ||
                pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction5of6 === true ||
-               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
+               pikachuHP2 < 0 || pikachuHP2 >= 0 && player1.pikachuMoves[0].pikachuFunction6of6 === true ||
+
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction3of6 === true ||
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction4of6 === true ||
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction5of6 === true ||
+               charmanderHP5 < 0 || charmanderHP5 >= 0 && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
 
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-              switch(pikachuHP2 < 0 || pikachuHP2 >= 0) {
+              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0) {
 
-              case (pikachuHP2 < 0):
-              hpDamage3 = 0;
-              document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
-
-              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
-
-              (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+              case (pikachuHP2 < 0 || charmanderHP5 < 0):
 
 
-              comp.informWinner();
+
+              if(p1.pikachuSelected === true && comp.scytherSelected === true) {
+
+                pikachuHPDamage = 0;
+                document.querySelector(".player1HP").style.width = pikachuHPDamage +   "%";
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+                comp.informWinner();
+
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+                charmanderHPDamage = 0;
+                document.querySelector(".player1HP").style.width = charmanderHPDamage +   "%";
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+                comp.informWinner();
+
+              }
+
+
+
+
 
               break;
 
 
-              case (pikachuHP2 === 0):
-              hpDamage3 = pikachuHP2;
-              document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+              case (pikachuHP2 === 0 || charmanderHP5 === 0):
 
-              //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+              if(p1.pikachuSelected === true && comp.scytherSelected === true) {
 
-              (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+                pikachuHPDamage = pikachuHP2;
+                document.querySelector(".player1HP").style.width = pikachuHPDamage +   "%";
 
-              player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
-              comp.informWinner();
+                player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+                comp.informWinner();
+
+
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+                charmanderHPDamage = charmanderHP5;
+                document.querySelector(".player1HP").style.width = charmanderHPDamage +   "%";
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+                player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+                comp.informWinner();
+
+
+              }
+
+
 
               break;
 
-              case (pikachuHP2 > 0 && pikachuHP2 <= 100):
+              case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100):
+
 
               //change color of HP progress bar here:
-              if (pikachuHP2 > 40) {
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 > 40) {
 
-                hpDamage3 = pikachuHP2;
-                document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+                pikachuHPDamage = pikachuHP2;
+                document.querySelector(".player1HP").style.width = pikachuHPDamage +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
 
                 //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
-
                 (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderHP5 > 40) {
+
+                charmanderHPDamage = charmanderHP5;
+                document.querySelector(".player1HP").style.width = charmanderHPDamage +   "%";
+                player1LowHealthIndicator.style.backgroundColor = "#A6EDED";//blue
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
 
-              }else if (pikachuHP2 <= 40) {
+              }//end of if statement #1 1 of 2
 
-                hpDamage3 = pikachuHP2;
-                document.querySelector(".player1HP").style.width = hpDamage3 +   "%";
+
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 <= 40 ) {
+
+                pikachuHPDamage = pikachuHP2;
+                document.querySelector(".player1HP").style.width = pikachuHPDamage +   "%";
                 player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
 
                 //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
-
                 (pikachuSpeedBar2 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderHP5 <=40) {
+
+                charmanderHPDamage = charmanderHP5;
+                document.querySelector(".player1HP").style.width = charmanderHPDamage +   "%";
+                player1LowHealthIndicator.style.backgroundColor = "#FD0202";//red
+
+                //conditional ternary that determines the color of the speedbar (red or blue) based off health bar conditions
+                (charmanderSpeedBar <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+
+              }//end of if statement #1 2 of 2
 
 
-              }//end of if statement #1
 
 
 
-              //change speedbar progressbar here:
-              if (pikachuSpeedBar2 <= 50) {
 
-                //confirm that pikachu speedbar is only decreased here:
-                restore.pikachuSpeedDecreased = true;
+
+                //change speedbar progressbar here:
+                if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 <= 50) {
+
+                  //confirm that pikachu speedbar is only decreased here:
+                  restore.pikachuSpeedDecreased = true;
+
+                  document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
+                  document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+                  console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
+
+
+                }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar <= 50) {
+
+                  //confirm that charmander speedbar is only decreased here:
+                  restore.charmanderSpeedDecreased = true;
+
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
+                  document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+                  console.log("charmander speedbar array is "+ charmanderSpeedBar);
+
+                }//end of if statement #2
+
+
+
+
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 <= 0 || pikachuSpeedBar2 < 0) {
 
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
                 document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-                console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar <= 0 || charmanderSpeedBar < 0) {
 
-
-              }//end of if statement #2
-
-              if (pikachuSpeedBar2 <= 0 || pikachuSpeedBar2 < 0) {
-
-
-                document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
                 document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
 
               }//end of if statement #3
 
-              if (pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 < 0 && restore.pikachuSpeedDecreased === true) {
+
+
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 < 0 && restore.pikachuSpeedDecreased === true) {
 
                 //confirm that pikachu rested and speedbar is at zero only here:
                 restore.restedPikachu = true;
@@ -4286,8 +4375,42 @@ class progressBar {
                 console.log("restedPikachu status: " + restore.restedPikachu);
                 console.log("Pikachu rest function was disabled without making function6of6 false.");
 
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+
+                //confirm that charmander rested and speedbar is at zero only here:
+                restore.restedCharmander = true;
+
+                hpRecovered6 = 1; //setting this to 1 HP to indicate low speedbar
+
+                document.querySelector(".playerSpeed").style.width = hpRecovered6  +   "%";
+                document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+                //play invalid sound here:
+                player1SD.invalidAction.play();
+
+
+                //remove event listener to prevent user from using the rest function
+                document.getElementById("defenseC").style.color = "#C91212";
+                document.getElementById("defenseC").removeEventListener("click", defenseC);
+                player1SD.pokemonRest_sound3.pause();
+
+
+                setTimeout(function() {
+
+                  //inform player1 that they can no longer use rest function
+                  document.getElementById("statusProgress2").innerHTML = "Charmander can no longer rest because speed is too low!";
+
+                }, 1000);// message is displayed after 1 sec.
+
+
+
+                //debugging here -- delete when neccessary
+                //turn of rest function for charmander when speed progress bar is zero
+                console.log("restedCharmander status(2): " + restore.restedCharmander);
+                console.log("Charmander rest function was disabled without making function6of6 false.(2)");
 
               }//end of if statement #4
+
 
 
 
