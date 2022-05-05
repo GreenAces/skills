@@ -2,11 +2,11 @@
 /*
 NOTE:
 
-Last update: (05/04/2022)
+Last update: (05/05/2022)
 
 1) what happens when charmander defeats squirtle? or when pikachu defeats scyther, or when blastoise defeats onix? add code for that.                       *** high priority *** (03/25/2022)
-2) Fix new waiting mechanism so that player1 can pick a pokemon when they click on it again but NOT when it's the computers turn. notify user if this happens. start with charmander and turn sound off first. ;)
-3) find a way to restore pokemon healthbBar after switching pokemon -- note: need at least two pairs of pokemon that are functional (currently only have 1 pair).
+2) create code to make charmander battle with onix (see this.loadScytherOrOnix for details) but start with onixMoves function and add charmander functions  *** high priority *** (05/05/2022)
+3) add more code for blaze and other charmander attack functions to battle with scyther or onix *** high priority *** (05/05/2022)
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
@@ -15,13 +15,13 @@ Last update: (05/04/2022)
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
 10) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
-12) on line 444 isPokemonAlive can be used to call the function that allows you to switch pokemon (not created yet).
+12)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
-16) squirtle gets the crossmark when he dies but it disappears when charmander dies -- fix this. Also make scyther health reload when battling charmader *** high priority *** (05/04/2022)
-17) on line 3111 or loadSquirtleOnly focus on new pokemon battle *** high priority *** (04/06/2022)
-18) make comp.scytherSelected != true and others to false *** high priority *** (04/06/2022)
-19) add comment during laughandpoint image s whenever player1 uses rest function or when hp is > 40 *** high priority *** (04/06/2022)
+16)
+17)
+18) when scyther defeats charmander -- something could be wrong with the score count -- troubleshoot that *** low priority *** (05/05/2020)
+19) add comment during laughandpoint image s whenever player1 uses rest function or when hp is > 40 *** low priority *** (04/06/2022)
 
 
 
@@ -1027,7 +1027,7 @@ class referee {
           document.getElementById("ScytherIcon").style.height = 46;
 
           // loads squirtle or onix if scyther dies (incomplete)
-          computerCH.loadSquirtleOnly();
+          computerCH.loadSquirtleOrOnix();
 
 
 
@@ -1053,10 +1053,40 @@ class referee {
           document.getElementById("OnixIcon").style.height = 46;
 
           // loads squirtle or scyther if onix dies (incomplete)
-          computerCH.loadOnixOnly();
+          computerCH.loadsquirtleOrScyther();
 
 
         }//end of if statement
+
+
+        //new entry added (05/05/2020)
+        //modified version of pokemon battle is kept here
+
+
+
+        if (p1.charmanderDied === false && comp.scytherDied === true) {
+
+
+            // remove scyther icon
+
+            let elem =  document.createElement("img");
+            elem.src ="";
+            document.getElementById("ScytherIcon").appendChild(elem);
+            document.getElementById("ScytherIcon").style.width = 34;
+            document.getElementById("ScytherIcon").style.height = 46;
+
+            // replace with new squirtle icon
+
+            document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHeadDead.png" </img>';
+            document.getElementById("ScytherIcon").style.width = 34;
+            document.getElementById("ScytherIcon").style.height = 46;
+
+
+
+
+
+          }//end of if statement
+
 
 
 
@@ -1361,6 +1391,7 @@ class referee {
 
 
         /////////////////////////////////////////////////////new entries ////////////////////////////////////////////////////////////////
+        //possible else if logic needed here
 
 
 
@@ -1402,7 +1433,7 @@ class referee {
            // give score to computer array
            a2.computerScore.push(1);
            let score2 = a2.computerScore.reduce(array2.PokemonHPReduced);
-           console.log("Computer Score: " + score2);
+           console.log("Computer Score: (***) " + score2);
 
 
 
@@ -1506,8 +1537,7 @@ class referee {
           p1.charmanderDied = true;
           p1.charmanderAlive = false;
 
-          //confirm that the pokemon can no longer be selected
-          player1CH.pokemonType[0].isSelected = false; // charmander
+
 
           //record data to deadPokemon array as well
           p1.deadPokemon.push("Charmander");
@@ -1532,8 +1562,8 @@ class referee {
         }else if (charmanderHP4 >= 1 && scytherHP5  <= 0) {
 
           // confirm dead pokemon
-          p1.scytherDied = true;
-          p1.scytherAlive = false;
+          comp.scytherDied = true;
+          comp.scytherAlive = false;
 
 
           //record data to deadPokemon array as well
@@ -1640,6 +1670,7 @@ this.isPikachuDead = function() {
 
 
     } // end of if statements
+
 
 
 } // end of isPikachuDead function
@@ -2423,47 +2454,98 @@ confirm = new wait;
 class changePokemon {
 
   constructor () {
+
     this.player1PokemonChoices = ["Charmander","Blastoise", "Pikachu"];
     this.ComputerPokemonChoices = ["Scyther", "Onix","Squirtle"];
     this.pokemonIndicator = function() {
 
-      //This function informs the player of the remaining pokemon that is left using images
+        //This function informs the player of the remaining pokemon that is left using pokemon icons
 
-        if (p1.charmanderDied === false && comp.squirtleDied === false || p1.pikachuDied === false && comp.scytherDied === false || p1.blastoiseDied === false && comp.onixDied === false) {
+        //shows pokemmon icon without crosses if pokemon are live NOTE: default for all pokemon is true
 
-          // show default icon if both pokemon are live
+        //player1 pokemon icons are here
+        if (p1.charmanderAlive === true) {
 
-          //player1 pokemon icons are here
+          //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
+          (p1.charmanderAlive === false) ? p1.charmanderAlive = false : p1.charmanderAlive = true;
+          //debugging delete when neccessary
+          console.log("status check for charmanderAlive: " + p1.charmanderAlive);
 
           document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadIcon.png" </img>';
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
+        }
+
+        if (p1.pikachuAlive === true) {
+
           document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadIcon.png" </img>';
           document.getElementById("PikachuIcon").style.width = 34;
           document.getElementById("PikachuIcon").style.height = 46;
+
+
+        }
+
+        if (p1.blastoiseAlive === true) {
 
           document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadIcon.png" </img>';
           document.getElementById("BlastoiseIcon").style.width = 34;
           document.getElementById("BlastoiseIcon").style.height = 46;
 
-          //computer pokemon icons are here
+
+        }
+
+
+
+        //computer pokemon icons are here
+        if (comp.squirtleAlive === true) {
 
           document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHead.png" </img>';
           document.getElementById("squirtleIcon").style.width = 34;
           document.getElementById("squirtleIcon").style.height = 46;
 
+        }
+
+
+        if (comp.scytherAlive === true) {
+
           document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHead.png" </img>';
           document.getElementById("ScytherIcon").style.width = 34;
           document.getElementById("ScytherIcon").style.height = 46;
+
+        }
+
+        if (comp.onixAlive === true) {
 
           document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHead.png" </img>';
           document.getElementById("OnixIcon").style.width = 34;
           document.getElementById("OnixIcon").style.height = 46;
 
-        }//end of if statement
+
+
+        }
+
+
 
         if (p1.charmanderDied === true && comp.squirtleDied === false) {
+
+          // remove previousicon
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("charmanderIcon").appendChild(elem);
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+          // replace with new icon
+
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+        }//end of if statement
+
+        if (p1.charmanderDied === true && comp.scytherDied === false) {
 
           // remove previousicon
 
@@ -3318,16 +3400,19 @@ class changePokemon {
 // In this section computer pokemon will not be paired to player1 pokemon
 
 
+// loads squirtle or onix if scyther dies (incomplete)
+this.loadSquirtleOrOnix = function () {
 
-this.loadSquirtleOnly = function () {
+  let squirtleHP7 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+  let onixHP8 = a6.onixHealthBar.reduce(array2.PokemonHPReduced)
 
   setTimeout(function() {
 
     let scytherHP10 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
 
-    //if scyther dies than squirtle is loaded up -- no attacks are programmed as of now
 
-    if(scytherHP10 === 0 && p1.deadPokemonBackup[0] === "Scyther") {
+
+    if(comp.scytherDied === true && comp.squirtleAlive === true) {
 
 
         //remove previous Pokemon image
@@ -3344,14 +3429,6 @@ this.loadSquirtleOnly = function () {
         document.getElementById("CpuPokeImage").style.width = 320;
         document.getElementById("CpuPokeImage").style.height = 380;
 
-        setTimeout(function() {
-
-        //This function resets the defaultHP color settings of the progress for player1 and computer
-
-
-      },1000); // 1 sec wait time for loading new progressBar for Scyther
-
-       //call a switch statement here -- work on this later
 
 
         //Inform player that computer selected a pokemon
@@ -3361,9 +3438,13 @@ this.loadSquirtleOnly = function () {
        computerSD.squirtleVO.play();
 
 
-       //Display and save computer pokemon name to savedPokemonName2 on line 445
+       //Display and save computer pokemon name to savedPokemonName2
        document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
        computerCH.savedPokemonName2.push("Squirtle");
+
+       //if squirtleHP is 100 then it will load with full health and change progressbar to blue
+       (squirtleHP7 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+       document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
 
 
        //verify that computer selected a pokemon
@@ -3381,87 +3462,176 @@ this.loadSquirtleOnly = function () {
 
 
 
-          }// end of if statement
+     }else if (comp.squirtleDied === true && comp.scytherDied === true && p1.pikachuAlive === true) {
+
+       //remove previous Pokemon image
+
+       let elem =  document.createElement("img");
+       elem.src ="";
+       document.getElementById("CpuPokeImage").appendChild(elem);
+       document.getElementById("CpuPokeImage").style.width = 100;
+       document.getElementById("CpuPokeImage").style.height = 100;
+
+       //replace with new pokemon
+
+       document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
+       document.getElementById("CpuPokeImage").style.width = 320;
+       document.getElementById("CpuPokeImage").style.height = 380;
+
+
+       //Inform player that computer selected a pokemon
+       document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[1] + " and has no pokemon remaining.");
+
+      //load pokemon sound
+      computerSD.onixVO.play();
+
+
+      //Display and save computer pokemon name to savedPokemonName2
+      document.getElementById("cpuPokemonName").innerHTML = "Onix";
+      computerCH.savedPokemonName2.push("Onix");
+
+
+      //if onix HP is 100 then it will load with full health and change progressbar to blue
+      (onixHP8 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+      document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
+
+
+
+      //verify that computer selected a pokemon
+      computerCH.pokemonType[4].isSelected = true; //Onix
+
+
+      //set boolean stats to false for non-selected pokemon
+      computerCH.pokemonType[0].isSelected = false;
+      computerCH.pokemonType[1].isSelected = false;
+      computerCH.pokemonType[2].isSelected = false;
+      computerCH.pokemonType[5].isSelected = false;
+
+     }// end of if statement
 
 
         },1000); // 1 sec wait time for computer to select pokemon
 
 
-            } //end of loadSquirtleOnly function
+            } //end of loadSquirtleOrOnix function
 
 
 
 
+// loads squirtle or scyther if onix dies (incomplete)
+this.loadsquirtleOrScyther = function () {
 
-this.loadOnixOnly = function () {
+  let squirtleHP7 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+  let scytherHP8 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
 
   setTimeout(function() {
 
-    let onixHP10 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-
-    //if onix is the only pokemon left and blastoise eliminates it then match is won by player1. -- no attacks are programmed as of now
-
-    if(onixHP10 === 0 && p1.deadPokemonBackup[0] === "Onix") {
 
 
-        //remove previous Pokemon image
-
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
-
-        //replace with new pokemon
-
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
-
-        setTimeout(function() {
-
-        //This function resets the defaultHP color settings of the progress for player1 and computer
+    if(comp.onixDied === true && comp.squirtleAlive === true) {
 
 
-      },3000); // 3 sec wait time for loading new progressBar for Scyther
+      //remove previous Pokemon image
 
-       //call a switch statement here -- work on this later
+      let elem =  document.createElement("img");
+      elem.src ="";
+      document.getElementById("CpuPokeImage").appendChild(elem);
+      document.getElementById("CpuPokeImage").style.width = 100;
+      document.getElementById("CpuPokeImage").style.height = 100;
 
+      //replace with new pokemon
 
-        //Inform player that computer selected a pokemon
-        document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[1] + " and has 1 pokemon remaining.");
-
-       //load pokemon sound
-       computerSD.onixVO.play();
-
-
-       //Display and save computer pokemon name to savedPokemonName2 on line 445
-       document.getElementById("cpuPokemonName").innerHTML = "Onix";
-       computerCH.savedPokemonName2.push("Onix");
+      document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
+      document.getElementById("CpuPokeImage").style.width = 320;
+      document.getElementById("CpuPokeImage").style.height = 380;
 
 
-       //verify that computer selected a pokemon
-       computerCH.pokemonType[4].isSelected = true; //Onix
+
+      //Inform player that computer selected a pokemon
+      document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[2] + " and has 1 pokemon remaining.");
+
+     //load pokemon sound
+     computerSD.squirtleVO.play();
 
 
-       // set boolean stats to false for non-selected pokemon
-       computerCH.pokemonType[0].isSelected = false;
-       computerCH.pokemonType[1].isSelected = false;
-       computerCH.pokemonType[2].isSelected = false;
-       computerCH.pokemonType[5].isSelected = false;
+     //Display and save computer pokemon name to savedPokemonName2
+     document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
+     computerCH.savedPokemonName2.push("Squirtle");
+
+     //if squirtleHP is 100 then it will load with full health and change progressbar to blue
+     (squirtleHP7 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+     document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
+
+
+
+     //verify that computer selected a pokemon
+     computerCH.pokemonType[5].isSelected = true; //Squirtle
+
+
+     // set boolean stats to false for non-selected pokemon
+     computerCH.pokemonType[0].isSelected = false;
+     computerCH.pokemonType[1].isSelected = false;
+     computerCH.pokemonType[2].isSelected = false;
+     computerCH.pokemonType[4].isSelected = false;
 
 
 
 
 
+   } else if (comp.squirtleDied === true && comp.onixDied === true && p1.blastoiseAlive === true) {
 
-          }// end of if statement
+      //remove previous Pokemon image
+
+      let elem =  document.createElement("img");
+      elem.src ="";
+      document.getElementById("CpuPokeImage").appendChild(elem);
+      document.getElementById("CpuPokeImage").style.width = 100;
+      document.getElementById("CpuPokeImage").style.height = 100;
+
+      //replace with new pokemon
+
+      document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
+      document.getElementById("CpuPokeImage").style.width = 320;
+      document.getElementById("CpuPokeImage").style.height = 380;
+
+
+      //Inform player that computer selected a pokemon
+      document.getElementById("statusProgress").innerHTML=("Computer seleted " + computerCH.ComputerPokemonChoices[0] + " and has no pokemon remaining.");
+
+      //load pokemon sound
+      computerSD.scytherVO.play();
+
+
+      //Display and save computer pokemon name to savedPokemonName2 on line 445
+      document.getElementById("cpuPokemonName").innerHTML = "Scyther";
+      computerCH.savedPokemonName2.push("Scyther");
+
+
+      //if scytherHP is 100 then it will load with full health and change progressbar to blue
+      (scytherHP8 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+      document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
+
+
+
+      //verify that computer selected a pokemon
+      computerCH.pokemonType[3].isSelected = true; //Scyther
+
+
+      //set boolean stats to false for non-selected pokemon
+      computerCH.pokemonType[0].isSelected = false;
+      computerCH.pokemonType[1].isSelected = false;
+      computerCH.pokemonType[2].isSelected = false;
+      computerCH.pokemonType[4].isSelected = false;
+      computerCH.pokemonType[5].isSelected = false;
+
+
+   }//end of if statement
 
 
         },1000); // 1 sec wait time for computer to select pokemon
 
 
-            } //end of loadOnixOnly function
+            } //end of loadsquirtleOrScyther function
 
 
 
@@ -3469,16 +3639,19 @@ this.loadOnixOnly = function () {
 
 
 
-
+// loads scyther or onix if squirtle dies (work-in-progress)
 this.loadScytherOrOnix = function () {
 
+  let scytherHP2 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+  let onixHP10 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+
   setTimeout(function() {
 
 
 
-    //if squirtle dies than Scyther is loaded up -- no attacks are programmed as of now
-
     if(comp.squirtleDied === true && comp.scytherAlive === true) {
+
+
 
 
         //remove previous Pokemon image
@@ -3503,11 +3676,13 @@ this.loadScytherOrOnix = function () {
        computerSD.scytherVO.play();
 
 
-       //Display and save computer pokemon name to savedPokemonName2 on line 445
+       //Display and save computer pokemon name to savedPokemonName2 on
        document.getElementById("cpuPokemonName").innerHTML = "Scyther";
        computerCH.savedPokemonName2.push("Scyther");
 
-
+       //if scythers HP is 100 then it will load with full health and change progressbar to blue
+       (scytherHP2 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+       document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
 
 
 
@@ -3559,6 +3734,12 @@ this.loadScytherOrOnix = function () {
           //Display and save computer pokemon name to savedPokemonName2
           document.getElementById("cpuPokemonName").innerHTML = "Onix";
           computerCH.savedPokemonName2.push("Onix");
+
+
+          //if onix HP is 100 then it will load with full health and change progressbar to blue
+          (onixHP10 === 100) ? document.querySelector(".cpuHP").style.width =  "100%" : document.querySelector(".cpuHP").style.width =  "0%";
+          document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
+
 
 
           //verify that computer selected a pokemon
