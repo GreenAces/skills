@@ -2,9 +2,9 @@
 /*
 NOTE:
 
-Last update: (05/09/2022)
+Last update: (05/13/2022)
 
-1) troubleshoot why charmander vs onix does not work  *** high priority *** (05/06/2022)
+1) troubleshoot why charmander vs onix does not work but first troubleshoot why charmander vs scyther doesn't work on line 7898  *** high priority *** (05/13/2022)
 2) create code to make charmander battle with onix (see this.loadScytherOrOnix for details) but start with onixMoves function and add charmander functions  *** high priority *** (05/09/2022)
 3) add more code for blaze and other charmander attack functions to battle with scyther or onix *** high priority *** (05/05/2022)
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
@@ -999,6 +999,9 @@ class referee {
         //conditional ternary determines if squirtle is dead and sets scyther as the selected pokemon if true
         (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
 
+        //debugging here
+        console.log("(2) comp.scytherSelected: " + comp.scytherSelected);
+
         //conditional ternary determines if scyther is dead and sets onix as the the selected pokemon if true
         (comp.scytherDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
 
@@ -1072,6 +1075,9 @@ class referee {
 
           //conditional ternary determines if squirtle is dead and sets scyther as the selected pokemon if true
           (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
+
+          //debugging here
+          console.log("(3) comp.scytherSelected: " + comp.scytherSelected);
 
           // loads squirtle or scyther if onix dies
           computerCH.loadsquirtleOrScyther();
@@ -7263,12 +7269,7 @@ class computerMoves {
      a1.charmanderHealthBar.push(-20);
      a1.charmanderBackup.push(-20);
 
-
      charmanderProgressBar.decreasePlayerHP();
-
-     //disable attack move for squirtle pokemon and charmander
-     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-     player1.charmanderMoves[0].charmanderFunction1of6 = false;
 
      //show attack image
      computerImg.squAtkImage1();
@@ -7290,10 +7291,6 @@ class computerMoves {
 
      pikachuProgressBar.decreasePlayerHP();
 
-     //disable attack move for squirtle pokemon and pikachu
-     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-     player1.pikachuMoves[0].pikachuFunction1of6 === true
-
      //show attack image
      computerImg.squAtkImage1();
      computerSD.squirtleBubble_sound.play();
@@ -7313,10 +7310,6 @@ class computerMoves {
 
      blastoiseProgressBar.decreasePlayerHP();
 
-     //disable attack move for squirtle pokemon and blastoise
-     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-     player1.blastoiseMoves[0].blastoiseFunction1of6 === true
-
      //show attack image
      computerImg.squAtkImage1();
      computerSD.squirtleBubble_sound.play();
@@ -7334,25 +7327,34 @@ class computerMoves {
 
 
 
-   if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
+   if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction1of6 === true) {
 
      //inform player1 attack from squirtle -- default setting
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
 
+     //disable attack move for squirtle pokemon and pikachu
+     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+     player1.pikachuMoves[0].pikachuFunction1of6 === true
 
-
-
-   }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
+   }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction1of6 === true) {
 
      //inform player1 attack from squirtle
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Bubble Beam!";
 
+     //disable attack move for squirtle pokemon and pikachu
+     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+     player1.pikachuMoves[0].pikachuFunction1of6 = false;
 
 
-   }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
+
+   }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction1of6 === true) {
 
      //inform player1 attack from squirtle
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Bubble Beam!";
+
+     //disable attack move for squirtle pokemon and blastoise
+     computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
+     player1.blastoiseMoves[0].blastoiseFunction1of6 === true
 
    }//end of multiple if statements
 
@@ -7367,62 +7369,120 @@ class computerMoves {
 
 
 
+
+
     break;
 
 
 
 
-  case (computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true):
+  case (computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.charmanderMoves[0].charmanderFunction2of6 === true ||
+        computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.pikachuMoves[0].pikachuFunction2of6 === true ||
+        computer.squirtleMovesActivated[0].squirtleFunction2of6 === true && player1.blastoiseMoves[0].blastoiseFunction2of6 === true):
 
   //squirtle attack move: Tail Whip
-  //disable attack move for squirtle pokemon and charmander
-  computer.squirtleMovesActivated[0].squirtleFunction2of6 = false;
 
 
-  //debugging here -- delete when neccessary
-  console.log("squirtleMoves Function2of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction2of6);
+  if(comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
-  //Tail Whip does -5 damage to charmander
-  //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-  a1.charmanderHealthBar.push(-5);
-  a1.charmanderBackup.push(-5);
+    //debugging here -- delete when neccessary
+    console.log("squirtleMoves Function2of6 is : " + computer.squirtleMovesActivated[0].squirtleFunction2of6);
 
+    //Tail Whip does -5 damage to charmander
+    //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
+    a1.charmanderHealthBar.push(-5);
+    a1.charmanderBackup.push(-5);
 
-  //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-  squirtleProgressBar.decreasePlayerHP();
+    //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
+    squirtleProgressBar.decreasePlayerHP();
 
-  //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
-  array1.checkTheStatus();
+    //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
+    array1.checkTheStatus();
 
-  //debugging here------------------------------------------------------
+    //show attack image
+    computerImg.squAtkImage2();
+    computerSD.squirtleTailWhip_sound.play();
 
-  console.log("CharmanderHealthBar array is "+ a1.charmanderHealthBar);
+    //debugging here------------------------------------------------------
 
-  // get the status of health for player1
-
-  console.log("charmanderBackup array is " + a1.charmanderBackup);
-
-    //default setting
-
-  if (p1.preserveHPChanges === false) {
-
-  //inform player1 of attack from computer
-  document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
+    console.log("CharmanderHealthBar array is "+ a1.charmanderHealthBar);
+    console.log("charmanderBackup array is " + a1.charmanderBackup);
 
 
-  }else if (p1.preserveHPChanges === true) {
+  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
-    //remove previous comment
-    document.getElementById("statusProgress2").innerHTML =  "";
+    //debugging here -- delete when neccessary
+    console.log("squirtleMoves Function2of6 is (2) : " + computer.squirtleMovesActivated[0].squirtleFunction2of6);
 
-  }//end of if statements
+    //reflect the changes to pikachuHealthBar AND pikachuBackup array as well.
+    a3.pikachuHealthBar.push(-5);
+    a3.pikachuBackup.push(-5);
+
+    pikachuProgressBar.decreasePlayerHP();
+
+    //show attack image
+    computerImg.squAtkImage1();
+    computerSD.squirtleBubble_sound.play();
+
+    //debugging
+    console.log("pikachuHealthBar array is (2) "+ a3.pikachuHealthBar);
+    console.log("pikachuBackup array is (2) " + a3.pikachuBackup);
+
+  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
+
+    //debugging here -- delete when neccessary
+    console.log("squirtleMoves Function2of6 is (3) : " + computer.squirtleMovesActivated[0].squirtleFunction2of6);
+
+    //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
+    a5.blastoiseHealthBar.push(-5);
+    a5.blastoiseBackup.push(-5);
+
+    blastoiseProgressBar.decreasePlayerHP();
+
+    //show attack image
+    computerImg.squAtkImage1();
+    computerSD.squirtleBubble_sound.play();
+
+    //debugging
+    console.log("blastoiseHealthBar array is (3) "+ a5.blastoiseHealthBar);
+    console.log("blastoiseBackup array is (3) " + a5.blastoiseBackup);
+
+  }//end of multiple if statements
 
 
 
-  //show attack image
-  computerImg.squAtkImage2();
-  computerSD.squirtleTailWhip_sound.play();
 
+
+  if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction2of6 === true) {
+
+    //inform player1 attack from squirtle -- default setting
+    document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
+
+    //disable attack move for squirtle pokemon and charmander
+    computer.squirtleMovesActivated[0].squirtleFunction2of6 = false;
+    player1.charmanderMoves[0].charmanderFunction2of6 = false;
+
+
+  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction2of6 === true) {
+
+    //inform player1 attack from squirtle
+    document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Tail Whip!";
+
+    //disable attack move for squirtle pokemon and pikachu
+    computer.squirtleMovesActivated[0].squirtleFunction2of6 = false;
+    player1.pikachuMoves[0].pikachuFunction2of6 = false;
+
+
+  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction2of6 === true) {
+
+    //inform player1 attack from squirtle
+    document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Tail Whip!";
+
+    //disable attack move for squirtle pokemon and blastoise
+    computer.squirtleMovesActivated[0].squirtleFunction2of6 = false;
+    player1.blastoiseMoves[0].blastoiseFunction2of6 === true
+
+  }//end of multiple if statements
 
 
 
@@ -7432,8 +7492,11 @@ class computerMoves {
   confirm.enableMoves();
   console.log(confirm.makeMove[0]);
 
-  //disable attack move for squirtle pokemon and charmander
-  player1.charmanderMoves[0].charmanderFunction2of6 = false;
+
+
+
+
+
 
     break;
 
@@ -7802,6 +7865,8 @@ class computerMoves {
            computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.charmanderMoves[0].charmanderFunction1of6 === true ||
            computer.scytherMovesActivated[0].scytherFunction1of6 === true && player1.blastoiseMoves[0].blastoiseFunction1of6 === true):
 
+
+
       //scyther attack move: slash
       //this statement selects the computer pokemon to battle with player1 pokemon (pikachu, charmander, or blastoise)
       if(comp.scytherSelected === true  && p1.pikachuSelected === true) {
@@ -7815,15 +7880,12 @@ class computerMoves {
       a3.pikachuBackup.push(-25);
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-      pikachuProgressBar.decreasePlayerHP2();
+      scytherProgressBar.decreasePlayerHP2();
 
       //show attack image
       computerImg.scyAtkImage1();
       computerSD.scytherSlash_sound.play();
 
-      //disable attack move for pikachu and scyther
-      player1.pikachuMoves[0].pikachuFunction1of6 = false;
-      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
 
       //debugging here------------------------------------------------------
       console.log("pikachuHealthBar array is "+a3.pikachuHealthBar);
@@ -7831,24 +7893,22 @@ class computerMoves {
 
 
 
-      }else if (comp.scytherSelected === true  &&  p1.charmanderSelected === true) {
+    }else if (comp.scytherSelected === true  &&  p1.charmanderSelected === true) {
+
+      console.log("why nothing happens here?");
 
       //debugging here -- delete when neccessary
       console.log("scytherMoves Function1of6 is (2) : " + computer.scytherMovesActivated[0].scytherFunction1of6);
 
       //reflect the changes to charmanderHealthBar AND charmanderBackup array as well.
-      a1.charmanderHealthBar.push(-25);
-      a1.charmanderBackup.push(-25);
+      a1.charmanderHealthBar.push(-5);
+      a1.charmanderBackup.push(-5);
 
-      charmanderProgressBar.decreasePlayerHP2();
+      scytherProgressBar.decreasePlayerHP2();
 
       //show attack image
       computerImg.scyAtkImage1();
       computerSD.scytherSlash_sound.play();
-
-      //disable attack move for charmander and scyther
-      player1.charmanderMoves[0].charmanderFunction1of6 = false;
-      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
 
       //debugging here------------------------------------------------------
       console.log("charmanderHealthBar array is (2) " + a1.charmanderHealthBar);
@@ -7860,18 +7920,15 @@ class computerMoves {
       console.log("scytherMoves Function1of6 is (3) : " + computer.scytherMovesActivated[0].scytherFunction1of6);
 
       //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
-      a5.blastoiseHealthBar.push(-25);
-      a5.blastoiseBackup.push(-25);
+      a5.blastoiseHealthBar.push(-5);
+      a5.blastoiseBackup.push(-5);
 
-      blastoiseProgressBar.decreasePlayerHP2();
+      scytherProgressBar.decreasePlayerHP2();
 
       //show attack image
       computerImg.scyAtkImage1();
       computerSD.scytherSlash_sound.play();
 
-      //disable attack move for charmander and scyther
-      player1.charmanderMoves[0].charmanderFunction1of6 = false;
-      computer.scytherMovesActivated[0].scytherFunction1of6 = false;
 
       //debugging here------------------------------------------------------
       console.log("blastoiseHealthBar array is (3) " + a5.blastoiseHealthBar);
@@ -7893,16 +7950,28 @@ class computerMoves {
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[1] + " attacked "+ player1CH.player1PokemonChoices[2] +" with Slash!";
 
+        //disable attack move for pikachu and scyther
+        player1.pikachuMoves[0].pikachuFunction1of6 = false;
+        computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+
 
       }else if (comp.scytherSelected === true  &&  p1.charmanderSelected === true) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[0] + " attacked "+ player1CH.player1PokemonChoices[0] +" with Slash!";
 
+        //disable attack move for charmander and scyther
+        player1.charmanderMoves[0].charmanderFunction1of6 = false;
+        computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+
       }else if (comp.scytherSelected === true  &&  p1.blastoiseSelected === true) {
 
         //remove previous comment
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[0] + " attacked "+ player1CH.player1PokemonChoices[1] +" with Slash!";
+
+        //disable attack move for blastoise and scyther
+        player1.blastoiseMoves[0].blastoiseFunction1of6 = false;
+        computer.scytherMovesActivated[0].scytherFunction1of6 = false;
 
       }//end of if statements
 
