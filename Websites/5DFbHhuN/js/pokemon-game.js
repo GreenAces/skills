@@ -1088,7 +1088,7 @@ class referee {
         if (p1.charmanderDied === false && comp.scytherDied === true) {
 
 
-            // remove scyther icon
+            // remove other icon
 
             let elem =  document.createElement("img");
             elem.src ="";
@@ -1096,11 +1096,40 @@ class referee {
             document.getElementById("ScytherIcon").style.width = 34;
             document.getElementById("ScytherIcon").style.height = 46;
 
-            // replace with new squirtle icon
+            // replace with scyther icon
 
             document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHeadDead.png" </img>';
             document.getElementById("ScytherIcon").style.width = 34;
             document.getElementById("ScytherIcon").style.height = 46;
+
+
+
+
+
+          }else if (p1.charmanderDied === false && comp.squirtleDied === true) {
+
+            //remove other icon
+
+            let elem =  document.createElement("img");
+            elem.src ="";
+            document.getElementById("squirtleIcon").appendChild(elem);
+            document.getElementById("squirtleIcon").style.width = 34;
+            document.getElementById("squirtleIcon").style.height = 46;
+
+            // replace with squirtle icon
+
+            document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHeadDead.png" </img>';
+            document.getElementById("squirtleIcon").style.width = 34;
+            document.getElementById("squirtleIcon").style.height = 46;
+
+
+            //conditional ternary determines if scyther is dead and sets onix as the the selected pokemon if true
+            (comp.scytherDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
+
+
+            // loads scyther or onix if squirtle dies
+              computerCH.loadScytherOrOnix();
+
 
 
 
@@ -8354,9 +8383,9 @@ class computerMoves {
            computerImg.oniAtkImage1();
            computerSD.onixRockThrow_sound.play();
 
-           //disable attack move for onix and blastoise
+           //disable attack move for onix and charmander
            computer.onixMovesActivated[0].onixFunction1of6 = false;
-           player1.blastoiseMoves[0].blastoiseFunction1of6 = false;
+           player1.charmanderMoves[0].charmanderFunction1of6 = false;
 
            //debugging here------------------------------------------------------
            console.log("charmanderHealthBar array is (2) " + a1.charmanderHealthBar);
@@ -8377,9 +8406,9 @@ class computerMoves {
            computerImg.oniAtkImage1();
            computerSD.onixRockThrow_sound.play();
 
-           //disable attack move for onix and blastoise
+           //disable attack move for onix and pikachu
            computer.onixMovesActivated[0].onixFunction1of6 = false;
-           player1.blastoiseMoves[0].blastoiseFunction1of6 = false;
+           player1.pikachuMoves[0].pikachuFunction1of6 = false;
 
            //debugging here------------------------------------------------------
            console.log("pikachuHealthBar array is (3) " + a3.pikachuHealthBar);
