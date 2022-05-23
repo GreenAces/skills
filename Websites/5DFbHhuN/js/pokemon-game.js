@@ -2,9 +2,9 @@
 /*
 NOTE:
 
-Last update: (05/19/2022)
+Last update: (05/23/2022)
 
-1) troubleshoot why charmander vs onix does not work on line 8556 and disable debuggingOperation when finish. Maybe look at onixHeadDead as well? *** high priority *** (05/19/2022)
+1) troubleshoot why charmander vs onix does not work on line 1106 and disable debuggingOperation when finish. organize algorithem for charmander vs squirtle, scyther, and onix NOTE: two functions are required  *** high priority *** (05/23/2022)
 2) create code to make charmander battle with onix (see this.loadScytherOrOnix for details) but start with onixMoves function and add charmander functions  *** high priority *** (05/09/2022)
 3) add more code for blaze and other charmander attack functions to battle with scyther or onix *** high priority *** (05/05/2022)
 4) Save health information to array when pokemon gets injured. also restore health info when player switches back to pokemon.
@@ -923,7 +923,37 @@ class referee {
 
 
 
-      }// end of 1st if statement 2 of 3  (3 not yet created)
+
+      }// end of 1st if statement 2 of 3
+
+
+      if (p1.charmanderDied === true && comp.onixDied === false) {
+
+
+        //change font color to red to let the player know that their pokemon is no longer active and disable all pokemon functions
+
+        //below is the original if statment
+
+
+        document.getElementById("p1PokemonName").innerHTML = "";
+        document.getElementById("Charmander_sel").style.color = "#C91212";
+        document.getElementById("Charmander_sel").removeEventListener("click", player1CH.chrPokeImage);
+        document.getElementById("attackA").removeEventListener("click", attackA);
+        document.getElementById("attackB").removeEventListener("click", attackB);
+        document.getElementById("attackC").removeEventListener("click", attackC);
+        document.getElementById("defenseA").removeEventListener("click", defenseA);
+        document.getElementById("defenseB").removeEventListener("click", defenseB);
+        document.getElementById("defenseC").removeEventListener("click", defenseC);
+        document.getElementById("attackA").innerHTML = ("");
+        document.getElementById("attackB").innerHTML = ("");
+        document.getElementById("attackC").innerHTML = ("");
+        document.getElementById("defenseA").innerHTML = ("");
+        document.getElementById("defenseB").innerHTML = ("");
+        document.getElementById("defenseC").innerHTML = ("");
+
+
+
+      }// end of 1st if statement 3 of 3  (
 
         // same conditions for other player1 pokemon
         if (p1.pikachuDied === true && comp.scytherDied === false) {
@@ -999,11 +1029,6 @@ class referee {
         //conditional ternary determines if squirtle is dead and sets scyther as the selected pokemon if true
         (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
 
-        //conditional ternary determines if scyther and squirtle are dead and sets onix as the the selected pokemon if true
-        (comp.scytherDied === true && comp.squirtleDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
-
-        //debugging here
-        console.log("(3) comp.onixSelected: " + comp.onixSelected);
 
 
         // loads scyther or onix if squirtle dies
@@ -1034,11 +1059,9 @@ class referee {
           //conditional ternary determines if scyther is dead then it can't be selected 2 of 2
           (p1.pikachuSelected === true && comp.scytherDied === true) ? comp.scytherSelected = false : comp.scytherAlive = true;
 
-          //conditional ternary determines if scyther is dead and sets squirtle as the selected pokemon if true
-          (comp.scytherDied === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
 
           //conditional ternary determines if squirtle is dead and sets onix as the selected pokemon if true
-          (comp.squirtleDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
+          (comp.squirtleDied === true && comp.scytherDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
 
 
           // loads squirtle or onix if scyther dies
@@ -1049,7 +1072,7 @@ class referee {
         }//end of if statement
 
 
-       if (comp.onixDied === true && p1.blastoiseDied === false && p1.blastoiseSelected === true) {
+       if (comp.onixDied === true && comp.squirtleDied === true && p1.charmanderSelected === true) {
 
 
 
@@ -1067,23 +1090,51 @@ class referee {
           document.getElementById("OnixIcon").style.width = 34;
           document.getElementById("OnixIcon").style.height = 46;
 
-          //conditional ternary determines if onix is dead then it can't be selected 2 of 2
+          //conditional ternary determines if onix is dead then it can't be selected 1 of 2
           (p1.blastoiseSelected === true && comp.onixDied === true) ? comp.onixSelected = false : comp.onixAlive = true;
 
-          //conditional ternary determines if onix is dead and sets squirtle as the selected pokemon if true
-          (comp.onixDied === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
+          //conditional ternary determines if onix or squirtle are dead and sets scyther as the selected pokemon if true
+          (comp.onixDied === true && comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
 
-          //conditional ternary determines if squirtle is dead and sets scyther as the selected pokemon if true
-          (comp.squirtleDied === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
-
-          //debugging here
-          console.log("(3) comp.scytherSelected: " + comp.scytherSelected);
 
           // loads squirtle or scyther if onix dies
           computerCH.loadsquirtleOrScyther();
 
 
         }//end of if statement
+
+        if (comp.onixDied === true && comp.scytherDied === true && p1.charmanderSelected === true) {
+
+
+
+           // remove onix icon
+
+           let elem =  document.createElement("img");
+           elem.src ="";
+           document.getElementById("OnixIcon").appendChild(elem);
+           document.getElementById("OnixIcon").style.width = 34;
+           document.getElementById("OnixIcon").style.height = 46;
+
+           // replace with new squirtle icon
+
+           document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHeadDead.png" </img>';
+           document.getElementById("OnixIcon").style.width = 34;
+           document.getElementById("OnixIcon").style.height = 46;
+
+           //conditional ternary determines if onix is dead then it can't be selected 2 of 2
+           (p1.blastoiseSelected === true && comp.onixDied === true) ? comp.onixSelected = false : comp.onixAlive = true;
+
+           //conditional ternary determines if onix and scyther are dead and sets squirtle as the selected pokemon if true
+           (comp.onixDied === true && comp.scytherDied === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
+
+
+
+
+           // loads squirtle or scyther if onix dies
+           computerCH.loadsquirtleOrScyther();
+
+
+         }//end of if statement
 
 
         //new entry added (05/05/2020)
@@ -1131,9 +1182,6 @@ class referee {
 
             //conditional ternary determines if scyther and squirtle are dead and sets onix as the the selected pokemon if true
             (comp.scytherDied === true && comp.squirtleDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
-
-            //debugging here
-            console.log("(3.1) comp.onixSelected: " + comp.onixSelected);
 
 
             // loads scyther or onix if squirtle dies
@@ -1506,10 +1554,17 @@ class referee {
 
            else if (charmanderHP7 <= 0 && onixHP8 >= 1 && p1.charmanderDied === true && comp.onixSelected === true) {
 
-               //Inform player that pokemon is dead and game is over because onix is the last computer pokemon
+             setTimeout(function() {
 
 
-               document.getElementById("statusProgress").innerHTML=(lastDeadPokemon1 +" died. Game Over! Restart game to play again!");
+             //Inform player that a pokemon is dead and declare the game is over if the last two pokemon are dead (pikachu and blastoise)
+
+            (p1.pikachuDied === true && p1.blastoiseDied === true) ?  document.getElementById("statusProgress").innerHTML= ("Last pokemon died. Game Over! Restart game to play again!") : document.getElementById("statusProgress").innerHTML= ("Select another pokemon!");
+
+
+
+              },3000); // 3 sec wait time for computer to select pokemon
+
 
 
                // remove previous player1 Pokemon image
@@ -1549,7 +1604,7 @@ class referee {
 
                 },3000); // 3 sec wait time for computer to select pokemon
 
-              }// if charmander dies when battling onix, the game is over because it's the last computer pokemon for that set
+              }// if charmander dies when battling onix, the game could be over because it's the last computer pokemon for that set
 
 
 
@@ -2674,8 +2729,7 @@ class changePokemon {
 
           //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
           (p1.pikachuAlive === false) ? p1.pikachuAlive = false : p1.pikachuAlive = true;
-          //debugging delete when neccessary
-          console.log("status check for pikachuAlive: " + p1.pikachuAlive);
+
 
           document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadIcon.png" </img>';
           document.getElementById("PikachuIcon").style.width = 34;
@@ -2688,8 +2742,7 @@ class changePokemon {
 
           //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
           (p1.blastoiseAlive === false) ? p1.blastoiseAlive = false : p1.blastoiseAlive = true;
-          //debugging delete when neccessary
-          console.log("status check for blastoiseAlive: " + p1.blastoiseAlive);
+
 
           document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadIcon.png" </img>';
           document.getElementById("BlastoiseIcon").style.width = 34;
@@ -2703,6 +2756,11 @@ class changePokemon {
         //computer pokemon icons are here
         if (comp.squirtleAlive === true) {
 
+          //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
+          (comp.squirtleAlive === false) ? comp.squirtleAlive = false : comp.squirtleAlive= true;
+          //debugging delete when neccessary
+          console.log("status check for comp.squirtleAlive: " + comp.squirtleAlive);
+
           document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHead.png" </img>';
           document.getElementById("squirtleIcon").style.width = 34;
           document.getElementById("squirtleIcon").style.height = 46;
@@ -2712,6 +2770,11 @@ class changePokemon {
 
         if (comp.scytherAlive === true) {
 
+          //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
+          (comp.scytherAlive === false) ? comp.scytherAlive = false : comp.scytherAlive = true;
+          //debugging delete when neccessary
+          console.log("status check for comp.scytherAlive: " + comp.scytherAlive);
+
           document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHead.png" </img>';
           document.getElementById("ScytherIcon").style.width = 34;
           document.getElementById("ScytherIcon").style.height = 46;
@@ -2719,6 +2782,11 @@ class changePokemon {
         }
 
         if (comp.onixAlive === true) {
+
+          //ternary checks if pokemon is dead -- if the pokemon is dead, then no changes are made but if true then pokemon will be marked as alive
+          (comp.onixAlive === false) ? comp.onixAlive= false : comp.onixAlive = true;
+          //debugging delete when neccessary
+          console.log("status check for comp.onixAlive: " + comp.onixAlive);
 
           document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHead.png" </img>';
           document.getElementById("OnixIcon").style.width = 34;
@@ -2746,7 +2814,7 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
-        }//end of if statement
+        }//end of if statement 1 of 3
 
         if (p1.charmanderDied === true && comp.scytherDied === false) {
 
@@ -2764,7 +2832,25 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
-        }//end of if statement
+        }//end of if statement 2 of 3
+
+        if (p1.charmanderDied === true && comp.onixDied === false) {
+
+          // remove previousicon
+
+          let elem =  document.createElement("img");
+          elem.src ="";
+          document.getElementById("charmanderIcon").appendChild(elem);
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+          // replace with new icon
+
+          document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
+          document.getElementById("charmanderIcon").style.width = 34;
+          document.getElementById("charmanderIcon").style.height = 46;
+
+        }//end of if statement 3 of 3
 
          if (p1.pikachuDied === true && comp.scytherDied === false) {
 
