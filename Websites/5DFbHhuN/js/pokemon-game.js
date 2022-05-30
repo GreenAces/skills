@@ -2,12 +2,12 @@
 /*
 NOTE:
 
-Last update: (05/27/2022)
+Last update: (05/30/2022)
 
-1) find a way to disable scyther from loading up when selecting pikachu but play as charmander first and defeat scyther... only onix should load up (if you defeated squirtle with charmander) start with loadpikachu function   *** high priority *** (05/27/2022)
-2) create code that prevents a dead computer pokemon image from loading after selecting a different pokemon  *** high priority *** (05/25/2022)
+1) make pikachu and squirtle battle and then make pikachu and onix battle -- just focus on function1of6 for each pokemon *** high priority *** (05/30/2022)
+2)   *** high priority *** (05/25/2022)
 3) add more code for blaze and other charmander attack functions to battle with scyther or onix *** high priority *** (05/05/2022)
-4) add more code for player1 pokemon after status check for charmanderAlive: and use that code to create a rule of dead computer pokemon *** high priority *** (05/25/2022) work on this first **
+4) 
 5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
 6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
 7) why is Computer health status is undefined on line 1149? maybe because it's a function?
@@ -3133,8 +3133,6 @@ class changePokemon {
 
     this.chrPokeImage =  function () {
 
-      let score0 = a1.player1Score.reduce(array1.PokemonHPReduced);
-
 
       confirm.makeMove[0].player1Move = true;
 
@@ -3200,7 +3198,7 @@ class changePokemon {
 
 
       //if player1 doesn't have a score then allow squirtle (computer pokemon) to battle with charmander (default choice).
-    }else if (score0 === 0) {
+    }else if (p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
       //re-activate active listener again because it was disabled in a different scenario.
       document.getElementById("attackA").addEventListener("click", attackA);
@@ -3211,30 +3209,26 @@ class changePokemon {
       document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-      // load player1 pokemon
+      //load charmander
       document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
       document.getElementById("Player1PokeImage").style.width = 200;
       document.getElementById("Player1PokeImage").style.height = 180;
 
 
 
-     setTimeout(function (){
-
-       // if player1 selects fire-type pokemon, computer will use a water-type pokemon
-
-       let isPokemonFire = player1CH.pokemonType.filter(function(perfectMatch){
-
-       if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){
+     setTimeout(function () {
 
 
-       //load  water-type for computer pokemon
+       if(p1.charmanderSelected === true && comp.squirtleSelected === true) {
+
+
+      //load computer pokemon
       document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
       document.getElementById("CpuPokeImage").style.width = 320;
       document.getElementById("CpuPokeImage").style.height = 380;
 
       //load pokemon sound
       //computerSD.squirtleVO.play();
-
 
 
 
@@ -3259,15 +3253,14 @@ class changePokemon {
 
     }
 
-     });
+
 
 
    },3000); // 3 sec wait time to load computer pokemon
 
 
-   //new entry added
-   //removes squirtle tombstone and reloads charmander image if player1 score is equal or greater than 1
- }else if (score0 >= 1) {
+
+ }else if (comp.scytherDied === true && comp.squirtleAlive === true && comp.squirtleSelected === true) {
 
        //re-activate active listener again because it was disabled in a different scenario.
        document.getElementById("attackA").addEventListener("click", attackA);
@@ -3278,7 +3271,7 @@ class changePokemon {
        document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-       // load player1 pokemon
+       //load charmander
        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
        document.getElementById("Player1PokeImage").style.width = 200;
        document.getElementById("Player1PokeImage").style.height = 180;
@@ -3287,52 +3280,39 @@ class changePokemon {
 
       setTimeout(function (){
 
-        // if player1 selects fire-type pokemon, computer will use a water-type pokemon
+        //loads squirtle or onix if scyther dies
+        computerCH.loadSquirtleOrOnix();
 
-        let isPokemonFire = player1CH.pokemonType.filter(function(perfectMatch){
-
-        if(perfectMatch.Type === "fire" && perfectMatch.isSelected === true){
-
-
-        //load  water-type for computer pokemon
-       document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-       document.getElementById("CpuPokeImage").style.width = 320;
-       document.getElementById("CpuPokeImage").style.height = 380;
-
-       //load pokemon sound
-       //computerSD.squirtleVO.play();
-
-
-
-
-
-       //Display and save computer pokemon name to savedPokemonName2
-       document.getElementById("cpuPokemonName").innerHTML = "Squirtle";
-       computerCH.savedPokemonName2.push("Squirtle");
-
-
-
-        //verify that computer selected a pokemon
-       computerCH.pokemonType[2].isSelected = true; // squirtle
-
-       //set boolean stats to false for non-selected pokemon
-
-       computerCH.pokemonType[1].isSelected = false;
-       computerCH.pokemonType[3].isSelected = false;
-       computerCH.pokemonType[4].isSelected = false;
-       computerCH.pokemonType[5].isSelected = false;
-
-
-
-     }
-
-      });
 
 
     },3000); // 3 sec wait time to load computer pokemon
 
 
-          }//end of multiple if statements
+  }else if (comp.squirtleDied === true && comp.scytherDied === true && p1.charmanderAlive === true && comp.onixSelected === true) {
+
+      //re-activate active listener again because it was disabled in a different scenario.
+      document.getElementById("attackA").addEventListener("click", attackA);
+      document.getElementById("attackB").addEventListener("click", attackB);
+      document.getElementById("attackC").addEventListener("click", attackC);
+      document.getElementById("defenseA").addEventListener("click", defenseA);
+      document.getElementById("defenseB").addEventListener("click", defenseB);
+      document.getElementById("defenseC").addEventListener("click", defenseC);
+
+      //load charmander
+      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
+      document.getElementById("Player1PokeImage").style.width = 200;
+      document.getElementById("Player1PokeImage").style.height = 180;
+
+      setTimeout(function(){
+
+      //loads scyther or onix if squirtle dies
+      computerCH.loadScytherOrOnix();
+
+      },3000); // 3 sec wait time to load computer pokemon
+
+
+
+  }//end of multiple if statements
 
 
 
@@ -3346,9 +3326,6 @@ class changePokemon {
 
 
     this.blaPokeImage = function () {
-
-      let score0 = a1.player1Score.reduce(array1.PokemonHPReduced);
-
 
 
       confirm.makeMove[0].player1Move = true;
@@ -3415,7 +3392,7 @@ class changePokemon {
 
 
          //if player1 doesn't have a score then allow onix (computer pokemon) to battle with blastoise (default choice).
-       }else if (score0 === 0) {
+       }else if (p1.blastoiseSelected === true && comp.onixSelected === true) {
 
          //re-activate active listener again because it was disabled in a different scenario.
          document.getElementById("attackA").addEventListener("click", attackA);
@@ -3433,13 +3410,10 @@ class changePokemon {
         document.getElementById("Player1PokeImage").style.height = 100;
 
 
-        setTimeout(function(){
+        setTimeout(function() {
 
-          // if player1 selects water-type pokemon, computer will use a rock-type pokemon
 
-          let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
-
-          if(perfectMatch.Type === "water" && perfectMatch.isSelected === true){
+          if(p1.blastoiseSelected === true && comp.onixSelected === true) {
 
 
               // remove previous Pokemon image
@@ -3462,8 +3436,7 @@ class changePokemon {
 
 
 
-
-             //Display and save computer pokemon name to savedPokemonName2 on line 445
+             //Display and save computer pokemon name to savedPokemonName2
              document.getElementById("cpuPokemonName").innerHTML = "Onix";
              computerCH.savedPokemonName2.push("Onix");
 
@@ -3480,14 +3453,13 @@ class changePokemon {
 
           }
 
-        });
+
 
 
       },3000); // 3 sec wait time to load computer pokemon
 
-      //new entry added
-      //removes onix tombstone and reloads blastoise image if player1 score is equal or greater than 1
-    }else if (score0 >= 1) {
+
+    }else if (comp.scytherDied === true && comp.squirtleAlive === true && comp.squirtleSelected === true) {
 
           //re-activate active listener again because it was disabled in a different scenario.
           document.getElementById("attackA").addEventListener("click", attackA);
@@ -3498,67 +3470,51 @@ class changePokemon {
           document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-          //load player1 pokemon
+          //load blastoise
 
          document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
          document.getElementById("Player1PokeImage").style.width = 100;
          document.getElementById("Player1PokeImage").style.height = 100;
 
 
-         setTimeout(function(){
+         setTimeout(function() {
 
-           // if player1 selects water-type pokemon, computer will use a rock-type pokemon
+           //loads squirtle or scyther if onix dies
+           computerCH.loadsquirtleOrScyther();
 
-           let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
-
-           if(perfectMatch.Type === "water" && perfectMatch.isSelected === true){
-
-
-               // remove previous Pokemon image
-
-               let elem =  document.createElement("img");
-               elem.src ="";
-               document.getElementById("CpuPokeImage").appendChild(elem);
-               document.getElementById("CpuPokeImage").style.width = 100;
-               document.getElementById("CpuPokeImage").style.height = 100;
-
-               // replace with new pokemon
-
-               document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
-               document.getElementById("CpuPokeImage").style.width = 320;
-               document.getElementById("CpuPokeImage").style.height = 380;
-
-
-              //load pokemon sound
-              computerSD.onixVO.play();
-
-
-
-
-              //Display and save computer pokemon name to savedPokemonName2 on line 445
-              document.getElementById("cpuPokemonName").innerHTML = "Onix";
-              computerCH.savedPokemonName2.push("Onix");
-
-
-              //verify that computer selected a pokemon
-              computerCH.pokemonType[4].isSelected = true; //onix
-
-              // set boolean stats to false for non-selected pokemon
-              computerCH.pokemonType[0].isSelected = false;
-              computerCH.pokemonType[2].isSelected = false;
-              computerCH.pokemonType[5].isSelected = false;
-
-
-
-           }
-
-         });
 
 
        },3000); // 3 sec wait time to load computer pokemon
 
 
-              }//end of multiple if statements
+     }else if (comp.squirtleDied === true && comp.onixDied === true && p1.blastoiseAlive === true && comp.scytherSelected === true) {
+
+       //re-activate active listener again because it was disabled in a different scenario.
+       document.getElementById("attackA").addEventListener("click", attackA);
+       document.getElementById("attackB").addEventListener("click", attackB);
+       document.getElementById("attackC").addEventListener("click", attackC);
+       document.getElementById("defenseA").addEventListener("click", defenseA);
+       document.getElementById("defenseB").addEventListener("click", defenseB);
+       document.getElementById("defenseC").addEventListener("click", defenseC);
+
+
+       //load blastoise
+
+       document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
+       document.getElementById("Player1PokeImage").style.width = 100;
+       document.getElementById("Player1PokeImage").style.height = 100;
+
+
+       setTimeout(function() {
+
+         //loads squirtle or scyther if onix dies
+         computerCH.loadsquirtleOrScyther();
+
+        },3000); // 3 sec wait time to load computer pokemon
+
+
+
+     }//end of multiple if statements
 
 
 
@@ -3569,9 +3525,6 @@ class changePokemon {
 
 
     this.pikPokeImage = function () {
-
-      let score0 = a1.player1Score.reduce(array1.PokemonHPReduced);
-
 
 
       confirm.makeMove[0].player1Move = true;
@@ -3643,7 +3596,7 @@ class changePokemon {
 
 
         //if player1 doesn't have a score then allow scyther (computer pokemon) to battle with pikachu (default choice).
-      }else if (score0 === 0) {
+      }else if (p1.pikachuSelected === true && comp.scytherSelected === true) {
 
         //re-activate active listener again because it was disabled in a different scenario.
         document.getElementById("attackA").addEventListener("click", attackA);
@@ -3654,7 +3607,7 @@ class changePokemon {
         document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-        // load player1 pokemon
+        //load pikachu
 
        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
        document.getElementById("Player1PokeImage").style.width = 200;
@@ -3662,11 +3615,11 @@ class changePokemon {
 
        setTimeout(function(){
 
-         // if player1 selects electric-type pokemon, computer will use a grass-type pokemon
 
-         let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
 
-         if(perfectMatch.Type === "electric" && perfectMatch.isSelected === true){
+
+
+         if(p1.pikachuSelected === true && comp.scytherSelected === true) {
 
 
              // remove previous Pokemon image
@@ -3690,7 +3643,7 @@ class changePokemon {
 
 
 
-            //Display and save computer pokemon name to savedPokemonName2 on line 445
+            //Display and save computer pokemon name to savedPokemonName2
             document.getElementById("cpuPokemonName").innerHTML = "Scyther";
             computerCH.savedPokemonName2.push("Scyther");
 
@@ -3709,16 +3662,14 @@ class changePokemon {
 
          }
 
-       });
+
 
 
      },6000); // 6 sec wait time to load computer pokemon
 
 
 
-   //new entry added
-   //removes scyther tombstone and reloads pikachu image if player1 score is equal or greater than 1
-   }else if (score0 >= 1) {
+   }else if (comp.scytherDied === true && comp.squirtleAlive === true && comp.squirtleSelected === true) {
 
      //re-activate active listener again because it was disabled in a different scenario.
      document.getElementById("attackA").addEventListener("click", attackA);
@@ -3729,7 +3680,7 @@ class changePokemon {
      document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
-     // load player1 pokemon
+     //load pikachu
 
     document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
     document.getElementById("Player1PokeImage").style.width = 200;
@@ -3737,69 +3688,49 @@ class changePokemon {
 
     setTimeout(function(){
 
-      // if player1 selects electric-type pokemon, computer will use a grass-type pokemon
+      //loads squirtle or onix if scyther dies
+      computerCH.loadSquirtleOrOnix();
 
-      let isPokemonElectric = player1CH.pokemonType.filter(function(perfectMatch){
-
-      if(perfectMatch.Type === "electric" && perfectMatch.isSelected === true){
-
-
-          // remove previous Pokemon image
-
-          let elem =  document.createElement("img");
-          elem.src ="";
-          document.getElementById("CpuPokeImage").appendChild(elem);
-          document.getElementById("CpuPokeImage").style.width = 100;
-          document.getElementById("CpuPokeImage").style.height = 100;
-
-          // replace with new pokemon
-
-          document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
-          document.getElementById("CpuPokeImage").style.width = 320;
-          document.getElementById("CpuPokeImage").style.height = 380;
-
-
-         //load pokemon sound
-         computerSD.scytherVO.play();
+    },3000); // 3 sec wait time to load computer pokemon
 
 
 
+   }else if (comp.squirtleDied === true && comp.scytherDied === true && p1.charmanderAlive === true && comp.onixSelected === true) {
 
-         //Display and save computer pokemon name to savedPokemonName2 on line 445
-         document.getElementById("cpuPokemonName").innerHTML = "Scyther";
-         computerCH.savedPokemonName2.push("Scyther");
-
-
-         //verify that computer selected a pokemon
-         computerCH.pokemonType[3].isSelected = true; //Scyther
-
-
-         // set boolean stats to false for non-selected pokemon
-         computerCH.pokemonType[0].isSelected = false;
-         computerCH.pokemonType[1].isSelected = false;
-         computerCH.pokemonType[4].isSelected = false;
-         computerCH.pokemonType[5].isSelected = false;
+     //re-activate active listener again because it was disabled in a different scenario.
+     document.getElementById("attackA").addEventListener("click", attackA);
+     document.getElementById("attackB").addEventListener("click", attackB);
+     document.getElementById("attackC").addEventListener("click", attackC);
+     document.getElementById("defenseA").addEventListener("click", defenseA);
+     document.getElementById("defenseB").addEventListener("click", defenseB);
+     document.getElementById("defenseC").addEventListener("click", defenseC);
 
 
+     //load pikachu
 
-      }
+    document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
+    document.getElementById("Player1PokeImage").style.width = 200;
+    document.getElementById("Player1PokeImage").style.height = 180;
 
-    });
+     setTimeout(function(){
+
+     //loads scyther or onix if squirtle dies
+     computerCH.loadScytherOrOnix();
+
+   },3000); // 3 sec wait time to load computer pokemon
 
 
-          },6000); // 6 sec wait time to load computer pokemon
 
 
-
-   }//end of multiple if statements
+ }//end of multiple if statements
 
 
 
 
 
-   } // end of 1st if statement
+   }//end of 1st if statement
 
- } // end of pikPokeImage function
+ }//end of pikPokeImage function
 
 
 
@@ -9312,8 +9243,6 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
     }else if (comp.onixSelected === true  &&  p1.charmanderSelected === true) {
 
-      console.log("This confirms that only onix and charmander are selected -- delete this comment.");
-
       computer.onixMoves();
 
     }//end of if statements
@@ -9333,8 +9262,21 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
   setTimeout (function(){
 
 
+        if (comp.squirtleSelected === true  &&  p1.blastoiseSelected === true) {
 
-    computer.onixMoves();
+          computer.squirtleMoves();
+
+        }else if (comp.scytherSelected === true  &&  p1.blastoiseSelected === true) {
+
+          computer.scytherMoves();
+
+        }else if (comp.onixSelected === true  &&  p1.blastoiseSelected === true) {
+
+          computer.onixMoves();
+
+        }//end of if statements
+
+
 
 
   },2000); // computer attacks after 2 secs
@@ -9349,8 +9291,20 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
   setTimeout (function(){
 
 
+        if (comp.squirtleSelected === true  &&  p1.pikachuSelected === true) {
 
-    computer.scytherMoves();
+          computer.squirtleMoves();
+
+        }else if (comp.scytherSelected === true  &&  p1.pikachuSelected === true) {
+
+          computer.scytherMoves();
+
+        }else if (comp.onixSelected === true  &&  p1.pikachuSelected === true) {
+
+          computer.onixMoves();
+
+        }//end of if statements
+
 
 
 
@@ -9694,34 +9648,30 @@ let fullHealthData = a1.fullHealth.reduce(array1.PokemonHPReduced);
 
 
 function loadCharmander () {
+//verification procedure
 
-  //charmander + squirtle battle
-  player1CH.chrPokeImage();
+//confirm selected pokemon first
+p1.charmanderSelected = true;
 
-  if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && p1.charmanderCounts >= 0) {
+//conditional ternary determines if charmander was selected and sets squirtle true if it was 1 of 2
+(p1.charmanderSelected === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
 
-    //confirm selected pokemon first
-    p1.charmanderSelected = true;
+//A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
 
-    //conditional ternary determines if charmander was selected and sets squirtle true if it was 1 of 2
-    (p1.charmanderSelected === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
+(comp.squirtleDied === true) ?  comp.squirtleSelected = false :  comp.squirtleSelected = true;
 
-    setTimeout(function() {
+console.log("(8) comp.squirtleSelected: " + comp.squirtleSelected);
+
+(comp.scytherDied === true) ? comp.scytherSelected = false : comp.scytherSelected = true;
+
+console.log("(8.2) comp.scytherSelected: " + comp.scytherSelected);
+
+//this function loads charmander and squritle (default) + scyther or onix based on battle conditions
+player1CH.chrPokeImage();
+
+if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[0].isSelected === true && p1.charmanderCounts >= 0) {
 
 
-    //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
-
-    if (p1.deadPokemon[0] === "Scyther" || p1.deadPokemon[1] === "Scyther" || p1.deadPokemon[2] === "Scyther" || p1.deadPokemon[3] === "Scyther" || p1.deadPokemon[4] === "Scyther" || p1.deadPokemon[5] === "Scyther") {
-
-    comp.scytherSelected = false;
-
-    }else if (p1.deadPokemon[0] === "Squirtle" || p1.deadPokemon[1] === "Squirtle" || p1.deadPokemon[2] === "Squirtle" || p1.deadPokemon[3] === "Squirtle" || p1.deadPokemon[4] === "Squirtle" || p1.deadPokemon[5] === "Squirtle") {
-
-    comp.squirtleSelected = false;
-
-    }
-
-    }, 0001);
 
     console.log("charmander selected: " + p1.charmanderSelected + "   squirtle selected: " + comp.squirtleSelected);
 
@@ -9818,39 +9768,29 @@ console.log("loadCharmander default switch was activated on this line: ");
 
 function loadPikachu () {
 
-  //pikachu + sycther battle
+  //verification procedure
+
+  //confirm selected pokemon first
+  p1.pikachuSelected = true;
+
+  //conditional ternary determines if pikachu was selected and sets scyther true if it was
+  (p1.pikachuSelected === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
+
+
+  //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
+
+  (comp.squirtleDied === true) ?  comp.squirtleSelected = false :  comp.squirtleSelected = true;
+
+  console.log("(9) comp.squirtleSelected: " + comp.squirtleSelected);
+
+  (comp.scytherDied === true) ? comp.scytherSelected = false : comp.scytherSelected = true;
+
+  console.log("(9.2) comp.scytherSelected: " + comp.scytherSelected);
+
+  //this function loads pikachu or sycther (default) + squirtle or onix based on battle conditions
   player1CH.pikPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[2].isSelected === true && p1.pikachuCounts >= 0) {
-
-    //confirm selected pokemon first
-    p1.pikachuSelected = true;
-
-    //conditional ternary determines if pikachu was selected and sets scyther true if it was
-    (p1.pikachuSelected === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
-
-
-    //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
-
-    (p1.deadPokemon[0] === "Scyther" || p1.deadPokemon[1] === "Scyther" || p1.deadPokemon[2] === "Scyther" || p1.deadPokemon[3] === "Scyther" || p1.deadPokemon[4] === "Scyther" || p1.deadPokemon[5] === "Scyther") ? comp.scytherSelected = false : comp.scytherSelected = true;
-
-
-    console.log("(9) comp.scytherSelected: " + comp.scytherSelected);
-
-    (p1.deadPokemon[0] === "Scyther" || p1.deadPokemon[1] === "Scyther" || p1.deadPokemon[2] === "Scyther" || p1.deadPokemon[3] === "Scyther" || p1.deadPokemon[4] === "Scyther" || p1.deadPokemon[5] === "Scyther") ? computerCH.loadScytherOrOnix() : console.log(comp.scytherSelected);
-
-
-
-
-    (p1.deadPokemon[0] === "Squirtle" || p1.deadPokemon[1] === "Squirtle" || p1.deadPokemon[2] === "Squirtle" || p1.deadPokemon[3] === "Squirtle" || p1.deadPokemon[4] === "Squirtle" || p1.deadPokemon[5] === "Squirtle") ?  comp.squirtleSelected = false :  comp.squirtleSelected = true;
-
-    (p1.deadPokemon[0] === "Squirtle" || p1.deadPokemon[1] === "Squirtle" || p1.deadPokemon[2] === "Squirtle" || p1.deadPokemon[3] === "Squirtle" || p1.deadPokemon[4] === "Squirtle" || p1.deadPokemon[5] === "Squirtle") ? computerCH.loadScytherOrOnix() : console.log(comp.squirtleSelected);
-
-    console.log("(9.2) comp.squirtleSelected: " + comp.squirtleSelected);
-
-
-
-
 
     console.log("pikachu selected: " + p1.pikachuSelected + "   scyther selected: " + comp.scytherSelected);
 
@@ -9950,113 +9890,108 @@ console.log("loadPikachu default switch was activated on this line: ");
 
 
 function loadBlastoise () {
+  //verification procedure
 
-  //blastoise + onix battle
+  //confirm selected pokemon first
+  p1.blastoiseSelected = true;
+
+  //conditional ternary determines if blastoise was selected and sets onix true if it was
+  (p1.blastoiseSelected === true) ? comp.onixSelected = true : comp.onixSelected = false;
+
+  //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
+
+  (comp.onixDied === true) ?  comp.onixSelected = false :  comp.squirtleSelected = true;
+
+  console.log("(10) comp.squirtleSelected: " + comp.squirtleSelected);
+
+  (comp.squirtleDied === true) ? comp.squirtleSelected = false : comp.scytherSelected = true;
+
+  console.log("(10.2) comp.scytherSelected: " + comp.scytherSelected);
+
+  //this function loads blastoise and onix (default) + squirtle or onix based on battle conditions
   player1CH.blaPokeImage();
 
   if (confirm.makeMove[0].player1Move === true && player1CH.pokemonType[1].isSelected === true && p1.blastoiseCounts >= 0) {
 
-//confirm selected pokemon first
-p1.blastoiseSelected = true;
 
-//conditional ternary determines if blastoise was selected and sets onix true if it was
-(p1.blastoiseSelected === true) ? comp.onixSelected = true : comp.onixSelected = false;
+  console.log("blastoise selected: " + p1.blastoiseSelected + "   onix selected: " + comp.onixSelected);
 
-setTimeout(function() {
+  //disable non-selected pokemon
+  player1CH.pokemonType[0].isSelected = false; // charmander
+  player1CH.pokemonType[2].isSelected = false; // pikachu
+  p1.charmanderSelected = false;
+  p1.pikachuSelected = false;
+  console.log("non-selected pokemon are charmander: " + p1.charmanderSelected + " and pikachu: " + p1.pikachuSelected);
 
-  //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
+  //disable non-selected pokemon functions
+  player1.charmanderMoves[0].charmanderFunction1of6 = false;
+  player1.charmanderMoves[0].charmanderFunction2of6 = false;
+  player1.charmanderMoves[0].charmanderFunction3of6 = false;
+  player1.charmanderMoves[0].charmanderFunction4of6 = false;
+  player1.charmanderMoves[0].charmanderFunction5of6 = false;
+  player1.charmanderMoves[0].charmanderFunction6of6 = false;
 
-  if (p1.deadPokemon[0] === "Scyther" || p1.deadPokemon[1] === "Scyther" || p1.deadPokemon[2] === "Scyther" || p1.deadPokemon[3] === "Scyther" || p1.deadPokemon[4] === "Scyther" || p1.deadPokemon[5] === "Scyther") {
+  player1.pikachuMoves[0].pikachuFunction1of6 = false;
+  player1.pikachuMoves[0].pikachuFunction2of6 = false;
+  player1.pikachuMoves[0].pikachuFunction3of6 = false;
+  player1.pikachuMoves[0].pikachuFunction4of6 = false;
+  player1.pikachuMoves[0].pikachuFunction5of6 = false;
+  player1.pikachuMoves[0].pikachuFunction6of6 = false;
 
-  comp.scytherSelected = false;
+  //disable non-selected pokemon functions including computer oppenent as it removes bugs when using rest function
+  computer.onixMovesActivated[0].onixFunction1of6 = false;
+  computer.onixMovesActivated[0].onixFunction2of6 = false;
+  computer.onixMovesActivated[0].onixFunction3of6 = false;
+  computer.onixMovesActivated[0].onixFunction4of6 = false;
+  computer.onixMovesActivated[0].onixFunction5of6 = false;
+  computer.onixMovesActivated[0].onixFunction6of6 = false;
 
-  }else if (p1.deadPokemon[0] === "Squirtle" || p1.deadPokemon[1] === "Squirtle" || p1.deadPokemon[2] === "Squirtle" || p1.deadPokemon[3] === "Squirtle" || p1.deadPokemon[4] === "Squirtle" || p1.deadPokemon[5] === "Squirtle") {
-
-  comp.squirtleSelected = false;
-
-  }
-
-
-}, 0001);
-
-console.log("blastoise selected: " + p1.blastoiseSelected + "   onix selected: " + comp.onixSelected);
-
-//disable non-selected pokemon
-player1CH.pokemonType[0].isSelected = false; // charmander
-player1CH.pokemonType[2].isSelected = false; // pikachu
-p1.charmanderSelected = false;
-p1.pikachuSelected = false;
-console.log("non-selected pokemon are charmander: " + p1.charmanderSelected + " and pikachu: " + p1.pikachuSelected);
-
-//disable non-selected pokemon functions
-player1.charmanderMoves[0].charmanderFunction1of6 = false;
-player1.charmanderMoves[0].charmanderFunction2of6 = false;
-player1.charmanderMoves[0].charmanderFunction3of6 = false;
-player1.charmanderMoves[0].charmanderFunction4of6 = false;
-player1.charmanderMoves[0].charmanderFunction5of6 = false;
-player1.charmanderMoves[0].charmanderFunction6of6 = false;
-
-player1.pikachuMoves[0].pikachuFunction1of6 = false;
-player1.pikachuMoves[0].pikachuFunction2of6 = false;
-player1.pikachuMoves[0].pikachuFunction3of6 = false;
-player1.pikachuMoves[0].pikachuFunction4of6 = false;
-player1.pikachuMoves[0].pikachuFunction5of6 = false;
-player1.pikachuMoves[0].pikachuFunction6of6 = false;
-
-//disable non-selected pokemon functions including computer oppenent as it removes bugs when using rest function
-computer.onixMovesActivated[0].onixFunction1of6 = false;
-computer.onixMovesActivated[0].onixFunction2of6 = false;
-computer.onixMovesActivated[0].onixFunction3of6 = false;
-computer.onixMovesActivated[0].onixFunction4of6 = false;
-computer.onixMovesActivated[0].onixFunction5of6 = false;
-computer.onixMovesActivated[0].onixFunction6of6 = false;
-
-//call pokemonLoops function to update healthbar when switching pokemon
-p1.pokemonLoops();
+  //call pokemonLoops function to update healthbar when switching pokemon
+  p1.pokemonLoops();
 
 
-switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
-       keepDefault === true && p1.blastoiseCounts === 0  || keepChanges  === true  && p1.blastoiseCounts >= 1) {
+  switch(charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1 ||
+         keepDefault === true && p1.blastoiseCounts === 0  || keepChanges  === true  && p1.blastoiseCounts >= 1) {
 
-  case (charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1):
+    case (charmanderHP11 === 0 && squirtleHP11 >= 1 || pikachuHP11 === 0 && blastoiseHP11 >= 1):
 
-  //clear previous comment as it becomes irrelavent
-  document.getElementById("statusProgress").innerHTML=("");
-
-
-  break;
-
-  case (keepDefault === true && p1.blastoiseCounts === 0):
-
-  //count the number of times blastoise and onix was selected
-  p1.blastoiseCounts++;
-  comp.onixCounts++;
-
-  //save these changes so it can be used later
-  keepDefault = false;
-  keepChanges = true;
-  console.log("keepDefault: "+ keepDefault);
-  console.log("keepChanges: "+ keepChanges);
-  console.log("blastoiseCounts: " + p1.blastoiseCounts);
-  console.log("onixCounts: " + comp.onixCounts);
-
-  //if blastoiseCounts is 0 then 100% health is given to blastoise and onix
-  defaultProgressBar.defaultHPSetting();
+    //clear previous comment as it becomes irrelavent
+    document.getElementById("statusProgress").innerHTML=("");
 
 
-  break;
+    break;
 
-  case (keepChanges  === true  && p1.blastoiseCounts >= 1):
+    case (keepDefault === true && p1.blastoiseCounts === 0):
 
-  //if blastoiseCounts is 1 or greater then no changes will be made to pokemon progressbar
-  defaultProgressBar.preserveHpSetting();
+    //count the number of times blastoise and onix was selected
+    p1.blastoiseCounts++;
+    comp.onixCounts++;
+
+    //save these changes so it can be used later
+    keepDefault = false;
+    keepChanges = true;
+    console.log("keepDefault: "+ keepDefault);
+    console.log("keepChanges: "+ keepChanges);
+    console.log("blastoiseCounts: " + p1.blastoiseCounts);
+    console.log("onixCounts: " + comp.onixCounts);
+
+    //if blastoiseCounts is 0 then 100% health is given to blastoise and onix
+    defaultProgressBar.defaultHPSetting();
 
 
-  break;
+    break;
 
-default:
+    case (keepChanges  === true  && p1.blastoiseCounts >= 1):
 
-console.log("loadBlastoise default switch was activated on this line: ");
+    //if blastoiseCounts is 1 or greater then no changes will be made to pokemon progressbar
+    defaultProgressBar.preserveHpSetting();
+
+
+    break;
+
+  default:
+
+  console.log("loadBlastoise default switch was activated on this line: ");
 
 
               }// end of switch statement
