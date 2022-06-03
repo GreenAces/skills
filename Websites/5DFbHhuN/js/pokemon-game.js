@@ -2,9 +2,9 @@
 /*
 NOTE:
 
-Last update: (06/02/2022)
+Last update: (06/03/2022)
 
-1) change the informWinner function and add a rule to let the last pokemon earn a point towards winning the game -- code should be similiar to blockComputerPokemon2 function *** high priority *** (06/02/2022)
+1)  *** high priority *** (06/02/2022)
 2) play as pikachu and defeat the first two pokemon and notice how blastoise healthbar vanishes --  fix this *** high priority *** (06/02/2022)
 3) add rest function for all pokemon regarding battle 2 and 3 but only allow health to regenerate if its never been used in battle 1  *** high priority *** (06/01/2022)
 4)  *** high priority *** (05/31/2022)
@@ -15,7 +15,7 @@ Last update: (06/02/2022)
 9) fix boolean state and permission levels for pikachu and scyther (line 385)
 10) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
-12)
+12) look at the informWinner function and determine what happens when a player losses the battle -- did  you account for all scenarios of loses? *** low priority *** (06/03/2022)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
 16) blastoise health bar is empty up after loading it when switching from charmander vs onix -- troubleshoot why this happens ** low priority ** (05/25/2022)
@@ -2781,7 +2781,7 @@ this.isBlastoiseDead = function() {
 
   //conditions to execute if computer defeats player1 pokemon are below
 
-  //round 1 -- victory to computer pokemon set 1 of 3
+  //round 1 -- victory goes to computer pokemon set 1 of 3
 
 
   if (charmanderHP3 <= 0 && squirtleHP3 >= 1 && p1.charmanderSelected === true && comp.squirtleSelected === true) {
@@ -2813,7 +2813,7 @@ this.isBlastoiseDead = function() {
 
   }//end of multiple if statements for informWinner function set 1of3
 
-  //round 2 -- victory to computer pokemon set 2 of 3
+  //round 2 -- victory goes to computer pokemon set 2 of 3
 
   if (charmanderHP3 <= 0 && scytherHP4 >= 1 && p1.charmanderSelected === true && comp.scytherSelected === true) {
 
@@ -2845,7 +2845,7 @@ this.isBlastoiseDead = function() {
   }//end of multiple if statements for informWinner function set 2of3
 
 
-  //round 3 -- victory to computer pokemon set 3 of 3
+  //round 3 -- victory goes to computer pokemon set 3 of 3
 
   if (charmanderHP3 <= 0 && onixHP4 >= 1 && p1.charmanderSelected === true && comp.onixSelected === true) {
 
@@ -2881,7 +2881,7 @@ this.isBlastoiseDead = function() {
 
 
 
-  //round 1 -- victory to player 1 pokemon set 1 of 3
+  //round 1 -- victory goes to player 1 pokemon set 1 of 3
 
   if (charmanderHP3 >= 1 && squirtleHP3 <= 0  && p1.charmanderSelected === true && comp.squirtleSelected === true) {
 
@@ -2912,7 +2912,7 @@ this.isBlastoiseDead = function() {
 
   }//end of multiple if statements for informWinner function 1of3
 
-  //round 2 -- victory to player 1 pokemon set 2 of 3
+  //round 2 -- victory goes to player 1 pokemon set 2 of 3
 
   if (charmanderHP3 >= 1 && scytherHP4 <= 0  && p1.charmanderSelected === true && comp.scytherSelected === true) {
 
@@ -2946,7 +2946,7 @@ this.isBlastoiseDead = function() {
 
 
 
-  //round 3 -- victory to player 1 pokemon set 3 of 3
+  //round 3 -- victory goes to player 1 pokemon set 3 of 3
 
 
   if (charmanderHP3 >= 1 && onixHP4 <= 0  && p1.charmanderSelected === true && comp.onixSelected === true) {
@@ -2979,8 +2979,56 @@ this.isBlastoiseDead = function() {
   }//end of multiple if statements for informWinner function 3of3
 
 
+  //if previous battles from charmander, pikachu, or blastoise are declared a victory and the last player1 pokemon won the battle then it will count towards the winning the game
+
+  if (comp.squirtleDied === true && comp.scytherDied === true && p1.blastoiseSelected === true && comp.onixDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(A1) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.onixDied === true && comp.squirtleDied === true && p1.charmanderSelected === true && comp.scytherDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(A2) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.scytherDied === true && comp.squirtleDied === true && p1.pikachuSelected === true && comp.onixDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(A3) p1.battle3Player1: " + p1.battle3Player1);
+
+  }//end of multiple if statements
 
 
+  //if previous battles from charmander, pikachu, or blastoise are declared a loss and the last computer pokemon won the battle then it will count towards the losing the game
+
+  if (comp.onixSelected === true && p1.pikachuDied === true && p1.blastoiseDied === true && comp.battle1Computer === true) {
+
+      comp.battle3Computer = true;
+
+      console.log("(A4) comp.battle3Computer: " + comp.battle3Computer);
+
+  }else if (p1.onixSelected === true && p1.charmanderDied === true && p1.pikachuDied === true && comp.battle1Computer === true) {
+
+      comp.battle3Computer = true;
+
+      console.log("(A5) comp.battle3Computer: " + comp.battle3Computer);
+
+  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.pikachuDied === true && comp.battle1Computer === true) {
+
+      comp.battle3Computer = true;
+
+      console.log("(A6) comp.battle3Computer: " + comp.battle3Computer);
+
+  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.charmanderDied === true && comp.battle1Computer === true) {
+
+      comp.battle3Computer = true;
+
+      console.log("(A7) comp.battle3Computer: " + comp.battle3Computer);
+
+  }//end of multiple if statements
 
 
 
@@ -4028,6 +4076,24 @@ class changePokemon {
 
 
   }//end of multiple if statements
+
+
+  if (comp.squirtleDied === true && p1.charmanderAlive === true && comp.scytherSelected === true) {
+
+    //re-activate active listener again because it was disabled in a different scenario.
+    document.getElementById("attackA").addEventListener("click", attackA);
+    document.getElementById("attackB").addEventListener("click", attackB);
+    document.getElementById("attackC").addEventListener("click", attackC);
+    document.getElementById("defenseA").addEventListener("click", defenseA);
+    document.getElementById("defenseB").addEventListener("click", defenseB);
+    document.getElementById("defenseC").addEventListener("click", defenseC);
+
+    //load charmander
+    document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
+    document.getElementById("Player1PokeImage").style.width = 200;
+    document.getElementById("Player1PokeImage").style.height = 180;
+
+  }
 
 
 
@@ -8316,9 +8382,9 @@ class player1Moves {
          console.log("pikachuFunction5of6 (3) is: " + player1.pikachuMoves[0].pikachuFunction5of6);
 
          //reflect the changes to onixHealthBar AND onixBackup array as well.
-         //headButt does -10 damage on onix
-         a6.onixHealthBar.push(-10);
-         a6.onixBackup.push(-10);
+         //headButt does -20 damage on onix
+         a6.onixHealthBar.push(-20);
+         a6.onixBackup.push(-20);
 
          //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          pikachuProgressBar.decreaseComputerHP2();
