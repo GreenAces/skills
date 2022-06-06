@@ -2,9 +2,9 @@
 /*
 NOTE:
 
-Last update: (06/03/2022)
+Last update: (06/04/2022)
 
-1)  *** high priority *** (06/02/2022)
+1) focus on health restoration for squirtle and pikachu + squirtle + blastoise *** high priority *** (06/04/2022)
 2) play as pikachu and defeat the first two pokemon and notice how blastoise healthbar vanishes --  fix this *** high priority *** (06/02/2022)
 3) add rest function for all pokemon regarding battle 2 and 3 but only allow health to regenerate if its never been used in battle 1  *** high priority *** (06/01/2022)
 4)  *** high priority *** (05/31/2022)
@@ -1409,7 +1409,7 @@ this.checkComputerPokemon = function () {
               (p1.blastoiseSelected === true &&  comp.squirtleSelected === false && comp.onixSelected === false) ? comp.scytherSelected = true : comp.scytherSelected = false;
 
 
-              console.log("(1.3) comp.onixSelectedd: " + comp.onixSelected);
+              console.log("(1.3) comp.onixSelected: " + comp.onixSelected);
 
               console.log("(1.3) comp.squirtleSelected: " + comp.squirtleSelected);
 
@@ -7751,6 +7751,8 @@ class player1Moves {
 
        //confirm attack move for pokemon was clicked
        player1.charmanderMoves[0].charmanderFunction6of6 = true;
+       player1.pikachuMoves[0].pikachuFunction6of6 = true;
+       player1.blastoiseMoves[0].blastoiseFunction6of6 = true;
 
        computer.squirtleMovesActivated[0].squirtleFunction6of6 = true;
 
@@ -7759,7 +7761,9 @@ class player1Moves {
 
       //rest recovers 10 HP to squirtle if conditions are true
 
-      if (squirtleHP5 <= 40) {
+      if (p1.charmanderSelected === true && comp.squirtleSelected === true && squirtleHP5 <= 40 ||
+          p1.pikachuSelected === true && comp.squirtleSelected === true && squirtleHP5 <= 40 ||
+          p1.blastoiseSelected === true && comp.squirtleSelected === true && squirtleHP5 <= 40) {
 
         //show recovery image for computer pokemon
         computerImg.squAtkImage6();
@@ -7777,7 +7781,9 @@ class player1Moves {
         restore.squirtleSpeedDecreased = true;
 
 
-      }else if (squirtleHP5 > 40) {
+      }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && squirtleHP5 > 40 ||
+                p1.pikachuSelected === true && comp.squirtleSelected === true && squirtleHP5 > 40 ||
+                p1.blastoiseSelected === true && comp.squirtleSelected === true && squirtleHP5 > 40) {
 
         //if health is > 40 then this implies that squirtle didn't restore health
         restore.restedSquirtle = false;
@@ -8430,7 +8436,9 @@ class player1Moves {
 
        //rest recovers 10 HP to scyther if conditions are true
 
-       if (scytherHP14 <= 40) {
+       if (p1.pikachuSelected === true && comp.scytherSelected === true && scytherHP14 <= 40 ||
+           p1.charmanderSelected === true && comp.scytherSelected === true && scytherHP14 <= 40 ||
+           p1.blastoiseSelected === true && comp.scytherSelected === true && scytherHP14 <= 40) {
 
          //show recovery image for computer pokemon
          computerImg.scyAtkImage6();
@@ -8447,7 +8455,9 @@ class player1Moves {
          //scyther speedbar is true only here:
          restore.scytherSpeedDecreased = true;
 
-       }else if (scytherHP14 > 40) {
+       }else if (p1.pikachuSelected === true && comp.scytherSelected === true && scytherHP14 > 40 ||
+                 p1.charmanderSelected === true && comp.scytherSelected === true && scytherHP14 > 40 ||
+                 p1.blastoiseSelected === true && comp.scytherSelected === true && scytherHP14 > 40) {
 
          //if health is > 40 then this implies that scyther didn't restore health
          restore.restedScyther = false;
@@ -9098,6 +9108,12 @@ class player1Moves {
        let onixHP11 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
        let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
 
+       let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+       let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+
+       let pikachuHP15 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+       let pikachuSpeedBar = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+
        //confirm attack move for pokemon was clicked
        player1.blastoiseMoves[0].blastoiseFunction6of6 = true;
 
@@ -9108,7 +9124,9 @@ class player1Moves {
 
        //rest recovers 10 HP to onix if conditions are true
 
-       if (onixHP11 <= 40) {
+       if (p1.blastoiseSelected === true && comp.onixSelected === true && onixHP11 <= 40 ||
+           p1.charmanderSelected === true && comp.onixSelected === true && onixHP11 <= 40 ||
+           p1.pikachuSelected === true && comp.onixSelected === true && onixHP11 <= 40) {
 
          //show recovery image for computer pokemon
          computerImg.oniAtkImage6();
@@ -9125,7 +9143,9 @@ class player1Moves {
          //onix speedbar is true only here:
          restore.onixSpeedDecreased = true;
 
-       }else if (onixHP11 > 40) {
+       }else if (p1.blastoiseSelected === true && comp.onixSelected === true && onixHP11 > 40 ||
+                 p1.charmanderSelected === true && comp.onixSelected === true && onixHP11 > 40 ||
+                 p1.pikachuSelected === true && comp.onixSelected === true && onixHP11 > 40) {
 
          //if health is > 40 then this implies that onix didn't restore health
          restore.restedOnix = false;
@@ -9940,24 +9960,31 @@ class computerMoves {
 
 
 
-        case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true):
+        case (computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.charmanderMoves[0].charmanderFunction6of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.pikachuMoves[0].pikachuFunction6of6 === true ||
+              computer.squirtleMovesActivated[0].squirtleFunction6of6 === true && player1.blastoiseMoves[0].blastoiseFunction6of6 === true):
 
         //varible declartion
 
         let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
         let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+
+        let pikachuHP15 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+        let pikachuSpeedBar = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+
+        let blastoiseHP16 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+        let blastoiseSpeedBar = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+
         let hpRecovered2 = a7.charmanderHpRecovered.reduce(array1.PokemonRestoredReducer);
+        let hpRecovered3 = a9.pikachuHpRecovered.reduce(array1.PokemonRestoredReducer);
+        let hpRecovered4 = a11.blastoiseHpRecovered.reduce(array1.PokemonRestoredReducer);
 
-        //squirtle attack move: rest (restores health to charmander)
-        //disable attack move for squirtle pokemon and charmander
-        computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
-
-
-        //charmander gets 45 HP if conditions are true
-
-        if (charmanderHP5 <= 40) {
+        //squirtle attack move: rest (restores health to charmander, pikachu, or blastoise)
 
 
+        //Charmander vs squirtle (default) 1 of 3 sets
+        //charmander, pikachu, or blastoise gets 45 HP if conditions are true
+        if (comp.squirtleSelected === true && p1.charmanderSelected === true && charmanderHP5 <= 40) {
 
           //show recovery image for computer pokemon and play rest sound effect
           player1Img.chrAtkImage6();
@@ -9972,9 +9999,13 @@ class computerMoves {
           //reflect speedbar progress to chaSpeedProgressBar array to create limit for health restoration
          a7.chaSpeedProgressBar.push(-50);
 
+         //debugging here------------------------------------------------------
+
+         console.log("charmanderHealthBar array is "+ charmanderHP5);
+         console.log("charmanderHP_recovered array is " + hpRecovered2);
 
 
-       }else if(charmanderHP5 > 40) {
+        }else if(comp.squirtleSelected === true && p1.charmanderSelected === true && charmanderHP5 > 40) {
 
           //turn off rest sound effect
           player1SD.pokemonRest_sound2.pause();
@@ -9991,29 +10022,117 @@ class computerMoves {
 
 
 
-        }//end of if statements
+        }//end of if statements 1 of 3
+
+
+       //Squirtle vs pikachu 2 of 3 sets
+       if (comp.squirtleSelected === true && p1.pikachuSelected === true && pikachuHP14 <= 40) {
+
+        //show recovery image for computer pokemon and play rest sound effect
+        player1Img.pikAtkImage6();
+        player1SD.pokemonRest_sound3.play();
+
+        //reflect the changes to the pikachuHealthBar array
+       a3.pikachuHealthBar.push(45);
+
+       //backup array for health restoration needs to be updated as well
+       a9.pikachuHpRecovered.push(45);
+
+        //reflect speedbar progress to pikSpeedProgressBar array to create limit for health restoration
+       a9.pikSpeedProgressBar.push(-50);
+
+       //debugging here------------------------------------------------------
+
+      console.log("(2) pikachuHealthBar array is "+ a3.pikachuBackup);
+      console.log("(2) pikachuHP_recovered array is " + hpRecovered3);
+
+
+
+       }else if(comp.squirtleSelected === true && p1.pikachuSelected === true && pikachuHP14 > 40) {
+
+        //turn off rest sound effect
+        player1SD.pokemonRest_sound3.pause();
+
+        //make no changes to the pikachuHealthBar array
+        a3.pikachuHealthBar.push(0);
+
+        //make no changes to pikachuHpRecovered array
+        a9.pikachuHpRecovered.push(0);
+
+        //make no changes to pikSpeedProgressBar array
+        a9.pikSpeedProgressBar.push(0);
+
+
+
+
+      }//end of if statements 2 of 3
+
+
+        //Squirtle vs blastoise 3 of 3 sets
+        if (comp.squirtleSelected === true && p1.blastoiseSelected === true && blastoiseHP15 <= 40) {
+
+         //show recovery image for player1 pokemon and play rest sound effect
+         player1Img.blaAtkImage6();
+         player1SD.pokemonRest_sound5.play();
+
+         //reflect the changes to the blastoiseHealthBar array
+        a5.blastoiseHealthBar.push(45);
+
+
+        //backup array for health restoration needs to be updated as well
+        a11.blastoiseHpRecovered.push(45);
+
+
+         //reflect speedbar progress to blaSpeedProgressBar array to create limit for health restoration
+        a11.blaSpeedProgressBar.push(-50);
+
+        //debugging here------------------------------------------------------
+
+        console.log("(3) blastoiseHealthBar array is "+ a5.blastoiseHealthBar);
+        console.log("(3) blastoiseHP_recovered array is " + hpRecovered4);
+
+
+
+        }else if(comp.squirtleSelected === true && p1.blastoiseSelected === true && blastoiseHP15 > 40) {
+
+         //turn off rest sound effect
+         player1SD.pokemonRest_sound5.pause();
+
+         //make no changes to the pikachuHealthBar array
+         a5.blastoiseHealthBar.push(0);
+
+
+         //make no changes to the blastoiseHpRecovered array
+         a11.blastoiseHpRecovered.push(0);
+
+
+         //make no changes to pikSpeedProgressBar array
+         a11.blaSpeedProgressBar.push(0);
+
+
+
+
+       }//end of if statements 3 of 3
+
+
+
 
 
           //This is the function that applies the reduce method to the arrays listed below. player1 recovers HP if certain conditions are true.
           charmanderProgressBar.decreasePlayerHP(); //actually increases hp for charmander
 
 
-          //debugging here------------------------------------------------------
-
-          console.log("charmanderHealthBar array is "+ charmanderHP5);
-          console.log("charmanderHP_recovered array is " + hpRecovered2);
-
-
-
-
-
           //default setting
           if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+
+            //disable attack move for squirtle pokemon and charmander
+            player1.charmanderMoves[0].charmanderFunction6of6 = false;
+            computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
             setTimeout(function() {
 
               //inform player1 of attack from computer
-              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!***";
+              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!(1)";
 
 
             }, 2000);
@@ -10021,11 +10140,15 @@ class computerMoves {
 
           }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
 
+            //disable attack move for squirtle pokemon and pikachu
+            player1.pikachuMoves[0].pikachuFunction6of6 = false;
+            computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
+
 
             setTimeout(function() {
 
               //inform player1 of attack from computer
-              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!***";
+              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!(2)";
 
 
             }, 2000);
@@ -10034,11 +10157,15 @@ class computerMoves {
 
           }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
 
+            //disable attack move for squirtle pokemon and blastoise
+            player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
+            computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
+
 
             setTimeout(function() {
 
               //inform player1 of attack from computer
-              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!***";
+              document.getElementById("statusProgress2").innerHTML =   "Squirtle used rest to recover!(3)";
 
 
             }, 2000);
@@ -10056,8 +10183,9 @@ class computerMoves {
         confirm.enableMoves();
         console.log(confirm.makeMove[0]);
 
-        //disable attack move for squirtle pokemon and charmander
-        player1.charmanderMoves[0].charmanderFunction6of6 = false;
+
+
+
           break;
 
 
