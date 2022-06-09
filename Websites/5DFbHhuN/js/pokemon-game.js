@@ -2,26 +2,26 @@
 /*
 NOTE:
 
-Last update: (06/08/2022)
+Last update: (06/09/2022)
 
-1) update HP information to reflect the changes you made -- start with chrPokeImage and make fireBlaster HP information display correctly *** high priority *** (06/08/2022)
+1) some player1 pokemon victories are not declared as a win -- fix this *** high priority *** (06/09/2022)
 2) play as pikachu and defeat the first two pokemon and notice how blastoise healthbar vanishes --  fix this *** high priority *** (06/02/2022)
-3) add rest function for all pokemon regarding battle 2 and 3 but only allow health to regenerate if its never been used in battle 1  *** high priority *** (06/01/2022)
+3) playing with a unconventional player1 pokemon forces the hp progress bar not to appear -- fix this  *** high priority *** (06/09/2022)
 4) update speedbar when new computer pokemon are loaded in all sections 1)pokemonLoops 2)loadsquirtleOrScyther, loadScytherOrOnix, and loadSquirtleOrOnix *** high priority *** (06/08/2022)
-5) Add a rule to the referee class about not being able to attack or defend if a pokemon is NOT selected. (working on it but it has errors -- see line 201)
-6) On line 791 (or computer moves - phase1 function) improve the condition for the else if function
-7) why is Computer health status is undefined on line 1149? maybe because it's a function?
-8) if onix is the only pokemon left and blastoise eliminates it then match is won by player1 -- create a new image and inform player1 of winning the game. Also change deadPokemonBackup to accomadate all index for all 3 functions starting with loadScytherOrOnix ** 12/20/2021
-9) fix boolean state and permission levels for pikachu and scyther (line 385)
+5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
+6)
+7)
+8)
+9)
 10) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
 11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
 12) look at the informWinner function and determine what happens when a player losses the battle -- did  you account for all scenarios of loses? *** low priority *** (06/03/2022)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
 16) blastoise health bar is empty up after loading it when switching from charmander vs onix -- troubleshoot why this happens ** low priority ** (05/25/2022)
-17) When blastoise wins the game -- the user can't click the link to give feedback -- solution might be to create a space below or make blastoise smaller ** low priority ** (05/25/2022)
+17)
 18) when scyther defeats charmander -- something could be wrong with the score count -- troubleshoot that *** low priority *** (05/05/2020)
-19) add comment during laughandpoint image s whenever player1 uses rest function or when hp is > 40 *** low priority *** (04/06/2022)
+19) add comment during laughandpoint image whenever player1 uses rest function or when hp is > 40 *** low priority *** (04/06/2022)
 
 
 
@@ -886,7 +886,286 @@ class referee {
 
     }//end of blockComputerPokemon3
 
+    this.loadUpdatedMenu = function () {
+
+      console.log("loadUpdatedMenu started");
+
+      //set 1 of 3
+
+      //attack/defense menu changes depending on which pokemon player1 is fighting against
+
+      if (p1.charmanderSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-10HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-25HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-20HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-10HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.charmanderSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-12HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
+      //2 of 2
+
+      if (p1.pikachuSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-15)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-25HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.pikachuSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-5HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.pikachuSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-15HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-10)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-5HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
+
+      //3 of 3
+
+      if (p1.blastoiseSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-20HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-5HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-11)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-18HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.blastoiseSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-10)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-20HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
+
+
+
+
+
+    }//end of loadUpdatedMenu
+
+    this.updateHealthInformation = function () {
+
+      console.log("updateHealthInformation started");
+
+      //This function was copied from pokemonLoops -- it's responsible for updating the health information when the player selects a pokemon -- but this function needs to be called again
+      //whenever changes are made to player1 or computer pokemon
+
+      //varibles
+
+      let updateCharmanderHP = 0;
+      let updatePikachuHP = 0;
+      let updateBlastoiseHP = 0;
+      let updateSquirtleHP = 0;
+      let updateScytherHP = 0;
+      let updateOnixHP = 0;
+      let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+      let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+      let pikachuHP15 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+      let pikachuSpeedBar = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
+      let blastoiseHP16 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
+      let blastoiseSpeedBar = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+      let squirtleHP8 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
+      let squirtleSpeedBar2 =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+      let scytherHP9 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
+      let scytherSpeedBar = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
+      let onixHP9 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
+      let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonHPReduced);
+
+
+
+
+
+      if (charmanderHP8 >= 1 && p1.charmanderSelected === true) {
+
+      //hp
+      updateCharmanderHP = charmanderHP8;
+      document.querySelector(".player1HP").style.width = updateCharmanderHP +   "%";
+      (charmanderHP8 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+
+      //speedbar
+      document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+      (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedPikachu === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedBlastoise === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+
+      }
+
+
+
+      if (pikachuHP15 >= 1 && p1.pikachuSelected === true) {
+
+
+      //hp
+      updatePikachuHP = pikachuHP15;
+      document.querySelector(".player1HP").style.width = updatePikachuHP +   "%";
+      (pikachuHP15 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+      //speedbar
+      document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
+      (pikachuSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedCharmander === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedBlastoise === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+
+      }
+
+
+      if (blastoiseHP16 >= 1 && p1.blastoiseSelected === true) {
+
+
+      //hp
+      updateBlastoiseHP = blastoiseHP16;
+      document.querySelector(".player1HP").style.width = updateBlastoiseHP +   "%";
+      (blastoiseHP16 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+
+      //speedbar
+      document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
+      (blastoiseSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+
+      //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
+      (restore.restedCharmander === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+      (restore.restedPikachu === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
+
+      }
+
+
+
+
+      if (squirtleHP8 >=1 && comp.squirtleSelected === true) {
+
+
+        //hp
+        updateSquirtleHP = squirtleHP8;
+        document.querySelector(".cpuHP").style.width = updateSquirtleHP +   "%";
+        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+
+        //speedbar
+        document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2  +   "%";
+        (squirtleSpeedBar2 >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+
+      }
+
+
+
+
+
+      if (onixHP9 >=1 && comp.onixSelected === true) {
+
+
+        //hp
+        updateOnixHP = onixHP9;
+        document.querySelector(".cpuHP").style.width = updateOnixHP +   "%";
+        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+
+        //speedbar
+        document.querySelector(".cpuSpeed").style.width = onixSpeedBar  +   "%";
+        (onixSpeedBar >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+      }
+
+
+
+
+      if (scytherHP9 >=1 && comp.scytherSelected === true) {
+
+
+        //hp
+        updateScytherHP = scytherHP9;
+        document.querySelector(".cpuHP").style.width = updateScytherHP +   "%";
+        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+
+        //speedbar
+        document.querySelector(".cpuSpeed").style.width = scytherSpeedBar  +   "%";
+        (scytherSpeedBar >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
+
+      }
+
+
+
+
+
+    }//end of updateHealthInformation
+
+
+
+
+
+
     this.checkComputerSpeedbar = function () {
+
+      console.log("checkComputerSpeedbar started");
 
       //this function compliments increaseComputerHP and will check to see if the speedbar was decreased or not and take appropriate action to update it based on certian conditions
 
@@ -900,182 +1179,186 @@ class referee {
       let squirtleSpeedBar =  a8.squSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
       let scytherSpeedBar = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
       let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonSpeedReduced);
-      let computerLowHealthIndicator2 = document.querySelector('.cpuHP');
+      let computerLowSpeedIndicator2 = document.querySelector('.cpuSpeed');
 
-if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
+      if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound2.pause();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound2.pause();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 1;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 1;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
-  //change squirtleSpeedDecreased to false
-  restore.squirtleSpeedDecreased = false;
+        //change squirtleSpeedDecreased to false
+        restore.squirtleSpeedDecreased = false;
 
-  console.log("(CCS 1) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
+        console.log("(CCS 1) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
 
 
-}else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 50 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 50) {
+      }else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 50 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 50) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound2.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound2.play();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 50;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 50;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
-  //change squirtleSpeedDecreased to false
-  restore.squirtleSpeedDecreased = false;
+        //change squirtleSpeedDecreased to false
+        restore.squirtleSpeedDecreased = false;
 
-  console.log("(CCS 2) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
+        console.log("(CCS 2) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
 
-}else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 100 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 100) {
+      }else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === false && squirtleSpeedBar <= 100 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === false && squirtleSpeedBar === 100) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound2.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound2.play();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 100;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 100;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#A6EDED";//blue
 
-  //change squirtleSpeedDecreased to false
-  restore.squirtleSpeedDecreased = false;
+        //change squirtleSpeedDecreased to false
+        restore.squirtleSpeedDecreased = false;
 
-  console.log("(CCS 3) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
+        console.log("(CCS 3) squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
 
-}//end of if statement for squirtleSpeedDecreased
+      }//end of if statement for squirtleSpeedDecreased
 
 
 
 
-if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 0 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 0) {
+      if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 0 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 0) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound4.pause();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound4.pause();
 
- //increase computer health and reduce computer speed to 50 HP
+       //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 1;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 1;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
-  //change scytherSpeedDecreased to false
-  restore.scytherSpeedDecreased = false;
+        //change scytherSpeedDecreased to false
+        restore.scytherSpeedDecreased = false;
 
-  console.log("(CCS 1)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
+        console.log("(CCS 1)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
 
 
-}else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 50 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 50) {
+      }else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 50 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 50) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound4.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound4.play();
 
- //increase computer health and reduce computer speed to 50 HP
+       //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 50;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 50;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
-  //change scytherSpeedDecreased to false
-  restore.scytherSpeedDecreased = false;
+        //change scytherSpeedDecreased to false
+        restore.scytherSpeedDecreased = false;
 
-  console.log("(CCS 2)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
+        console.log("(CCS 2)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
 
-}else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 100 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 100) {
+      }else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === false && scytherSpeedBar <= 100 || comp.scytherSelected === true && restore.scytherSpeedDecreased === false && scytherSpeedBar === 100) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound4.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound4.play();
 
- //increase computer health and reduce computer speed to 50 HP
+       //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 100;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 100;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#A6EDED";//blue
 
-  //change scytherSpeedDecreased to false
-  restore.scytherSpeedDecreased = false;
+        //change scytherSpeedDecreased to false
+        restore.scytherSpeedDecreased = false;
 
-  console.log("(CCS 3)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
+        console.log("(CCS 3)scytherSpeedDecreased: " + restore.scytherSpeedDecreased);
 
-}//end of if statement for scytherSpeedDecreased
+      }//end of if statement for scytherSpeedDecreased
 
 
 
 
 
-if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 0 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 0) {
+      if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 0 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 0) {
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound6.pause();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound6.pause();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 1;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 1;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
 
-  //change onixSpeedDecreased to false
-  restore.onixSpeedDecreased = false;
+        //change onixSpeedDecreased to false
+        restore.onixSpeedDecreased = false;
 
-  console.log("(CCS 1) onixSpeedDecreased: " + restore.onixSpeedDecreased);
+        console.log("(CCS 1) onixSpeedDecreased: " + restore.onixSpeedDecreased);
 
 
 
-}else if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 50 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 50) {
+      }else if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 50 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 50) {
 
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound6.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound6.play();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 50;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 50;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#FD0202";//red
 
 
-  //change onixSpeedDecreased to false
-  restore.onixSpeedDecreased = false;
+        //change onixSpeedDecreased to false
+        restore.onixSpeedDecreased = false;
 
-  console.log("(CCS 2) onixSpeedDecreased: " + restore.onixSpeedDecreased);
+        console.log("(CCS 2) onixSpeedDecreased: " + restore.onixSpeedDecreased);
 
 
 
-}else if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 100 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 100) {
+      }else if (comp.onixSelected === true && restore.onixSpeedDecreased === false && onixSpeedBar <= 100 || comp.onixSelected === true && restore.onixSpeedDecreased === false && onixSpeedBar === 100) {
 
 
-  //pause rest sound effect for computer
-  computerSD.pokemonRest_sound6.play();
+        //pause rest sound effect for computer
+        computerSD.pokemonRest_sound6.play();
 
-  //increase computer health and reduce computer speed to 50 HP
+        //increase computer health and reduce computer speed to 50 HP
 
-  speedReduced2 = 100;
-  document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
-  computerLowHealthIndicator2.style.backgroundColor = "#FD0202";//red
+        speedReduced2 = 100;
+        document.querySelector(".cpuSpeed").style.width = speedReduced2 +   "%";
+        computerLowSpeedIndicator2.style.backgroundColor = "#A6EDED";//blue
 
 
-  //change onixSpeedDecreased to false
-  restore.onixSpeedDecreased = false;
+        //change onixSpeedDecreased to false
+        restore.onixSpeedDecreased = false;
 
-  console.log("(CCS 3) onixSpeedDecreased: " + restore.onixSpeedDecreased);
+        console.log("(CCS 3) onixSpeedDecreased: " + restore.onixSpeedDecreased);
 
-}//end of if statement for onixSpeedDecreasedS
+      }//end of if statement for onixSpeedDecreasedS
 
 
 
 
 
 
-    }//end of checkComputerSpeedbar
+}//end of checkComputerSpeedbar
+
+
+
+
 
     this.disableDeadPokemon = function () {
 
@@ -1479,8 +1762,15 @@ this.checkComputerPokemon = function () {
 
               console.log("(2) comp.onixSelected: " + comp.onixSelected);
 
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads scyther or onix if squirtle dies
               computerCH.loadScytherOrOnix();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
 
 
 
@@ -1498,8 +1788,15 @@ this.checkComputerPokemon = function () {
               console.log("(3) comp.onixSelected: " + comp.onixSelected);
 
 
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads scyther or onix if squirtle dies
               computerCH.loadScytherOrOnix();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
 
 
 
@@ -1549,8 +1846,16 @@ this.checkComputerPokemon = function () {
 
               console.log("(2.2) comp.onixSelected: " + comp.onixSelected);
 
+
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads squirtle or onix if scyther dies
               computerCH.loadSquirtleOrOnix();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
 
 
             }
@@ -1565,8 +1870,15 @@ this.checkComputerPokemon = function () {
               console.log("(3.3) comp.onixSelected: " + comp.onixSelected);
 
 
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads squirtle or onix if scyther dies
               computerCH.loadSquirtleOrOnix();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
 
 
 
@@ -1617,8 +1929,16 @@ this.checkComputerPokemon = function () {
 
               console.log("(2.3) comp.scytherSelected: " + comp.scytherSelected);
 
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads squirtle or scyther if onix dies
               computerCH.loadsquirtleOrScyther();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
+
 
             }
 
@@ -1632,8 +1952,15 @@ this.checkComputerPokemon = function () {
 
               console.log("(3.3) comp.scytherSelected: " + comp.scytherSelected);
 
+
+              //Update attack/defense menu for player1
+              p1.loadUpdatedMenu();
+
               //loads squirtle or scyther if onix dies
               computerCH.loadsquirtleOrScyther();
+
+              //updateHealthInformation
+              p1.updateHealthInformation();
 
 
 
@@ -3328,8 +3655,7 @@ document.getElementById("sendLink").target = "_blank";
     let scytherSpeedBar = a10.scySpeedProgressBar.reduce(array2.PokemonSpeedReduced);
     let onixHP9 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
     let onixSpeedBar = a12.onixSpeedProgressBar.reduce(array2.PokemonHPReduced);
-    let player1LowHealthIndicator3 = document.querySelector('.player1HP');
-    let computerLowHealthIndicator3 = document.querySelector('.cpuHP');
+
 
 
 
@@ -3348,7 +3674,11 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateCharmanderHP = charmanderHP8;
       document.querySelector(".player1HP").style.width = updateCharmanderHP +   "%";
-      player1LowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (charmanderHP8 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+
+      //speedbar
+      document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+      (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
       //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
       (restore.restedPikachu === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
@@ -3375,15 +3705,14 @@ document.getElementById("sendLink").target = "_blank";
       //debugging here delete if neccessary
       console.log("loop#2 for pikachu started because it was selected.");
 
-
       //hp
       updatePikachuHP = pikachuHP15;
       document.querySelector(".player1HP").style.width = updatePikachuHP +   "%";
-      player1LowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (pikachuHP15 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
-      document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+      (pikachuSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
       //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
       (restore.restedCharmander === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
@@ -3412,11 +3741,11 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateBlastoiseHP = blastoiseHP16;
       document.querySelector(".player1HP").style.width = updateBlastoiseHP +   "%";
-      player1LowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (blastoiseHP16 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
-      document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED"; //blue
+      (blastoiseSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
       //conditional ternary determines if color is red for the rest function and changes it to black -- NOTE: rest function is red when disabled
       (restore.restedCharmander === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
@@ -3439,7 +3768,7 @@ document.getElementById("sendLink").target = "_blank";
 
   for (let i = 0; i < a2.squirtleHealthBar.length; i++) {
 
-    if (squirtleHP8 >=1 && comp.squirtleSelected === true && p1.charmanderSelected === true) {
+    if (squirtleHP8 >=1 && comp.squirtleSelected === true) {
 
       //debugging here delete if neccessary
       console.log("loop#4 -- for squirtle vs charmander was selected.");
@@ -3447,11 +3776,11 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateSquirtleHP = squirtleHP8;
       document.querySelector(".cpuHP").style.width = updateSquirtleHP +   "%";
-      computerLowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
 
       //speedbar
-      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2 +   "%";
-      document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+      document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2  +   "%";
+      (squirtleSpeedBar2 >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
 
       //update speedbar for computer pokemon
       comp.checkComputerSpeedbar();
@@ -3460,30 +3789,8 @@ document.getElementById("sendLink").target = "_blank";
 
       break;
 
-    }else if (pikachuHP15 >=1 && p1.pikachuSelected === true && comp.squirtleSelected === true) {
+    }
 
-      //debugging here delete if neccessary
-      console.log("loop#4 -- for squirtle vs pikachu was selected");
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
-
-
-      break;
-
-    }else if (blastoiseHP16 >=1 && p1.blastoiseSelected === true && comp.squirtleSelected === true) {
-
-      //debugging here delete if neccessary
-      console.log("loop#4 -- for squirtle vs blastoise was selected");
-
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
-
-
-      break;
-
-    }//end of if statement
 
   }//end of for-loop4
 
@@ -3493,20 +3800,19 @@ document.getElementById("sendLink").target = "_blank";
 
   for (let i = 0; i < a4.scytherHealthBar.length; i++) {
 
-    if (scytherHP9 >=1 && comp.scytherSelected === true && p1.pikachuSelected === true) {
+    if (scytherHP9 >=1 && comp.scytherSelected === true) {
 
       //debugging here delete if neccessary
       console.log("loop#5 -- for scyther vs pikachu was selected.");
 
-
       //hp
       updateScytherHP = scytherHP9;
       document.querySelector(".cpuHP").style.width = updateScytherHP +   "%";
-      computerLowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
 
       //speedbar
-      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar +   "%";
-      document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+      document.querySelector(".cpuSpeed").style.width = scytherSpeedBar  +   "%";
+      (scytherSpeedBar >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
 
       //update speedbar for computer pokemon
       comp.checkComputerSpeedbar();
@@ -3514,29 +3820,8 @@ document.getElementById("sendLink").target = "_blank";
 
       break;
 
-    }else if (charmanderHP8 >=1 && p1.charmanderSelected === true && comp.scytherSelected === true) {
+    }
 
-      //debugging here delete if neccessary
-      console.log("loop#5 -- for charmander vs scyther was selected.");
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
-
-
-      break;
-
-    }else if (blastoiseHP16 >=1 && p1.blastoiseSelected === true && comp.scytherSelected === true) {
-
-      //debugging here delete if neccessary
-      console.log("loop#5 -- for blastoise vs scyther was selected.");
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
-
-
-      break;
-
-    }//end of if statement
 
   }//end of for-loop5
 
@@ -3546,7 +3831,7 @@ document.getElementById("sendLink").target = "_blank";
 
   for (let i = 0; i < a6.onixHealthBar.length; i++) {
 
-    if (onixHP9 >=1 && comp.onixSelected === true && p1.blastoiseSelected === true) {
+    if (onixHP9 >=1 && comp.onixSelected === true) {
 
       //debugging here delete if neccessary
       console.log("loop#6 -- for onix vs blastoise was selected.");
@@ -3554,11 +3839,11 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateOnixHP = onixHP9;
       document.querySelector(".cpuHP").style.width = updateOnixHP +   "%";
-      computerLowHealthIndicator3.style.backgroundColor = "#A6EDED";//blue
+      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
 
       //speedbar
-      document.querySelector(".cpuSpeed").style.width = onixSpeedBar +   "%";
-      document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
+      document.querySelector(".cpuSpeed").style.width = onixSpeedBar  +   "%";
+      (onixSpeedBar >= 50) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202"; //red
 
 
       //update speedbar for computer pokemon
@@ -3568,29 +3853,9 @@ document.getElementById("sendLink").target = "_blank";
 
       break;
 
-    }else if (charmanderHP8 >=1 && p1.charmanderSelected === true && comp.onixSelected === true) {
-
-      //debugging here delete if neccessary
-      console.log("loop#6 -- for charmander vs onix was selected.");
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
+    }
 
 
-      break;
-
-    }else if (pikachuHP15 >=1 && p1.pikachuSelected === true && comp.onixSelected === true) {
-
-      //debugging here delete if neccessary
-      console.log("loop#6 -- for pikachu vs onix was selected.");
-
-      //update speedbar for computer pokemon
-      comp.checkComputerSpeedbar();
-
-
-      break;
-
-    }//end of if statement
 
   }//end of for-loop6
 
@@ -4114,8 +4379,47 @@ class changePokemon {
 
     this.chrPokeImage =  function () {
 
-
       confirm.makeMove[0].player1Move = true;
+
+      //attack/defense menu changes depending on which pokemon player1 is fighting against
+
+      if (p1.charmanderSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-10HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-25HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-20HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-10HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.charmanderSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Fire Blaster (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Blaze (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-12HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
+
+
 
       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
 
@@ -4134,17 +4438,7 @@ class changePokemon {
 
       document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
 
-    }, 6000); // 6 secs
-
-
-      //load pokemon attack/defense menu
-      document.getElementById("attackA").innerHTML = ("Fire Blaster (-20HP)");
-      document.getElementById("attackB").innerHTML = ("Blaze (-10HP)");
-      document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
-
-      document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
-      document.getElementById("defenseB").innerHTML = ("Smokescreen (-20HP)");
-      document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+      }, 6000); // 6 secs
 
 
       //load pokemon name
@@ -4328,6 +4622,43 @@ class changePokemon {
 
       confirm.makeMove[0].player1Move = true;
 
+      //attack/defense menu changes depending on which pokemon player1 is fighting against
+
+      if (p1.blastoiseSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-20HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-5HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-11)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-18HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.blastoiseSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Aqua Jet (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Bubble (-4HP)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-10)");
+
+        document.getElementById("defenseA").innerHTML = ("Protect (-20HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
 
        if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
 
@@ -4349,14 +4680,6 @@ class changePokemon {
 
        }, 6000); // 6 secs
 
-         //load pokemon attack/defense menu
-         document.getElementById("attackA").innerHTML = ("Aqua Jet (-20HP)");
-         document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
-         document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
-
-         document.getElementById("defenseA").innerHTML = ("Protect (-10HP)");
-         document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
-         document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
 
          //load pokemon name
          document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[1]; // blastoise
@@ -4527,6 +4850,41 @@ class changePokemon {
 
       confirm.makeMove[0].player1Move = true;
 
+      if (p1.pikachuSelected === true && comp.scytherSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-15)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-25HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.pikachuSelected === true && comp.squirtleSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-25HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-35)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-15HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-5HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }else if (p1.pikachuSelected === true && comp.onixSelected === true) {
+
+        //load pokemon attack/defense menu
+        document.getElementById("attackA").innerHTML = ("Thunder Shock (-5HP)");
+        document.getElementById("attackB").innerHTML = ("Double Kick (-15HP)");
+        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-10)");
+
+        document.getElementById("defenseA").innerHTML = ("Growl (-5HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
+
+      }//end of multiple if statements
+
 
       if(confirm.makeMove[0].computerMove === false && confirm.makeMove[0].player1Move === true) {
 
@@ -4551,16 +4909,8 @@ class changePokemon {
 
         document.getElementById("statusProgress3").innerHTML =("You can now attack or switch pokemon.");
 
-      }, 6000); // 6 secs
+        }, 6000); // 6 secs
 
-        //load pokemon attack/defense menu
-        document.getElementById("attackA").innerHTML = ("Thunder Shock (-20HP)");
-        document.getElementById("attackB").innerHTML = ("Double Kick (-10HP)");
-        document.getElementById("attackC").innerHTML = ("Thunder Bolt (-45)");
-
-        document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
-        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
-        document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
 
         //load pokemon name
         document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[2]; // pikachu
