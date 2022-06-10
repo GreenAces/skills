@@ -2,9 +2,9 @@
 /*
 NOTE:
 
-Last update: (06/09/2022)
+Last update: (06/10/2022)
 
-1) some player1 pokemon victories are not declared as a win -- fix this *** high priority *** (06/09/2022)
+1) created new entries to declare wins and losses but unable to troubleshoot losses because of issues with pikachu vs scyther (bubble beam occurs for any pikachu attack) *** high priority *** (06/10/2022)
 2) play as pikachu and defeat the first two pokemon and notice how blastoise healthbar vanishes --  fix this *** high priority *** (06/02/2022)
 3) playing with a unconventional player1 pokemon forces the hp progress bar not to appear -- fix this  *** high priority *** (06/09/2022)
 4) update speedbar when new computer pokemon are loaded in all sections 1)pokemonLoops 2)loadsquirtleOrScyther, loadScytherOrOnix, and loadSquirtleOrOnix *** high priority *** (06/08/2022)
@@ -1183,8 +1183,6 @@ class referee {
 
       if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 0 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 0) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound2.pause();
 
         //increase computer health and reduce computer speed to 50 HP
 
@@ -1200,8 +1198,6 @@ class referee {
 
       }else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar <= 50 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === true && squirtleSpeedBar < 50) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound2.play();
 
         //increase computer health and reduce computer speed to 50 HP
 
@@ -1216,8 +1212,6 @@ class referee {
 
       }else if (comp.squirtleSelected === true && restore.squirtleSpeedDecreased === false && squirtleSpeedBar <= 100 || comp.squirtleSelected === true && restore.squirtleSpeedDecreased === false && squirtleSpeedBar === 100) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound2.play();
 
         //increase computer health and reduce computer speed to 50 HP
 
@@ -1237,8 +1231,6 @@ class referee {
 
       if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 0 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 0) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound4.pause();
 
        //increase computer health and reduce computer speed to 50 HP
 
@@ -1254,8 +1246,6 @@ class referee {
 
       }else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar <= 50 || comp.scytherSelected === true && restore.scytherSpeedDecreased === true && scytherSpeedBar < 50) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound4.play();
 
        //increase computer health and reduce computer speed to 50 HP
 
@@ -1270,8 +1260,6 @@ class referee {
 
       }else if (comp.scytherSelected === true && restore.scytherSpeedDecreased === false && scytherSpeedBar <= 100 || comp.scytherSelected === true && restore.scytherSpeedDecreased === false && scytherSpeedBar === 100) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound4.play();
 
        //increase computer health and reduce computer speed to 50 HP
 
@@ -1292,8 +1280,6 @@ class referee {
 
       if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 0 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 0) {
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound6.pause();
 
         //increase computer health and reduce computer speed to 50 HP
 
@@ -1312,9 +1298,6 @@ class referee {
       }else if (comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar <= 50 || comp.onixSelected === true && restore.onixSpeedDecreased === true && onixSpeedBar < 50) {
 
 
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound6.play();
-
         //increase computer health and reduce computer speed to 50 HP
 
         speedReduced2 = 50;
@@ -1330,10 +1313,6 @@ class referee {
 
 
       }else if (comp.onixSelected === true && restore.onixSpeedDecreased === false && onixSpeedBar <= 100 || comp.onixSelected === true && restore.onixSpeedDecreased === false && onixSpeedBar === 100) {
-
-
-        //pause rest sound effect for computer
-        computerSD.pokemonRest_sound6.play();
 
         //increase computer health and reduce computer speed to 50 HP
 
@@ -3503,50 +3482,100 @@ this.isBlastoiseDead = function() {
 
       p1.battle3Player1 = true;
 
-      console.log("(A1) p1.battle3Player1: " + p1.battle3Player1);
+      console.log("(P1) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.squirtleDied === true && comp.onixDied === true && p1.pikachuSelected === true && comp.scytherDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P2) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.scytherDied === true && comp.onixDied === true && p1.charmanderSelected === true && comp.squirtleDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P3) p1.battle3Player1: " + p1.battle3Player1);
 
   }else if (comp.onixDied === true && comp.squirtleDied === true && p1.charmanderSelected === true && comp.scytherDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
 
       p1.battle3Player1 = true;
 
-      console.log("(A2) p1.battle3Player1: " + p1.battle3Player1);
+      console.log("(P4) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.squirtleDied === true && comp.scytherDied === true && p1.pikachuSelected === true && comp.onixDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P5) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.squirtleDied === true && comp.onixDied === true && p1.blastoiseSelected === true  && comp.scytherDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P6) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.scytherDied === true && comp.squirtleDied === true && p1.charmanderSelected === true && comp.onixDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P7) p1.battle3Player1: " + p1.battle3Player1);
 
   }else if (comp.scytherDied === true && comp.squirtleDied === true && p1.pikachuSelected === true && comp.onixDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
 
       p1.battle3Player1 = true;
 
-      console.log("(A3) p1.battle3Player1: " + p1.battle3Player1);
+      console.log("(P8) p1.battle3Player1: " + p1.battle3Player1);
+
+  }else if (comp.squirtleDied === true && comp.onixDied === true && p1.blastoiseSelected === true && comp.scytherDied === true && p1.battle1Player1 === true && p1.battle2Player1 === true) {
+
+      p1.battle3Player1 = true;
+
+      console.log("(P9) p1.battle3Player1: " + p1.battle3Player1);
 
   }//end of multiple if statements
+
+
 
 
   //if previous battles from charmander, pikachu, or blastoise are declared a loss and the last computer pokemon won the battle then it will count towards the losing the game
 
-  if (comp.onixSelected === true && p1.pikachuDied === true && p1.blastoiseDied === true && comp.battle1Computer === true) {
+  if (comp.onixSelected === true && p1.pikachuDied === true && p1.blastoiseDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
 
       comp.battle3Computer = true;
 
-      console.log("(A4) comp.battle3Computer: " + comp.battle3Computer);
+      console.log("(C1) comp.battle3Computer: " + comp.battle3Computer);
 
-  }else if (p1.onixSelected === true && p1.charmanderDied === true && p1.pikachuDied === true && comp.battle1Computer === true) {
-
-      comp.battle3Computer = true;
-
-      console.log("(A5) comp.battle3Computer: " + comp.battle3Computer);
-
-  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.pikachuDied === true && comp.battle1Computer === true) {
+  }else if (p1.onixSelected === true && p1.charmanderDied === true && p1.pikachuDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
 
       comp.battle3Computer = true;
 
-      console.log("(A6) comp.battle3Computer: " + comp.battle3Computer);
+      console.log("(C2) comp.battle3Computer: " + comp.battle3Computer);
 
-  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.charmanderDied === true && comp.battle1Computer === true) {
+  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.pikachuDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
 
       comp.battle3Computer = true;
 
-      console.log("(A7) comp.battle3Computer: " + comp.battle3Computer);
+      console.log("(C3) comp.battle3Computer: " + comp.battle3Computer);
 
-  }//end of multiple if statements
+  }else if (comp.scytherSelected === true && comp.blastoiseDied === true && p1.charmanderDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
+
+      comp.battle3Computer = true;
+
+      console.log("(C4) comp.battle3Computer: " + comp.battle3Computer);
+
+  }else if (comp.squirtleSelected === true && p1.charmanderDied === true && p1.pikachuDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
+
+    comp.battle3Computer = true;
+
+    console.log("(C5) comp.battle3Computer: " + comp.battle3Computer);
+
+  }else if (comp.squirtleSelected === true && p1.charmanderDied === true && comp.blastoiseDied === true && comp.battle1Computer === true && comp.battle2Computer === true) {
+
+    comp.battle3Computer = true;
+
+    console.log("(C6) comp.battle3Computer: " + comp.battle3Computer);
+
+   }//end of multiple if statements
 
 
 
@@ -4989,11 +5018,13 @@ class changePokemon {
             computerSD.scytherVO.play();
 
 
-
-
             //Display and save computer pokemon name to savedPokemonName2
             document.getElementById("cpuPokemonName").innerHTML = "Scyther";
             computerCH.savedPokemonName2.push("Scyther");
+
+
+            //Change progressbar to blue
+            document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
 
 
             //verify that computer selected a pokemon
@@ -5288,7 +5319,7 @@ this.loadsquirtleOrScyther = function () {
       computerSD.scytherVO.play();
 
 
-      //Display and save computer pokemon name to savedPokemonName2 on line 445
+      //Display and save computer pokemon name to savedPokemonName2
       document.getElementById("cpuPokemonName").innerHTML = "Scyther";
       computerCH.savedPokemonName2.push("Scyther");
 
@@ -10279,16 +10310,16 @@ class computerMoves {
 
 
 
-   if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction1of6 === true) {
+   if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
      //inform player1 attack from squirtle -- default setting
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Bubble Beam!";
 
-     //disable attack move for squirtle pokemon and pikachu
+     //disable attack move for squirtle pokemon and charmander
      computer.squirtleMovesActivated[0].squirtleFunction1of6 = false;
-     player1.pikachuMoves[0].pikachuFunction1of6 = false;
+     player1.charmanderMoves[0].charmanderFunction1of6 = false;
 
-   }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction1of6 === true) {
+   }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
      //inform player1 attack from squirtle
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Bubble Beam!";
@@ -10299,7 +10330,7 @@ class computerMoves {
 
 
 
-   }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction1of6 === true) {
+   }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
      //inform player1 attack from squirtle
      document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Bubble Beam!";
@@ -10405,7 +10436,7 @@ class computerMoves {
 
 
   //default setting
-  if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction2of6 === true) {
+  if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
     //inform player1 attack from squirtle -- default setting
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tail Whip!";
@@ -10415,7 +10446,7 @@ class computerMoves {
     player1.charmanderMoves[0].charmanderFunction2of6 = false;
 
 
-  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction2of6 === true) {
+  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
     //inform player1 attack from squirtle
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Tail Whip!";
@@ -10425,7 +10456,7 @@ class computerMoves {
     player1.pikachuMoves[0].pikachuFunction2of6 = false;
 
 
-  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction2of6 === true) {
+  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
     //inform player1 attack from squirtle
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Tail Whip!";
@@ -10548,7 +10579,7 @@ class computerMoves {
 
 
   //default setting
-  if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction3of6 === true) {
+  if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
     //inform player1 of attack from computer
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Pulse!";
@@ -10557,7 +10588,7 @@ class computerMoves {
     computer.squirtleMovesActivated[0].squirtleFunction3of6 = false;
     player1.charmanderMoves[0].charmanderFunction3of6 = false;
 
-  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction3of6 === true) {
+  }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
 
   document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Water Pulse!";
@@ -10567,7 +10598,7 @@ class computerMoves {
   player1.pikachuMoves[0].pikachuFunction3of6 = false;
 
 
-  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction3of6 === true) {
+  }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
 
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Water Pulse!";
@@ -10690,7 +10721,7 @@ class computerMoves {
 
 
     //default setting
-    if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction4of6 === true) {
+    if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
       //inform player1 of attack from computer
       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Tackle!";
@@ -10700,7 +10731,7 @@ class computerMoves {
       player1.charmanderMoves[0].charmanderFunction4of6 = false;
 
 
-    }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction4of6 === true) {
+    }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
 
     document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Tackle!";
@@ -10710,7 +10741,7 @@ class computerMoves {
     player1.pikachuMoves[0].pikachuFunction4of6 = false;
 
 
-    }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction4of6 === true) {
+    }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
 
       document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Tackle!";
@@ -10827,7 +10858,7 @@ class computerMoves {
 
 
       //default setting
-      if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction5of6 === true) {
+      if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
         //inform player1 of attack from computer
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[0]+" with Water Gun!";
@@ -10836,7 +10867,7 @@ class computerMoves {
         computer.squirtleMovesActivated[0].squirtleFunction5of6 = false;
         player1.charmanderMoves[0].charmanderFunction5of6 = false;
 
-      }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction5of6 === true) {
+      }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
 
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[5]+" with Water Gun!";
@@ -10846,7 +10877,7 @@ class computerMoves {
         player1.pikachuMoves[0].pikachuFunction5of6 = false;
 
 
-      }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction5of6 === true) {
+      }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
 
         document.getElementById("statusProgress2").innerHTML = computer.pokemonName[4]+ " attacked "+player1.pokemonName[2]+" with Water Gun!";
@@ -11038,21 +11069,21 @@ class computerMoves {
 
 
           //default setting
-          if (comp.squirtleSelected === true && p1.charmanderSelected === true && player1.charmanderMoves[0].charmanderFunction6of6 === true) {
+          if (comp.squirtleSelected === true && p1.charmanderSelected === true) {
 
             //disable attack move for squirtle pokemon and charmander
             player1.charmanderMoves[0].charmanderFunction6of6 = false;
             computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
 
-          }else if (comp.squirtleSelected === true && p1.pikachuSelected === true && player1.pikachuMoves[0].pikachuFunction6of6 === true) {
+          }else if (comp.squirtleSelected === true && p1.pikachuSelected === true) {
 
             //disable attack move for squirtle pokemon and pikachu
             player1.pikachuMoves[0].pikachuFunction6of6 = false;
             computer.squirtleMovesActivated[0].squirtleFunction6of6 = false;
 
 
-          }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true && player1.blastoiseMoves[0].blastoiseFunction6of6 === true) {
+          }else if (comp.squirtleSelected === true && p1.blastoiseSelected === true) {
 
             //disable attack move for squirtle pokemon and blastoise
             player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
