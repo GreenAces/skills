@@ -2,10 +2,10 @@
 /*
 NOTE:
 
-Last update: (06/10/2022)
+Last update: (06/13/2022)
 
-1) created new entries to declare wins and losses but unable to troubleshoot losses because of issues with pikachu vs scyther (bubble beam occurs for any pikachu attack) *** high priority *** (06/10/2022)
-2) play as pikachu and defeat the first two pokemon and notice how blastoise healthbar vanishes --  fix this *** high priority *** (06/02/2022)
+1) create code that displays losing the game when all 3 pokemon died -- make sure battle1,2, and 3 are set true *** high priority *** (06/13/2022)
+2) play as pikachu first and lost the game then select scyther and lose the game, then select blastoise and lose the game --  fix this *** high priority *** (06/13/2022)
 3) playing with a unconventional player1 pokemon forces the hp progress bar not to appear -- fix this  *** high priority *** (06/09/2022)
 4) update speedbar when new computer pokemon are loaded in all sections 1)pokemonLoops 2)loadsquirtleOrScyther, loadScytherOrOnix, and loadSquirtleOrOnix *** high priority *** (06/08/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
@@ -884,6 +884,16 @@ class referee {
 
       console.log("(10.2) comp.scytherSelected: " + comp.scytherSelected);
 
+
+      //conditional ternary determines if pikachu died and disables scyther so that onix will be the next pokemon loaded  1 of 2
+      (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.scytherSelected = false : console.log(comp.scytherSelected);
+      (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.squirtleSelected = false : console.log(comp.squirtleSelected);
+      (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.onixSelected = true : console.log(comp.onixSelected);
+
+
+      console.log("(10.3) comp.onixSelected: " + comp.onixSelected);
+      console.log("(10.3) comp.squirtleSelected: " + comp.squirtleSelected);
+
     }//end of blockComputerPokemon3
 
     this.loadUpdatedMenu = function () {
@@ -1048,7 +1058,7 @@ class referee {
       //hp
       updateCharmanderHP = charmanderHP8;
       document.querySelector(".player1HP").style.width = updateCharmanderHP +   "%";
-      (charmanderHP8 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+      (charmanderHP8 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
@@ -1068,7 +1078,7 @@ class referee {
       //hp
       updatePikachuHP = pikachuHP15;
       document.querySelector(".player1HP").style.width = updatePikachuHP +   "%";
-      (pikachuHP15 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+      (pikachuHP15 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
@@ -1087,7 +1097,7 @@ class referee {
       //hp
       updateBlastoiseHP = blastoiseHP16;
       document.querySelector(".player1HP").style.width = updateBlastoiseHP +   "%";
-      (blastoiseHP16 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+      (blastoiseHP16 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
@@ -1108,7 +1118,7 @@ class referee {
         //hp
         updateSquirtleHP = squirtleHP8;
         document.querySelector(".cpuHP").style.width = updateSquirtleHP +   "%";
-        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+        (squirtleHP8 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
         //speedbar
         document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2  +   "%";
@@ -1127,7 +1137,7 @@ class referee {
         //hp
         updateOnixHP = onixHP9;
         document.querySelector(".cpuHP").style.width = updateOnixHP +   "%";
-        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+        (onixHP9 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
         //speedbar
         document.querySelector(".cpuSpeed").style.width = onixSpeedBar  +   "%";
@@ -1144,7 +1154,7 @@ class referee {
         //hp
         updateScytherHP = scytherHP9;
         document.querySelector(".cpuHP").style.width = updateScytherHP +   "%";
-        (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+        (scytherHP9 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
         //speedbar
         document.querySelector(".cpuSpeed").style.width = scytherSpeedBar  +   "%";
@@ -1702,7 +1712,7 @@ this.checkComputerPokemon = function () {
           //This function is also responsible for selecting a new computer pokemon to replace the one that died.
 
 
-          //what happens when charmander doesn't die -- it loads squirle, scyther, or onix  -- set 1 of 3
+          //what happens when charmander is alive -- it loads squirle, scyther, or onix  -- set 1 of 3
 
           if (p1.charmanderSelected === true && p1.charmanderDied === false && comp.squirtleDied === true) {
 
@@ -1728,7 +1738,30 @@ this.checkComputerPokemon = function () {
 
 
 
-          }
+          }else if (p1.charmanderDied === true && comp.squirtleDied === false) { // what happens when charmander dies
+
+
+            //conditional ternary determines if charmander is dead and disables squirtle so that scyther or onix can load
+            (p1.charmanderSelected === false &&  comp.squirtleDied === false) ? comp.squirtleSelected = false : console.log(comp.squirtleSelected);
+
+            //conditional ternary determines if charmander is dead and sets scyther as the selected pokemon if user selects pikachu *secondary logic 1 of 3*
+            (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.pikachuSelected === true) ? comp.scytherSelected = true : console.log(comp.scytherSelected);
+
+            //conditional ternary determines if charmander is dead and disables scyther as the selected pokemon if user selects blastoise *secondary logic 2 of 3*
+            (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.blastoiseSelected === true) ? comp.scytherSelected = false : console.log(comp.scytherSelected);
+
+            //conditional ternary determines if charmander is dead and sets onix as the selected pokemon if user selects blastoise *secondary logic 3 of 3*
+            (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.blastoiseSelected === true) ? comp.onixSelected = true : console.log(comp.onixSelected);
+
+            console.log("(1.2) comp.squirtleSelected: " + comp.squirtleSelected);
+
+            console.log("(1.2) comp.scytherSelected: " + comp.scytherSelected);
+
+            console.log("(1.2) comp.onixSelected: " + comp.onixSelected);
+
+          }// what happens when charmander dies 1 of 2
+
+
 
            if (p1.charmanderSelected === true && p1.charmanderDied === false && comp.scytherSelected === true) {
 
@@ -1782,7 +1815,22 @@ this.checkComputerPokemon = function () {
 
 
 
-            }//what happens when charmander doesn't die -- it loads squirle, scyther,  or onix  -- set 1 of 3
+            }else if (p1.charmanderDied === true && p1.pikachuDied === true || p1.charmanderDied === true && p1.blastoiseDied === true) { // what happens when charmander dies 2 of 2
+
+                      //conditional ternary determines if pikachu died and disables scyther so that onix will be the next pokemon loaded  1 of 2
+                      (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.scytherSelected = false : console.log(comp.scytherSelected);
+                      (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.onixSelected = true : console.log(comp.onixSelected);
+
+
+                      //conditional ternary determines if blastoise died and disables onix so that scyther will be the next pokemon loaded  2 of 2
+                      (p1.charmanderDied === true && p1.blastoiseDied === true && p1.pikachuSelected === true) ? comp.onixSelected = false : console.log(comp.onixSelected);
+                      (p1.charmanderDied === true && p1.blastoiseDied === true && p1.pikachuSelected === true) ? comp.scytherSelected = true : console.log(comp.scytherSelected);
+
+
+                      console.log("(3.1) comp.scytherSelected: " + comp.scytherSelected);
+                      console.log("(3.1) comp.onixSelected: " + comp.onixSelected);
+
+            }//what happens when charmander is alive -- it loads squirle, scyther, or onix  -- set 1 of 3
 
 
 
@@ -1791,7 +1839,7 @@ this.checkComputerPokemon = function () {
 
 
 
-            //what happens when pikachu doesn't die -- it loads scyther, squirtle, or onix  -- set 2 of 3
+            //what happens when pikachu is alive -- it loads scyther, squirtle, or onix  -- set 2 of 3
 
             if (p1.pikachuSelected === true && p1.pikachuDied === false && comp.scytherDied === true) {
 
@@ -1863,7 +1911,7 @@ this.checkComputerPokemon = function () {
 
 
 
-            }//what happens when pikachu doesn't die -- it loads scyther, squirtle, or onix  -- set 2 of 3
+            }//what happens when pikachu is alive -- it loads scyther, squirtle, or onix  -- set 2 of 3
 
 
 
@@ -1872,7 +1920,7 @@ this.checkComputerPokemon = function () {
 
 
 
-            //what happens when blastoise doesn't die -- it loads onix, squirtle, or scyther  -- set 3 of 3
+            //what happens when blastoise is alive -- it loads onix, squirtle, or scyther  -- set 3 of 3
 
             if (p1.blastoiseSelected === true && p1.blastoiseDied === false && comp.onixDied === true) {
 
@@ -1943,7 +1991,7 @@ this.checkComputerPokemon = function () {
 
 
 
-            }//what happens when blastoise doesn't die -- it loads onix, squirtle, or scyther  -- set 3 of 3
+            }//what happens when blastoise is alive -- it loads onix, squirtle, or scyther  -- set 3 of 3
 
 
 
@@ -2600,6 +2648,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           p1.charmanderDied = true;
           p1.charmanderAlive = false;
+          p1.charmanderSelected = false;
 
           //confirm that the pokemon can no longer be selected
           player1CH.pokemonType[0].isSelected = false; // charmander
@@ -2634,6 +2683,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           comp.squirtleDied = true;
           comp.squirtleAlive = false;
+          comp.squirtleSelected = false;
 
           //confirm that the pokemon can no longer be selected
           computerCH.pokemonType[2].isSelected = false; // squirtle
@@ -2665,6 +2715,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           p1.charmanderDied = true;
           p1.charmanderAlive = false;
+          p1.charmanderSelected = false;
 
 
 
@@ -2695,6 +2746,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           comp.scytherDied = true;
           comp.scytherAlive = false;
+          comp.scytherSelected = false;
 
 
           //record data to deadPokemon array as well
@@ -2728,6 +2780,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           p1.charmanderDied = true;
           p1.charmanderAlive = false;
+          p1.charmanderSelected = false;
 
 
 
@@ -2758,7 +2811,7 @@ this.checkComputerPokemon = function () {
           // confirm dead pokemon
           comp.onixDied = true;
           comp.onixAlive = false;
-
+          comp.onixSelected = false;
 
           //record data to deadPokemon array as well
           p1.deadPokemon.push("Onix");
@@ -2811,6 +2864,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       p1.pikachuDied = true;
       p1.pikachuAlive = false;
+      p1.pikachuSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -2843,6 +2897,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       comp.scytherDied = true;
       comp.scytherAlive = false;
+      comp.scytherSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[3].isSelected = false; // Scyther
@@ -2875,6 +2930,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       p1.pikachuDied = true;
       p1.pikachuAlive = false;
+      p1.pikachuSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -2907,6 +2963,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       comp.squirtleDied = true;
       comp.squirtleAlive = false;
+      comp.squirtleSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[2].isSelected = false; // squirtle
@@ -2938,6 +2995,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       p1.pikachuDied = true;
       p1.pikachuAlive = false;
+      p1.pikachuSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[2].isSelected = false; // pikachu
@@ -2970,6 +3028,7 @@ this.isPikachuDead = function() {
       // confirm dead pokemon
       comp.onixDied = true;
       comp.onixAlive = false;
+      comp.onixSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[4].isSelected = false; // onix
@@ -3023,6 +3082,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       p1.blastoiseDied = true;
       p1.blastoiseAlive = false;
+      p1.blastoiseSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[1].isSelected = false; // blastoise
@@ -3055,6 +3115,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       comp.onixDied = true;
       comp.onixAlive = false;
+      comp.onixSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[4].isSelected = false; // onix
@@ -3089,6 +3150,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       p1.blastoiseDied = true;
       p1.blastoiseAlive = false;
+      p1.blastoiseSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[1].isSelected = false; // blastoise
@@ -3121,6 +3183,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       comp.squirtleDied = true;
       comp.squirtleAlive = false;
+      comp.squirtleSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[2].isSelected = false; // squirtle
@@ -3155,6 +3218,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       p1.blastoiseDied = true;
       p1.blastoiseAlive = false;
+      p1.blastoiseSelected = false;
 
       //confirm that the pokemon can no longer be selected
       player1CH.pokemonType[1].isSelected = false; // blastoise
@@ -3187,6 +3251,7 @@ this.isBlastoiseDead = function() {
       // confirm dead pokemon
       comp.scytherDied = true;
       comp.scytherAlive = false;
+      comp.scytherSelected = false;
 
       //confirm that the pokemon can no longer be selected
       computerCH.pokemonType[3].isSelected = false; // Scyther
@@ -3312,7 +3377,8 @@ this.isBlastoiseDead = function() {
 
   //round 2 -- victory goes to computer pokemon set 2 of 3
 
-  if (charmanderHP3 <= 0 && scytherHP4 >= 1 && p1.charmanderSelected === true && comp.scytherSelected === true) {
+  if (charmanderHP3 <= 0 && scytherHP4 >= 1 && p1.charmanderSelected === true && comp.scytherSelected === true ||
+      pikachuHP4 <= 0 &&  scytherHP4 >= 1 && p1.pikachuSelected === true && comp.scytherSelected === true) {
 
     document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
     p1.battle2Player1 = false;
@@ -3344,7 +3410,8 @@ this.isBlastoiseDead = function() {
 
   //round 3 -- victory goes to computer pokemon set 3 of 3
 
-  if (charmanderHP3 <= 0 && onixHP4 >= 1 && p1.charmanderSelected === true && comp.onixSelected === true) {
+  if (charmanderHP3 <= 0 && onixHP4 >= 1 && p1.charmanderSelected === true && comp.onixSelected === true ||
+      blastoiseHP4 <= 0 && onixHP4 >= 1 && p1.blastoiseSelected === true && comp.onixSelected === true) {
 
     document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
     p1.battle3Player1 = false;
@@ -3703,7 +3770,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateCharmanderHP = charmanderHP8;
       document.querySelector(".player1HP").style.width = updateCharmanderHP +   "%";
-      (charmanderHP8 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+      (charmanderHP8 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
@@ -3737,7 +3804,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updatePikachuHP = pikachuHP15;
       document.querySelector(".player1HP").style.width = updatePikachuHP +   "%";
-      (pikachuHP15 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+      (pikachuHP15 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = pikachuSpeedBar  +   "%";
@@ -3770,7 +3837,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateBlastoiseHP = blastoiseHP16;
       document.querySelector(".player1HP").style.width = updateBlastoiseHP +   "%";
-      (blastoiseHP16 >= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#A6EDED" : document.querySelector('.player1HP').style.backgroundColor = "#FD0202"; //red
+      (blastoiseHP16 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar +   "%";
@@ -3805,7 +3872,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateSquirtleHP = squirtleHP8;
       document.querySelector(".cpuHP").style.width = updateSquirtleHP +   "%";
-      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+      (squirtleHP8 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".cpuSpeed").style.width = squirtleSpeedBar2  +   "%";
@@ -3837,7 +3904,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateScytherHP = scytherHP9;
       document.querySelector(".cpuHP").style.width = updateScytherHP +   "%";
-      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+      (scytherHP9 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".cpuSpeed").style.width = scytherSpeedBar  +   "%";
@@ -3868,7 +3935,7 @@ document.getElementById("sendLink").target = "_blank";
       //hp
       updateOnixHP = onixHP9;
       document.querySelector(".cpuHP").style.width = updateOnixHP +   "%";
-      (charmanderHP8 >= 40) ? document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED" : document.querySelector('.cpuHP').style.backgroundColor = "#FD0202"; //red
+      (onixHP9 <= 40) ? document.querySelector('.cpuSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.cpuSpeed').style.backgroundColor = "#A6EDED"; //blue
 
       //speedbar
       document.querySelector(".cpuSpeed").style.width = onixSpeedBar  +   "%";
@@ -4158,6 +4225,9 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
+          //disable dead computer pokemon
+          p1.checkComputerPokemon();
+
         }//end of if statement 1 of 3
 
         if (p1.charmanderDied === true && comp.scytherDied === false) {
@@ -4176,6 +4246,9 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
 
+          //disable dead computer pokemon
+          p1.checkComputerPokemon();
+
         }//end of if statement 2 of 3
 
         if (p1.charmanderDied === true && comp.onixDied === false) {
@@ -4193,6 +4266,9 @@ class changePokemon {
           document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
           document.getElementById("charmanderIcon").style.width = 34;
           document.getElementById("charmanderIcon").style.height = 46;
+
+          //disable dead computer pokemon
+          p1.checkComputerPokemon();
 
         }//end of if statement 3 of 3
 
@@ -4218,6 +4294,9 @@ class changePokemon {
           document.getElementById("PikachuIcon").style.width = 34;
           document.getElementById("PikachuIcon").style.height = 46;
 
+          //disable dead computer pokemon
+          p1.checkComputerPokemon();
+
         }//end of if statement 1 of 3
 
         if (p1.pikachuDied === true && comp.squirtleDied === false) {
@@ -4236,6 +4315,9 @@ class changePokemon {
          document.getElementById("PikachuIcon").style.width = 34;
          document.getElementById("PikachuIcon").style.height = 46;
 
+         //disable dead computer pokemon
+         p1.checkComputerPokemon();
+
        }//end of if statement 2 of 3
 
        if (p1.pikachuDied === true && comp.onixDied === false) {
@@ -4253,6 +4335,9 @@ class changePokemon {
         document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadDead.jpg" </img>';
         document.getElementById("PikachuIcon").style.width = 34;
         document.getElementById("PikachuIcon").style.height = 46;
+
+        //disable dead computer pokemon
+        p1.checkComputerPokemon();
 
       }//end of if statement 3 of 3
 
@@ -4278,6 +4363,9 @@ class changePokemon {
           document.getElementById("BlastoiseIcon").style.width = 34;
           document.getElementById("BlastoiseIcon").style.height = 46;
 
+          //disable dead computer pokemon
+          p1.checkComputerPokemon();
+
         }//end of if statement 1 of 3
 
         if  (p1.blastoiseDied === true && comp.squirtleDied === false) {
@@ -4295,6 +4383,9 @@ class changePokemon {
          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadDead.png" </img>';
          document.getElementById("BlastoiseIcon").style.width = 34;
          document.getElementById("BlastoiseIcon").style.height = 46;
+
+         //disable dead computer pokemon
+         p1.checkComputerPokemon();
 
        }//end of if statement 2 of 3
 
@@ -4314,6 +4405,9 @@ class changePokemon {
         document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadDead.png" </img>';
         document.getElementById("BlastoiseIcon").style.width = 34;
         document.getElementById("BlastoiseIcon").style.height = 46;
+
+        //disable dead computer pokemon
+        p1.checkComputerPokemon();
 
       }//end of if statement 3 of 3
 
@@ -4474,7 +4568,7 @@ class changePokemon {
       document.getElementById("p1PokemonName").innerHTML = player1CH.player1PokemonChoices[0]; //charmander
 
       //load pokemon sound
-      //player1SD.charmanderVO.play();
+      player1SD.charmanderVO.play();
 
 
         //if a pokemon dies then player1 can't restore it by selecting the same pokemon again.
@@ -4532,9 +4626,7 @@ class changePokemon {
       document.getElementById("CpuPokeImage").style.height = 380;
 
       //load pokemon sound
-      //computerSD.squirtleVO.play();
-
-
+      computerSD.squirtleVO.play();
 
 
       //Display and save computer pokemon name to savedPokemonName2
@@ -4658,10 +4750,10 @@ class changePokemon {
         //load pokemon attack/defense menu
         document.getElementById("attackA").innerHTML = ("Aqua Jet (-25HP)");
         document.getElementById("attackB").innerHTML = ("Bubble (-10HP)");
-        document.getElementById("attackC").innerHTML = ("Hydro Pump (-45)");
+        document.getElementById("attackC").innerHTML = ("Hydro Pump (-35)");
 
         document.getElementById("defenseA").innerHTML = ("Protect (-20HP)");
-        document.getElementById("defenseB").innerHTML = ("HeadButt (-20HP)");
+        document.getElementById("defenseB").innerHTML = ("HeadButt (-15HP)");
         document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
 
       }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true) {
@@ -5021,10 +5113,6 @@ class changePokemon {
             //Display and save computer pokemon name to savedPokemonName2
             document.getElementById("cpuPokemonName").innerHTML = "Scyther";
             computerCH.savedPokemonName2.push("Scyther");
-
-
-            //Change progressbar to blue
-            document.querySelector('.cpuHP').style.backgroundColor = "#A6EDED"; //blue
 
 
             //verify that computer selected a pokemon
@@ -9827,8 +9915,8 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //hydroPump does -45 damage to onix
-         a6.onixHealthBar.push(-45);
-         a6.onixBackup.push(-45);
+         a6.onixHealthBar.push(-35);
+         a6.onixBackup.push(-35);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
@@ -10054,8 +10142,8 @@ class player1Moves {
 
         //reflect the changes to blastoiseHealthBar AND blastoiseBackup array as well.
         //headButt2 does -20 damage to onix
-         a6.onixHealthBar.push(-20);
-         a6.onixBackup.push(-20);
+         a6.onixHealthBar.push(-15);
+         a6.onixBackup.push(-15);
 
        //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          blastoiseProgressBar.decreaseComputerHP2();
@@ -13926,7 +14014,7 @@ function loadBlastoise () {
   (p1.blastoiseSelected === true) ? comp.onixSelected = true : comp.onixSelected = false;
 
   //conditional ternary determines if onix or squirtle died and blocks computer pokemon that died from a previous battle
-  (comp.onixDied === true || comp.squirtleDied === true) ? comp.blockComputerPokemon3() : p1.battle1Player1 = false;
+  (comp.onixDied === true || comp.squirtleDied === true || p1.charmanderDied === true && p1.pikachuDied === true) ? comp.blockComputerPokemon3() : p1.battle1Player1 = false;
 
   //this function loads blastoise and onix (default) + squirtle or onix based on battle conditions
   player1CH.blaPokeImage();
