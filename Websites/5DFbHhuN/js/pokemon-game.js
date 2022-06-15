@@ -2,15 +2,15 @@
 /*
 NOTE:
 
-Last update: (06/14/2022)
+Last update: (06/15/2022)
 
 1) rewrite deadpokemonImage by copying the alogrithem from informWinner function *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
 3) playing with a unconventional player1 pokemon forces the hp progress bar not to appear -- fix this  *** high priority *** (06/09/2022)
-4)  *** high priority *** (06/08/2022)
+4) (1.3) comp.squirtleSelected: true is becoming an issue after charmander dies and pikachu is selected (bubble beam attack occurs instead of slash) fix this *** high priority *** (06/15/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
 6) remove debuggingOperating function  *** low priority ***
-7) remove comment regarding "insert code on this line" *** low priority *** 
+7) remove comment regarding "insert code on this line" *** low priority ***
 8)
 9)
 10) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
@@ -845,12 +845,20 @@ class referee {
       //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
       //This function is ideal for Charmander because there is a scenario when onix is the last computer pokemon alive
 
-      (comp.squirtleDied === true && p1.charmanderSelected === true) ?  comp.squirtleSelected = false :  comp.squirtleSelected = true;
+      if (comp.squirtleDied === true && p1.charmanderSelected === true) {
+
+          comp.squirtleSelected = false;
+
+      }
+
+      if (comp.scytherDied === true && p1.charmanderSelected === true) {
+
+         comp.scytherSelected = false;
+
+      }
+
 
       console.log("(8) comp.squirtleSelected: " + comp.squirtleSelected);
-
-      (comp.scytherDied === true && p1.charmanderSelected === true) ? comp.scytherSelected = false : comp.scytherSelected = true;
-
       console.log("(8.2) comp.scytherSelected: " + comp.scytherSelected);
 
     }//end of blockComputerPokemon
@@ -860,13 +868,54 @@ class referee {
      //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
      //This function is ideal for Pikachu because there is a scenario when onix is the last computer pokemon alive
 
-     (comp.squirtleDied === true && p1.pikachuSelected === true) ?  comp.squirtleSelected = false :  comp.squirtleSelected = true;
+     if (p1.pikachuSelected === true && comp.squirtleDied === true  || p1.pikachuSelected === true && comp.charmanderDied === true) {
+
+         comp.squirtleSelected = false;
+
+     }
+
+
+     if (p1.pikachuSelected === true && comp.squirtleDied === true  || p1.pikachuSelected === true && comp.charmanderDied === true) {
+
+          comp.scytherSelected = true;
+
+      }
+
+
+     if (comp.scytherDied === true && p1.pikachuSelected === true) {
+
+       comp.scytherSelected = false;
+
+     }
 
      console.log("(9) comp.squirtleSelected: " + comp.squirtleSelected);
-
-     (comp.scytherDied === true && p1.pikachuSelected === true) ? comp.scytherSelected = false : comp.scytherSelected = true;
-
      console.log("(9.2) comp.scytherSelected: " + comp.scytherSelected);
+
+
+
+     if (p1.pikachuSelected === true && p1.pikachuDied === false && comp.scytherDied === true) {
+
+       //default action
+
+       //conditional ternary determines if scyther is dead then it can't be selected
+       (p1.pikachuSelected === true && comp.scytherDied === true) ? comp.scytherSelected = false : comp.scytherAlive = true;
+
+       //conditional ternary determines if scyther is dead and sets squirtle as the selected pokemon if true *primary logic 2 of 3*
+       (p1.pikachuSelected === true && comp.scytherDied === true) ? comp.squirtleSelected = true : comp.squirtleSelected = false;
+
+       //conditional ternary determines if squirtle is dead then it can't be selected *recently added*
+       (p1.pikachuSelected === true &&  comp.squirtleDied === true) ? comp.squirtleSelected = false : comp.squirtleAlive = true;
+
+       //enables onix if scyther and squirtle are NOT selected or died
+       (p1.pikachuSelected === true &&  comp.squirtleSelected === false && comp.scytherSelected === false) ? comp.onixSelected = true : comp.onixSelected = false;
+
+       console.log("(9.3) comp.scytherSelected: " + comp.scytherSelected);
+
+       console.log("(9.4) comp.squirtleSelected: " + comp.squirtleSelected);
+
+
+
+     }
 
 
     }//end of blockComputerPokemon2
@@ -876,12 +925,23 @@ class referee {
       //A computer pokemon that died in a previous match, can't be loaded or re-selected when player selects Charmander, Blastoise, or Pikachu
       //This function is ideal for Blastoise because there is a scenario when scyther is the last computer pokemon alive
 
-      (comp.onixDied === true && p1.blastoiseSelected === true) ?  comp.onixSelected = false :  comp.squirtleSelected = true;
+      if (comp.onixDied === true && p1.blastoiseSelected === true) {
+
+        comp.onixSelected = false;
+
+      }
+
+      if (comp.squirtleDied === true && p1.blastoiseSelected === true) {
+
+        comp.squirtleSelected = false;
+
+      }else if (comp.scytherDied === false && p1.blastoiseSelected === true) {
+
+        comp.scytherSelected = true;
+
+      }
 
       console.log("(10) comp.squirtleSelected: " + comp.squirtleSelected);
-
-      (comp.squirtleDied === true && p1.blastoiseSelected === true) ? comp.squirtleSelected = false : comp.scytherSelected = true;
-
       console.log("(10.2) comp.scytherSelected: " + comp.scytherSelected);
 
 
@@ -895,6 +955,9 @@ class referee {
       console.log("(10.3) comp.squirtleSelected: " + comp.squirtleSelected);
 
     }//end of blockComputerPokemon3
+
+
+
 
     this.loadUpdatedMenu = function () {
 
@@ -1847,6 +1910,23 @@ this.checkComputerPokemon = function () {
 
             //what happens when pikachu is alive -- it loads scyther, squirtle, or onix  -- set 2 of 3
 
+
+            (p1.pikachuSelected === true && comp.squirtleDied === true  || p1.pikachuSelected === true && comp.charmanderDied === true) ?  comp.squirtleSelected = false : console.log(comp.squirtleSelected);
+
+            if (p1.pikachuSelected === true && comp.squirtleDied === true  || p1.pikachuSelected === true && comp.charmanderDied === true) {
+
+                  comp.scytherSelected = true;
+
+                 }
+
+            console.log("(1.3) comp.squirtleSelected: " + comp.squirtleSelected);
+
+            (comp.scytherDied === true && p1.pikachuSelected === true) ? comp.scytherSelected = false : comp.scytherSelected = true;
+
+            console.log("(2.3) comp.scytherSelected: " + comp.scytherSelected);
+
+
+
             if (p1.pikachuSelected === true && p1.pikachuDied === false && comp.scytherDied === true) {
 
               //default action
@@ -1863,9 +1943,9 @@ this.checkComputerPokemon = function () {
               //enables onix if scyther and squirtle are NOT selected or died
               (p1.pikachuSelected === true &&  comp.squirtleSelected === false && comp.scytherSelected === false) ? comp.onixSelected = true : comp.onixSelected = false;
 
-              console.log("(1.2) comp.scytherSelected: " + comp.scytherSelected);
+              console.log("(3.3) comp.scytherSelected: " + comp.scytherSelected);
 
-              console.log("(1.2) comp.squirtleSelected: " + comp.squirtleSelected);
+              console.log("(3.3) comp.squirtleSelected: " + comp.squirtleSelected);
 
 
 
@@ -1877,7 +1957,7 @@ this.checkComputerPokemon = function () {
               //conditional ternary determines if scyther and squirtle are dead and sets onix as the the selected pokemon if true
               (p1.pikachuSelected === true && comp.scytherDied === true && comp.squirtleDied === true) ? comp.onixSelected = true : comp.onixSelected = false;
 
-              console.log("(2.2) comp.onixSelected: " + comp.onixSelected);
+              console.log("(3.4) comp.onixSelected: " + comp.onixSelected);
 
 
 
@@ -1900,7 +1980,7 @@ this.checkComputerPokemon = function () {
               //conditional ternary determines if onix is dead then it can't be selected
               (p1.pikachuSelected === true && comp.onixDied === true) ? comp.onixSelected = false : comp.onixAlive = true;
 
-              console.log("(3.3) comp.onixSelected: " + comp.onixSelected);
+              console.log("(3.5) comp.onixSelected: " + comp.onixSelected);
 
 
 
@@ -3361,6 +3441,8 @@ this.isBlastoiseDead = function() {
     console.log("battle1Player1: " + p1.battle1Player1);
     console.log("battle1Computer: " + comp.battle1Computer);
     p1.isCharmanderDead();
+    p1.isPikachuDead();
+    p1.isBlastoiseDead();
 
   }else if (pikachuHP4 <= 0 && scytherHP4 >= 1  && p1.pikachuSelected === true && comp.scytherSelected === true ||
             charmanderHP3 <= 0 && scytherHP4 >= 1 && p1.charmanderSelected === true && comp.scytherSelected === true ||
@@ -3371,7 +3453,9 @@ this.isBlastoiseDead = function() {
     comp.battle2Computer = true;
     console.log("battle2Player1: " + p1.battle2Player1);
     console.log("battle2Computer: " + comp.battle2Computer);
+    p1.isCharmanderDead();
     p1.isPikachuDead();
+    p1.isBlastoiseDead();
 
   }else if (blastoiseHP4 <= 0 && onixHP4 >= 1  && p1.blastoiseSelected === true && comp.onixSelected === true ||
             charmanderHP3 <= 0 && onixHP4 >= 1 && p1.charmanderSelected === true && comp.onixSelected === true ||
@@ -3382,6 +3466,8 @@ this.isBlastoiseDead = function() {
     comp.battle3Computer = true;
     console.log("battle3Player1: " + p1.battle3Player1);
     console.log("battle3Computer: " + comp.battle3Computer);
+    p1.isCharmanderDead();
+    p1.isPikachuDead();
     p1.isBlastoiseDead();
 
   }//end of multiple if statements
@@ -3401,6 +3487,8 @@ this.isBlastoiseDead = function() {
     console.log("battle1Player1: " + p1.battle1Player1);
     console.log("battle1Computer: " + comp.battle1Computer);
     p1.isCharmanderDead();
+    p1.isPikachuDead();
+    p1.isBlastoiseDead();
 
   }else if (pikachuHP4 >= 1 && scytherHP4 <= 0  && p1.pikachuSelected === true && comp.scytherSelected === true ||
             charmanderHP3 >= 1 && scytherHP4 <= 0  && p1.charmanderSelected === true && comp.scytherSelected === true ||
@@ -3411,7 +3499,9 @@ this.isBlastoiseDead = function() {
     p1.battle2Player1 = true;
     console.log("battle2Player1: " + p1.battle2Player1);
     console.log("battle2Computer: " + comp.battle2Computer);
+    p1.isCharmanderDead();
     p1.isPikachuDead();
+    p1.isBlastoiseDead();
 
   }else if (blastoiseHP4 >= 1 && onixHP4 <= 0  && p1.blastoiseSelected === true && comp.onixSelected === true ||
             charmanderHP3 >= 1 && onixHP4 <= 0  && p1.charmanderSelected === true && comp.onixSelected === true ||
@@ -3422,6 +3512,8 @@ this.isBlastoiseDead = function() {
     p1.battle3Player1 = true;
     console.log("battle3Player1: " + p1.battle3Player1);
     console.log("battle3Computer: " + comp.battle3Computer);
+    p1.isCharmanderDead();
+    p1.isPikachuDead();
     p1.isBlastoiseDead();
 
   }//end of multiple if statements
@@ -4304,7 +4396,7 @@ class changePokemon {
         document.getElementById("attackC").innerHTML = ("Solar Power (-35)");
 
         document.getElementById("defenseA").innerHTML = ("Growl (-10HP)");
-        document.getElementById("defenseB").innerHTML = ("Smokescreen (-25HP)");
+        document.getElementById("defenseB").innerHTML = ("Smokescreen (-30HP)");
         document.getElementById("defenseC").innerHTML = ("Rest (+45HP)");
 
       }else if (p1.charmanderSelected === true && comp.scytherSelected === true) {
@@ -8329,9 +8421,9 @@ class player1Moves {
          console.log("charmanderFunction5of6 is: " + player1.charmanderMoves[0].charmanderFunction5of6);
 
          //reflect the changes to squirtleHealthBar AND squirtleBackup array as well.
-         //smokescreen does -25 damage on squirtle
-         a2.squirtleHealthBar.push(-25);
-         a2.squirtleBackup.push(-25);
+         //smokescreen does -30 damage on squirtle
+         a2.squirtleHealthBar.push(-30);
+         a2.squirtleBackup.push(-30);
 
          //This is the function that applies the filter to the arrays listed below. player1 (does damage to computer HP). It also calls other functions
          charmanderProgressBar.decreaseComputerHP();
@@ -13901,7 +13993,7 @@ function loadPikachu () {
   (p1.pikachuSelected === true) ? comp.scytherSelected = true : comp.scytherSelected = false;
 
   //conditional ternary determines if squirtle or scyther died and blocks computer pokemon that died from a previous battle
-  (comp.squirtleDied === true || comp.scytherDied === true) ? comp.blockComputerPokemon2() : p1.battle1Player1 = false;
+  (comp.squirtleDied === true || comp.charmanderDied === true || comp.scytherDied === true) ? comp.blockComputerPokemon2() : p1.battle1Player1 = false;
 
   //this function loads pikachu or sycther (default) + squirtle or onix based on battle conditions
   player1CH.pikPokeImage();
