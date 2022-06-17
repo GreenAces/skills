@@ -2,11 +2,11 @@
 /*
 NOTE:
 
-Last update: (06/16/2022)
+Last update: (06/17/2022)
 
 1) rewrite deadpokemonImage by copying the alogrithem from informWinner function *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
-3) playing with a unconventional player1 pokemon forces the hp progress bar not to appear -- fix this  *** high priority *** (06/09/2022)
+3) updateHealthInformation was recently inserted to blockPlayer1Pokemon2 and 3 functions to fix the HP progressbar from going blank -- find an alternative solution and remove later *** high priority *** (06/17/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
 6) remove debuggingOperating function  *** low priority ***
@@ -840,7 +840,9 @@ class referee {
 
     this.blockPlayer1Pokemon = function () {
 
-      //if charmander dies then scyther is loaded next
+      //NOTE: if charmander dies then it will be unselected to allow a computer pokemon to be loaded for the next battle
+
+      //if charmander dies and pikachu is selected then scyther is loaded next
 
       if (p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true) {
 
@@ -854,7 +856,7 @@ class referee {
 
       }
 
-      //if charmander and pikachu dies then onix is loaded next
+      //if charmander and pikachu dies and blastoise is selected then onix is loaded next
 
       if (p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true) {
 
@@ -868,13 +870,95 @@ class referee {
 
       }
 
+      //if charmander dies and blastoise is selected then onix is loaded next
+
+      if (p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true) {
+
+        comp.scytherSelected = false;
+        comp.squirtleSelected = false;
+        comp.onixSelected = true;
+
+        console.log("(BPP3) comp.scytherSelected: " + comp.scytherSelected);
+        console.log("(BPP3) comp.squirtleSelected: " + comp.squirtleSelected);
+        console.log("(BPP3) comp.onixSelected: " + comp.onixSelected);
+
+      }
+
+      //if charmander and blastoise dies and pikachu is selected then scyther is loaded next
+
+      if (p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true) {
+
+        comp.scytherSelected = true;
+        comp.squirtleSelected = false;
+        comp.onixSelected = false;
+
+        console.log("(BPP4) comp.scytherSelected: " + comp.scytherSelected);
+        console.log("(BPP4) comp.squirtleSelected: " + comp.squirtleSelected);
+        console.log("(BPP4) comp.onixSelected: " + comp.onixSelected);
+
+      }
+
 
     }//end of blockPlayer1Pokemon
 
 
     this.blockPlayer1Pokemon2 = function () {
 
-      console.log("add code here (2)");
+
+    //NOTE: if pikachu dies then it will be unselected to allow a computer pokemon to be loaded for the next battle
+
+    //if pikachu dies and blastoise is selected then onix is loaded next
+
+    if (p1.blastoiseSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true) {
+
+    comp.scytherSelected = false;
+    comp.squirtleSelected = false;
+    comp.onixSelected = true;
+
+    //updateHealthInformation
+    p1.updateHealthInformation();
+
+    console.log("(BPP5) comp.scytherSelected: " + comp.scytherSelected);
+    console.log("(BPP6) comp.squirtleSelected: " + comp.squirtleSelected);
+    console.log("(BPP7) comp.onixSelected: " + comp.onixSelected);
+
+    }
+
+    //if pikachu dies and charmander is selected then squirtle is loaded next
+
+    if (p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true) {
+
+    comp.scytherSelected = false;
+    comp.squirtleSelected = true;
+    comp.onixSelected = false;
+
+    //updateHealthInformation
+    p1.updateHealthInformation();
+
+    console.log("(BPP8) comp.scytherSelected: " + comp.scytherSelected);
+    console.log("(BPP9) comp.squirtleSelected: " + comp.squirtleSelected);
+    console.log("(BPP10) comp.onixSelected: " + comp.onixSelected);
+
+    }
+
+    //if pikachu and blastoise dies and charmander is selected then squirtle is loaded next
+
+    if (p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true) {
+
+    comp.scytherSelected = false;
+    comp.squirtleSelected = true;
+    comp.onixSelected = false;
+
+    //updateHealthInformation
+    p1.updateHealthInformation();
+
+    console.log("(BPP11) comp.scytherSelected: " + comp.scytherSelected);
+    console.log("(BPP12) comp.squirtleSelected: " + comp.squirtleSelected);
+    console.log("(BPP13) comp.onixSelected: " + comp.onixSelected);
+
+    }
+
+
 
 
     }//end of blockPlayer1Pokemon2
@@ -882,7 +966,58 @@ class referee {
 
     this.blockPlayer1Pokemon3 = function () {
 
-      console.log("add code here (3)");
+      //NOTE: if blastoise dies then it will be unselected to allow a computer pokemon to be loaded for the next battle
+
+      //if blastoise dies and charmander is selected than squirtle is loaded next
+
+      if (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true) {
+
+      comp.scytherSelected = false;
+      comp.squirtleSelected = true;
+      comp.onixSelected = false;
+
+      //updateHealthInformation
+      p1.updateHealthInformation();
+
+      console.log("(BPP14) comp.scytherSelected: " + comp.scytherSelected);
+      console.log("(BPP15) comp.squirtleSelected: " + comp.squirtleSelected);
+      console.log("(BPP16) comp.onixSelected: " + comp.onixSelected);
+
+      }
+
+      //if blastoise dies and pikachu is selected then scyther is loaded next
+
+      if (p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true) {
+
+      comp.scytherSelected = true;
+      comp.squirtleSelected = false;
+      comp.onixSelected = false;
+
+      //updateHealthInformation
+      p1.updateHealthInformation();
+
+      console.log("(BPP17) comp.scytherSelected: " + comp.scytherSelected);
+      console.log("(BPP18) comp.squirtleSelected: " + comp.squirtleSelected);
+      console.log("(BPP19) comp.onixSelected: " + comp.onixSelected);
+
+      }
+
+      //if charmander and pikachu dies and blastoise is selected then onix is loaded next
+
+      if (p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true) {
+
+      comp.scytherSelected = false;
+      comp.squirtleSelected = false;
+      comp.onixSelected = true;
+
+      //updateHealthInformation
+      p1.updateHealthInformation();
+
+      console.log("(BPP20) comp.scytherSelected: " + comp.scytherSelected);
+      console.log("(BPP21) comp.squirtleSelected: " + comp.squirtleSelected);
+      console.log("(BPP22) comp.onixSelected: " + comp.onixSelected);
+
+      }
 
 
     }//end of blockPlayer1Pokemon3
@@ -1884,29 +2019,7 @@ this.charmanderPrimer = function () {
 
 
 
-  }else if (p1.charmanderDied === true && comp.squirtleDied === false) { // what happens when charmander dies
-
-
-    //conditional ternary determines if charmander is dead and disables squirtle so that scyther or onix can load
-    (p1.charmanderSelected === false &&  comp.squirtleDied === false) ? comp.squirtleSelected = false : console.log(comp.squirtleSelected);
-
-    //conditional ternary determines if charmander is dead and sets scyther as the selected pokemon if user selects pikachu *secondary logic 1 of 3*
-    (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.pikachuSelected === true) ? comp.scytherSelected = true : console.log(comp.scytherSelected);
-
-    //conditional ternary determines if charmander is dead and disables scyther as the selected pokemon if user selects blastoise *secondary logic 2 of 3*
-    (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.blastoiseSelected === true) ? comp.scytherSelected = false : console.log(comp.scytherSelected);
-
-    //conditional ternary determines if charmander is dead and sets onix as the selected pokemon if user selects blastoise *secondary logic 3 of 3*
-    (p1.charmanderSelected === false && comp.squirtleSelected === false && p1.blastoiseSelected === true) ? comp.onixSelected = true : console.log(comp.onixSelected);
-
-    console.log("(1.2) comp.squirtleSelected: " + comp.squirtleSelected);
-
-    console.log("(1.2) comp.scytherSelected: " + comp.scytherSelected);
-
-    console.log("(1.2) comp.onixSelected: " + comp.onixSelected);
-
-  }// what happens when charmander dies 1 of 2
-
+  }
 
 
    if (p1.charmanderSelected === true && p1.charmanderDied === false && comp.scytherSelected === true) {
@@ -1960,21 +2073,6 @@ this.charmanderPrimer = function () {
 
 
 
-
-    }else if (p1.charmanderDied === true && p1.pikachuDied === true || p1.charmanderDied === true && p1.blastoiseDied === true) { // what happens when charmander dies 2 of 2
-
-              //conditional ternary determines if pikachu died and disables scyther so that onix will be the next pokemon loaded  1 of 2
-              (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.scytherSelected = false : console.log(comp.scytherSelected);
-              (p1.charmanderDied === true && p1.pikachuDied === true && p1.blastoiseSelected === true) ? comp.onixSelected = true : console.log(comp.onixSelected);
-
-
-              //conditional ternary determines if blastoise died and disables onix so that scyther will be the next pokemon loaded  2 of 2
-              (p1.charmanderDied === true && p1.blastoiseDied === true && p1.pikachuSelected === true) ? comp.onixSelected = false : console.log(comp.onixSelected);
-              (p1.charmanderDied === true && p1.blastoiseDied === true && p1.pikachuSelected === true) ? comp.scytherSelected = true : console.log(comp.scytherSelected);
-
-
-              console.log("(3.1) comp.scytherSelected: " + comp.scytherSelected);
-              console.log("(3.1) comp.onixSelected: " + comp.onixSelected);
 
     }//what happens when charmander is alive -- it loads squirle, scyther, or onix
 
@@ -3776,6 +3874,20 @@ if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player
       (restore.restedPikachu === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
       (restore.restedBlastoise === true && p1.charmanderSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
 
+      //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 1 of 2
+      (p1.blastoiseSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+       p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+       p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
+       ? p1.blockPlayer1Pokemon2() : console.log("(BPP-001) blockPlayer1Pokemon2 failed...");
+
+      //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 2 of 2
+      (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+       p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+       p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true)
+        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-002) blockPlayer1Pokemon3 failed...");
+
+
+
 
       break;
 
@@ -3810,9 +3922,19 @@ if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player
       (restore.restedCharmander === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
       (restore.restedBlastoise === true && p1.pikachuSelected === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
 
+      //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 1 of 2
+      (p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
+       p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+       p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
+       p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
+        ? p1.blockPlayer1Pokemon() : console.log("(BPP-002) blockPlayer1Pokemon failed...");
 
-      //if charmander dies then scyther is loaded next
-      p1.blockPlayer1Pokemon();
+      //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 2 of 2
+      (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+       p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+       p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true)
+        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-003) blockPlayer1Pokemon3 failed...");
+
 
 
       break;
@@ -3847,8 +3969,24 @@ if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player
       (restore.restedCharmander === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
       (restore.restedPikachu === true && p1.blastoiseDied === true) ? document.getElementById("defenseC").style.color = "#000000" : document.getElementById("defenseC").style.color = "#000000";
 
-      //if charmander and pikachu dies then blastoise is loaded next
-      p1.blockPlayer1Pokemon();
+      //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 1 of 3
+      (p1.blastoiseSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+       p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+       p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
+       ? p1.blockPlayer1Pokemon2() : console.log("(BPP-004) blockPlayer1Pokemon2 failed...");
+
+       //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 2 of 3
+       (p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
+        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
+        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
+        p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
+         ? p1.blockPlayer1Pokemon() : console.log("(BPP-005) blockPlayer1Pokemon failed...");
+
+       //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 3 of 3
+       (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+        p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
+        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true)
+        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-006) blockPlayer1Pokemon3 failed...");
 
 
 
@@ -4231,9 +4369,9 @@ class changePokemon {
           document.getElementById("charmanderIcon").style.height = 46;
 
 
-          //mark player pokemon as un-selected starting here
+          //mark player1 pokemon as un-selected
           p1.charmanderSelected = false;
-          console.log("(H1-1) p1.charmanderSelected " + p1.charmanderSelected);
+          console.log("(H1-1) p1.charmanderSelected: " + p1.charmanderSelected);
 
 
 
@@ -4263,9 +4401,9 @@ class changePokemon {
           document.getElementById("PikachuIcon").style.width = 34;
           document.getElementById("PikachuIcon").style.height = 46;
 
-          //mark player pokemon as un-selected starting here
+          //mark player1 pokemon as un-selected
           p1.pikachuSelected = false;
-          console.log("(H1-2) p1.pikachuSelected " + p1.pikachuSelected);
+          console.log("(H1-2) p1.pikachuSelected: " + p1.pikachuSelected);
 
 
 
@@ -4293,9 +4431,9 @@ class changePokemon {
           document.getElementById("BlastoiseIcon").style.width = 34;
           document.getElementById("BlastoiseIcon").style.height = 46;
 
-          //mark player pokemon as un-selected starting here
+          //mark player1 pokemon as un-selected
           p1.blastoiseSelected = false;
-          console.log("(H1-3) p1.blastoiseSelected " + p1.blastoiseSelected);
+          console.log("(H1-3) p1.blastoiseSelected: " + p1.blastoiseSelected);
 
 
 
