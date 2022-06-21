@@ -2,26 +2,26 @@
 /*
 NOTE:
 
-Last update: (06/17/2022)
+Last update: (06/21/2022)
 
 1) rewrite deadpokemonImage by copying the alogrithem from informWinner function *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
 3) updateHealthInformation was recently inserted to blockPlayer1Pokemon2 and 3 functions to fix the HP progressbar from going blank -- find an alternative solution and remove later *** high priority *** (06/17/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
-6) remove debuggingOperating function  *** low priority ***
-7) remove comment regarding "insert code on this line" *** low priority ***
+6) It's almost impossible to lose the game because of no limit on rest function regarding charmander -- fix decreasePlayerHP and make sure the rest function is disabled after 2 uses
+7) for charmander, squirtle, and blastoise, -- make 0 health look like 1 HP so that player knows their about to die in on move *** high priority ***  (06/21/2022)
 8)
 9)
-10) call a switch statement on line 1443 for loadScytherOnly function *************************************************************************************************************************** 10/8/2021
-11) commented out charmander and squirtle sound on line  844 *********************************************************************************************************************************** 8/24/2021
+10) 
+11)
 12) look at the informWinner function and determine what happens when a player losses the battle -- did  you account for all scenarios of loses? *** low priority *** (06/03/2022)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 15) fix pokemonLoops and troubleshoot why charmanderSpeedBar2 is not updating when switching pokemon *** high priority *** (04/04/2022)
-16) blastoise health bar is empty up after loading it when switching from charmander vs onix -- troubleshoot why this happens ** low priority ** (05/25/2022)
+16)
 17)
 18) when scyther defeats charmander -- something could be wrong with the score count -- troubleshoot that *** low priority *** (05/05/2020)
-19) add comment during laughandpoint image whenever player1 uses rest function or when hp is > 40 *** low priority *** (04/06/2022)
+19)
 
 
 
@@ -915,8 +915,6 @@ class referee {
     comp.squirtleSelected = false;
     comp.onixSelected = true;
 
-    //updateHealthInformation
-    p1.updateHealthInformation();
 
     console.log("(BPP5) comp.scytherSelected: " + comp.scytherSelected);
     console.log("(BPP6) comp.squirtleSelected: " + comp.squirtleSelected);
@@ -932,8 +930,6 @@ class referee {
     comp.squirtleSelected = true;
     comp.onixSelected = false;
 
-    //updateHealthInformation
-    p1.updateHealthInformation();
 
     console.log("(BPP8) comp.scytherSelected: " + comp.scytherSelected);
     console.log("(BPP9) comp.squirtleSelected: " + comp.squirtleSelected);
@@ -976,8 +972,6 @@ class referee {
       comp.squirtleSelected = true;
       comp.onixSelected = false;
 
-      //updateHealthInformation
-      p1.updateHealthInformation();
 
       console.log("(BPP14) comp.scytherSelected: " + comp.scytherSelected);
       console.log("(BPP15) comp.squirtleSelected: " + comp.squirtleSelected);
@@ -993,8 +987,6 @@ class referee {
       comp.squirtleSelected = false;
       comp.onixSelected = false;
 
-      //updateHealthInformation
-      p1.updateHealthInformation();
 
       console.log("(BPP17) comp.scytherSelected: " + comp.scytherSelected);
       console.log("(BPP18) comp.squirtleSelected: " + comp.squirtleSelected);
@@ -1009,9 +1001,6 @@ class referee {
       comp.scytherSelected = false;
       comp.squirtleSelected = false;
       comp.onixSelected = true;
-
-      //updateHealthInformation
-      p1.updateHealthInformation();
 
       console.log("(BPP20) comp.scytherSelected: " + comp.scytherSelected);
       console.log("(BPP21) comp.squirtleSelected: " + comp.squirtleSelected);
@@ -4459,58 +4448,7 @@ class changePokemon {
     }// end of pokemonIndicator
 
 
-    this.debuggingOperation = function() {
 
-      //default message for debuggingOperating function -- comment out when working on errors
-
-     //console.log("DebuggingOperation function is launched. There are no major issues here.");
-
-
-      // debugging begins here ----------------------------------------------------------
-
-
-        let x = 20;
-
-
-        if (x === 0) {
-
-
-
-
-          console.log("debuggingOperation successful : if statment was triggered.");
-          console.log("----------------------------------------------------------");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          console.log("---------------------------------------------------------");
-
-
-
-
-
-
-
-        }//end of if statement for debuggingOperation
-
-
-
-
-
-
-
-
-   }//end of debuggingOperation function
 
 
 
@@ -6524,7 +6462,9 @@ class progressBar {
               console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
 
 
-            }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar <= 50) {
+            }
+
+            if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar <= 50) {
 
               //confirm that charmander speedbar is only decreased here:
               restore.charmanderSpeedDecreased = true;
@@ -6535,7 +6475,9 @@ class progressBar {
 
               console.log("charmander speedbar array is "+ charmanderSpeedBar);
 
-            }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 50) {
+            }
+
+            if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 50) {
 
               //confirm that blastoise speedbar is only decreased here:
               restore.blastoiseSpeedDecreased = true;
@@ -6609,7 +6551,9 @@ class progressBar {
             console.log("restedPikachu status: " + restore.restedPikachu);
             console.log("Pikachu rest function was disabled without making function6of6 false.");
 
-          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+          }
+
+           if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
 
             //confirm that charmander rested and speedbar is at zero only here:
             restore.restedCharmander = true;
@@ -6643,7 +6587,9 @@ class progressBar {
             console.log("restedCharmander status(2): " + restore.restedCharmander);
             console.log("Charmander rest function was disabled without making function6of6 false.(2)");
 
-          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+          }
+
+           if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
 
             //confirm that blastoise rested and speedbar is at zero only here:
             restore.restedBlastoise = true;
@@ -7041,7 +6987,9 @@ class progressBar {
                 console.log("restedPikachu status: " + restore.restedPikachu);
                 console.log("Pikachu rest function was disabled without making function6of6 false.");
 
-              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+              }
+
+              if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
 
                 //confirm that charmander rested and speedbar is at zero only here:
                 restore.restedCharmander = true;
@@ -7075,7 +7023,9 @@ class progressBar {
                 console.log("restedCharmander status(2): " + restore.restedCharmander);
                 console.log("Charmander rest function was disabled without making function6of6 false.(2)");
 
-              }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+              }
+
+               if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
 
                 //confirm that blastoise rested and speedbar is at zero only here:
                 restore.restedBlastoise = true;
@@ -7477,7 +7427,9 @@ class progressBar {
                   console.log("restedPikachu status: " + restore.restedPikachu);
                   console.log("Pikachu rest function was disabled without making function6of6 false.");
 
-                }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+                }
+
+                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
 
                   //confirm that charmander rested and speedbar is at zero only here:
                   restore.restedCharmander = true;
@@ -7511,7 +7463,9 @@ class progressBar {
                   console.log("restedCharmander status(2): " + restore.restedCharmander);
                   console.log("Charmander rest function was disabled without making function6of6 false.(2)");
 
-                }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+                }
+
+                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
 
                   //confirm that blastoise rested and speedbar is at zero only here:
                   restore.restedBlastoise = true;
@@ -7579,6 +7533,9 @@ this.increaseComputerHP = function () {
 
   let hpRestore2 = 0;
   let speedReduced2 = 0;
+  let charmanderHP8 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
+  let pikachuHP15 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
+  let blastoiseHP16 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
   let squirtleHP5 = a2.squirtleHealthBar.reduce(array2.PokemonHPReduced);
   let scytherHP8 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
   let onixHP12 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
@@ -7592,7 +7549,11 @@ this.increaseComputerHP = function () {
 
 
 
-    switch (squirtleSpeedBar <=50 ||  scytherSpeedBar <=50 ||  onixSpeedBar <=50 || squirtleSpeedBar <=0 || squirtleSpeedBar < 0 ||  scytherSpeedBar <=0 || scytherSpeedBar <= 0 ||  onixSpeedBar <=0 || onixSpeedBar <0 || squirtleHP5 <= 40 || squirtleHP5 > 40  || scytherHP8 <= 40 || scytherHP8 > 40  || onixHP12 <= 40 || onixHP12 > 40) {
+    switch (squirtleSpeedBar <=50 ||  scytherSpeedBar <=50 ||  onixSpeedBar <=50 || squirtleSpeedBar <=0 || squirtleSpeedBar < 0 ||  scytherSpeedBar <=0 || scytherSpeedBar <= 0 ||  onixSpeedBar <=0 || onixSpeedBar <0
+            || squirtleHP5 <= 40  || scytherHP8 <= 40  || onixHP12 <= 40 ||
+            squirtleHP5 > 40 && charmanderHP8 > 40 || scytherHP8 > 40  && pikachuHP15 > 40   || onixHP12 > 40 && blastoiseHP16 > 40 ||
+            squirtleHP5 > 40 && pikachuHP15 > 40   || scytherHP8 > 40  && charmanderHP8 > 40 || onixHP12 > 40 && charmanderHP8 > 40 ||
+            squirtleHP5 > 40 && blastoiseHP16 > 40 || scytherHP8 > 40  && blastoiseHP16 > 40 || onixHP12 > 40 && pikachuHP15 > 40) {
 
 
 
@@ -7879,15 +7840,26 @@ this.increaseComputerHP = function () {
 
     break;
 
-    case (squirtleHP5 > 40 || scytherHP8 > 40 || onixHP12 > 40):
+    case (squirtleHP5 > 40 && charmanderHP8 > 40 || scytherHP8 > 40  && pikachuHP15 > 40   || onixHP12 > 40 && blastoiseHP16 > 40 ||
+          squirtleHP5 > 40 && pikachuHP15 > 40   || scytherHP8 > 40  && charmanderHP8 > 40 || onixHP12 > 40 && charmanderHP8 > 40 ||
+          squirtleHP5 > 40 && blastoiseHP16 > 40 || scytherHP8 > 40  && blastoiseHP16 > 40 || onixHP12 > 40 && pikachuHP15 > 40):
 
-    if (comp.squirtleSelected === true && squirtleHP5 > 40) {
+    if (comp.squirtleSelected === true && squirtleHP5 > 40 && charmanderHP8 > 40  ||
+        comp.squirtleSelected === true && squirtleHP5 > 40 && pikachuHP15 > 40    ||
+        comp.squirtleSelected === true && squirtleHP5 > 40 && blastoiseHP16 > 40 ) {
 
       //prevent health restoration if computer pokemon health is > 40
       restore.restedSquirtle = false;
 
       //laughandpoint image loads here
       player1Img.player1TauntImage();
+
+      setTimeout(function() {
+
+      //taunt player1 for trying to use health when > 40
+      document.getElementById("statusProgress").innerHTML = "Squirtle was laughing because you tried to restore health...";
+
+      }, 3000); //text will be displayed after 3 secs
 
       //computer laughs at player when attempting to use health restoration when health is > 40
       computerSD.cartoonLaugh_sound.play();
@@ -7900,7 +7872,9 @@ this.increaseComputerHP = function () {
     }//end of if statement for when squirtle hp > 40
 
 
-    if (comp.scytherSelected === true && scytherHP8 > 40) {
+    if (comp.scytherSelected === true && scytherHP8 > 40  && pikachuHP15 > 40   ||
+        comp.scytherSelected === true && scytherHP8 > 40  && charmanderHP8 > 40 ||
+        comp.scytherSelected === true && scytherHP8 > 40  && blastoiseHP16 > 40) {
 
 
       //prevent health restoration if computer pokemon health is > 40
@@ -7909,9 +7883,15 @@ this.increaseComputerHP = function () {
       //laughandpoint image loads here
       player1Img.player1TauntImage();
 
+      setTimeout(function() {
+
+      //taunt player1 for trying to use health when > 40
+      document.getElementById("statusProgress").innerHTML = "Scyther was laughing because you tried to restore health...";
+
+      }, 3000); //text will be displayed after 3 secs
+
       //computer laughs at player when attempting to use health restoration when health is > 40
       computerSD.cartoonLaugh_sound.play();
-
 
       console.log("restedScyther hp: when > 40 is " + restore.restedScyther);
       console.log("code was commented out *debugging*(1-1-2)");
@@ -7920,7 +7900,9 @@ this.increaseComputerHP = function () {
     }//end of if statement for when scyther hp is > 40
 
 
-    if (comp.onixSelected === true && onixHP12 > 40) {
+    if (comp.onixSelected === true && onixHP12 > 40 && blastoiseHP16 > 40  ||
+        comp.onixSelected === true && onixHP12 > 40 && charmanderHP8 > 40  ||
+        comp.onixSelected === true && onixHP12 > 40 && pikachuHP15 > 40) {
 
 
       //prevent health restoration if computer pokemon health is > 40
@@ -7929,9 +7911,15 @@ this.increaseComputerHP = function () {
       //laughandpoint image loads here
       player1Img.player1TauntImage();
 
+      setTimeout(function() {
+
+      //taunt player1 for trying to use health when > 40
+      document.getElementById("statusProgress").innerHTML = "Onix was laughing because you tried to restore health...";
+
+      }, 3000); //text will be displayed after 3 secs
+
       //computer laughs at player when attempting to use health restoration when health is > 40
       computerSD.cartoonLaugh_sound.play();
-
 
       console.log("restedOnix hp: when > 40 is " + restore.restedOnix);
       console.log("code was commented out *debugging*(1-1-3)");
@@ -8010,7 +7998,7 @@ class arrayFunctions {
       pikachuHP >= 1 && scytherHP >= 1 ||
     blastoiseHP >= 1 && onixHP >= 1) {
 
-        console.log("insert code here if needed on this line (3)");
+
 
 
 
@@ -8871,7 +8859,7 @@ class player1Moves {
 
         setTimeout(function() {
 
-           document.getElementById("statusProgress").innerHTML = computer.pokemonName[4]+ " is "+" resting!";
+           document.getElementById("statusProgress").innerHTML = computer.pokemonName[4]+ " rested as well! ";
 
 
         }, 3000);
@@ -9083,7 +9071,7 @@ class player1Moves {
 
         setTimeout(function() {
 
-           document.getElementById("statusProgress").innerHTML = computer.pokemonName[1]+ " is "+" resting!";
+           document.getElementById("statusProgress").innerHTML = computer.pokemonName[1]+ " rested as well!";
 
 
         }, 3000);
@@ -9293,7 +9281,7 @@ class player1Moves {
 
         setTimeout(function() {
 
-           document.getElementById("statusProgress").innerHTML = computer.pokemonName[3]+ " is "+" resting!";
+           document.getElementById("statusProgress").innerHTML = computer.pokemonName[3]+ " rested as well!";
 
 
         }, 3000);
@@ -13405,8 +13393,6 @@ if(confirm.makeMove[0].player1Move === false && player1CH.pokemonType[0].isSelec
 
   player1.fireBlasterMove();
   player1SD.charmanderFireBlaster_sound.play();
-
-  //player1CH.debuggingOperation();
 
   setTimeout (function(){
 
