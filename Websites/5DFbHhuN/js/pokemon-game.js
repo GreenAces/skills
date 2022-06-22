@@ -2,18 +2,18 @@
 /*
 NOTE:
 
-Last update: (06/21/2022)
+Last update: (06/22/2022)
 
 1) rewrite deadpokemonImage by copying the alogrithem from informWinner function *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
 3) updateHealthInformation was recently inserted to blockPlayer1Pokemon2 and 3 functions to fix the HP progressbar from going blank -- find an alternative solution and remove later *** high priority *** (06/17/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
-6) It's almost impossible to lose the game because of no limit on rest function regarding charmander -- fix decreasePlayerHP and make sure the rest function is disabled after 2 uses
+6) p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true -- fix this as charmander can rest anytime *** high priority ***  (06/22/2022)
 7) for charmander, squirtle, and blastoise, -- make 0 health look like 1 HP so that player knows their about to die in on move *** high priority ***  (06/21/2022)
-8)
+8) NOTE: whenever the HP progressbar disappears it means either 1) wrong pokemon is selected OR 2) something wrong with the if statement regarding the pokemonHP reference 
 9)
-10) 
+10)
 11)
 12) look at the informWinner function and determine what happens when a player losses the battle -- did  you account for all scenarios of loses? *** low priority *** (06/03/2022)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
@@ -5772,15 +5772,15 @@ class progressBar {
 
 
          document.querySelector(".player1HP").style.width = charmanderHP6 +   "%";
-         document.querySelector(".playerSpeed").style.width = charmanderSpeedBar4 +   "%";
+         document.querySelector(".playerSpeed").style.width = charmanderSpeedBar24 +   "%";
 
          //conditional ternary for speedbar does the following:
 
          //update charmander speedbar
-         (charmanderSpeedBar4 >=1 && charmanderSpeedBar4 <= 100) ? document.querySelector(".playerSpeed").style.width = charmanderSpeedBar4  +   "%"  : document.querySelector(".playerSpeed").style.width =  "1 %" ;
+         (charmanderSpeedBar24 >=1 && charmanderSpeedBar24 <= 100) ? document.querySelector(".playerSpeed").style.width = charmanderSpeedBar24  +   "%"  : document.querySelector(".playerSpeed").style.width =  "1 %" ;
 
          //change charmander speedbar to red or blue
-         (charmanderSpeedBar4 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
+         (charmanderSpeedBar24 <= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202" : document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED";
 
 
          setTimeout(function() {
@@ -6225,7 +6225,7 @@ class progressBar {
       let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
       let pikachuSpeedBar2 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
       let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-      let charmanderSpeedBar =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+      let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
       let blastoiseHP2 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
       let blastoiseSpeedBar2 = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
 
@@ -6286,8 +6286,8 @@ class progressBar {
             (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
             //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
             comp.informWinner();
 
@@ -6339,8 +6339,8 @@ class progressBar {
             (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
             //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
             comp.informWinner();
 
@@ -6387,8 +6387,8 @@ class progressBar {
             (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
             //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
           }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true) {
@@ -6425,8 +6425,8 @@ class progressBar {
             (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
             //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
           }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseHP2 <= 40) {
 
@@ -6464,16 +6464,16 @@ class progressBar {
 
             }
 
-            if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar <= 50) {
+            if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2 <= 50) {
 
               //confirm that charmander speedbar is only decreased here:
               restore.charmanderSpeedDecreased = true;
 
               //speedbar
-              document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-              (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+              document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+              (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-              console.log("charmander speedbar array is "+ charmanderSpeedBar);
+              console.log("charmander speedbar array is "+ charmanderSpeedBar2);
 
             }
 
@@ -6501,13 +6501,17 @@ class progressBar {
             (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar <= 0 || charmanderSpeedBar < 0) {
+          }
+
+          if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
 
             //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+          }
+
+          if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
 
             //speedbar
             document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -6553,15 +6557,15 @@ class progressBar {
 
           }
 
-           if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+           if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
 
             //confirm that charmander rested and speedbar is at zero only here:
             restore.restedCharmander = true;
 
             hpRecovered7 = 1; //setting this to 1 HP to indicate low speedbar
 
-            document.querySelector(".playerSpeed").style.width = hpRecovered6  +   "%";
-            (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+            document.querySelector(".playerSpeed").style.width = hpRecovered7  +   "%";
+            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
             //play invalid sound here:
             player1SD.invalidAction.play();
@@ -6663,7 +6667,7 @@ class progressBar {
             let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
             let pikachuSpeedBar2 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
             let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-            let charmanderSpeedBar =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+            let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
             let blastoiseHP2 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
             let blastoiseSpeedBar2 = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
 
@@ -6722,8 +6726,8 @@ class progressBar {
                 (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                 //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 comp.informWinner();
 
@@ -6776,8 +6780,8 @@ class progressBar {
                 (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                 //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 comp.informWinner();
 
@@ -6825,8 +6829,8 @@ class progressBar {
                 (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                 //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
               }else if (p1.blastoiseSelected === true && comp.scytherSelected === true) {
@@ -6864,8 +6868,8 @@ class progressBar {
                 (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                 //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
               }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseHP2 <= 40) {
 
@@ -6902,18 +6906,22 @@ class progressBar {
                   console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
 
 
-                }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar <= 50) {
+                }
+
+                 if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2 <= 50) {
 
                   //confirm that charmander speedbar is only decreased here:
                   restore.charmanderSpeedDecreased = true;
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-                  console.log("charmander speedbar array is "+ charmanderSpeedBar);
+                  console.log("charmander speedbar array is "+ charmanderSpeedBar2);
 
-                }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 50) {
+                }
+
+                if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 50) {
 
                   //confirm that blastoise speedbar is only decreased here:
                   restore.blastoiseSpeedDecreased = true;
@@ -6936,13 +6944,17 @@ class progressBar {
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
                 (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar <= 0 || charmanderSpeedBar < 0) {
+              }
+
+               if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
 
                 //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-              }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+              }
+
+              if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
 
                 //speedbar
                 document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -6989,7 +7001,7 @@ class progressBar {
 
               }
 
-              if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+              if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
 
                 //confirm that charmander rested and speedbar is at zero only here:
                 restore.restedCharmander = true;
@@ -6997,7 +7009,7 @@ class progressBar {
                 hpRecovered6 = 1; //setting this to 1 HP to indicate low speedbar
 
                 document.querySelector(".playerSpeed").style.width = hpRecovered6  +   "%";
-                (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 //play invalid sound here:
                 player1SD.invalidAction.play();
@@ -7102,7 +7114,7 @@ class progressBar {
             let pikachuHP2 = a3.pikachuHealthBar.reduce(array1.PokemonHPReduced);
             let pikachuSpeedBar2 = a9.pikSpeedProgressBar.reduce(array1.PokemonHPReduced);
             let charmanderHP5 = a1.charmanderHealthBar.reduce(array1.PokemonHPReduced);
-            let charmanderSpeedBar =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
+            let charmanderSpeedBar2 =  a7.chaSpeedProgressBar.reduce(array1.PokemonHPReduced);
             let blastoiseHP2 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
             let blastoiseSpeedBar2 = a11.blaSpeedProgressBar.reduce(array1.PokemonHPReduced);
 
@@ -7162,8 +7174,8 @@ class progressBar {
                   (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                   comp.informWinner();
 
@@ -7217,8 +7229,8 @@ class progressBar {
                   (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                   comp.informWinner();
 
@@ -7266,8 +7278,8 @@ class progressBar {
                   (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
                 }else if (p1.blastoiseSelected === true && comp.onixSelected === true) {
@@ -7304,8 +7316,8 @@ class progressBar {
                   (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                 }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseHP2 <= 40) {
 
@@ -7342,18 +7354,22 @@ class progressBar {
                     console.log("pikachu speedbar array is "+ pikachuSpeedBar2);
 
 
-                  }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar <= 50) {
+                  }
+
+                   if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2 <= 50) {
 
                     //confirm that charmander speedbar is only decreased here:
                     restore.charmanderSpeedDecreased = true;
 
                     //speedbar
-                    document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                    (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                    document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                    (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-                    console.log("charmander speedbar array is "+ charmanderSpeedBar);
+                    console.log("charmander speedbar array is "+ charmanderSpeedBar2);
 
-                  }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 50) {
+                  }
+
+                   if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 50) {
 
                     //confirm that blastoise speedbar is only decreased here:
                     restore.blastoiseSpeedDecreased = true;
@@ -7377,13 +7393,17 @@ class progressBar {
                   (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-                }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar <= 0 || charmanderSpeedBar < 0) {
+                }
+
+                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
 
                   //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-                }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+                }
+
+                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
 
                   //speedbar
                   document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -7429,7 +7449,7 @@ class progressBar {
 
                 }
 
-                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar < 0 && restore.charamanderSpeedDecreased === true) {
+                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
 
                   //confirm that charmander rested and speedbar is at zero only here:
                   restore.restedCharmander = true;
@@ -7437,7 +7457,7 @@ class progressBar {
                   hpRecovered8 = 1; //setting this to 1 HP to indicate low speedbar
 
                   document.querySelector(".playerSpeed").style.width = hpRecovered8  +   "%";
-                  (charmanderSpeedBar >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
                   //play invalid sound here:
                   player1SD.invalidAction.play();
