@@ -2,15 +2,15 @@
 /*
 NOTE:
 
-Last update: (06/24/2022)
+Last update: (06/27/2022)
 
 1) *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
 3) updateHealthInformation was recently inserted to blockPlayer1Pokemon2 and 3 functions to fix the HP progressbar from going blank -- find an alternative solution and remove later *** high priority *** (06/17/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
-6) p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true -- fix this as charmander can rest anytime *** high priority ***  (06/22/2022)
-7)
+6)
+7) first play as charmander and defeat squirtle -- fix hp progress bar for pikachu + scyther and blastoise + onix 
 8) NOTE: whenever the HP progressbar disappears it means either 1) wrong pokemon is selected OR 2) something wrong with the if statement regarding the pokemonHP reference
 9)
 10)
@@ -5925,7 +5925,8 @@ class progressBar {
         //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-        switch (pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0) {
+        switch (pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+                pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
           case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
 
@@ -6030,7 +6031,8 @@ class progressBar {
 
           break;
 
-          case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100):
+          case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
+                pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0):
 
 
           //change color of HP progress bar here:
@@ -6072,7 +6074,7 @@ class progressBar {
           }//end of if statement #1 1 of 2
 
 
-          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 <= 40 ) {
+          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 <= 40) {
 
             //hp
             pikachuHPDamage2 = pikachuHP2;
@@ -6160,7 +6162,7 @@ class progressBar {
 
 
 
-          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuSpeedBar2 <= 0 || pikachuSpeedBar2 < 0) {
+          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuSpeedBar2 <= 0) {
 
             //speedbar
             document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
@@ -6169,7 +6171,7 @@ class progressBar {
 
           }
 
-          if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
+          if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2 <= 0) {
 
             //speedbar
             document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
@@ -6177,7 +6179,7 @@ class progressBar {
 
           }
 
-          if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+          if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2 <= 0) {
 
             //speedbar
             document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -6187,7 +6189,7 @@ class progressBar {
 
 
 
-          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 < 0 && restore.pikachuSpeedDecreased === true) {
+          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 <= 0 && restore.pikachuSpeedDecreased === true) {
 
             //confirm that pikachu rested and speedbar is at zero only here:
             restore.restedPikachu = true;
@@ -6216,14 +6218,13 @@ class progressBar {
 
 
 
-            //debugging here -- delete when neccessary
-            //turn of rest function for pikachu when speed progress bar is zero
+            //turn off rest function for pikachu when speed progress bar is zero
             console.log("restedPikachu status: " + restore.restedPikachu);
-            console.log("Pikachu rest function was disabled without making function6of6 false.");
+            console.log("Pikachu rest function was disabled.");
 
           }
 
-           if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
+           if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderSpeedBar2  === 0 && restore.charmanderSpeedDecreased === true || charmanderSpeedBar2 <= 0 && restore.charmanderSpeedDecreased === true) {
 
             //confirm that charmander rested and speedbar is at zero only here:
             restore.restedCharmander = true;
@@ -6252,14 +6253,13 @@ class progressBar {
 
 
 
-            //debugging here -- delete when neccessary
-            //turn of rest function for charmander when speed progress bar is zero
+            //turn off rest function for charmander when speed progress bar is zero
             console.log("restedCharmander status(2): " + restore.restedCharmander);
-            console.log("Charmander rest function was disabled without making function6of6 false.(2)");
+            console.log("Charmander rest function was disabled. (2)");
 
           }
 
-           if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+           if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 <= 0 && restore.blastoiseSpeedDecreased === true) {
 
             //confirm that blastoise rested and speedbar is at zero only here:
             restore.restedBlastoise = true;
@@ -6288,10 +6288,9 @@ class progressBar {
 
 
 
-            //debugging here -- delete when neccessary
-            //turn of rest function for blastoise when speed progress bar is zero
+            //turn off rest function for blastoise when speed progress bar is zero
             console.log("restedBlastoise status(3): " + restore.restedBlastoise);
-            console.log("Blastoise rest function was disabled without making function6of6 false.(3)");
+            console.log("Blastoise rest function was disabled.(3)");
 
 
 
@@ -6364,7 +6363,8 @@ class progressBar {
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0) {
+              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+                     pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
               case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
 
@@ -6471,7 +6471,8 @@ class progressBar {
 
               break;
 
-              case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100):
+              case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
+                    pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0):
 
 
               //change color of HP progress bar here:
@@ -6514,7 +6515,7 @@ class progressBar {
               }//end of if statement #1 1 of 2
 
 
-              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 <= 40 ) {
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 <= 40) {
 
                 //hp
                 pikachuHPDamage = pikachuHP2;
@@ -6604,7 +6605,7 @@ class progressBar {
 
 
 
-              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 <= 0 || pikachuSpeedBar2 < 0) {
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 <= 0) {
 
                 //speedbar
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
@@ -6612,7 +6613,7 @@ class progressBar {
 
               }
 
-               if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
+               if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2 <= 0) {
 
                 //speedbar
                 document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
@@ -6620,7 +6621,7 @@ class progressBar {
 
               }
 
-              if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+              if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2 <= 0) {
 
                 //speedbar
                 document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -6631,7 +6632,7 @@ class progressBar {
 
 
 
-              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 < 0 && restore.pikachuSpeedDecreased === true) {
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 <= 0 && restore.pikachuSpeedDecreased === true) {
 
                 //confirm that pikachu rested and speedbar is at zero only here:
                 restore.restedPikachu = true;
@@ -6663,11 +6664,11 @@ class progressBar {
                 //debugging here -- delete when neccessary
                 //turn of rest function for pikachu when speed progress bar is zero
                 console.log("restedPikachu status: " + restore.restedPikachu);
-                console.log("Pikachu rest function was disabled without making function6of6 false.");
+                console.log("Pikachu rest function was disabled.");
 
               }
 
-              if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
+              if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderSpeedBar2  === 0 && restore.charmanderSpeedDecreased === true || charmanderSpeedBar2 <= 0 && restore.charmanderSpeedDecreased === true) {
 
                 //confirm that charmander rested and speedbar is at zero only here:
                 restore.restedCharmander = true;
@@ -6696,14 +6697,13 @@ class progressBar {
 
 
 
-                //debugging here -- delete when neccessary
-                //turn of rest function for charmander when speed progress bar is zero
+                //turn off rest function for charmander when speed progress bar is zero
                 console.log("restedCharmander status(2): " + restore.restedCharmander);
-                console.log("Charmander rest function was disabled without making function6of6 false.(2)");
+                console.log("Charmander rest function was disabled.(2)");
 
               }
 
-               if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+               if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 <= 0 && restore.blastoiseSpeedDecreased === true) {
 
                 //confirm that blastoise rested and speedbar is at zero only here:
                 restore.restedBlastoise = true;
@@ -6731,11 +6731,9 @@ class progressBar {
                 }, 1000);// message is displayed after 1 sec.
 
 
-
-                //debugging here -- delete when neccessary
-                //turn of rest function for blastoise when speed progress bar is zero
+                //turn off rest function for blastoise when speed progress bar is zero
                 console.log("restedBlastoise status(3): " + restore.restedBlastoise);
-                console.log("Blastoise rest function was disabled without making function6of6 false.(3)");
+                console.log("Blastoise rest function was disabled.(3)");
 
 
 
@@ -6812,7 +6810,8 @@ class progressBar {
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0) {
+              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+                     pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
                 case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
 
@@ -6921,7 +6920,8 @@ class progressBar {
 
                 break;
 
-                case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100):
+                case (pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
+                      pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0):
 
 
                 //change color of HP progress bar here:
@@ -6963,7 +6963,7 @@ class progressBar {
                 }//end of if statement #1 1 of 2
 
 
-                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuHP2 <= 40 ) {
+                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuHP2 <= 40) {
 
                   //hp
                   pikachuHPDamage3 = pikachuHP2;
@@ -7052,7 +7052,7 @@ class progressBar {
 
 
 
-                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuSpeedBar2 <= 0 || pikachuSpeedBar2 < 0) {
+                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuSpeedBar2 <= 0) {
 
                   //speedbar
                   document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
@@ -7061,7 +7061,7 @@ class progressBar {
 
                 }
 
-                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2 <= 0 || charmanderSpeedBar2 < 0) {
+                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2 <= 0) {
 
                   //speedbar
                   document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
@@ -7069,7 +7069,7 @@ class progressBar {
 
                 }
 
-                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 0 || blastoiseSpeedBar2 < 0) {
+                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2 <= 0) {
 
                   //speedbar
                   document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
@@ -7079,7 +7079,7 @@ class progressBar {
 
 
 
-                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 < 0 && restore.pikachuSpeedDecreased === true) {
+                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuSpeedBar2 === 0 && restore.pikachuSpeedDecreased === true || pikachuSpeedBar2 <= 0 && restore.pikachuSpeedDecreased === true) {
 
                   //confirm that pikachu rested and speedbar is at zero only here:
                   restore.restedPikachu = true;
@@ -7108,14 +7108,14 @@ class progressBar {
 
 
 
-                  //debugging here -- delete when neccessary
-                  //turn of rest function for pikachu when speed progress bar is zero
+
+                  //turn off rest function for pikachu when speed progress bar is zero
                   console.log("restedPikachu status: " + restore.restedPikachu);
-                  console.log("Pikachu rest function was disabled without making function6of6 false.");
+                  console.log("Pikachu rest function was disabled.");
 
                 }
 
-                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2  === 0 && restore.charamanderSpeedDecreased === true || charmanderSpeedBar2 < 0 && restore.charamanderSpeedDecreased === true) {
+                 if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderSpeedBar2  === 0 && restore.charmanderSpeedDecreased === true || charmanderSpeedBar2 <= 0 && restore.charmanderSpeedDecreased === true) {
 
                   //confirm that charmander rested and speedbar is at zero only here:
                   restore.restedCharmander = true;
@@ -7144,14 +7144,13 @@ class progressBar {
 
 
 
-                  //debugging here -- delete when neccessary
-                  //turn of rest function for charmander when speed progress bar is zero
+                  //turn off rest function for charmander when speed progress bar is zero
                   console.log("restedCharmander status(2): " + restore.restedCharmander);
-                  console.log("Charmander rest function was disabled without making function6of6 false.(2)");
+                  console.log("Charmander rest function was disabled.(2)");
 
                 }
 
-                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 < 0 && restore.blastoiseSpeedDecreased === true) {
+                 if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseSpeedBar2  === 0 && restore.blastoiseSpeedDecreased === true || blastoiseSpeedBar2 <= 0 && restore.blastoiseSpeedDecreased === true) {
 
                   //confirm that blastoise rested and speedbar is at zero only here:
                   restore.restedBlastoise = true;
@@ -7179,11 +7178,9 @@ class progressBar {
                   }, 1000);// message is displayed after 1 sec.
 
 
-
-                  //debugging here -- delete when neccessary
-                  //turn of rest function for blastoise when speed progress bar is zero
+                  //turn off rest function for blastoise when speed progress bar is zero
                   console.log("restedBlastoise status(3): " + restore.restedBlastoise);
-                  console.log("Blastoise rest function was disabled without making function6of6 false.(3)");
+                  console.log("Blastoise rest function was disabled.(3)");
 
 
 
@@ -7262,7 +7259,7 @@ this.increaseComputerHP = function () {
 
 
       console.log("squirtleSpeedDecreased: " + restore.squirtleSpeedDecreased);
-      console.log("code was commented out *debugging*(4-1-1)");
+
 
       setTimeout(function() {
 
@@ -7552,7 +7549,7 @@ this.increaseComputerHP = function () {
 
 
       console.log("restedSquirtle hp: when > 40 is " + restore.restedSquirtle);
-      console.log("code was commented out *debugging*(1-1-1)");
+
 
 
     }//end of if statement for when squirtle hp > 40
@@ -7580,7 +7577,7 @@ this.increaseComputerHP = function () {
       computerSD.cartoonLaugh_sound.play();
 
       console.log("restedScyther hp: when > 40 is " + restore.restedScyther);
-      console.log("code was commented out *debugging*(1-1-2)");
+
 
 
     }//end of if statement for when scyther hp is > 40
@@ -7608,7 +7605,7 @@ this.increaseComputerHP = function () {
       computerSD.cartoonLaugh_sound.play();
 
       console.log("restedOnix hp: when > 40 is " + restore.restedOnix);
-      console.log("code was commented out *debugging*(1-1-3)");
+
 
 
     }//end of if statement when onix hp is > 40
@@ -7752,7 +7749,7 @@ class Sleep {
     this.restedSquirtle = false;
     this.restedScyther = false;
     this.restedOnix = false;
-    this.charamanderSpeedDecreased = false;
+    this.charmanderSpeedDecreased = false;
     this.pikachuSpeedDecreased = false;
     this.blastoiseSpeedDecreased = false;
     this.squirtleSpeedDecreased = false;
@@ -11954,7 +11951,7 @@ class computerMoves {
                   //make no changes to charmanderHpRecovered array
                   a7.charmanderHpRecovered.push(0);
 
-                  //make no changes to the chaSpeedProgressBa array
+                  //make no changes to the chaSpeedProgressBar array
                   a7.chaSpeedProgressBar.push(0);
 
 
@@ -12019,21 +12016,21 @@ class computerMoves {
         if (comp.scytherSelected === true  && p1.pikachuSelected === true) {
 
           //disable attack move for pikachu and scyther
-          player1.pikachuMoves[0].pikachuFunction1of6 = false;
-          computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+          player1.pikachuMoves[0].pikachuFunction6of6 = false;
+          computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
 
         }else if (comp.scytherSelected === true  &&  p1.charmanderSelected === true) {
 
           //disable attack move for charmander and scyther
-          player1.charmanderMoves[0].charmanderFunction1of6 = false;
-          computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+          player1.charmanderMoves[0].charmanderFunction6of6 = false;
+          computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
         }else if (comp.scytherSelected === true  &&  p1.blastoiseSelected === true) {
 
           //disable attack move for blastoise and scyther
-          player1.blastoiseMoves[0].blastoiseFunction1of6 = false;
-          computer.scytherMovesActivated[0].scytherFunction1of6 = false;
+          player1.blastoiseMoves[0].blastoiseFunction6of6 = false;
+          computer.scytherMovesActivated[0].scytherFunction6of6 = false;
 
         }//end of if statements
 
@@ -12047,8 +12044,7 @@ class computerMoves {
            confirm.enableMoves();
            console.log(confirm.makeMove[0]);
 
-           //disable attack move for scyther pokemon and pikachu
-           player1.pikachuMoves[0].pikachuFunction6of6 = false;
+
              break;
 
 
