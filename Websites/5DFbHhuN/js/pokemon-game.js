@@ -2,7 +2,7 @@
 /*
 NOTE:
 
-Last update: (06/27/2022)
+Last update: (06/28/2022)
 
 1) *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
@@ -10,7 +10,7 @@ Last update: (06/27/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
 6)
-7) first play as charmander and defeat squirtle -- fix hp progress bar for pikachu + scyther and blastoise + onix 
+7) 1) play as pikachu first then die -- select charmander or blastoise and progressbar dissapears 2) play as blastoise first then die -- select pikachu or charmander and progressbar dissapears as well *** high priority *** (06/28/2022)
 8) NOTE: whenever the HP progressbar disappears it means either 1) wrong pokemon is selected OR 2) something wrong with the if statement regarding the pokemonHP reference
 9)
 10)
@@ -5925,7 +5925,8 @@ class progressBar {
         //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-        switch (pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+        switch (pikachuHP2 < 0 || pikachuHP2 === 0  || charmanderHP5 < 0 || charmanderHP5 === 0 || blastoiseHP2 < 0 || blastoiseHP2 === 0 ||
+                pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
                 pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
           case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
@@ -6036,7 +6037,7 @@ class progressBar {
 
 
           //change color of HP progress bar here:
-          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 > 40) {
+          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 > 0 && pikachuHP2 <= 100) {
 
             //hp
             pikachuHPDamage2 = pikachuHP2;
@@ -6047,7 +6048,7 @@ class progressBar {
             document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
             (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderHP5 > 40) {
+          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderHP5 > 0 && charmanderHP5 <= 100) {
 
             //hp
             charmanderHPDamage2 = charmanderHP5;
@@ -6059,7 +6060,7 @@ class progressBar {
             (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true) {
+          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseHP2 > 0 && blastoiseHP2 <= 100) {
 
             //hp
             blastoiseHPDamage2 = blastoiseHP2;
@@ -6071,45 +6072,10 @@ class progressBar {
             (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-          }//end of if statement #1 1 of 2
-
-
-          if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 <= 40) {
-
-            //hp
-            pikachuHPDamage2 = pikachuHP2;
-            document.querySelector(".player1HP").style.width = pikachuHPDamage2 +   "%";
-            (pikachuHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-            //speedbar
-            document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
-            (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderHP5 <= 40) {
-
-            //hp
-            charmanderHPDamage2 = charmanderHP5;
-            document.querySelector(".player1HP").style.width = charmanderHPDamage2 +   "%";
-            (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-            //speedbar
-            document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
-            (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseHP2 <= 40) {
-
-            //hp
-            blastoiseHPDamage2 = blastoiseHP2;
-            document.querySelector(".player1HP").style.width = blastoiseHPDamage2 +   "%";
-            (blastoiseHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-            //speedbar
-            document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
-            (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+          }//end of if statement
 
 
 
-          }//end of if statement #1 2 of 2
 
 
 
@@ -6363,7 +6329,8 @@ class progressBar {
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+              switch(pikachuHP2 < 0 || pikachuHP2 === 0  || charmanderHP5 < 0 || charmanderHP5 === 0 || blastoiseHP2 < 0 || blastoiseHP2 === 0 ||
+                     pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
                      pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
               case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
@@ -6476,7 +6443,7 @@ class progressBar {
 
 
               //change color of HP progress bar here:
-              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 > 40) {
+              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 > 0 && pikachuHP2 <= 100) {
 
 
                 //hp
@@ -6488,7 +6455,7 @@ class progressBar {
                 document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
                 (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderHP5 > 40) {
+              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderHP5 > 0 && charmanderHP5 <= 100) {
 
                 //hp
                 charmanderHPDamage = charmanderHP5;
@@ -6500,7 +6467,7 @@ class progressBar {
                 (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-              }else if (p1.blastoiseSelected === true && comp.scytherSelected === true) {
+              }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseHP2 > 0 && blastoiseHP2 <= 100) {
 
                 //hp
                 blastoiseHPDamage = blastoiseHP2;
@@ -6512,47 +6479,10 @@ class progressBar {
                 (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-              }//end of if statement #1 1 of 2
-
-
-              if(p1.pikachuSelected === true && comp.scytherSelected === true && pikachuHP2 <= 40) {
-
-                //hp
-                pikachuHPDamage = pikachuHP2;
-                document.querySelector(".player1HP").style.width = pikachuHPDamage +   "%";
-                (pikachuHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                //speedbar
-                document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
-                (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-
-              }else if (p1.charmanderSelected === true && comp.scytherSelected === true && charmanderHP5 <= 40) {
-
-                //hp
-                charmanderHPDamage = charmanderHP5;
-                document.querySelector(".player1HP").style.width = charmanderHPDamage +   "%";
-                (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                //speedbar
-                document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
-                (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-              }else if (p1.blastoiseSelected === true && comp.scytherSelected === true && blastoiseHP2 <= 40) {
-
-                //hp
-                blastoiseHPDamage = blastoiseHP2;
-                document.querySelector(".player1HP").style.width = blastoiseHPDamage +   "%";
-                (blastoiseHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                //speedbar
-                document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
-                (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+              }//end of if statement
 
 
 
-
-              }//end of if statement #1 2 of 2
 
 
 
@@ -6810,7 +6740,8 @@ class progressBar {
               //if statement ensures that some functions are activated before making changes to the progress bar
 
 
-              switch(pikachuHP2 < 0 || pikachuHP2 >= 0  || charmanderHP5 < 0 || charmanderHP5 >= 0 || blastoiseHP2 < 0 || blastoiseHP2 >= 0 ||
+              switch(pikachuHP2 < 0 || pikachuHP2 === 0  || charmanderHP5 < 0 || charmanderHP5 === 0 || blastoiseHP2 < 0 || blastoiseHP2 === 0 ||
+                     pikachuHP2 > 0 && pikachuHP2 <= 100 || charmanderHP5 > 0 && charmanderHP5 <= 100 || blastoiseHP2 > 0 && blastoiseHP2 <= 100 ||
                      pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0) {
 
                 case (pikachuHP2 < 0 || charmanderHP5 < 0 || blastoiseHP2 < 0):
@@ -6925,7 +6856,7 @@ class progressBar {
 
 
                 //change color of HP progress bar here:
-                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuHP2 > 40) {
+                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuHP2 > 0 && pikachuHP2 <= 100) {
 
                   //hp
                   pikachuHPDamage3 = pikachuHP2;
@@ -6936,7 +6867,7 @@ class progressBar {
                   document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
                   (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-                }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderHP5 > 40) {
+                }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderHP5 > 0 && charmanderHP5 <= 100) {
 
                   //hp
                   charmanderHPDamage3 = charmanderHP5;
@@ -6948,7 +6879,7 @@ class progressBar {
                   (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-                }else if (p1.blastoiseSelected === true && comp.onixSelected === true) {
+                }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseHP2 > 0 && blastoiseHP2 <= 100) {
 
                   //hp
                   blastoiseHPDamage3 = blastoiseHP2;
@@ -6960,46 +6891,10 @@ class progressBar {
                   (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-                }//end of if statement #1 1 of 2
-
-
-                if(p1.pikachuSelected === true && comp.onixSelected === true && pikachuHP2 <= 40) {
-
-                  //hp
-                  pikachuHPDamage3 = pikachuHP2;
-                  document.querySelector(".player1HP").style.width = pikachuHPDamage3 +   "%";
-                  (pikachuHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                  //speedbar
-                  document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
-                  (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-                }else if (p1.charmanderSelected === true && comp.onixSelected === true && charmanderHP5 <= 40) {
-
-                  //hp
-                  charmanderHPDamage3 = charmanderHP5;
-                  document.querySelector(".player1HP").style.width = charmanderHPDamage3 +   "%";
-                  (charmanderHP5 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                  //speedbar
-                  document.querySelector(".playerSpeed").style.width = charmanderSpeedBar2  +   "%";
-                  (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
-
-                }else if (p1.blastoiseSelected === true && comp.onixSelected === true && blastoiseHP2 <= 40) {
-
-                  //hp
-                  blastoiseHPDamage3 = blastoiseHP2;
-                  document.querySelector(".player1HP").style.width = blastoiseHPDamage3 +   "%";
-                  (blastoiseHP2 <= 40) ? document.querySelector('.player1HP').style.backgroundColor = "#FD0202" : document.querySelector('.player1HP').style.backgroundColor = "#A6EDED"; //blue
-
-                  //speedbar
-                  document.querySelector(".playerSpeed").style.width = blastoiseSpeedBar2  +   "%";
-                  (blastoiseSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
+                }//end of if statement
 
 
 
-
-                }//end of if statement #1 2 of 2
 
 
 
@@ -10379,7 +10274,7 @@ class computerMoves {
     a1.charmanderBackup.push(-5);
 
     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-    squirtleProgressBar.decreasePlayerHP();
+    charmanderProgressBar.decreasePlayerHP();
 
     //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
     array1.checkTheStatus();
@@ -10507,7 +10402,7 @@ class computerMoves {
     a1.charmanderBackup.push(-35);
 
     //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-    squirtleProgressBar.decreasePlayerHP();
+    charmanderProgressBar.decreasePlayerHP();
 
     //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
     array1.checkTheStatus();
@@ -10650,7 +10545,7 @@ class computerMoves {
       a1.charmanderBackup.push(-10);
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-      squirtleProgressBar.decreasePlayerHP();
+      charmanderProgressBar.decreasePlayerHP();
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
@@ -10704,7 +10599,7 @@ class computerMoves {
       a5.blastoiseBackup.push(-5);
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-      squirtleProgressBar.decreasePlayerHP();
+      blastoiseProgressBar.decreasePlayerHP();
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
@@ -10795,7 +10690,7 @@ class computerMoves {
         a1.charmanderBackup.push(-30);
 
         //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-        squirtleProgressBar.decreasePlayerHP();
+        charmanderProgressBar.decreasePlayerHP();
 
         //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
         array1.checkTheStatus();
@@ -10840,7 +10735,7 @@ class computerMoves {
         a5.blastoiseBackup.push(-5);
 
         //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when squirtle attacks)
-        squirtleProgressBar.decreasePlayerHP();
+        blastoiseProgressBar.decreasePlayerHP();
 
         //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
         array1.checkTheStatus();
@@ -11176,7 +11071,7 @@ class computerMoves {
       a3.pikachuBackup.push(-25);
 
       //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-      scytherProgressBar.decreasePlayerHP2();
+      pikachuProgressBar.decreasePlayerHP2();
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
@@ -11202,7 +11097,7 @@ class computerMoves {
       a1.charmanderHealthBar.push(-5);
       a1.charmanderBackup.push(-5);
 
-      scytherProgressBar.decreasePlayerHP2();
+      charmanderProgressBar.decreasePlayerHP2();
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
@@ -11224,7 +11119,7 @@ class computerMoves {
       a5.blastoiseHealthBar.push(-5);
       a5.blastoiseBackup.push(-5);
 
-      scytherProgressBar.decreasePlayerHP2();
+      blastoiseProgressBar.decreasePlayerHP2();
 
       //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
       array1.checkTheStatus();
@@ -11308,7 +11203,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       pikachuProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11337,7 +11232,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       charmanderProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11365,7 +11260,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       blastoiseProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11449,7 +11344,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       pikachuProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11476,7 +11371,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       charmanderProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11503,7 +11398,7 @@ class computerMoves {
 
 
        //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-       scytherProgressBar.decreasePlayerHP2();
+       blastoiseProgressBar.decreasePlayerHP2();
 
        //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
        array1.checkTheStatus();
@@ -11589,7 +11484,7 @@ class computerMoves {
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-         scytherProgressBar.decreasePlayerHP2();
+         pikachuProgressBar.decreasePlayerHP2();
 
          //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
          array1.checkTheStatus();
@@ -11616,7 +11511,7 @@ class computerMoves {
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-         scytherProgressBar.decreasePlayerHP2();
+         charmanderProgressBar.decreasePlayerHP2();
 
          //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
          array1.checkTheStatus();
@@ -11643,7 +11538,7 @@ class computerMoves {
 
 
          //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-         scytherProgressBar.decreasePlayerHP2();
+         blastoiseProgressBar.decreasePlayerHP2();
 
          //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
          array1.checkTheStatus();
@@ -11729,7 +11624,7 @@ class computerMoves {
 
 
            //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-           scytherProgressBar.decreasePlayerHP2();
+           pikachuProgressBar.decreasePlayerHP2();
 
            //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
            array1.checkTheStatus();
@@ -11756,7 +11651,7 @@ class computerMoves {
 
 
            //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-           scytherProgressBar.decreasePlayerHP2();
+           charmanderProgressBar.decreasePlayerHP2();
 
            //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
            array1.checkTheStatus();
@@ -11783,7 +11678,7 @@ class computerMoves {
 
 
            //this function changes the HTML progress bar that displays the pokemon HP (does damage to player1 when pikachu attacks)
-           scytherProgressBar.decreasePlayerHP2();
+           blastoiseProgressBar.decreasePlayerHP2();
 
            //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
            array1.checkTheStatus();
@@ -12236,7 +12131,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          blastoiseProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12262,7 +12157,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          charmanderProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12288,7 +12183,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          pikachuProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12373,7 +12268,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          blastoiseProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12396,7 +12291,7 @@ class computerMoves {
 
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          charmanderProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12418,7 +12313,7 @@ class computerMoves {
           a3.pikachuBackup.push(-30);
 
           //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-          onixProgressBar.decreasePlayerHP3();
+          pikachuProgressBar.decreasePlayerHP3();
 
           //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
           array1.checkTheStatus();
@@ -12508,7 +12403,7 @@ class computerMoves {
 
 
             //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-            onixProgressBar.decreasePlayerHP3();
+            blastoiseProgressBar.decreasePlayerHP3();
 
             //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
             array1.checkTheStatus();
@@ -12534,7 +12429,7 @@ class computerMoves {
 
 
             //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-            onixProgressBar.decreasePlayerHP3();
+            charmanderProgressBar.decreasePlayerHP3();
 
             //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
             array1.checkTheStatus();
@@ -12560,7 +12455,7 @@ class computerMoves {
 
 
             //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-            onixProgressBar.decreasePlayerHP3();
+            pikachuProgressBar.decreasePlayerHP3();
 
             //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
             array1.checkTheStatus();
@@ -12647,7 +12542,7 @@ class computerMoves {
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-              onixProgressBar.decreasePlayerHP3();
+              blastoiseProgressBar.decreasePlayerHP3();
 
               //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
               array1.checkTheStatus();
@@ -12674,7 +12569,7 @@ class computerMoves {
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-              onixProgressBar.decreasePlayerHP3();
+              charmanderProgressBar.decreasePlayerHP3();
 
               //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
               array1.checkTheStatus();
@@ -12701,7 +12596,7 @@ class computerMoves {
 
 
               //this function changes the HTML progress bar that displays the pokemon HP (onix does damage to player1 when blastoise attacks)
-              onixProgressBar.decreasePlayerHP3();
+              pikachuProgressBar.decreasePlayerHP3();
 
               //This function checks if pokemon health is greater then 40 or less than 40. It also calls other functions
               array1.checkTheStatus();
