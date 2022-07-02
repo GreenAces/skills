@@ -2,14 +2,14 @@
 /*
 NOTE:
 
-Last update: (06/29/2022)
+Last update: (07/1/2022)
 
 1) *** high priority *** (06/14/2022)
 2) make blastoise character smaller or create space for feedback form *** high priority *** (06/13/2022)
 3) updateHealthInformation was recently inserted to blockPlayer1Pokemon2 and 3 functions to fix the HP progressbar from going blank -- find an alternative solution and remove later *** high priority *** (06/17/2022)
 4) create code for blockPlayer1Pokemon2 and 3 (when pikachu or blastoise lose the game) and 1 more if statement for blockPlayer1Pokemon regarding when blastoise is selected 1st instead of pikachu *** high priority *** (06/16/2022)
 5) redirect the user back to the homepage after filling out the pokemon form or add a homepage button to the form itself *** high priority *** (06/09/2022)
-6) 1) When pikachu and onix die and blastoise is selected -- player can't attack squirtle *** high priority *** (06/29/2022)
+6)
 7) 1) play as pikachu first then die -- select charmander or blastoise and progressbar dissapears 2) play as blastoise first then die -- select pikachu or charmander and progressbar dissapears as well *** high priority *** (06/28/2022)
 8) NOTE: whenever the HP progressbar disappears it means either 1) wrong pokemon is selected OR 2) something wrong with the if statement regarding the pokemonHP reference
 9)
@@ -3292,7 +3292,6 @@ this.isBlastoiseDead = function() {
       let scytherHP4 = a4.scytherHealthBar.reduce(array2.PokemonHPReduced);
       let blastoiseHP4 = a5.blastoiseHealthBar.reduce(array1.PokemonHPReduced);
       let onixHP4 = a6.onixHealthBar.reduce(array2.PokemonHPReduced);
-      let lastPlayerVictory = player1CH.savedPokemonName.pop();
 
 
 
@@ -3303,6 +3302,7 @@ this.isBlastoiseDead = function() {
       pikachuHP4 <= 0 && squirtleHP3 >= 1  && p1.pikachuSelected === true && comp.squirtleSelected === true ||
       blastoiseHP4 <= 0 && squirtleHP3 >= 1  && p1.blastoiseSelected === true && comp.squirtleSelected === true) {
 
+    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[0] + " died. Pick another pokemon to continue the battle.");
     p1.battle1Player1 = false;
     comp.battle1Computer = true;
     console.log("battle1Player1: " + p1.battle1Player1);
@@ -3311,14 +3311,11 @@ this.isBlastoiseDead = function() {
     p1.isPikachuDead();
     p1.isBlastoiseDead();
 
-    document.getElementById("statusProgress").innerHTML=("Pick another pokemon to continue the battle.");
-
-
   }else if (pikachuHP4 <= 0 && scytherHP4 >= 1  && p1.pikachuSelected === true && comp.scytherSelected === true ||
             charmanderHP3 <= 0 && scytherHP4 >= 1 && p1.charmanderSelected === true && comp.scytherSelected === true ||
             blastoiseHP4  <= 0 && scytherHP4 >= 1 && p1.blastoiseSelected === true && comp.scytherSelected === true) {
 
-
+    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[5] + " died. Pick another pokemon to continue the battle.");
     p1.battle2Player1 = false;
     comp.battle2Computer = true;
     console.log("battle2Player1: " + p1.battle2Player1);
@@ -3327,14 +3324,11 @@ this.isBlastoiseDead = function() {
     p1.isPikachuDead();
     p1.isBlastoiseDead();
 
-    document.getElementById("statusProgress").innerHTML=("Pick another pokemon to continue the battle.");
-
-
   }else if (blastoiseHP4 <= 0 && onixHP4 >= 1  && p1.blastoiseSelected === true && comp.onixSelected === true ||
             charmanderHP3 <= 0 && onixHP4 >= 1 && p1.charmanderSelected === true && comp.onixSelected === true ||
             pikachuHP4 <= 0 && onixHP4 >= 1  && p1.pikachuSelected === true && comp.onixSelected === true) {
 
-
+    document.getElementById("statusProgress").innerHTML=(p1.pokemonName[2] +" died. Pick another pokemon to continue the battle.");
     p1.battle3Player1 = false;
     comp.battle3Computer = true;
     console.log("battle3Player1: " + p1.battle3Player1);
@@ -3342,9 +3336,6 @@ this.isBlastoiseDead = function() {
     p1.isCharmanderDead();
     p1.isPikachuDead();
     p1.isBlastoiseDead();
-
-    document.getElementById("statusProgress").innerHTML=("Pick another pokemon to continue the battle.");
-
 
   }//end of multiple if statements
 
@@ -3357,11 +3348,7 @@ this.isBlastoiseDead = function() {
       pikachuHP4 >= 1 && squirtleHP3 <= 0   && p1.pikachuSelected === true && comp.squirtleSelected === true ||
       blastoiseHP4 >= 1 && squirtleHP3 <= 0   && p1.blastoiseSelected === true && comp.squirtleSelected === true) {
 
-    (charmanderHP3 >= 1 && squirtleHP3 <= 0) ? player1CH.savedPokemonName.push("Charmander") : console.log("null..");
-    (pikachuHP4 >= 1 && squirtleHP3 <= 0) ? player1CH.savedPokemonName.push("Pikachu") : console.log("null (2)...");
-    (blastoiseHP4 >= 1 && squirtleHP3 <= 0) ? player1CH.savedPokemonName.push("Blastoise") : console.log("null (3)...");
-
-    document.getElementById("statusProgress3").innerHTML=(lastPlayerVictory +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[0] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle1Computer = false;
     p1.battle1Player1 = true;
     console.log("battle1Player1: " + p1.battle1Player1);
@@ -3374,11 +3361,7 @@ this.isBlastoiseDead = function() {
             charmanderHP3 >= 1 && scytherHP4 <= 0  && p1.charmanderSelected === true && comp.scytherSelected === true ||
             blastoiseHP4 >= 1 && scytherHP4 <= 0  && p1.blastoiseSelected === true && comp.scytherSelected === true) {
 
-    (pikachuHP4 >= 1 && scytherHP4 <= 0) ? player1CH.savedPokemonName.push("Pikachu") : console.log("null...");
-    (charmanderHP3 >= 1 && scytherHP4 <= 0) ? player1CH.savedPokemonName.push("Charmander") : console.log("null (2)...");
-    (blastoiseHP4 >= 1 && scytherHP4 <= 0) ? player1CH.savedPokemonName.push("Blastoise") : console.log("null (3)...");
-
-    document.getElementById("statusProgress3").innerHTML=(lastPlayerVictory +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[5] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle2Computer = false;
     p1.battle2Player1 = true;
     console.log("battle2Player1: " + p1.battle2Player1);
@@ -3391,11 +3374,7 @@ this.isBlastoiseDead = function() {
             charmanderHP3 >= 1 && onixHP4 <= 0  && p1.charmanderSelected === true && comp.onixSelected === true ||
             pikachuHP4 >= 1 && onixHP4 <= 0  && p1.pikachuSelected === true && comp.onixSelected === true) {
 
-    (blastoiseHP4 >= 1 && onixHP4 <= 0) ? player1CH.savedPokemonName.push("Blastoise") : console.log("null...");
-    (charmanderHP3 >= 1 && onixHP4 <= 0) ? player1CH.savedPokemonName.push("Charmander") : console.log("null (2)...");
-    (pikachuHP4 >= 1 && onixHP4 <= 0) ? player1CH.savedPokemonName.push("Pikachu") : console.log("null (3)...");
-
-    document.getElementById("statusProgress3").innerHTML=(lastPlayerVictory +" won the match! Please wait for computer to select another pokemon.");
+    document.getElementById("statusProgress3").innerHTML=(p1.pokemonName[2] +" won the match! Please wait for computer to select another pokemon.");
     comp.battle3Computer = false;
     p1.battle3Player1 = true;
     console.log("battle3Player1: " + p1.battle3Player1);
@@ -3603,13 +3582,13 @@ if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player
        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
        p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
-        ? p1.blockPlayer1Pokemon() : console.log("(BPP-003) blockPlayer1Pokemon failed...");
+        ? p1.blockPlayer1Pokemon() : console.log("(BPP-002) blockPlayer1Pokemon failed...");
 
       //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 2 of 2
       (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
        p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
        p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true)
-        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-004) blockPlayer1Pokemon3 failed...");
+        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-003) blockPlayer1Pokemon3 failed...");
 
 
 
@@ -3649,20 +3628,20 @@ if (p1.battle1Player1 === true && p1.battle2Player1 === true && p1.battle3Player
       (p1.blastoiseSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
        p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
        p1.charmanderSelected === true && p1.pikachuSelected === false && p1.pikachuDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
-       ? p1.blockPlayer1Pokemon2() : console.log("(BPP-005) blockPlayer1Pokemon2 failed...");
+       ? p1.blockPlayer1Pokemon2() : console.log("(BPP-004) blockPlayer1Pokemon2 failed...");
 
        //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 2 of 3
        (p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
         p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true ||
         p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true ||
         p1.pikachuSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.blastoiseSelected === false && p1.blastoiseDied === true)
-         ? p1.blockPlayer1Pokemon() : console.log("(BPP-006) blockPlayer1Pokemon failed...");
+         ? p1.blockPlayer1Pokemon() : console.log("(BPP-005) blockPlayer1Pokemon failed...");
 
        //conditional ternary determines which pokemon should be loaded next if player1 pokemon dies 3 of 3
        (p1.charmanderSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
         p1.pikachuSelected === true && p1.blastoiseSelected === false && p1.blastoiseDied === true ||
         p1.blastoiseSelected === true && p1.charmanderSelected === false && p1.charmanderDied === true && p1.pikachuSelected === false && p1.pikachuDied === true)
-        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-007) blockPlayer1Pokemon3 failed...");
+        ? p1.blockPlayer1Pokemon3() : console.log("(BPP-006) blockPlayer1Pokemon3 failed...");
 
 
 
@@ -4148,8 +4127,8 @@ class changePokemon {
                        {Type: "water", pokemonName: this.ComputerPokemonChoices[2], isSelected: false,   character:"Squirtle"} //squirtle
                         ];
 
-    this.savedPokemonName = []; //empty array that will be filled with pokemon names to be used later  -- the 1st one will be used to store pokemon victories
-    this.savedPokemonName2 = []; //empty array that will be filled with pokemon names to be used later -- the 2nd one will be used for storing computer pokemon when they are loaded
+    this.savedPokemonName = []; // NOTE: empty array of that will be filled with pokemon names to be used later  -- the 1st one will be used to make the game more challenging for player1 -- see squPokeImage2 on line 699 for examples
+    this.savedPokemonName2 = []; // NOTE: empty array of that will be filled with pokemon names to be used later -- the 2nd one will be used for storing names only
 
 
 
@@ -6057,8 +6036,6 @@ class progressBar {
                 pikachuSpeedBar2 === 50 ||  pikachuSpeedBar2 <= 0 || charmanderSpeedBar2 === 50 || charmanderSpeedBar2 <= 0 || blastoiseSpeedBar2 === 50 || blastoiseSpeedBar2 <= 0):
 
 
-
-
           //change color of HP progress bar here:
           if(p1.pikachuSelected === true && comp.squirtleSelected === true && pikachuHP2 > 0 && pikachuHP2 <= 100) {
 
@@ -6071,11 +6048,7 @@ class progressBar {
             document.querySelector(".playerSpeed").style.width = pikachuSpeedBar2  +   "%";
             (pikachuSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
-          }
-
-          if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderHP5 > 0 && charmanderHP5 <= 100) {
-
-            console.log("(C&S) troubleshooting this issue -- delete when ready");
+          }else if (p1.charmanderSelected === true && comp.squirtleSelected === true && charmanderHP5 > 0 && charmanderHP5 <= 100) {
 
             //hp
             charmanderHPDamage2 = charmanderHP5;
@@ -6087,9 +6060,7 @@ class progressBar {
             (charmanderSpeedBar2 >= 50) ? document.querySelector('.playerSpeed').style.backgroundColor = "#A6EDED" : document.querySelector('.playerSpeed').style.backgroundColor = "#FD0202"; //red
 
 
-          }
-
-          if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseHP2 > 0 && blastoiseHP2 <= 100) {
+          }else if (p1.blastoiseSelected === true && comp.squirtleSelected === true && blastoiseHP2 > 0 && blastoiseHP2 <= 100) {
 
             //hp
             blastoiseHPDamage2 = blastoiseHP2;
