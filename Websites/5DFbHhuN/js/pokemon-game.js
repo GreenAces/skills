@@ -15,7 +15,7 @@ Last update: (07/03/2022)
 9)
 10)
 11)
-12)
+12) add meta tags on index page for better search engine optimization *** high priority *** (07/03/2022)
 14) remove bugs or useless code that you don't use  *** low priority *** (03/25/2022)
 
 
