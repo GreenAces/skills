@@ -1,0 +1,8 @@
+E:\Practice\Programming\skills\C#_projects\Chapter3\bin\Debug\Chapter3.exe.config
+E:\Practice\Programming\skills\C#_projects\Chapter3\bin\Debug\Chapter3.exe
+E:\Practice\Programming\skills\C#_projects\Chapter3\bin\Debug\Chapter3.pdb
+E:\Practice\Programming\skills\C#_projects\Chapter3\obj\Debug\Chapter3.csproj.AssemblyReference.cache
+E:\Practice\Programming\skills\C#_projects\Chapter3\obj\Debug\Chapter3.csproj.SuggestedBindingRedirects.cache
+E:\Practice\Programming\skills\C#_projects\Chapter3\obj\Debug\Chapter3.csproj.CoreCompileInputs.cache
+E:\Practice\Programming\skills\C#_projects\Chapter3\obj\Debug\Chapter3.exe
+E:\Practice\Programming\skills\C#_projects\Chapter3\obj\Debug\Chapter3.pdb
