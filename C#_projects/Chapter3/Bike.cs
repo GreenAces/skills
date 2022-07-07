@@ -13,14 +13,76 @@ namespace Chapter3
     {
         private float speed;
         private int color;
+        private static int nbBikes;//private and static means that the methods can be shared across instances of the bike class
 
-        public Bike()
+        public static void explainWhatAbikeIs() 
         {
-            //a constructor is created within a class, it can be left empty or deleted.
-            //A constructor is a special method that is used to initialize objects.
-            //You can think of a contructor as a unique trait that only that particular object can have. (example: class --> person, constructor --> fingerprint ID)
 
-        }//public Bike constructor
+            Console.WriteLine("A bike is human-powered, pedal-driven, single-track vehicle, having two wheels attached to a frame, one behind the other");
+        }
+
+        public int getNbBikes() //setting getNbBikes to public means that it can be accessed from outside the class (whenever it's called)
+        {
+            return nbBikes;
+        }
+        private void increaseNbBikes()  //setting increaseNbBikes to private means that only the bike class has access to this method
+        {
+            nbBikes++;//adds 1 to the number of bikes 
+        
+        }
+
+        //Destructors are responsible for when an object is deleted 
+        //They must have the same name as a class and is followed by a tilde ~ 
+        //NOTE: a destructors can't take parameters nor return a value
+        ~Bike() 
+        {
+            //add some code here
+
+
+        }//end of destructor
+
+        //default Bike constructor
+        public Bike() 
+        {
+
+            increaseNbBikes();
+
+
+        }//end of default Bike constructor  
+
+
+        //public Bike constructor #1
+        public int getColor()
+        {
+
+            return color;
+        }//end of constructor #1
+
+        //public Bike constructor #2
+        public Bike(int newColor)
+        {
+            //A constructor is created within a class, it can be left empty or deleted.
+            //A constructor is a special method that is used to initialize objects.
+            //You can think of a contructor as a unique trait that only a particular object can have. (example: class --> person, constructor --> fingerprint)
+            //You can have more than 1 contructor to serve different purposes.
+
+            color = newColor;//NOTE: doesn't require this keyword...
+            increaseNbBikes();
+
+        }//end of constructor #2
+
+
+        //public Bike constructor #3
+        public Bike(int newColor, float newSpeed) 
+        {
+
+            color = newColor;
+            speed = newSpeed;
+            increaseNbBikes();
+
+        }//end of construtor #3
+
+
 
         public void accelerate() 
         {
