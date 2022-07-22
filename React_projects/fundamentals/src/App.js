@@ -11,20 +11,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+
+
         <h1>Hello {title}</h1>
+        <p>Hello, Samantha! ;)</p>
         <label htmlFor="search">Search: </label>
         <input id="search" type="text"/>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
     </div>
   );
 }
