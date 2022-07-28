@@ -41,7 +41,7 @@ function App() {
       <label htmlFor="search">Search: </label>
       <input id="search" type="text"/>
 
-      <Search />
+      
 
       <hr />
 
@@ -69,7 +69,7 @@ function App() {
 
 
 
-      <List />
+
     </div>
   );
 }
