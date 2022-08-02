@@ -1,5 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
+//import './App.css';
+
+import * as React from 'react';
 
 const list =
 [
@@ -31,12 +33,13 @@ function App() {
 
 
   return (
+
     <div className="App">
 
 
       <h1> My Hacker Stories</h1>
 
-
+      <Search /> 
 
       <label htmlFor="search">Search: </label>
       <input id="search" type="text"/>
@@ -45,7 +48,7 @@ function App() {
 
       <hr />
 
-
+    
 
       <ul>
 
