@@ -1,5 +1,11 @@
 import React from 'react'; //allows you to write JSX
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; //allows you to use the reactDOM.render()
+import Header from "./Header.js"; //allows you to import larger code from a js file
+import Body from "./Body.js";
+import Footer from "./Footer.js";
+import './index.css'; //allows you to use css
+
+
 
 
 
@@ -23,55 +29,18 @@ Nested Components or React tools look like this => <ComponentName />
 */
 
 
-function Header() {
-
-  return (
-
-    <header>
-    <nav>
-    <img src="./react-logo.png" width="40px"/>
-    <ul className="nav-items">
-    <li>Pricing</li>
-    <li>About</li>
-    <li>Contact</li>
-    </ul>
-    </nav>
-    </header>
-
-  )
-}
-
-function Body() {
-
-  return (
-
-    <div>
-    <h2>Why I love React: </h2>
-    <ul>
-    <li>It has an awesome library and you can hang out with the kool kids ;)</li>
-    <li>You can get a job as a front end developer</li>
-    <li>It's mobile friendly</li>
-    </ul>
-    </div>
-
-
-  )
-}
 
 
 
 
-function Footer() {
-
-  return (
-
-      <small>Copyright @ 2022. All rights reserved.</small>
-  )
-}
 
 
 
-function Page () {
+
+
+
+
+function App () {
 
   return (
     <div>
@@ -85,4 +54,4 @@ function Page () {
 }
 
 
-ReactDOM.render(<Page />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
