@@ -7,11 +7,9 @@ import './index.css'; //allows you to use css
 
 
 
-
-
-
-
 /*
+
+
 video 2020 @ 1:34:27
 Video 2022 @ 1:21:14
 

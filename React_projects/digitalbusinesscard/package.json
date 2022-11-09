@@ -1,0 +1,20 @@
+{
+  "name": "digitalbusinesscard",
+  "type": "module",
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "webpack": "^2.0",
+    "babel-core": "^6.0",
+    "babel-loader": "^7.0",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*"
+  },
+  "scripts": {
+    "start": "node App.js",
+    "build": "webpack",
+    "watch": "webpack -w"
+  }
+}

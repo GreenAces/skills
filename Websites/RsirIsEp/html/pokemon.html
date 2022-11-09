@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Play free games on GreenAces. Download games on Andriod or play steam games on your computer or PC">
+  <meta name="keywords" content="Play, free games, GreenAces, pokemon game, cool games, puzzle games, shooting games, racing games, games download, games">
+  <meta name="author" content="GreenAces">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>GreenAces Pokemon Game || Pick your favorite pokemon and let them duel against your opponent. If all 3 pokemon are dead then you lose!</title>
+  <link rel="stylesheet" type="text/css" href="https://greenaces.site/5DFbHhuN/css/pokemon.css">
+</head>
+<body>
+
+  <div id="header"><!--div tag 1 of 3 opened -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="https://greenaces.site"><img id="GreenAcesNavbarBrand" src = "https://greenaces.site/5DFbHhuN/images/greenaces_logo/GreenAces-logo.jpg" alt= "GreenAces-logo"></a></img>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProjects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Projects
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProjects">
+            <li><a class="dropdown-item" href="#"><b>Browser Games</b></a></li>
+            <li><hr class="dropdown-divider3"></li>
+            <li><a class="dropdown-item" href="https://greenaces.site/lucky7.html">Lucky 7</a></li>
+            <li><a class="dropdown-item" href="https://greenaces.site/pokemon.html">Pokemon</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAndroid" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Andriod
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownProjects">
+            <li><a class="dropdown-item" href="#"><b>Apps</b></a></li>
+            <li><hr class="dropdown-divider3"></li>
+            <li><a class="dropdown-item" href="#">App 1</a></li>
+            <li><a class="dropdown-item" href="#">App 2</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOther" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Other
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownOther">
+            <li><a class="dropdown-item" href="https://greenaces.site/index3.html">Test 1</a></li>
+            <li><hr class="dropdown-divider1"></li>
+            <li><a class="dropdown-item" href="https://greenaces.site/practice.html">Test 2</a></li>
+            <li><hr class="dropdown-divider2"></li>
+            <li><a class="dropdown-item" href="https://greenaces.site/pokemonForm.php">Test 3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div><!--div tag 1 of 3 closed -->
+
+
+
+  <!-- bootstrap5 containers-->
+
+  <!-- container layout setup  -->
+
+
+<div class="container">
+  <div class="row row-cols-2">
+    <div class="col" id ="column1">
+
+      <!--computer pokemon_icon-indicators-->
+
+      <table id="tablePokemonIconIndicators2">
+        <tr>
+          <td><p id="squirtleIcon"></td></p>
+          <td><p id="ScytherIcon"></td></p>
+          <td><p id="OnixIcon"></td></p>
+        </tr>
+      </table>
+
+
+      </div>
+    <div class="col" id ="column2">
+
+      <!--player1 pokemon_icon-indicators-->
+
+      <div class ="container">
+
+        <table id="tablePokemonIconIndicators">
+          <tr>
+            <td><p id="charmanderIcon"></td></p>
+            <td><p id="PikachuIcon"></td></p>
+            <td><p id="BlastoiseIcon"></td></p>
+          </tr>
+        </table>
+
+      </div>
+
+      <!-- Column 7 and column 12 are empty. Use them wislely -->
+
+
+      </div>
+    <div class="col" id ="column3">
+
+      <!-- computer pokemon progress bar -->
+
+
+        <div class="CpuStatus">
+          <p><b>Computer Pokemon:</p></b>
+          <p id="cpuPokemonName"></p>
+          <p id="cpuHpFont"><b>HP:</b></p>
+          <div class="cpuHP-progressBarBackground">
+        <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p id="cpuSpeedFont"><b>Speed:</b></p>
+        <div class="cpuSpeed-progressBarBackground">
+        <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+
+
+      </div>
+    <div class="col"id ="column4">
+
+      <!-- computer pokemon -->
+
+<div class="CpuPokemonContainer">
+
+
+
+<!-- image goes here -->
+<p id="CpuPokeImage"></p>
+</div>
+
+
+    </div>
+    <div class="col" id ="column5">
+
+<!--this space needs to be empty for player1 attack image to display properly -->
+
+
+      </div>
+    <div class="col" id ="column6">
+
+
+
+<!-- player1 attack image goes here -->
+<div class="AttackGraphicContainer">
+<p id="player1AttackImage"></p>
+</div>
+
+
+      </div>
+      <div class="col" id ="column7">
+
+        <!--column 7 is also empty -->
+
+      </div>
+    <div class="col" id ="column8">
+
+<!-- another empty column. use this space carefully -->
+
+
+    </div>
+    <div class="col" id ="column9">
+
+      <!-- player1 pokemon and text indicators go here -->
+
+      <div class="Player1PokemonContainer">
+
+        <!-- put all text indicators in a div tag to reduce space in this order statusProgress 1,3,2  -->
+
+        <div class="statusLayoutProgress">
+          <p id="statusProgress"></p>
+          <p id="statusProgress3"></p><a id="sendLink" href="#"></a>
+          <p id="statusProgress2"></p>
+        </div>
+
+
+
+
+        <!-- player1 image goes here -->
+        <p id="Player1PokeImage"></p>
+      </div>
+
+
+
+      <!-- break tag needed at the end of player1 pokemon to display correctly DO NOT REMOVE -->
+
+      <br></br>
+
+
+
+
+      </div>
+    <div class="col "id ="column10">
+
+      <!-- player1 pokemon progress bar -->
+
+
+        <div class="Player1Status">
+          <p><b>Player1 Pokemon:</p></b>
+          <p id="p1PokemonName"></p>
+          <p id="p1HpFont"><b>HP:</p></b>
+          <div class="player1HP-progressBarBackground">
+        <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+          <p id="p1SpeedFont"><b>Speed:</p></b>
+          <div class="playerSpeed-progressBarBackground">
+        <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+
+
+    </div>
+  </div>
+  <div class="col" id ="column11">
+
+<!--this space needs to be empty for computer attack image to display properly -->
+
+
+    <div class="col" id ="column12">
+
+      <!-- attack image 1 of 2 -->
+
+      <!-- computer attack image goes here -->
+      <div class="AttackGraphicContainer">
+      <p id="computerAttackImage"></p>
+      </div>
+        </div>
+
+      </div>
+
+      <div class="col" id ="column13">
+
+
+
+        <div class="col" id ="column14">
+
+
+
+
+        <!--nothing added here but previously statusProgress was here-->
+
+
+
+
+
+
+          </div>
+
+          </div>
+          </div>
+
+
+
+
+</div>
+
+
+<!-- navbar-submenu-main-controller-->
+
+
+
+
+       <!--google + w3 navbar-->
+
+
+       <nav class="nav" id="PokemonAttackMenuController"> <!-- start of 3rd nav bar-->
+
+           <div class="dropup">
+         <button class="dropbtn"><img id="attack-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/attack-menu-icon.jpg"></img><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+
+               <a href="#" id="attackA"></a>
+               <a href="#" id="attackB"></a>
+               <a href="#" id="attackC"></a>
+
+
+
+
+         </div>
+       </div>
+
+
+          <div class="dropup">
+         <button class="dropbtn"><img id="defense-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/defense-menu-icon.jpg"></img><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content">
+
+
+               <a href="#" id="defenseA"></a>
+               <a href="#" id="defenseB"></a>
+               <a href="#" id="defenseC"></a>
+
+
+
+
+         </div>
+       </div>
+
+
+          <div class="dropup">
+         <button class="dropbtn"><img id="select-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/select-icon.jpg"></img><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content" id="dropUpPokemonSelectionMenu">
+
+
+               <a href="#" id="Charmander_sel">Charmander</a>
+               <a href="#" id="Pikachu_sel">Pikachu</a>
+               <a href="#" id="Blastoise_sel">Blastoise</a>
+
+
+
+         </div>
+       </div>
+
+            <div class="dropup">
+         <button class="dropbtn"><img id="settings-menu-icon" src="https://greenaces.site/5DFbHhuN/images/pokemon/settings.jpg"></img><i class="fa fa-caret-up"></i></button>
+         <div class="dropup-content" id="dropupContentSettings">
+
+
+             <a href="#" id="soundON">Sound ON</a>
+             <a href="#" id="soundOFF">Sound OFF</a>
+             <a href="#" id="restartYES">Restart Game</a>
+
+
+
+         </div>
+       </div>
+
+     </nav> <!-- end of 3rd nav bar-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- JavaScript should always be placed after the body tag 95% of the time. -->
+<script src="https://greenaces.site/5DFbHhuN/js/pokemon-game.js"></script>
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  -->
+</body>
+</html>
