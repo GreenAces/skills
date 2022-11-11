@@ -56,16 +56,18 @@ header {
 .nav-area {
   display: flex;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 10px 20px;
+  background-color: black;
 }
 
 .logo {
   text-decoration: none;
   font-size: 25px;
-  color: inherit;
+  color: green;
   margin-right: 20px;
+
 }
 
 .menus {
@@ -73,11 +75,14 @@ header {
   align-items: center;
   flex-wrap: wrap;
   list-style: none;
+  color: white;
+
 }
 
 .menu-items {
   position: relative;
   font-size: 14px;
+  color: yellow;
 }
 
 .menu-items a {
@@ -85,12 +90,13 @@ header {
   font-size: inherit;
   color: inherit;
   text-decoration: none;
+  color: grey;
 }
 
 .menu-items button {
   display: flex;
   align-items: center;
-  color: inherit;
+  color: green;
   font-size: inherit;
   border: none;
   background-color: transparent;

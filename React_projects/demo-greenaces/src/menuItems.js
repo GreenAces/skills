@@ -3,55 +3,106 @@ export const menuItems = [
     title: 'Home',
     url: '/',
   },
+
+
+
+
   {
-    title: 'Services',
-    url: '/services',
+
+
+
+    title: 'Projects',
+    url: '/Projects',
     submenu: [
-      {
-        title: 'web design',
-        url: 'web-design',
-      },
-      {
-        title: 'web development',
-        url: 'web-dev',
+
+
+       {
+        title: 'Browser Games',
         submenu: [
-          {
-            title: 'Frontend',
-            url: 'frontend',
-          },
-          {
-            title: 'Backend',
-            submenu: [
-              {
-                title: 'NodeJS',
-                url: 'node',
-              },
-              {
-                title: 'PHP',
-                url: 'php',
-              },
-            ],
-          },
+
+        {
+          title: 'Lucky 7',
+          url: 'Lucky7',
+        },
+
+        {
+          title: 'Pokemon',
+          url: 'Pokemon',
+        },
+
+
+
+
+
         ],
+
+
       },
+
       {
-        title: 'SEO',
-        url: 'seo',
+       title: 'Unity Games',
+       submenu: [
+
+      {
+        title: 'Game 1',
+        url: 'Game1',
       },
-    ],
-  },
+
+      {
+        title: 'Game 2',
+        url: 'Game2',
+      },
+
+
+
+              ], //Unity games submenu
+
+
+     },
+
+
+     {
+      title: 'Andriod Games',
+      submenu: [
+
+      {
+      title: 'Game 3',
+      url: 'Game3',
+      },
+
+     {
+      title: 'Game 4',
+      url: 'Game4',
+     },
+
+
+
+            ], // Andriod games submenu
+
+
+    },
+
+
+            ], // brower games submenu
+
+
+
+
+  },// projects folder category
+
+
+
+
+
+
   {
     title: 'About',
     url: '/about',
     submenu: [
       {
-        title: 'Who we are',
-        url: 'who-we-are',
-      },
-      {
-        title: 'Our values',
-        url: 'our-values',
-      },
-    ],
-  },
-];
+        title: 'GreenAces',
+        url: 'GreenAces',
+      }, // GreenAces content
+    ], // GreenAces title
+  },// about folder category
+]; // menuItems end here
