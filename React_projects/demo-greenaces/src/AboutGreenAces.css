@@ -1,7 +1,29 @@
 /*Settings for AboutGreenAces.js*/
 * {
     box-sizing: border-box;
-    background-color: #23252C;
+    background-color: #FFF;
+
+}
+
+.boarder-background{
+  text-align: center;
+
+}
+
+.profile-frame {
+  background-color: #23252C;
+  width: 317px;
+  height: 300px;
+
+}
+
+.inside-box {
+
+  position: absolute;
+  width: 300px;
+  height: 1800px;
+  top: 98px;
+  right: 608px;
 
 }
 
@@ -11,23 +33,25 @@
 
 position: relative;
 width: 300px;
-height: 250px;
+height: 400px;
 
 }
 
-#greenaces-font {
+.greenaces-font {
+
    color: #FFFFFF;
    text-align: center;
 }
 
-#frontend-font {
+.frontend-font {
    color: #F3BF99;
    text-align: center;
 }
 
-#website-font {
+.website-font {
 
    text-align: center;
+
 
 }
 
@@ -206,15 +230,16 @@ border-radius: 6px;
 
 /*email and linkedin images */
 
-#email-logo {
+.email-logo {
 
  max-width: 25%;
  max-height: 1000%;
  background: #FFFFFF;
 
+
 }
 
-#linkin-logo {
+.linkin-logo {
 
  max-width: 25%;
  max-height: 1000%;
@@ -225,12 +250,17 @@ border-radius: 6px;
 
 
 
- #about-me-section {
+ .about-me-section {
      color: #FFFFFF;
+     background-color: #23252C;
+     width: 317px;
+     height: 300px;
 
  }
 
- #paragraph1 {
+
+
+ .paragraph1 {
 
     font-family: 'Inter';
     font-style: normal;
@@ -239,14 +269,22 @@ border-radius: 6px;
     line-height: 150%;
     /* or 15px */
     color: #DCDCDC;
+    background-color: #23252C;
+    width: 317px;
+    height: 300px;
 
  }
 
- #interest-section {
-     color: #FFFFFF;
+ .interest-section {
+     color: #BC8F8F;
+     background-color: #23252C;
+     width: 317px;
+     height: 300px;
  }
 
- #paragraph2 {
+
+
+ .paragraph2 {
 
     font-family: 'Inter';
     font-style: normal;
@@ -255,6 +293,10 @@ border-radius: 6px;
     line-height: 150%;
     /* or 15px */
     color: #DCDCDC;
+    background-color: #23252C;
+    width: 317px;
+    height: 300px;
+
 
  }
 
@@ -275,6 +317,7 @@ border-radius: 6px;
     left: 116px;
     top: 361px;
     background: #1A1B21;
+    background-color: #23252C;
 }
 
 
@@ -293,11 +336,13 @@ border-radius: 6px;
     top: 760px;
     background: #161619;
     border-radius: 0px 0px 10px 10px;
+    background-color: #23252C;
+
 }
 
 
 
-#youtube-logo {
+.youtube-logo {
 
     height: 25px;
     width: 25px;
@@ -311,7 +356,7 @@ border-radius: 6px;
 
 }
 
-#tiktok-logo {
+.tiktok-logo {
 
     height: 25px;
     width: 25px;
@@ -324,7 +369,7 @@ border-radius: 6px;
 
 }
 
-#twitter-logo {
+.twitter-logo {
 
     height: 25px;
     width: 25px;
@@ -337,7 +382,7 @@ border-radius: 6px;
 
 }
 
-#github-logo {
+.github-logo {
 
     height: 25px;
     width: 25px;

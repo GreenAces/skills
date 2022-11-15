@@ -4,7 +4,8 @@ import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 
 // styles
-import './App.css';
+import './App.css'; //needed for GreenAces Navbar
+import './AboutGreenAces.css'; //needed for AboutGreenAces.js
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
