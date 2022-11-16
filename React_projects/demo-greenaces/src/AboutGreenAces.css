@@ -48,12 +48,11 @@ height: 400px;
    text-align: center;
 }
 
-.website-font {
+#GreenAces-link{
 
-   text-align: center;
-
-
+  color: #FFFFFF;
 }
+
 
 /*link color settings for greenaces link */
 
@@ -61,25 +60,25 @@ height: 400px;
  a:link {color: #F5F5F5;}
 
  a:link {
-  color: F5F5F5;
+  color: #F5F5F5;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: F5F5F5;
+  color: #F5F5F5;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: F5F5F5;
+  color: #F5F5F5;
   background-color: transparent;
   text-decoration: underline;
 }
 
 a:active {
-  color: F5F5F5;
+  color: #F5F5F5;
   background-color: transparent;
   text-decoration: underline;
 }
@@ -251,11 +250,18 @@ border-radius: 6px;
 
 
  .about-me-section {
-     color: #FFFFFF;
+
+     text-align: center;
      background-color: #23252C;
      width: 317px;
      height: 300px;
 
+ }
+
+ #About-headline {
+
+   background-color: #23252C;
+   color: #F3BF99;
  }
 
 
@@ -275,13 +281,25 @@ border-radius: 6px;
 
  }
 
- .interest-section {
-     color: #BC8F8F;
-     background-color: #23252C;
-     width: 317px;
-     height: 300px;
+ .paragraph1-alignment {
+
+   text-align: left;
+   background-color: #23252C;
+
  }
 
+ .interest-section {
+
+     background-color: #23252C;
+     width: 317px;
+     height: 1px;
+ }
+
+#About-Interest {
+  background-color: #23252C;
+  color: #F3BF99;
+
+}
 
 
  .paragraph2 {
@@ -296,9 +314,50 @@ border-radius: 6px;
     background-color: #23252C;
     width: 317px;
     height: 300px;
+ }
+
+ .paragraph2-alignment {
+
+   text-align: left;
+   background-color: #23252C;
 
 
  }
+
+
+ #x0 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+ #x1 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x2 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x3 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x4 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
 
 
 
@@ -308,17 +367,7 @@ border-radius: 6px;
 
 /*body section*/
 
-.rectangle91 {
 
-    color: white;
-    position: absolute;
-    width: 317px;
-    height: 399px;
-    left: 116px;
-    top: 361px;
-    background: #1A1B21;
-    background-color: #23252C;
-}
 
 
 
@@ -338,6 +387,7 @@ border-radius: 6px;
     border-radius: 0px 0px 10px 10px;
     background-color: #23252C;
 
+
 }
 
 
@@ -352,6 +402,7 @@ border-radius: 6px;
     top: 89.8%;
     bottom: 7.32%;
     background: #161619;
+
 
 
 }
