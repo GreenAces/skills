@@ -82,7 +82,7 @@ header {
 .menu-items {
   position: relative;
   font-size: 14px;
-  color: yellow;
+  color: black;
 }
 
 .menu-items a {
@@ -90,7 +90,7 @@ header {
   font-size: inherit;
   color: inherit;
   text-decoration: none;
-  color: grey;
+  color: black;
 }
 
 .menu-items button {
