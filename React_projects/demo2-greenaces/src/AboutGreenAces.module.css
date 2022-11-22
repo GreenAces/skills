@@ -1,0 +1,449 @@
+/*Settings for AboutGreenAces.js*/
+* {
+    box-sizing: border-box;
+    background-color: #FFF;
+
+}
+
+.boarder-background{
+  text-align: center;
+
+}
+
+.profile-frame {
+  background-color: #23252C;
+  width: 317px;
+  height: 300px;
+
+}
+
+.inside-box {
+
+  position: absolute;
+  width: 300px;
+  height: 1800px;
+  top: 98px;
+  right: 608px;
+
+}
+
+
+
+.displayPicture {
+
+position: relative;
+width: 300px;
+height: 400px;
+
+}
+
+.greenaces-font {
+
+   color: #FFFFFF;
+   text-align: center;
+}
+
+.frontend-font {
+   color: #F3BF99;
+   text-align: center;
+}
+
+#GreenAces-link{
+
+  color: #FFFFFF;
+}
+
+
+/*link color settings for greenaces link */
+
+
+ a:link {color: #F5F5F5;}
+
+ a:link {
+  color: #F5F5F5;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #F5F5F5;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #F5F5F5;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #F5F5F5;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
+
+
+/*link color settings for email button link */
+
+.emailBtn a:link, a:visited {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  background: #FFFFFF;
+  /* gray/300 */
+
+  border: 1px solid #D1D5DB;
+  /* shadow/sm */
+
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+
+}
+
+
+
+.emailBtn {
+
+color: black;
+
+box-sizing: border-box;
+
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+/* Button */
+
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 9px 13px 9px 11px;
+gap: 8px;
+
+
+width: 115px;
+height: 34px;
+position: relative;
+left: 3px;
+right: 10px;
+bottom: 50px;
+top: 34px;
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+
+
+
+}
+
+
+/*link color settings for linkin button link */
+
+.linkinBtn a:link, a:visited {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+
+  /* gray/300 */
+
+  border: 1px solid #D1D5DB;
+  /* shadow/sm */
+
+ box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+ border-radius: 6px;
+
+}
+
+.linkinBtn {
+
+box-sizing: border-box;
+
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+/* Button */
+
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 9px 13px 9px 11px;
+gap: 8px;
+
+width: 115px;
+height: 34px;
+position: relative;
+left: 200px;
+right: 0px;
+bottom: 0px;
+top: 1px;
+
+background: #297FE5;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+
+}
+
+
+
+/*email and linkedin images */
+
+.email-logo {
+
+ max-width: 25%;
+ max-height: 1000%;
+ background: #FFFFFF;
+
+
+}
+
+.linkin-logo {
+
+ max-width: 25%;
+ max-height: 1000%;
+ background: #297FE5;
+
+}
+
+
+
+
+ .about-me-section {
+
+     text-align: center;
+     background-color: #23252C;
+     width: 317px;
+     height: 300px;
+
+ }
+
+ #About-headline {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+
+ .paragraph1 {
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.24px;
+    line-height: 150%;
+    /* or 15px */
+    color: #DCDCDC;
+    background-color: #23252C;
+    width: 317px;
+    height: 300px;
+
+ }
+
+ .paragraph1-alignment {
+
+   text-align: left;
+   background-color: #23252C;
+
+ }
+
+ .interest-section {
+
+     background-color: #23252C;
+     width: 317px;
+     height: 1px;
+ }
+
+#About-Interest {
+  background-color: #23252C;
+  color: #F3BF99;
+
+}
+
+
+ .paragraph2 {
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.24px;
+    line-height: 150%;
+    /* or 15px */
+    color: #DCDCDC;
+    background-color: #23252C;
+    width: 317px;
+    height: 300px;
+ }
+
+ .paragraph2-alignment {
+
+   text-align: left;
+   background-color: #23252C;
+
+
+ }
+
+
+ #x0 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+ #x1 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x2 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x3 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #x4 {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+
+
+
+
+
+
+/*body section*/
+
+
+
+
+
+
+
+
+/*footer section*/
+
+.rectangle93 {
+
+    position: bottom;
+    width: 317px;
+    height: 64px;
+    left: 116px;
+    top: 760px;
+    background: #161619;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #23252C;
+
+
+}
+
+
+
+.youtube-logo {
+
+    height: 25px;
+    width: 25px;
+    position: bottom;
+    left: 38.82%;
+    right: 56.64%;
+    top: 89.8%;
+    bottom: 7.32%;
+    background: #161619;
+
+
+
+}
+
+.tiktok-logo {
+
+    height: 25px;
+    width: 25px;
+    position: bottom;
+    left: 47.73%;
+    right: 47.73%;
+    top: 89.8%;
+    bottom: 7.32%;
+    background: #161619;
+
+}
+
+.twitter-logo {
+
+    height: 25px;
+    width: 25px;
+    position: bottom;
+    left: 56.64%;
+    right: 38.82%;
+    top: 89.8%;
+    bottom: 7.32%;
+    background: #161619;
+
+}
+
+.github-logo {
+
+    height: 25px;
+    width: 25px;
+    position: bottom;
+    left: 65.55%;
+    right: 29.91%;
+    top: 89.8%;
+    bottom: 7.32%;
+    background: #161619;
+
+}
+
+
