@@ -2,6 +2,7 @@ import React from 'react';
 import DiceImage from '../images/thumbnails/Lucky7_game_thumnail.jpg';
 import PikachuImage from '../images/thumbnails/Pokemon_game_thumbnail.jpg';
 import DemoImage from '../images/thumbnails/Demo_game_thumbnail.jpg';
+import  '../css/HomePage.css';
 
 function Home() {
 

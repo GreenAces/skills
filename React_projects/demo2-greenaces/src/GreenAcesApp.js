@@ -1,7 +1,7 @@
-//import logo from './logo.svg';
+import logo from './greenAcesLogo.png';
 import React from 'react';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import AboutGreenAces from './routes/AboutGreenAces';
 import {Routes, Route} from 'react-router-dom';

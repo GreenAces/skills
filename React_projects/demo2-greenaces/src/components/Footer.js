@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/FooterNav.css';
 
 function Footer() {
 
@@ -29,19 +30,19 @@ function Footer() {
     <h5 className="widget-title">Quick Links<span></span></h5>
     <ul className="thumbnail-widget">
     <li>
-    <div className="thumb-content"><a href="#.">Docs</a></div>
+    <div className="thumb-content"><a href="#. "target="_blank" rel="noreferrer">Docs</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#.">Blog</a></div>
+    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Blog</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#.">Privacy-Policy</a></div>
+    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Privacy-Policy</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#.">Legal-statement</a></div>
+    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Legal-statement</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#.">About</a></div>
+    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">About</a></div>
     </li>
     </ul>
     </div>

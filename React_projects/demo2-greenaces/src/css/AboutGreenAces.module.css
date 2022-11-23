@@ -1,23 +1,25 @@
 /*Settings for AboutGreenAces.js*/
-* {
+
+
+.AboutPageBody {
     box-sizing: border-box;
     background-color: #FFF;
 
 }
 
-.boarder-background{
+.smallBoarderBackground{
   text-align: center;
 
 }
 
-.profile-frame {
+.profileFrame {
   background-color: #23252C;
   width: 317px;
   height: 300px;
 
 }
 
-.inside-box {
+.insideBox {
 
   position: absolute;
   width: 300px;
@@ -37,18 +39,19 @@ height: 400px;
 
 }
 
-.greenaces-font {
+.greenacesText {
 
    color: #FFFFFF;
    text-align: center;
 }
 
-.frontend-font {
+.frontendFont {
+
    color: #F3BF99;
    text-align: center;
 }
 
-#GreenAces-link{
+#GreenAcesLink{
 
   color: #FFFFFF;
 }
@@ -229,7 +232,7 @@ border-radius: 6px;
 
 /*email and linkedin images */
 
-.email-logo {
+.emailLogo {
 
  max-width: 25%;
  max-height: 1000%;
@@ -238,7 +241,7 @@ border-radius: 6px;
 
 }
 
-.linkin-logo {
+.linkinLogo {
 
  max-width: 25%;
  max-height: 1000%;
@@ -249,7 +252,7 @@ border-radius: 6px;
 
 
 
- .about-me-section {
+ .aboutMeSection {
 
      text-align: center;
      background-color: #23252C;
@@ -258,7 +261,7 @@ border-radius: 6px;
 
  }
 
- #About-headline {
+ #AboutHeadline {
 
    background-color: #23252C;
    color: #F3BF99;
@@ -266,7 +269,7 @@ border-radius: 6px;
 
 
 
- .paragraph1 {
+ .paragraphOne {
 
     font-family: 'Inter';
     font-style: normal;
@@ -281,28 +284,28 @@ border-radius: 6px;
 
  }
 
- .paragraph1-alignment {
+ .paragraphOneAlignment {
 
    text-align: left;
    background-color: #23252C;
 
  }
 
- .interest-section {
+ .interestSection {
 
      background-color: #23252C;
      width: 317px;
      height: 1px;
  }
 
-#About-Interest {
+#AboutInterest {
   background-color: #23252C;
   color: #F3BF99;
 
 }
 
 
- .paragraph2 {
+ .paragraphTwo {
 
     font-family: 'Inter';
     font-style: normal;
@@ -316,7 +319,7 @@ border-radius: 6px;
     height: 300px;
  }
 
- .paragraph2-alignment {
+ .paragraphTwoAlignment {
 
    text-align: left;
    background-color: #23252C;
@@ -325,34 +328,34 @@ border-radius: 6px;
  }
 
 
- #x0 {
+ #AB {
 
    background-color: #23252C;
    color: #F3BF99;
  }
 
- #x1 {
-
-   background-color: #23252C;
-   color: #F3BF99;
- }
-
-
- #x2 {
+ #ABC {
 
    background-color: #23252C;
    color: #F3BF99;
  }
 
 
- #x3 {
+ #ABCD {
 
    background-color: #23252C;
    color: #F3BF99;
  }
 
 
- #x4 {
+ #ABCDE {
+
+   background-color: #23252C;
+   color: #F3BF99;
+ }
+
+
+ #ABCDEF {
 
    background-color: #23252C;
    color: #F3BF99;
@@ -392,7 +395,7 @@ border-radius: 6px;
 
 
 
-.youtube-logo {
+.youtubeLogo {
 
     height: 25px;
     width: 25px;
@@ -407,7 +410,7 @@ border-radius: 6px;
 
 }
 
-.tiktok-logo {
+.tiktokLogo {
 
     height: 25px;
     width: 25px;
@@ -420,7 +423,7 @@ border-radius: 6px;
 
 }
 
-.twitter-logo {
+.twitterLogo {
 
     height: 25px;
     width: 25px;
@@ -433,7 +436,7 @@ border-radius: 6px;
 
 }
 
-.github-logo {
+.githubLogo {
 
     height: 25px;
     width: 25px;
