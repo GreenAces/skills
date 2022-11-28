@@ -1,10 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import '../css/FooterNav.css';
+import { useLocation } from "react-router-dom";
 
 function Footer() {
 
+    const { pathname } = useLocation();
+    console.log(pathname);
+    // removes the footer component if the pathname matches
+    if (pathname === "/AboutGreenAces" ||
+        pathname === "/Lucky7" ||
+        pathname === "/Pokemon" ||
+        pathname === "/Demo"
+        ) return null;
+
     return (
         <React.Fragment>
+
+
 
     <footer id="footer" className="footer-1">
     <div className="main-footer widgets-dark typo-light">
@@ -42,7 +55,7 @@ function Footer() {
     <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Legal-statement</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">About</a></div>
+    <div className="thumb-content"><Link to="/AboutGreenAces" href="#." target="_blank" rel="noreferrer">About</Link></div>
     </li>
     </ul>
     </div>
@@ -52,7 +65,7 @@ function Footer() {
     <div className="widget no-box">
     <h5 className="widget-title">Newsletter<span></span></h5>
     <p>Get the lastest news delivered right to your inbox.</p>
-    <a className="btn" href="https://greenaces.site/newsletter.html" target="_blank">Sign Up</a>
+    <button className="myButtonNews"><a className="signupNewsButton" href="https://greenaces.site/newsletter.html" target="_blank"></a>Sign Up</button>
     </div>
     </div>
 
@@ -61,7 +74,7 @@ function Footer() {
     <div className="widget no-box">
     <h5 className="widget-title">Contact:<span></span></h5>
 
-    <p><a href="mailto:greenaces@greenaces.site" title="glorythemes">greenaces@greenaces.site</a></p>
+    <p className="GreenAcesMailTag"><a className="greenAcesEmailContact" href="mailto:greenaces@greenaces.site" title="Send Email to GreenAces">greenaces@greenaces.site</a></p>
     <ul className="social-footer2">
     <li className=""><a title="YouTube" target="_blank" href="https://www.youtube.com/channel/UC63jUz00mGHXB7pdtzT-vEw"><img alt="YouTube" width="30" height="30" src="https://greenaces.site/5DFbHhuN/images/other/YouTube_23392.png"/></a></li>
     <li className=""><a href="https://www.tiktok.com/@greenacesgames" target="_blank" title="TikTok"><img alt="TikTok" width="30" height="30" src="https://greenaces.site/5DFbHhuN/images/other/tiktok_logo_icon_187324.png"/></a></li>

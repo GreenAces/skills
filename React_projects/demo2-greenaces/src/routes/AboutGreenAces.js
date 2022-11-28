@@ -11,7 +11,7 @@ import AboutPage from '../css/AboutGreenAces.module.css';
 
 
 
-const AboutGreenAces = () => {
+function AboutGreenAces() {
 
 
   return (
@@ -40,7 +40,7 @@ const AboutGreenAces = () => {
         </nav>
 
 
-      <section>
+      <section className={AboutPage.primarySection}>
       <p className={AboutPage.aboutMeSection}></p>
       <p className={AboutPage.paragraphOne}>
       <h2 id={AboutPage.AboutHeadline}>About</h2>

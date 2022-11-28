@@ -23,8 +23,8 @@ function Header() {
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownProjects">
         <li><a className="dropdown-item" href="#"><b>Browser Games</b></a></li>
         
-        <li><a className="dropdown-item" href="https://greenaces.site/lucky7.html">Lucky 7</a></li>
-        <li><a className="dropdown-item" href="https://greenaces.site/pokemon.html">Pokemon</a></li>
+        <li><Link to="/Lucky7" className="dropdown-item" href="#">Lucky 7</Link></li>
+        <li><Link to="/Pokemon" className="dropdown-item" href="#">Pokemon</Link></li>
       </ul>
     </li>
     <li className="nav-item dropdown">
@@ -43,11 +43,11 @@ function Header() {
         Other
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownOther">
-        <li><Link to="/AboutGreenAces"className="dropdown-item" href="#">About GreenAces</Link></li>
+        <li><a className="dropdown-item" href="#">Test 1</a></li>
         
-        <li><a className="dropdown-item" href="https://greenaces.site/practice.html">Test 2</a></li>
+        <li><a className="dropdown-item" href="#">Test 2</a></li>
         
-        <li><a className="dropdown-item" href="https://greenaces.site/pokemonForm.php">Test 3</a></li>
+        <li><a className="dropdown-item" href="#">Test 3</a></li>
       </ul>
     </li>
   </ul>

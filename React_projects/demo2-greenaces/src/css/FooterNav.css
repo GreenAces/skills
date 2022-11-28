@@ -51,13 +51,48 @@
   .widget.no-box{ padding: 0; background-color: transparent;  margin-bottom: 40px;
     box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none;}
   .widget.subscribe p{  margin-bottom: 18px;}
-  .widget li a{ color: #ff8d1e;}
-  .widget li a:hover{ color: #4b92dc;}
-  .widget-title {margin-bottom: 20px;}
+  .widget li a{ color: #50e177;}
+  .widget li a:hover{ color: #ff8d1e;}
+  .widget-title  {margin-bottom: 20px;}
   .widget-title span {background: #839FAD none repeat scroll 0 0;display: block; height: 1px;margin-top: 25px;position: relative;width: 20%;}
   .widget-title span::after {background: inherit;content: "";height: inherit;    position: absolute;top: -4px;width: 50%;}
   .widget-title.text-center span,.widget-title.text-center span::after {margin-left: auto;margin-right:auto;left: 0;right: 0;}
   .widget .badge{ float: right; background: #7f7f7f;}
+
+  /*Custom button settings for signup*/
+
+  .widget .signupNewsButton {color: #50e177;}
+
+  .myButtonNews {
+
+    background-color: #50e177; 
+    border-radius: 12px;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    
+
+  }
+
+  .myButtonNews {
+    transition-duration: 0.4s;
+  }
+  
+  .myButtonNews:hover {
+    background-color: #ff8d1e; 
+    color: white;
+  }
+  
+
+  /*Custom Email settings for GreenAces*/
+
+  .GreenAcesMailTag .greenAcesEmailContact {color: #50e177;}
+
+ 
+
   
   .typo-light h1,
   .typo-light h2,
@@ -86,6 +121,14 @@
   -ms-transition: all 250ms ease-in-out 0s;
   -o-transition: all 250ms ease-in-out 0s;
   transition: all 250ms ease-in-out 0s;
-  
-  
+
+
+
+
+
+
   }
+  
+  
+  
+  

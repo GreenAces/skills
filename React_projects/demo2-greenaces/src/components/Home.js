@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import DiceImage from '../images/thumbnails/Lucky7_game_thumnail.jpg';
 import PikachuImage from '../images/thumbnails/Pokemon_game_thumbnail.jpg';
 import DemoImage from '../images/thumbnails/Demo_game_thumbnail.jpg';
@@ -28,7 +29,7 @@ function Home() {
     <img src={DiceImage} alt="DiceImage Logo" className="DiceImage-Logo" /></a>    
     
       <div className="carousel-caption d-none d-md-block">
-        <h5>Lucky7</h5>
+        <h5><Link to="/Lucky7" href="#">Lucky 7</Link></h5>
         <p>Are you feeling lucky? You have 3 chances to roll lucky number 7. Give it a try!</p>
       </div>
     </div>
@@ -37,7 +38,7 @@ function Home() {
     <img src={PikachuImage} alt="PikachuImage Logo" className="PikachuImage-Logo" /></a> 
       
       <div className="carousel-caption d-none d-md-block">
-        <h5>Pokemon</h5>
+        <h5><Link to="/Pokemon" href="#">Pokemon</Link></h5>
         <p>Pick your favorite pokemon and let them duel against your opponent. If all 3 pokemon are dead then you lose!</p>
       </div>
     </div>
@@ -46,7 +47,7 @@ function Home() {
         <img src={DemoImage} alt="DemoImage Logo" className="DemoImage-Logo" /></a> 
     
       <div className="carousel-caption d-none d-md-block">
-        <h5>Demo</h5>
+        <h5><Link to="/Demo" href="#">Demo</Link></h5>
         <p>Work in progress</p>
       </div>
     </div>
