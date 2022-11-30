@@ -1,12 +1,12 @@
 import React from 'react';
-import Avatar from '../images/logos/GreenAcesAvatar.png';
-import EmailLogo from '../images/logos/mail.png';
-import LinkInLogo from '../images/logos/linkedin.png';
-import YouTubeLogo from '../images/logos/YouTube_23392.png';
-import TwitterLogo from '../images/logos/twitter_logo_icon_187318.png';
-import GithubLogo from '../images/logos/github_logo.png';
-import TikTok from '../images/logos/tiktok_logo_icon_187324.png';
-import AboutPage from '../css/AboutGreenAces.module.css';
+import Avatar from '../assets/images/logos/GreenAcesAvatar.png';
+import EmailLogo from '../assets/images/logos/mail.png';
+import LinkInLogo from '../assets/images/logos/linkedin.png';
+import YouTubeLogo from '../assets/images/logos/YouTube_23392.png';
+import TwitterLogo from '../assets/images/logos/twitter_logo_icon_187318.png';
+import GithubLogo from '../assets/images/logos/github_logo.png';
+import TikTok from '../assets/images/logos/tiktok_logo_icon_187324.png';
+import AboutPage from '../styles/AboutGreenAces.module.css';
 
 
 

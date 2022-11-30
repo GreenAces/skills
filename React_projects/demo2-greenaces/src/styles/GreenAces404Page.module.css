@@ -1,0 +1,27 @@
+/* add different view ports later */
+
+
+.section {
+    text-align: center;
+    background-color: grey;
+    height: 1000x; 
+    width: 1600px;
+
+}
+
+.h2{
+    font-family: 'Lucida Sans';
+    color: black;
+}
+
+.logo {
+    height: 500x; 
+    width: 500px;
+    text-align: center;
+}
+
+.text {
+    text-align: center;
+    color: #50e177;
+
+}

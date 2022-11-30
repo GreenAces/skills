@@ -1,15 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import DiceImage from '../images/thumbnails/Lucky7_game_thumnail.jpg';
-import PikachuImage from '../images/thumbnails/Pokemon_game_thumbnail.jpg';
-import DemoImage from '../images/thumbnails/Demo_game_thumbnail.jpg';
-import  '../css/HomePage.css';
+import DiceImage from '../assets/images/thumbnails/Lucky7_game_thumnail.jpg';
+import PikachuImage from '../assets/images/thumbnails/Pokemon_game_thumbnail.jpg';
+import DemoImage from '../assets/images/thumbnails/Demo_game_thumbnail.jpg';
+import  '../styles/HomePage.css';
 
 function Home() {
 
     return (
 
-        <div>
+      <React.Fragment>
 
             <p><br></br></p>
             <p><br></br></p>
@@ -66,7 +66,8 @@ function Home() {
            
 
  
-        </div>    
+    </React.Fragment>   
+    
 
     );
 }

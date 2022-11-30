@@ -3,10 +3,11 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import Lucky7 from './routes/Lucky7';
-import Pokemon from './routes/Pokemon';
-import Demo from './routes/Demo';
-import AboutGreenAces from './routes/AboutGreenAces';
+import Lucky7 from './pages/Lucky7';
+import Pokemon from './pages/Pokemon';
+import Demo from './pages/Demo';
+import AboutGreenAces from './pages/AboutGreenAces';
+import NotFound from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom';
 
 
@@ -26,7 +27,7 @@ function GreenAcesApp() {
             <Route path={"/Pokemon"} element={<Pokemon />} /> 
             <Route path={"/Demo"} element={<Demo />} /> 
             <Route path={"/AboutGreenAces"} element={<AboutGreenAces />} /> 
-            <Route path="*" element={<p>Not found!</p>} />
+            <Route path="*" element={<NotFound />} />
       
           </Routes>
           
