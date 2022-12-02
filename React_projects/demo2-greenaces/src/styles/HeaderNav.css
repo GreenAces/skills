@@ -1,4 +1,4 @@
-
+/*Navbar settings for greenaces*/
 
 .dropdown-menu{
 
@@ -9,3 +9,76 @@
     
 }
 
+        
+
+
+#label-row-browser-games {
+    background-color: #708090;
+}
+
+#label-row-Apps {
+    background-color: #708090;
+}
+
+#label-row-Stuff {
+    background-color: #708090;
+}
+
+.dropdown-menu :hover{
+
+    background-color: #D3D3D3
+
+}
+
+#navbarDropdownProjects {
+    color: #50e177;
+}
+
+#label-column-lucky {
+    color: black;
+    font-size: larger;
+    
+}
+
+#label-column-pokemon {
+    color: black;
+    font-size: larger;
+}
+
+
+
+#navbarDropdownAndroid {
+    color: #50e177;
+}
+
+#label-column-App1 {
+    color: black;
+    font-size: larger;
+}
+
+#label-column-App2 {
+    color: black;
+    font-size: larger;
+}
+
+#navbarDropdownOther {
+    color: #50e177;
+}
+
+#label-column-Test1 {
+    color: black;
+    font-size: larger;
+
+}
+
+#label-column-Test2 {
+    color: black;
+    font-size: larger;
+
+}
+
+#label-column-Test3 {
+    color: black;
+    font-size: larger;
+
+}

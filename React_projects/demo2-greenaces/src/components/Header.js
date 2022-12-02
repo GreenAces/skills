@@ -23,10 +23,10 @@ function Header() {
         Projects
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownProjects">
-        <li><a className="dropdown-item" href="#"><b>Browser Games</b></a></li>
+        <li><a className="dropdown-item"  id="label-row-browser-games"><b>Browser Games</b></a></li>
         
-        <li><Link to="/Lucky7" className="dropdown-item" href="#">Lucky 7</Link></li>
-        <li><Link to="/Pokemon" className="dropdown-item" href="#">Pokemon</Link></li>
+        <li><Link to="/Lucky7" className="dropdown-item" id="label-column-lucky">Lucky 7</Link></li>
+        <li><Link to="/Pokemon" className="dropdown-item" id="label-column-pokemon">Pokemon</Link></li>
       </ul>
     </li>
     <li className="nav-item dropdown">
@@ -34,10 +34,10 @@ function Header() {
         Andriod
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownProjects">
-        <li><a className="dropdown-item" href="#"><b>Apps</b></a></li>
+        <li><a className="dropdown-item" id="label-row-Apps" ><b>Apps</b></a></li>
         
-        <li><a className="dropdown-item" href="#">App 1</a></li>
-        <li><a className="dropdown-item" href="#">App 2</a></li>
+        <li><a className="dropdown-item" id="label-column-App1">App 1</a></li>
+        <li><a className="dropdown-item" id="label-column-App2">App 2</a></li>
       </ul>
     </li>
     <li className="nav-item dropdown">
@@ -45,11 +45,13 @@ function Header() {
         Other
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownOther">
-        <li><a className="dropdown-item" href="#">Test 1</a></li>
+        <li><a className="dropdown-item" id="label-row-Stuff" ><b>Stuff</b></a></li>
         
-        <li><a className="dropdown-item" href="#">Test 2</a></li>
+        <li><a className="dropdown-item" id="label-column-Test1">Test 1</a></li>
         
-        <li><a className="dropdown-item" href="#">Test 3</a></li>
+        <li><a className="dropdown-item" id="label-column-Test2">Test 2</a></li>
+        
+        <li><a className="dropdown-item" id="label-column-Test3">Test 3</a></li>
       </ul>
     </li>
   </ul>
