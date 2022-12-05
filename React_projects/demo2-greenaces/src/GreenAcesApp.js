@@ -11,8 +11,10 @@ import NotFound from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom';
 
 
-
 function GreenAcesApp() {
+ 
+
+
   return (
     
     <div className="GreenAcesApp">
@@ -21,8 +23,8 @@ function GreenAcesApp() {
 
           <Routes>
 
-            
-            <Route index element={<Home />} />
+          
+            <Route index element={<Home />} /> 
             <Route path={"/Lucky7"} element={<Lucky7 />} /> 
             <Route path={"/Pokemon"} element={<Pokemon />} /> 
             <Route path={"/Demo"} element={<Demo />} /> 

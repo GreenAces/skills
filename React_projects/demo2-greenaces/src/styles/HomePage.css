@@ -1,37 +1,47 @@
-  /*carousel items on homepage */
+  /*Homepage that renders the games and app thumbnails */
+
+.page-content{
+  background-color: grey;
+}
+
   
-  .carousel-indicators {
-    background-color: green;
-  }
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2,2fr);
+  grid-template-rows: repeat(4,minmax(205px,50px));
+  grid-gap: 1rem;
+  height: 320px;
+  width:  600px;
+
+
+}
+
+.grid-item {
+  background: yellow;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.game-title {
+  text-align: center;
+  font-weight: 700;
+}
   
-  .carousel-inner {
-    background-color: green;
-  }
+
+  /*coverImg on homepage*/
   
-  
-  
-  
-  /*Thumbnails on homepage*/
-  
-  .DiceImage-Logo {
+  .game-thumbnail {
     height: 200px;
     width: 200px;
     
   
   }
   
-  .PikachuImage-Logo {
-    height: 200px;
-    width: 200px;
-   
-  
-  }
-  
-  .DemoImage-Logo {
-    height: 200px;
-    width: 200px;
-    
-  
+
+  .game-description {
+    text-align: left;
   }
   
   
