@@ -1,0 +1,165 @@
+/* NOTE: This is the external css file for index2.html and it is controlled by lucky7.js (javascript file)
+          created 9/27/2018*/
+
+
+          /*custom bootstrap 5 navbar settings*/
+
+
+          .navbarDropdownProjects {
+            color: #50e177;
+            background-color: #212529;
+        }
+
+        .navbarDropdownAndroid {
+            color: #50e177;
+            background-color: #212529;
+        }
+
+        .navbarDropdownOther {
+            color: #50e177;
+            background-color: #212529;
+        }
+
+
+/*table properties */
+
+
+/*table 1 properties */
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+/*table 1 properties */
+
+.t01 {
+
+  width: 11%;
+  background-color: #00FFFF;
+  
+}
+
+
+
+
+.h1 {
+  color: white;
+  text-align: center;
+  font-size: 20px
+}
+
+.p {
+  font-family: times;
+  font-size: 20px;
+  color: white;
+}
+
+/*font settings for lucky 7 game */
+
+.displayGameAlert {
+
+color: red;
+font-weight: bold;
+}
+
+.InformPlayerLoss {
+
+color: white;
+font-weight: bold;
+
+}
+
+.InformPlayerWon {
+
+color: green;
+font-weight: bold;
+font-size: 22px
+
+}
+
+
+
+.logo1 {
+
+display: block;
+margin-left: auto;
+margin-right: auto;
+
+width: 400px;
+height: 71px;
+
+}
+
+
+
+
+.GameInfo {
+
+text-align: left;
+color: white;
+
+}
+
+
+.GameButtonAndText {
+
+text-align: center;
+
+}
+
+
+
+
+
+.GameNumberFont {
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+
+
+}
+
+.displayRandomNumber {
+
+color: green;
+font-weight: bold;
+text-align: center;
+font-size: 90px
+
+}
+
+
+
+.PlayAgainButton img {
+
+display: block;
+margin: 0 auto;
+width: 160px;
+height: 77px;
+
+}
+
+
+.dice1 img {
+
+display: block;
+margin: 0 auto;
+width: 200px;
+height: 200px;
+
+}
+
+.dice2 img {
+
+display: block;
+margin: 0 auto;
+width: 200px;
+height: 200px;
+
+}
