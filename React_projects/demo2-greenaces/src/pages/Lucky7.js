@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from "react";
 import  '../styles/Lucky7Game.css';
 import blackbackground from "../assets/images/lucky7_game_images/Black-wallpapers-33.jpg";
 import lucky7Font from "../assets/images/lucky7_game_images/lucky7_logo.png";
@@ -19,7 +19,14 @@ import dice6 from '../assets/images/lucky7_game_images/dice6.png';
 function Lucky7()  {
 
   /* work on this part later */
+  
 
+  const ref = useRef(null);
+  
+  useEffect(() => {
+    console.log(ref.current); // <p>Are you feeling lucky?</p>
+    console.log(typeof ref.current); // "object"
+  }, []);
 
 
 
@@ -37,6 +44,8 @@ function Lucky7()  {
 <div  style={{ backgroundImage: `url(${blackbackground})` }}>
 
 
+
+
 <div className="container">
 <div className="row">
 <div className="col align-self-start"></div>
@@ -46,7 +55,7 @@ function Lucky7()  {
 
 <p>Click the button to win lucky number 7!</p>
 <p>You're given 3 rounds before the game ends.</p>
-<p>Are you feeling lucky?</p>
+<p ref={ref}>Are you feeling lucky?</p>
 </div>
 </div>
 

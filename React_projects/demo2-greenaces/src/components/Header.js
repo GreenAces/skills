@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import GreenAcesImage from '../assets/images/logos/GreenAces-new-logo.png';
 import '../styles/HeaderNav.css';
 
 function Header() {
@@ -12,7 +13,7 @@ function Header() {
 <div id="header">
 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 <div className="container-fluid">
-<Link to="/" className="navbar-brand" href="https://greenaces.site"><img id="GreenAcesNavbarBrand" src = "https://greenaces.site/5DFbHhuN/images/greenaces_logo/GreenAces-logo.jpg" alt= "GreenAces-logo"></img></Link>
+<Link to="/" className="navbar-brand"><img id="GreenAcesNavbarBrand" src = {GreenAcesImage} alt= "GreenAces-logo"></img></Link>
 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon"></span>
 </button>

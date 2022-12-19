@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../assets/images/logos/GreenAcesAvatar.png';
+import Avatar from '../assets/images/logos/GreenAcesAvatar.jpg';
 import EmailLogo from '../assets/images/logos/mail.png';
 import LinkInLogo from '../assets/images/logos/linkedin.png';
 import YouTubeLogo from '../assets/images/logos/YouTube_23392.png';
