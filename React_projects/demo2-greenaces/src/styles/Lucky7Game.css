@@ -81,6 +81,19 @@ font-size: 22px
 
 }
 
+.InformPlayerWonDetails {
+ color: white;
+ font-weight: bold;
+}
+
+
+.sendLink a:hover, a:active {
+  
+  color: blue;
+  text-decoration: underline;
+  
+}
+
 
 
 .logo1 {
@@ -111,6 +124,39 @@ text-align: center;
 
 }
 
+.diceBoxOne {
+
+  justify-content: center;
+  align-content: center;
+  grid-auto-flow: column;
+  display: flex;
+  position: relative;
+  left: 40%;
+  top: 40%;
+  transform: translate(-20%, -9400%);
+  max-height: 2px;
+  max-width: 2px;
+
+ 
+
+}
+
+.diceBoxTwo {
+
+  justify-content: center;
+  align-content: center;
+  grid-auto-flow: column;
+  display: flex;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-500%, -9400%);
+  max-height: 2px;
+  max-width: 2px;
+  
+ 
+
+}
 
 
 
@@ -150,8 +196,8 @@ height: 77px;
 
 display: block;
 margin: 0 auto;
-width: 200px;
-height: 200px;
+width: 95px;
+height: 95px;
 
 }
 
@@ -159,7 +205,7 @@ height: 200px;
 
 display: block;
 margin: 0 auto;
-width: 200px;
-height: 200px;
+width: 95px;
+height: 95px;
 
 }
