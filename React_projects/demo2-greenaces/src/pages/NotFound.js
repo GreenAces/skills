@@ -13,7 +13,7 @@ function NotFound()  {
         setTimeout(() => {
             navigate("/")
 
-        }, 2000)
+        }, 5000) // 5 second waiting time before page redircts user to homepage
     }, [])
 
 
