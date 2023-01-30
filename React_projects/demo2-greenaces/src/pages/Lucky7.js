@@ -94,7 +94,8 @@ function Lucky7()  {
       // load dice animation for gif 1 and gif 2
       setDiceOne(<img src={dice1Gif} />);
       setDiceTwo(<img src={dice2Gif} />);
-
+      
+      
 
 
 
@@ -373,7 +374,9 @@ function Lucky7()  {
     <React.Fragment>
 
 
-   
+  <meta name="author" content="GreenAces" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GreenAces Lucky7 Game || Are you feeling lucky? You have 3 chances to roll lucky number 7. Give it a try!</title>
 
 <div  style={{ backgroundImage: `url(${blackbackground})` }}>
 

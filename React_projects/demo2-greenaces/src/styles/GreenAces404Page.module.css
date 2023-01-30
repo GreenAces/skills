@@ -1,11 +1,13 @@
-/* add different view ports later */
+
 
 
 .section {
     text-align: center;
     background-color: grey;
-    height: 1000x; 
-    width: 1600px;
+    height: 50vh;
+    width: 100vw;
+    position: center;
+    height: -webkit-fill-available;
 
 }
 
@@ -15,13 +17,21 @@
 }
 
 .logo {
-    height: 500x; 
-    width: 500px;
+    height: 50vh;
+    width: 50vw;
+    position: center;
     text-align: center;
+    height: -webkit-fill-available;
+    
 }
 
 .text {
     text-align: center;
     color: #50e177;
+  
 
 }
+
+
+
+

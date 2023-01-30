@@ -27,7 +27,7 @@ function Header() {
         <li><a className="dropdown-item"  id="label-row-browser-games"><b>Browser Games</b></a></li>
         
         <li><Link to="/Lucky7" className="dropdown-item" id="label-column-lucky">Lucky 7</Link></li>
-        <li><Link to="/Pokemon" className="dropdown-item" id="label-column-pokemon">Pokemon</Link></li>
+        <li><Link to="/PokemonGame" className="dropdown-item" id="label-column-pokemon">Pokemon</Link></li>
       </ul>
     </li>
     <li className="nav-item dropdown">

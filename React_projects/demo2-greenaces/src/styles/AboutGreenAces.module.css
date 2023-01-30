@@ -1,31 +1,53 @@
 /*Settings for AboutGreenAces.js*/
 
 
+/* For desktop: */
+
+
+
 .AboutPageBody {
-    box-sizing: border-box;
-    background-color: #FFF;
+  box-sizing: border-box;
+  background-color: #FFF;
+  
 
 }
 
 .smallBoarderBackground{
-  text-align: center;
+text-align: center;
+width: 30vw;
+height: 60vh;
+position: center;
+
 
 }
 
 .profileFrame {
-  background-color: #23252C;
-  width: 317px;
-  height: 300px;
+background-color: #23252C;
+width: 30vw;
+height: 60vh;
+position: center;
+height: -webkit-fill-available;
+
+}
+
+.blackBorderTop {
+
+background-color: #23252C;
+width: 30vw;
+height: 1.5vh;
+position: center;
 
 }
 
 .insideBox {
 
-  position: absolute;
-  width: 300px;
-  height: 1800px;
-  top: 98px;
-  right: 608px;
+position: absolute;
+width: 30vw;
+height: 60vh;
+position: center;
+height: -webkit-fill-available;
+top: 40vh;
+right: 30vw;
 
 }
 
@@ -34,83 +56,97 @@
 .displayPicture {
 
 position: relative;
-width: 300px;
-height: 400px;
+width: 250px;
+height: 350px;
+
 
 }
 
 .greenacesText {
 
-   color: #FFFFFF;
-   text-align: center;
+ color: #FFFFFF;
+ text-align: center;
 }
 
 .frontendFont {
 
-   color: #F3BF99;
-   text-align: center;
+ color: #F3BF99;
+ text-align: center;
 }
 
 #GreenAcesLink{
 
-  color: #FFFFFF;
+color: #FFFFFF;
 }
 
 
 /*link color settings for greenaces link */
 
 
- a:link {color: #F5F5F5;}
+a:link {color: #F5F5F5;}
 
- a:link {
-  color: #F5F5F5;
-  background-color: transparent;
-  text-decoration: none;
+a:link {
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: none;
 }
 
 a:visited {
-  color: #F5F5F5;
-  background-color: transparent;
-  text-decoration: none;
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: none;
 }
 
 a:hover {
-  color: #F5F5F5;
-  background-color: transparent;
-  text-decoration: underline;
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: underline;
 }
 
 a:active {
-  color: #F5F5F5;
-  background-color: transparent;
-  text-decoration: underline;
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: underline;
 }
 
 
+.ButtonWrapper {
 
+margin: 0 auto;
+width: 115px;
+height: 34px;
+position: relative;
+left: -70px;
+right: 0px;
+bottom: 0px;
+top: 0px;
+
+}
 
 /*link color settings for email button link */
 
 .emailBtn a:link, a:visited {
-  color: black;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+color: black;
+text-align: center;
+text-decoration: none;
+display: inline-block;
 
-  background: #FFFFFF;
-  /* gray/300 */
+background: #FFFFFF;
+/* gray/300 */
 
-  border: 1px solid #D1D5DB;
-  /* shadow/sm */
+border: 1px solid #D1D5DB;
+/* shadow/sm */
 
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
 
 }
 
 
 
 .emailBtn {
+
+
 
 color: black;
 
@@ -145,10 +181,10 @@ gap: 8px;
 width: 115px;
 height: 34px;
 position: relative;
-left: 3px;
-right: 10px;
-bottom: 50px;
-top: 34px;
+left: 1vh;
+right: 0px;
+bottom: 0px;
+top: 20px;
 /* white */
 
 background: #FFFFFF;
@@ -169,18 +205,18 @@ border-radius: 6px;
 /*link color settings for linkin button link */
 
 .linkinBtn a:link, a:visited {
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+text-align: center;
+text-decoration: none;
+display: inline-block;
 
 
-  /* gray/300 */
+/* gray/300 */
 
-  border: 1px solid #D1D5DB;
-  /* shadow/sm */
+border: 1px solid #D1D5DB;
+/* shadow/sm */
 
- box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
- border-radius: 6px;
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
 
 }
 
@@ -214,10 +250,10 @@ gap: 8px;
 width: 115px;
 height: 34px;
 position: relative;
-left: 200px;
+left: 130px;
 right: 0px;
 bottom: 0px;
-top: 1px;
+top: -14px;
 
 background: #297FE5;
 /* shadow/sm */
@@ -234,137 +270,159 @@ border-radius: 6px;
 
 .emailLogo {
 
- max-width: 25%;
- max-height: 1000%;
- background: #FFFFFF;
+max-width: 25%;
+max-height: 1000%;
+background: #FFFFFF;
 
 
 }
 
 .linkinLogo {
 
- max-width: 25%;
- max-height: 1000%;
- background: #297FE5;
+max-width: 25%;
+max-height: 1000%;
+background: #297FE5;
+
 
 }
 
 .primarySection {
 
-  background-color: #23252C;
-  width: 317px;
+background-color: #23252C;
+width: 30vw;
 
 }
 
 
- .aboutMeSection {
+.aboutMeSection {
 
-     text-align: center;
-     background-color: #23252C;
-     width: 317px;
-     height: 300px;
-
- }
-
- #AboutHeadline {
-
+   text-align: center;
    background-color: #23252C;
-   color: #F3BF99;
- }
+   width: 30vw;
+   height: 29vh;
+   
+
+}
+
+.AboutSectionContent {
+
+text-align: center;
+
+}
+
+#AboutHeadline {
+
+ background-color: #23252C;
+ color: #F3BF99;
+
+}
 
 
 
- .paragraphOne {
+.paragraphOne {
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12.24px;
-    line-height: 150%;
-    /* or 15px */
-    color: #DCDCDC;
-    background-color: #23252C;
-    width: 317px;
-    height: 300px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.24px;
+  line-height: 150%;
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 21vw;
 
- }
+}
 
- .paragraphOneAlignment {
+#paragraphOneAlignment {
 
-   text-align: left;
+ text-align: left;
+ background-color: #23252C;
+ font-family: 'Inter';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 12.24px;
+ line-height: 150%;
+ /* or 15px */
+ color: #DCDCDC;
+ background-color: #23252C;
+ width: 30vw;
+
+
+}
+
+.interestSection {
+
+    
    background-color: #23252C;
+   width: 30vw;
 
- }
-
- .interestSection {
-
-     background-color: #23252C;
-     width: 317px;
-     height: 1px;
- }
+}
 
 #AboutInterest {
-  background-color: #23252C;
-  color: #F3BF99;
+
+background-color: #23252C;
+color: #F3BF99;
 
 }
 
 
- .paragraphTwo {
+.paragraphTwo {
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12.24px;
-    line-height: 150%;
-    /* or 15px */
-    color: #DCDCDC;
-    background-color: #23252C;
-    width: 317px;
-    height: 300px;
- }
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.24px;
+  line-height: 150%;
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 30vw;
+  height: 60vh;
+}
 
- .paragraphTwoAlignment {
+.paragraphTwoAlignment {
 
-   text-align: left;
-   background-color: #23252C;
-
-
- }
+ text-align: left;
+ background-color: #23252C;
 
 
- #AB {
-
-   background-color: #23252C;
-   color: #F3BF99;
- }
-
- #ABC {
-
-   background-color: #23252C;
-   color: #F3BF99;
- }
+}
 
 
- #ABCD {
-
-   background-color: #23252C;
-   color: #F3BF99;
- }
+#AB {
 
 
- #ABCDE {
+ background-color: #23252C;
+ color: #F3BF99;
+}
 
-   background-color: #23252C;
-   color: #F3BF99;
- }
+#ABC {
+ 
+ 
+ background-color: #23252C;
+ color: #F3BF99;
+}
 
 
- #ABCDEF {
+#ABCD {
 
-   background-color: #23252C;
-   color: #F3BF99;
- }
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+#ABCDE {
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+#ABCDEF {
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
 
 
 
@@ -386,14 +444,15 @@ border-radius: 6px;
 
 .rectangle93 {
 
-    position: bottom;
-    width: 317px;
-    height: 64px;
-    left: 116px;
-    top: 760px;
-    background: #161619;
-    border-radius: 0px 0px 10px 10px;
-    background-color: #23252C;
+  position: bottom;
+  width: 30vw;
+  height: 10vh;
+  left: 0px;
+  top: 0px;
+  background: #161619;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #23252C;
+
 
 
 }
@@ -402,14 +461,14 @@ border-radius: 6px;
 
 .youtubeLogo {
 
-    height: 25px;
-    width: 25px;
-    position: bottom;
-    left: 38.82%;
-    right: 56.64%;
-    top: 89.8%;
-    bottom: 7.32%;
-    background: #161619;
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 18.82%;
+  right: 56.64%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
 
 
 
@@ -417,40 +476,565 @@ border-radius: 6px;
 
 .tiktokLogo {
 
-    height: 25px;
-    width: 25px;
-    position: bottom;
-    left: 47.73%;
-    right: 47.73%;
-    top: 89.8%;
-    bottom: 7.32%;
-    background: #161619;
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 47.73%;
+  right: 47.73%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
 
 }
 
 .twitterLogo {
 
-    height: 25px;
-    width: 25px;
-    position: bottom;
-    left: 56.64%;
-    right: 38.82%;
-    top: 89.8%;
-    bottom: 7.32%;
-    background: #161619;
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 56.64%;
+  right: 38.82%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
 
 }
 
 .githubLogo {
 
-    height: 25px;
-    width: 25px;
-    position: bottom;
-    left: 65.55%;
-    right: 29.91%;
-    top: 89.8%;
-    bottom: 7.32%;
-    background: #161619;
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 65.55%;
+  right: 29.91%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
+
+}
+
+
+
+
+
+
+
+ /* For mobile phones: */
+@media only screen and (max-width: 768px) {
+ 
+
+
+.AboutPageBody {
+  box-sizing: border-box;
+  background-color: #FFF;
+  
+
+}
+
+.smallBoarderBackground{
+text-align: center;
+width: 68vw;
+height: 60vh;
+position: center;
+
+
+}
+
+.profileFrame {
+background-color: #23252C;
+width: 68vw;
+height: 60vh;
+position: center;
+height: -webkit-fill-available;
+
+}
+
+.blackBorderTop {
+
+background-color: #23252C;
+width: 68vw;
+height: 1.5vh;
+position: center;
+
+}
+
+.insideBox {
+
+position: absolute;
+width: 68vw;
+height: 60vh;
+position: center;
+height: -webkit-fill-available;
+top: 40vh;
+right: 30vw;
+
+}
+
+
+
+.displayPicture {
+
+position: relative;
+width: 250px;
+height: 350px;
+
+
+}
+
+.greenacesText {
+
+ color: #FFFFFF;
+ text-align: center;
+}
+
+.frontendFont {
+
+ color: #F3BF99;
+ text-align: center;
+}
+
+#GreenAcesLink{
+
+color: #FFFFFF;
+}
+
+
+/*link color settings for greenaces link */
+
+
+a:link {color: #F5F5F5;}
+
+a:link {
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: none;
+}
+
+a:visited {
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: none;
+}
+
+a:hover {
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: underline;
+}
+
+a:active {
+color: #F5F5F5;
+background-color: transparent;
+text-decoration: underline;
+}
+
+
+.ButtonWrapper {
+
+margin: 0 auto;
+width: 115px;
+height: 34px;
+position: relative;
+left: -70px;
+right: 0px;
+bottom: 0px;
+top: 0px;
+
+}
+
+/*link color settings for email button link */
+
+.emailBtn a:link, a:visited {
+color: black;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+}
+
+
+
+.emailBtn {
+
+
+
+color: black;
+
+box-sizing: border-box;
+
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+/* Button */
+
+
+box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 9px 13px 9px 11px;
+gap: 8px;
+
+
+width: 115px;
+height: 34px;
+position: relative;
+left: 1vh;
+right: 0px;
+bottom: 0px;
+top: 20px;
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+
+
+
+}
+
+
+/*link color settings for linkin button link */
+
+.linkinBtn a:link, a:visited {
+text-align: center;
+text-decoration: none;
+display: inline-block;
+
+
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+}
+
+.linkinBtn {
+
+box-sizing: border-box;
+
+/* white */
+
+background: #FFFFFF;
+/* gray/300 */
+
+border: 1px solid #D1D5DB;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+/* Button */
+
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 9px 13px 9px 11px;
+gap: 8px;
+
+width: 115px;
+height: 34px;
+position: relative;
+left: 130px;
+right: 0px;
+bottom: 0px;
+top: -14px;
+
+background: #297FE5;
+/* shadow/sm */
+
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 6px;
+
+
+}
+
+
+
+/*email and linkedin images */
+
+.emailLogo {
+
+max-width: 25%;
+max-height: 1000%;
+background: #FFFFFF;
+
+
+}
+
+.linkinLogo {
+
+max-width: 25%;
+max-height: 1000%;
+background: #297FE5;
+
+
+}
+
+.primarySection {
+
+background-color: #23252C;
+width: 68vw;
+
+}
+
+
+.aboutMeSection {
+
+   text-align: center;
+   background-color: #23252C;
+   width: 68vw;
+   height: 29vh;
+   
+
+}
+
+.AboutSectionContent {
+
+text-align: center;
+
+}
+
+#AboutHeadline {
+
+ background-color: #23252C;
+ color: #F3BF99;
+
+}
+
+
+
+.paragraphOne {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.24px;
+  line-height: 150%;
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 21vw;
+
+}
+
+#paragraphOneAlignment {
+
+ text-align: left;
+ background-color: #23252C;
+ font-family: 'Inter';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 12.24px;
+ line-height: 150%;
+ /* or 15px */
+ color: #DCDCDC;
+ background-color: #23252C;
+ width: 68vw;
+
+
+}
+
+.interestSection {
+
+    
+   background-color: #23252C;
+   width: 68vw;
+
+}
+
+#AboutInterest {
+
+background-color: #23252C;
+color: #F3BF99;
+
+}
+
+
+.paragraphTwo {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.24px;
+  line-height: 150%;
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 68vw;
+  height: 60vh;
+}
+
+.paragraphTwoAlignment {
+
+ text-align: left;
+ background-color: #23252C;
+
+
+}
+
+
+#AB {
+
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+#ABC {
+ 
+ 
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+#ABCD {
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+#ABCDE {
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+#ABCDEF {
+
+ background-color: #23252C;
+ color: #F3BF99;
+}
+
+
+
+
+
+
+
+
+/*body section*/
+
+
+
+
+
+
+
+
+/*footer section*/
+
+.rectangle93 {
+
+  position: bottom;
+  width: 68vw;
+  height: 10vh;
+  left: 0px;
+  top: 0px;
+  background: #161619;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #23252C;
+
+
+
+}
+
+
+
+.youtubeLogo {
+
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 18.82%;
+  right: 56.64%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
+
+
+
+}
+
+.tiktokLogo {
+
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 47.73%;
+  right: 47.73%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
+
+}
+
+.twitterLogo {
+
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 56.64%;
+  right: 38.82%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
+
+}
+
+.githubLogo {
+
+  height: 25px;
+  width: 25px;
+  position: bottom;
+  left: 65.55%;
+  right: 29.91%;
+  top: 89.8%;
+  bottom: 7.32%;
+  background: #161619;
+
+}
+
+
+
+
 
 }
 

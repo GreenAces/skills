@@ -95,7 +95,7 @@ function Footer() {
     <div className="container">
     <div className="row">
     <div className="col-md-12 text-center">
-    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.</p>
+    <p>Copyright &copy; {(new Date().getFullYear())} All rights reserved.</p>
     </div>
     </div>
     </div>

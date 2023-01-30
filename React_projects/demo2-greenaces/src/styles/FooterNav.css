@@ -131,4 +131,26 @@
   
   
   
+  /*change viewport settings here for desktop monitor*/
+
+ 
   
+  @media (max-width: 1200px)  {
+    
+    .footer-1 {
+          flex-wrap: wrap;
+          height: 5rem;  
+    }
+    
+  
+  }
+  
+
+ 
+  
+
+
+  
+ 
+  
+ 

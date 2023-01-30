@@ -1,0 +1,542 @@
+/* This css file is soley for pokemon.html
+additional information can be found here:
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div */
+
+
+
+
+/*Navbar settings for greenaces*/
+
+.dropdown-menu{
+
+  background-color: #50e177;
+  font-family: Helvetica;
+  font-weight: 300;
+  
+  
+}
+
+/*GreenAces logo here*/
+
+#GreenAcesNavbarBrand {
+
+  height: 50px;
+  width: 75px;
+}
+
+      
+
+
+#label-row-browser-games {
+  background-color: #708090;
+}
+
+#label-row-Apps {
+  background-color: #708090;
+}
+
+#label-row-Stuff {
+  background-color: #708090;
+}
+
+.dropdown-menu :hover{
+
+  background-color: #D3D3D3
+
+}
+
+#navbarDropdownProjects {
+  color: #50e177;
+}
+
+#label-column-lucky {
+  color: black;
+  font-size: larger;
+  
+}
+
+#label-column-pokemon {
+  color: black;
+  font-size: larger;
+}
+
+
+
+#navbarDropdownAndroid {
+  color: #50e177;
+}
+
+#label-column-App1 {
+  color: black;
+  font-size: larger;
+}
+
+#label-column-App2 {
+  color: black;
+  font-size: larger;
+}
+
+#navbarDropdownOther {
+  color: #50e177;
+}
+
+#label-column-Test1 {
+  color: black;
+  font-size: larger;
+
+}
+
+#label-column-Test2 {
+  color: black;
+  font-size: larger;
+
+}
+
+#label-column-Test3 {
+  color: black;
+  font-size: larger;
+
+}
+
+
+
+/*
+update progress bar style here
+
+*/
+
+         /* progress bar for player1 HP*/
+
+         .player1HP-progressBarBackground{
+           background: black;
+           padding: 3px;
+           width: 100px;
+         }
+
+          .player1HP {
+            width:0px;height:10px;
+            background-color: #A6EDED;
+
+           }
+
+
+       /* speedbar for player1 */
+          .playerSpeed-progressBarBackground{
+          background: black;
+          padding: 3px;
+          width: 100px;
+          }
+
+          .playerSpeed {
+              width:0px;height:10px;
+              background-color: #A6EDED;
+
+            }
+
+
+
+
+            /* progress bar for computer HP*/
+
+            .cpuHP-progressBarBackground{
+              background: black;
+              padding: 3px;
+              width: 100px;
+              }
+
+            .cpuHP {
+                width:0px;height:10px;
+                background-color: #A6EDED;
+
+              }
+
+
+          /* speedbar for computer */
+
+            .cpuSpeed-progressBarBackground{
+              background: black;
+              padding: 3px;
+              width: 100px;
+              }
+
+
+              .cpuSpeed {
+                  width:0px;height:10px;
+                  background-color: #A6EDED;
+
+                }
+
+
+
+
+  /* player1 menus  */
+
+
+#PokemonAttackMenuController{
+   width: 100%;
+}
+
+.Player1Status {
+
+  width: 100px;
+  height: 150px;
+  max-width:450px
+
+}
+
+
+.Player1PokemonContainer{
+  width: 100px;
+  height: 150px;
+  max-width:450px
+
+}
+
+#Player1PokeImage img {
+  display: block;
+  width: 192px;
+  height: 192px;
+
+}
+
+.AttackGraphicContainer{
+  width: 80px;
+  height: 80px;
+  max-width:250px
+
+}
+
+
+#player1AttackImage img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  max-width:250px
+
+
+}
+
+
+
+
+  /* computer menus */
+
+#computerAttackImage img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  max-width:250px
+
+
+}
+
+
+
+.CpuPokemonContainer{
+  width: 100px;
+  height: 150px;
+  max-width:450px
+
+}
+
+
+
+#CpuPokeImage img {
+  display: block;
+  width: 188px;
+  height: 188px;
+
+
+}
+
+
+.CpuStatus {
+
+  width: 100px;
+  height: 150px;
+  max-width:450px
+}
+
+
+
+/*table for cpu icon pokemon*/
+
+#tablePokemonIconIndicators2 {
+
+  
+  border: none;
+
+}
+
+/*table for player1 icon pokemon*/
+
+#tablePokemonIconIndicators {
+
+
+  border: none;
+
+}
+
+
+/*pokemon_icon-indicators*/
+
+/*computer pokemon icon */
+
+#squirtleIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+#ScytherIcon {
+  width: 34px;
+  height: 46px;
+}
+
+#OnixIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+
+
+/*player1 pokemon icon */
+
+#charmanderIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+#PikachuIcon {
+  width: 34px;
+  height: 46px;
+}
+
+#BlastoiseIcon {
+  width: 34px;
+  height: 46px;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* main navbar sub-menu options */
+
+
+
+/*w3 navbar*/
+
+.dropbtn {
+  background-color: #FFFFFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropup {
+  position: relative;
+  display: inline-block;
+
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  background-color : rgba(184, 229, 250, 0.5);
+  min-width: 135px;
+  bottom: 64px;
+  z-index: 1;
+  font-weight: 700;
+  font-family: sans-serif;
+  font-size: auto;
+
+}
+
+#dropUpPokemonSelectionMenu {
+  background-color : rgba(184, 229, 250, 3);
+}
+
+#Charmander_sel {
+  color: #70B663;
+}
+
+#Pikachu_sel {
+  color: #70B663;
+}
+
+#Blastoise_sel {
+  color: #70B663;
+}
+
+
+
+
+#dropupContentSettings {
+  min-width: auto;
+  font-weight: 700;
+  font-family: sans-serif;
+  font-size: auto;
+}
+
+.dropup-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropup-content a:hover {background-color: #A9E2F3}
+
+.dropup:hover .dropup-content {
+  display: block;
+}
+
+.dropup:hover .dropbtn {
+  background-color: #A9E2F3;
+}
+
+
+/*google-navbar*/
+
+
+body {
+    margin: 0 0 55px 0;
+}
+
+.nav {
+
+    align-self: center;
+    position: fixed;
+    bottom: 0px;
+    width: 375px;
+    height: 65px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.nav__link {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #444444;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+
+
+}
+
+.nav__link:hover {
+    background-color: #eeeeee;
+}
+
+.nav__link--active {
+    color: #009578;
+}
+
+.nav__icon {
+    font-size: 18px;
+}
+
+
+
+
+/* pokemon text indicators AND statusLayoutProgress settings */
+
+.statusLayoutProgress{
+  width: 200px;
+  height: 77px;
+
+/*
+  statusLayoutProgress is the div tag that holds the text indicators
+  max height should not exceed 98px for statusLayoutProgress
+  and max width should not exceed 200px for statusLayoutProgress
+*/
+
+
+}
+
+#statusProgress {
+
+  font-size: 10px;
+
+}
+
+#statusProgress2 {
+
+  font-size: 10px;
+
+}
+
+
+#statusProgress3 {
+
+font-size: 10px;
+
+
+}
+
+
+
+
+
+
+/* main navbar menu options */
+
+#attack-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#defense-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#select-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#settings-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#hamburger-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}

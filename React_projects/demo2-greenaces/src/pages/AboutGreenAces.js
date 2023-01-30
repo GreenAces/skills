@@ -16,9 +16,17 @@ function AboutGreenAces() {
 
   return (
 
+    <React.Fragment> 
+
+    <meta name="author" content="GreenAces" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+
       <main className={AboutPage.smallBoarderBackground}>
 
               <div className={AboutPage.insideBox}>
+
+              <div className={AboutPage.blackBorderTop} />
 
         <nav className={AboutPage.profileFrame}>
 
@@ -28,6 +36,9 @@ function AboutGreenAces() {
       <h4 className={AboutPage.frontendFont}>Frontend Developer</h4>
         <br></br>
       <h5><a href = "https://www.greenaces.site/" target="_blank"  rel="noopener noreferrer" id={AboutPage.GreenAcesLink} >Website</a></h5>
+
+      <div className={AboutPage.ButtonWrapper}>
+
         <div className={AboutPage.emailBtn}>
         <img img src={EmailLogo} alt="Email" className={AboutPage.emailLogo} />&nbsp;<a href = "mailto:greenaces@greenaces.site" target="_blank" rel="noopener noreferrer">Email</a>
 
@@ -37,18 +48,25 @@ function AboutGreenAces() {
         <img img src={LinkInLogo} alt="Email" className={AboutPage.linkinLogo}/>&nbsp;<a href = "https://www.linkedin.com/in/robert-labonte-8b135086?trk=people-guest_people_search-card" target="_blank" rel="noopener noreferrer">LinkIn</a>
       </div>
 
+      </div>
+
         </nav>
 
 
       <section className={AboutPage.primarySection}>
       <p className={AboutPage.aboutMeSection}></p>
-      <p className={AboutPage.paragraphOne}>
+      <p className={AboutPage.paragraphOne}></p>
+
+         <div className={AboutPage.AboutSectionContent}>
+
       <h2 id={AboutPage.AboutHeadline}>About</h2>
-      <p className={AboutPage.paragraphOneAlignment}>
+      <p id={AboutPage.paragraphOneAlignment}>
       Robert spends most of his time learning about React and C# and is willing to learn about other programming
       languages as well. He wants to grow an online business pertaining to games and the metaverse,
       but when asked how long it takes to accomplish his goal, he simply laughed and said “Rome, wasn’t built in a day!”
-      </p></p>
+      </p>
+          </div>
+      
 
       <p className={AboutPage.interestSection}></p>
       <p className={AboutPage.paragraphTwo}>
@@ -92,6 +110,9 @@ function AboutGreenAces() {
             </div>
 
       </main>
+
+
+      </React.Fragment>
 
 
 
