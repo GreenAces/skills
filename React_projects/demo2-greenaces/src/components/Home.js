@@ -44,7 +44,7 @@ className="game-thumbnail" alt="Lucky 7" title="Lucky 7"/></Link>
 </div>
 <div className="col-6">
   <div className="p-3 border bg-light">
-  <Link to="/Pokemon"><img src={PikachuImage} 
+  <Link to="/PokemonGame"><img src={PikachuImage} 
 className="game-thumbnail" alt="Pokemon Game" title="Pokemon Game"/></Link>
   </div>
 </div>

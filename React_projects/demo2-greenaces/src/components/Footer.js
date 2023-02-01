@@ -10,7 +10,7 @@ function Footer() {
     // removes the footer component if the pathname matches
     if (pathname === "/AboutGreenAces" ||
         pathname === "/Lucky7" ||
-        pathname === "/Pokemon" ||
+        pathname === "/PokemonGame" ||
         pathname === "/Demo"
         ) return null;
 
