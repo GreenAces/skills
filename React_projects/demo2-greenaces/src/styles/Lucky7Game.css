@@ -214,19 +214,3 @@ height: 95px;
 
   /*change viewport settings here*/
 
-  .html {
-    height: -webkit-fill-available;
-  }
-  
-  .body {
-  
-    height: -webkit-fill-available;
-  }
-  
-  
-  .container {
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-    height: -webkit-fill-available;
-  }

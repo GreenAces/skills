@@ -261,21 +261,27 @@ update progress bar style here
 
 /*table for cpu icon pokemon*/
 
-#tablePokemonIconIndicators2 {
+#tablePokemonIconIndicators2, tr, td {
 
   
   border: none;
+
 
 }
 
 /*table for player1 icon pokemon*/
 
-#tablePokemonIconIndicators {
+#tablePokemonIconIndicators, tr, td {
 
-
+  
   border: none;
 
+
 }
+
+
+
+
 
 
 /*pokemon_icon-indicators*/
@@ -540,3 +546,105 @@ font-size: 10px;
   display:inline-block;
 
 }
+
+/*custom view port settings created for other devices*/
+
+ /* For mobile phones: */
+ @media only screen and (max-width: 768px) {
+
+
+/*google-navbar*/
+
+ 
+body {
+  margin: 0 0 55px 0;
+}
+
+.nav {
+
+  align-self: center;
+  position: fixed;
+  bottom: 0px;
+  width: 375px;
+  height: 65px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.nav__link {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  min-width:  50px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: sans-serif;
+  font-size: 13px;
+  color: #444444;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.1s ease-in-out;
+
+
+}
+
+.nav__link:hover {
+  background-color: #eeeeee;
+}
+
+.nav__link--active {
+  color: #009578;
+}
+
+.nav__icon {
+  font-size: 18px;
+}
+
+
+/* main navbar menu options */
+
+#attack-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#defense-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#select-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#settings-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+#hamburger-menu-icon{
+  width: 58px;
+  height: 30px;
+  display:inline-block;
+
+}
+
+
+
+ }

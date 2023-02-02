@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import  '../styles/pokemon.css';
+import  '../styles/PokemonGame.css';
 import pokemonData from './PokemonData.js';
 import pokemonData2 from './PokemonData2.js';
 import pokemonData3 from './PokemonData3.js';
@@ -13393,28 +13393,6 @@ function refreshPage() {
 
 
 
-// Attack menu for Event listeners
-
-document.getElementById("attackA").addEventListener("click", attackA);
-document.getElementById("attackB").addEventListener("click", attackB);
-document.getElementById("attackC").addEventListener("click", attackC);
-
-// Defense menu for Event listeners
-
-document.getElementById("defenseA").addEventListener("click", defenseA);
-document.getElementById("defenseB").addEventListener("click", defenseB);
-document.getElementById("defenseC").addEventListener("click", defenseC);
-
-
-// Event listener for player1 pokemonchange on line 890-1700
-
-
-document.getElementById("Charmander_sel").addEventListener("click", loadCharmander);
-document.getElementById("Blastoise_sel").addEventListener("click", loadBlastoise);
-document.getElementById("Pikachu_sel").addEventListener("click", loadPikachu);
-
-
-
 
 
 
@@ -14580,9 +14558,9 @@ return (
          <button class="dropbtn"><img id="attack-menu-icon" src={attackMenuIcon}></img><i class="fa fa-caret-up"></i></button>
          <div class="dropup-content">
 
-               <a href="#" id="attackA"></a>
-               <a href="#" id="attackB"></a>
-               <a href="#" id="attackC"></a>
+               <a href="#" id="attackA" onClick={attackA}></a>
+               <a href="#" id="attackB" onClick={attackB}></a>
+               <a href="#" id="attackC" onClick={attackC}></a>
 
 
 
@@ -14596,9 +14574,9 @@ return (
          <div class="dropup-content">
 
 
-               <a href="#" id="defenseA"></a>
-               <a href="#" id="defenseB"></a>
-               <a href="#" id="defenseC"></a>
+               <a href="#" id="defenseA" onClick={defenseA}></a>
+               <a href="#" id="defenseB" onClick={defenseB}></a>
+               <a href="#" id="defenseC" onClick={defenseC}></a>
 
 
 
@@ -14612,9 +14590,9 @@ return (
          <div class="dropup-content" id="dropUpPokemonSelectionMenu">
 
 
-               <a href="#" id="Charmander_sel">Charmander</a>
-               <a href="#" id="Pikachu_sel">Pikachu</a>
-               <a href="#" id="Blastoise_sel">Blastoise</a>
+               <a href="#" id="Charmander_sel" onClick={loadCharmander}>Charmander</a>
+               <a href="#" id="Pikachu_sel" onClick={loadPikachu}>Pikachu</a>
+               <a href="#" id="Blastoise_sel" onClick={loadBlastoise}>Blastoise</a>
 
 
 
