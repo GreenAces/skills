@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import  '../styles/PokemonGame.css';
 import pokemonData from './PokemonData.js';
 import pokemonData2 from './PokemonData2.js';
@@ -246,51 +246,53 @@ const defenseC_Sta = useState("");
               
           const chrAtkImage1 = function () {  // image 1 of 6 is fireblaster for charmander
 
-          const [chrAtkImage11, setChrAtkImage11] = useState([]);
-
     
-
-          let player1AttackImage = setChrAtkImage11(<img src={fireBlasterGif} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-
-            // remove attack image after 5 secs
-            let player1AttackImage = setChrAtkImage11([]);
-    
-            }, 5000); // 5 sec wait time
+            
+              setPlayer1AttackImage(
+                <img
+                src={fireBlasterGif}
+                
+                />
+              );
+          
+              setTimeout(() => {
+                setPlayer1AttackImage('');
+              }, 5000);
+            
     
         }
     
           const chrAtkImage2 = function () {  // image 2 of 6 is blaze for charmander
 
-          const [chrAtkImage22, setChrAtkImage22] = useState([]);
-    
 
+            setPlayer1AttackImage(
+              <img
+              src={blaze}
+              
+              />
+            );
+        
+            setTimeout(() => {
+              setPlayer1AttackImage('');
+            }, 5000);
 
-            let player1AttackImage = setChrAtkImage22(<img src={blaze} />);
-    
-            setTimeout(function() { // This is an anonymous callback function
-    
-              // remove attack image after 5 secs
-              let player1AttackImage = setChrAtkImage22([]);
-    
-              }, 5000); // 5 sec wait time
+        
     
           }
     
           const chrAtkImage3 = function () {  // image 3 of 6 solarbeam for charmander
 
-          const [chrAtkImage33, setChrAtkImage33] = useState([]);
-    
-              let player1AttackImage = setChrAtkImage33(<img src={solarbeam} />);
-    
-              setTimeout(function() { // This is an anonymous callback function
-    
-                // remove attack image after 5 secs
-                let player1AttackImage = setChrAtkImage33([]);
-    
-              }, 5000); // 5 sec wait time
+
+            setPlayer1AttackImage(
+              <img
+              src={solarbeam}
+              
+              />
+            );
+        
+            setTimeout(() => {
+              setPlayer1AttackImage('');
+            }, 5000);
     
     
     
@@ -298,51 +300,55 @@ const defenseC_Sta = useState("");
     
       const chrAtkImage4 = function () {  // image 4 of 6 is growl for charmander
 
-      const [chrAtkImage44, setChrAtkImage44] = useState([]);  
+
+        setPlayer1AttackImage(
+          <img
+          src={growl}
+         
+          />
+        );
     
-          let player1AttackImage = setChrAtkImage44(<img src={growl} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let player1AttackImage = setChrAtkImage44([]);
-    
-          }, 5000); // 5 sec wait time
-    
+        setTimeout(() => {
+          setPlayer1AttackImage('');
+        }, 5000);
+
+
     
     
     }
     
     const chrAtkImage5 = function () {  // image 5 of 6 smoke screen for charmander
 
-    const [chrAtkImage55, setChrAtkImage55] = useState([]);  
-    
-      let player1AttackImage = setChrAtkImage55(<img src={smokescreen} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 5 secs
-        let player1AttackImage = setChrAtkImage55([]);
-    
-      }, 5000); // 5 sec wait time
-    
+
+      setPlayer1AttackImage(
+        <img
+        src={smokescreen}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+ 
     
     
     }
     
     const chrAtkImage6 = function () {  // image 6 of 6 is rest for charmander -- NOTE: attack image needs to show on player1 side because of self-healing
 
-    const [chrAtkImage66, setChrAtkImage66] = useState([]);  
-    
-      let player1AttackImage = setChrAtkImage66(<img src={hpRecoveredImage} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 5 secs
-        let player1AttackImage = setChrAtkImage66([]);
-    
-      }, 5000); // 5 sec wait time
-    
+
+      setPlayer1AttackImage(
+        <img
+        src={hpRecoveredImage}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+     
     
     
     }
@@ -355,94 +361,115 @@ const defenseC_Sta = useState("");
     
     const squAtkImage1 = function () { // image 1 of 6 is bubbles for squirtle
 
-      const [squAtkImage11, setSquAtkImage11] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage11(<img src={bubblesGif} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage11([]);
-    
-      }, 3000); // 3 sec wait time
+
+      
+      setComputerAttackImage(
+        <img
+        src={bubblesGif}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
+     
+
     
     }
     
     const squAtkImage2 = function () { // image 2 of 6 is TailWhip for squirtle
 
-      const [squAtkImage22, setSquAtkImage22] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage22(<img src={TailWhip} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage22([]);
-    
-      }, 3000); // 3 sec wait time
+
+      setComputerAttackImage(
+        <img
+        src={TailWhip}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
+     
+
+
     
     }
     
     
     const squAtkImage3 = function () { // image 3 of 6 is waterPulse for squirtle
 
-      const [squAtkImage33, setSquAtkImage33] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage33(<img src={waterPulse} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage33([]);
-    
-      }, 3000); // 3 sec wait time
+
+      setComputerAttackImage(
+        <img
+        src={waterPulse}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
+     
+
+
     
     }
     
     
     const squAtkImage4 = function () { // image 4 of 6 is tackle for squirtle
 
-      const [squAtkImage44, setSquAtkImage44] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage44(<img src={waterPulse} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage44([]);
-    
-      }, 3000); // 3 sec wait time
+
+      setComputerAttackImage(
+        <img
+        src={tackle}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
+
+ 
     
     }
     
     const squAtkImage5 = function () { // image 5 of 6 is watergun for squirtle
 
-      const [squAtkImage55, setSquAtkImage55] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage55(<img src={watergun} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage55([]);
-    
-      }, 3000); // 3 sec wait time
+      setComputerAttackImage(
+        <img
+        src={watergun}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
+
+
+  
     
     }
     
     
     const squAtkImage6 = function () { // image 6 of 6 rest for squirtle -- NOTE: attack image needs to show on computer side because of self-healing
 
-      const [squAtkImage66, setSquAtkImage66] = useState([]);
-    
-      let computerAttackImage = setSquAtkImage66(<img src={watergun} />);
+      
+      setComputerAttackImage(
+        <img
+        src={hpRecoveredImage}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setComputerAttackImage('');
+      }, 5000);
 
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let computerAttackImage = setSquAtkImage66([]);
-    
-      }, 3000); // 3 sec wait time
+  
     
     }
 
@@ -455,93 +482,102 @@ const defenseC_Sta = useState("");
     
     const pikAtkImage1 = function () { // image 1 of 6 thunderShock
 
-      const [pikAtkImage11, setPikAtkImage11] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage11(<img src={pikachuThundershock} />);
-    
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let player1AttackImage = setPikAtkImage11([]);
-    
-      }, 3000); // 3 sec wait time
+      setPlayer1AttackImage(
+        <img
+        src={pikachuThundershock}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+
+  
     
     }
     
     const pikAtkImage2 = function () { // image 2 of 6 is doubleKick
 
-      const [pikAtkImage22, setPikAtkImage22] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage22(<img src={pikachuDoubleKick} />);
+      setPlayer1AttackImage(
+        <img
+        src={pikachuDoubleKick}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
 
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let player1AttackImage = setPikAtkImage22([]);
 
-      }, 3000); // 3 sec wait time
     
     }
     
     const pikAtkImage3 = function () { // image 3 of 6 is thunderBolt -- note: consider using slash.gif for the animation for thunderBolt -- looks really good together
 
-      const [pikAtkImage33, setPikAtkImage33] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage33(<img src={pikachuThunderbolt} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let player1AttackImage = setPikAtkImage33([]);
-    
-      }, 3000); // 3 sec wait time
+      setPlayer1AttackImage(
+        <img
+        src={pikachuThunderbolt}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+
     
     }
     
     const pikAtkImage4 = function () { // image 4 of 6 is growl
 
-      const [pikAtkImage44, setPikAtkImage44] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage44(<img src={pikachuGrowl} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let player1AttackImage = setPikAtkImage44([]);
+      setPlayer1AttackImage(
+        <img
+        src={pikachuGrowl}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
 
-      }, 3000); // 3 sec wait time
+
     
     }
     
     const pikAtkImage5 = function () { // image 5 of 6 is headButt -- NOTE: 6of6 is rest but this is same attack move for all player1 pokemon
 
-      const [pikAtkImage55, setPikAtkImage55] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage55(<img src={pikachuHeadbutt} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 3 secs
-        let player1AttackImage = setPikAtkImage55([]);
-    
-      }, 3000); // 3 sec wait time
+      setPlayer1AttackImage(
+        <img
+        src={pikachuHeadbutt}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+
+
     
     }
     
     
     const pikAtkImage6 = function () {  // image 6 of 6 is rest for pikachu -- NOTE: attack image needs to show on player1 side because of self-healing
 
-      const [pikAtkImage66, setPikAtkImage66] = useState([]);
-    
-      let player1AttackImage = setPikAtkImage66(<img src={hpRecoveredImage} />);
-    
-      setTimeout(function() { // This is an anonymous callback function
-    
-        // remove attack image after 5 secs
-        let player1AttackImage = setPikAtkImage66([]);
-    
-      }, 5000); // 5 sec wait time
+      setPlayer1AttackImage(
+        <img
+        src={hpRecoveredImage}
+        
+        />
+      );
+  
+      setTimeout(() => {
+        setPlayer1AttackImage('');
+      }, 5000);
+
     
     
     
@@ -558,93 +594,100 @@ const defenseC_Sta = useState("");
     
         const scyAtkImage1 = function () { // image 1 of 6 is slash
 
-          const [scyAtkImage11, setScyAtkImage11] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage11(<img src={slashGif} />);
+          setComputerAttackImage(
+            <img
+            src={slashGif}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+         
 
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage11([]);
-    
-          }, 5000); // 5 sec wait time
     
         }
     
         const scyAtkImage2 = function () { // image 2 of 6 is quick attack
 
-          const [scyAtkImage22, setScyAtkImage22] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage22(<img src={scytherQuickAttack} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage22([]);
-    
-          }, 5000); // 5 sec wait time
+          setComputerAttackImage(
+            <img
+            src={scytherQuickAttack}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+         
     
         }
     
         const scyAtkImage3 = function () { // image 3 of 6 is X-Scissor
 
-          const [scyAtkImage33, setScyAtkImage33] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage33(<img src={scytherXScissor} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage33([]);
-    
-          }, 5000); // 5 sec wait time
+          setComputerAttackImage(
+            <img
+            src={scytherXScissor}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+         
+
+
     
         }
     
         const scyAtkImage4 = function () { // image 4 of 6 is Fury Cutter
 
-          const [scyAtkImage44, setScyAtkImage44] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage44(<img src={scytherFurycutter} />);
+          setComputerAttackImage(
+            <img
+            src={scytherFurycutter}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
 
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage44([]);
-    
-          }, 5000); // 5 sec wait time
     
         }
     
         const scyAtkImage5 = function () { // image 5 of 6 is Wing Attack
 
-          const [scyAtkImage55, setScyAtkImage55] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage55(<img src={scytherFurycutter} />);
+          setComputerAttackImage(
+            <img
+            src={scytherWingAttack}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
 
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage55([]);
-    
-          }, 5000); // 5 sec wait time
     
         }
     
         const scyAtkImage6 = function () {  // image 6 of 6 is rest for scyther -- NOTE: attack image needs to show on player1 side because of self-healing
 
-          const [scyAtkImage66, setScyAtkImage66] = useState([]);
-    
-          let computerAttackImage = setScyAtkImage66(<img src={hpRecoveredImage} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setScyAtkImage66([]);
+          setComputerAttackImage(
+            <img
+            src={hpRecoveredImage}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
 
-          }, 5000); // 5 sec wait time
-    
     
     
         }
@@ -657,92 +700,103 @@ const defenseC_Sta = useState("");
     
         const blaAtkImage1 = function () { // image 1 of 6 is aquaJet
 
-          const [blaAtkImage11, setBlaAtkImage11] = useState([]);
 
-          let player1AttackImage = setBlaAtkImage11(<img src={blastoiseAquaJet} />);
-          
+          setPlayer1AttackImage(
+            <img
+            src={blastoiseAquaJet}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
 
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 3 secs
-            let player1AttackImage = setBlaAtkImage11([]);
-    
-          }, 3000); // 3 sec wait time
     
         }
     
         const blaAtkImage2 = function () { // image 2 of 6 is bubble
 
-          const [blaAtkImage22, setBlaAtkImage22] = useState([]);
-    
-          let player1AttackImage = setBlaAtkImage22(<img src={blastoiseBubble} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 3 secs
-            let player1AttackImage = setBlaAtkImage22([]);
-    
-          }, 3000); // 3 sec wait time
+          setPlayer1AttackImage(
+            <img
+            src={blastoiseBubble}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
+
+
     
         }
     
         const blaAtkImage3 = function () { // image 3 of 6 is hydroPump
 
-          const [blaAtkImage33, setBlaAtkImage33] = useState([]);
-    
-          let player1AttackImage = setBlaAtkImage33(<img src={blastoiseHydroPump} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 3 secs
-            let player1AttackImage = setBlaAtkImage33([]);
-    
-          }, 3000); // 3 sec wait time
+
+          setPlayer1AttackImage(
+            <img
+            src={blastoiseHydroPump}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
+
+
     
         }
     
         const blaAtkImage4 = function () { // image 4 of 6 is protect
 
-          const [blaAtkImage44, setBlaAtkImage44] = useState([]);
-    
-          let player1AttackImage = setBlaAtkImage44(<img src={blastoiseProtect} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 3 secs
-            let player1AttackImage = setBlaAtkImage44([]);
-    
-          }, 3000); // 3 sec wait time
+          setPlayer1AttackImage(
+            <img
+            src={blastoiseProtect}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
+
     
         }
     
         const blaAtkImage5 = function () { // image 5 of 6 is headbutt
 
-          const [blaAtkImage55, setBlaAtkImage55] = useState([]);
-    
-          let player1AttackImage = setBlaAtkImage55(<img src={blastoiseProtect} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 3 secs
-            let player1AttackImage = setBlaAtkImage55([]);
-    
-          }, 3000); // 3 sec wait time
+          setPlayer1AttackImage(
+            <img
+            src={blastoiseHeadbutt}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
+
+
+ 
     
         }
     
         const blaAtkImage6 = function () {  // image 6 of 6 is rest for blastoise -- NOTE: attack image needs to show on player1 side because of self-healing
 
-          const [blaAtkImage66, setBlaAtkImage66] = useState([]);
-    
-          let player1AttackImage = setBlaAtkImage66(<img src={hpRecoveredImage} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let player1AttackImage = setBlaAtkImage66([]);
-    
-          }, 5000); // 5 sec wait time
+          setPlayer1AttackImage(
+            <img
+            src={hpRecoveredImage}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setPlayer1AttackImage('');
+          }, 5000);
+
     
     
     
@@ -758,96 +812,107 @@ const defenseC_Sta = useState("");
     
         const oniAtkImage1 = function () { // image 1 of 6 is rock throw
 
-          const [oniAtkImage11, setOniAtkImage11] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage11(<img src={onixRockthrow} />);
- 
 
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage11([]);
-    
-          }, 5000); // 5 sec wait time
+          setComputerAttackImage(
+            <img
+            src={onixRockthrow}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+
     
         }
     
         const oniAtkImage2 = function () { // image 2 of 6 is smack down
 
+          setComputerAttackImage(
+            <img
+            src={onixSmackdown}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
 
-          const [oniAtkImage22, setOniAtkImage22] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage22(<img src={onixSmackdown} />);
 
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage22([]);
-    
-          }, 5000); // 5 sec wait time
+
     
         }
     
         const oniAtkImage3 = function () { // image 3 of 6 is rock slide
 
-          const [oniAtkImage33, setOniAtkImage33] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage33(<img src={onixRockSlide} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage33([]);
-    
-          }, 5000); // 5 sec wait time
+          setComputerAttackImage(
+            <img
+            src={onixRockSlide}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+
+
     
         }
     
         const oniAtkImage4 = function () { // image 4 of 6 is screech
 
-          const [oniAtkImage44, setOniAtkImage44] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage44(<img src={onixScreech} />);
 
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage44([]);
-    
-          }, 5000); // 5 sec wait time
+          setComputerAttackImage(
+            <img
+            src={onixScreech}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+
+
     
         }
     
         const oniAtkImage5 = function () { // image 5 of 6 is stone edge
 
-          const [oniAtkImage55, setOniAtkImage55] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage55(<img src={onixStoneEdge} />);
+          setComputerAttackImage(
+            <img
+            src={onixStoneEdge}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
 
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage55([]);
 
-          }, 5000); // 5 sec wait time
+
     
         }
     
         const oniAtkImage6 = function () {  // image 6 of 6 is rest for onix -- NOTE: attack image needs to show on player1 side because of self-healing
 
-          const [oniAtkImage66, setOniAtkImage66] = useState([]);
-    
-          let computerAttackImage = setOniAtkImage66(<img src={hpRecoveredImage} />);
-    
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove attack image after 5 secs
-            let computerAttackImage = setOniAtkImage66([]);
-    
-          }, 5000); // 5 sec wait time
-    
+
+          setComputerAttackImage(
+            <img
+            src={hpRecoveredImage}
+            
+            />
+          );
+      
+          setTimeout(() => {
+            setComputerAttackImage('');
+          }, 5000);
+
+
     
     
         }
@@ -860,16 +925,17 @@ const defenseC_Sta = useState("");
     
           const player1TauntImage = function () { // image 1 of 1 for taunting player1 when attemping to use health restoration when health is > 40
 
-            const [player1TauntImage11, setPlayer1TauntImage11] = useState([]);
-
-          let player1AttackImage = setPlayer1TauntImage11(<img src={laughAndPoint} />);
-
-          setTimeout(function() { // This is an anonymous callback function
-    
-            // remove taunt image after 4 secs
-            let player1AttackImage = setPlayer1TauntImage11([]);
-    
-            }, 4000); // 4 sec wait time
+            setPlayer1AttackImage(
+              <img
+              src={laughAndPoint}
+              
+              />
+            );
+        
+            setTimeout(() => {
+              setPlayer1AttackImage('');
+            }, 5000);
+           
     
         }
 
@@ -2068,15 +2134,15 @@ const disableDeadPokemon = function () {
 
     (charmanderDied === true && charmanderSelected === true) ? playInvalidAction() : charmanderAlive = true;
 
-    (charmanderDied === true && charmanderSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Charmander died and can no longer be selected." :  console.log("(2) charmanderAlive: " + charmanderAlive);
+    (charmanderDied === true && charmanderSelected === true) ? setStatusProgress3("Charmander died and can no longer be selected.") :  console.log("(2) charmanderAlive: " + charmanderAlive);
 
     (pikachuDied === true && pikachuSelected === true) ? playInvalidAction() : pikachuAlive = true;
 
-    (pikachuDied === true && pikachuSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Pikachu died and can no longer be selected." : console.log("(2) pikachuAlive: " + pikachuAlive);
+    (pikachuDied === true && pikachuSelected === true) ? setStatusProgress3("Pikachu died and can no longer be selected.") : console.log("(2) pikachuAlive: " + pikachuAlive);
 
     (blastoiseDied === true && blastoiseSelected === true) ? playInvalidAction() : blastoiseAlive = true;
 
-    (blastoiseDied === true && blastoiseSelected === true) ? document.getElementById("statusProgress3").innerHTML = "Blastoise died and can no longer be selected." : console.log("(2) blastoiseAlive: " + blastoiseAlive);
+    (blastoiseDied === true && blastoiseSelected === true) ? setStatusProgress3("Blastoise died and can no longer be selected.") : console.log("(2) blastoiseAlive: " + blastoiseAlive);
 
 
 
@@ -3891,7 +3957,7 @@ if (battle1Player1 === true && battle2Player1 === true && battle3Player1 === tru
 
       document.getElementById("statusProgress2").innerHTML=("");
 
-      document.getElementById("statusProgress3").innerHTML = "Click the link below to leave feedback. ";
+      setStatusProgress3("Click the link below to leave feedback. ");
       document.getElementById("sendLink").innerHTML = "Give feedback";
       document.getElementById("sendLink").href = "https://greenaces.site/pokemonForm.php";
       document.getElementById("sendLink").target = "_blank";
@@ -4252,23 +4318,30 @@ const pokemonLoops = function () {
     //wait section 
 
 
-    let makeMove = [{player1Move: false, computerMove: false}];        
-
-    
+    const [makeMove, setMakeMove] = useState([{ player1Move: false, computerMove: false }]);
+           
 
     const startGameMessage = function () {
 
+
+
       // disable attack and defense menu when computerMove and player1Move is false
 
-      if(setPlayer1Move === false && setComputerMove === false) {
+
+      if(makeMove[0].player1Move === false && makeMove[0].computerMove === false) {
+
+        
+
+
+        useEffect(() => { 
+
+           pokemonIndicator(); // displays pokemon icon image
+
+           setStatusProgress3("Select a pokemon to begin the match!");
 
 
 
-        //document.getElementById("statusProgress3").innerHTML=("Select a pokemon to begin the match!");
-
-        pokemonIndicator(); // displays pokemon icon image
-
-        setStatusProgress("Select a pokemon to begin the match!");
+        }, []);
 
 
 
@@ -4333,7 +4406,8 @@ const pokemonLoops = function () {
 
           if (makeMove[0].player1Move === false && makeMove[0].computerMove === true){
 
-          document.getElementById("statusProgress3").innerHTML = "It's the computers turn to attack or switch pokemon.";
+         
+          setStatusProgress3("It's the computers turn to attack or switch pokemon.");
 
           //remove add event listener for switch button
           document.getElementById("Charmander_sel").removeEventListener("click", chrPokeImage);
@@ -14455,7 +14529,9 @@ return (
 
 
 <div class="AttackGraphicContainer">
-<p id="player1AttackImage">{player1AttackImage}</p>
+<p id="player1AttackImage">
+  {player1AttackImage}
+  </p>
 </div>
 
 
