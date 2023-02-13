@@ -1,6 +1,4 @@
-/* This css file is soley for pokemon.html
-additional information can be found here:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div */
+
 
 
 
@@ -547,104 +545,194 @@ font-size: 10px;
 
 }
 
-/*custom view port settings created for other devices*/
 
- /* For mobile phones: */
- @media only screen and (max-width: 768px) {
+/*Custom settings here for mobile devices*/
 
 
-/*google-navbar*/
+@media only screen and (max-width: 767px)  {
 
- 
-body {
-  margin: 0 0 55px 0;
+  
+
+  html, .body {
+  overflow-x: hidden;
+  
+  }
+
+
+  #squirtleIcon, #ScytherIcon, #OnixIcon, #charmanderIcon, 
+  #PikachuIcon, #BlastoiseIcon {
+    margin-left: -20px;
+
+  }
+
+
+
+
+
+
+  /*toggle dark/light mode settings here */
+
+.switch {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+  margin: 0 auto;
 }
 
-.nav {
-
-  align-self: center;
-  position: fixed;
-  bottom: 0px;
-  width: 375px;
-  height: 65px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.nav__link {
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  min-width:  50px;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: sans-serif;
-  font-size: 13px;
-  color: #444444;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.1s ease-in-out;
-
-
+.slider  {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
 }
 
-.nav__link:hover {
-  background-color: #eeeeee;
+.slider:before  {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: gray;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
 }
 
-.nav__link--active {
-  color: #009578;
+input[type="checkbox"]:checked + .slider {
+  background-color: slategray;
 }
 
-.nav__icon {
-  font-size: 18px;
+input[type="checkbox"]:focus + .slider {
+  box-shadow: 0 0 1px slategray;
 }
 
-
-/* main navbar menu options */
-
-#attack-menu-icon{
-  width: 58px;
-  height: 30px;
-  display:inline-block;
-
+input[type="checkbox"]:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
-#defense-menu-icon{
-  width: 58px;
-  height: 30px;
-  display:inline-block;
-
+.slider.round {
+  border-radius: 34px;
 }
 
-#select-menu-icon{
-  width: 58px;
-  height: 30px;
-  display:inline-block;
-
+.slider.round:before {
+  border-radius: 50%;
 }
 
-#settings-menu-icon{
-  width: 58px;
-  height: 30px;
-  display:inline-block;
+/*part 2 for slider setting -- call back function*/
 
+.theme-toggler.light {
+  background-color: white;
 }
 
-#hamburger-menu-icon{
-  width: 58px;
-  height: 30px;
-  display:inline-block;
-
+.theme-toggler.dark {
+  background-color: grey;
 }
 
 
+  }
 
- }
+
+
+
+
+
+
+
+
+
+ /*toggle dark/light mode settings here */
+
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  
+}
+
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  
+}
+
+.slider  {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+  
+}
+
+.slider:before  {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: gray;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .slider {
+  background-color: slategray;
+}
+
+input[type="checkbox"]:focus + .slider {
+  box-shadow: 0 0 1px slategray;
+}
+
+input[type="checkbox"]:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/*part 2 for slider setting -- call back function*/
+
+.theme-toggler.light {
+  background-color: white;
+}
+
+.theme-toggler.dark {
+  background-color: grey;
+}
+
+
+
+

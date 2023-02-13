@@ -39,7 +39,7 @@ import pikachuThunderbolt from "../assets/images/pokemon/pikachu_thunderbolt.png
 import pikachuThundershock from "../assets/images/pokemon/pikachu_thundershock.png";
 import PikachuGif from "../assets/images/pokemon/Pikachu.gif";
 import pikachuHeadDead from "../assets/images/pokemon/PikachuHeadDead.jpg";
-import pikachuHeadIcon from "../assets/images/pokemon/PikachuHeadIcon.png";
+import pikachuHeadIcon from "../assets/images/pokemon/PikachuHeadIcon2023.png";
 import pokemonGameThumbnail from "../assets/images/pokemon/Pokemon_game_thumbnail.jpg";
 import pokemonLogo from "../assets/images/pokemon/pokemon_logo.jpg";
 import ripPokemon from "../assets/images/pokemon/rip_pokemon.jpeg";
@@ -132,6 +132,12 @@ Last update: (01/26/2023)
 
 
 function PokemonGame() {
+
+
+ 
+
+
+  
 
 //defined variables are listed here 
 
@@ -233,6 +239,12 @@ const attackC_Sta = useState("");
 const defenseA_Sta = useState("");
 const defenseB_Sta = useState("");
 const defenseC_Sta = useState("");
+
+
+
+
+
+
 
 
 
@@ -1261,6 +1273,25 @@ const defenseC_Sta = useState("");
   
   
 
+  //Pokemon toggle dark/light mode: 
+
+  const [isDarkMode, setDarkMode] = useState(false);
+  const [mode, setMode] = useState("Light");
+  
+  const changePokemonTheme = () => {
+    setDarkMode(!isDarkMode);
+    setMode(mode === "Light" ? "Dark" : "Light");
+  }
+
+  
+  
+
+
+
+
+
+
+  //Pokemon toggle sound ON/OFF: 
 
 
   const soundSettingsOn = function() {
@@ -1314,6 +1345,10 @@ const defenseC_Sta = useState("");
 
 
   }
+
+
+
+
 
 
 
@@ -14450,11 +14485,17 @@ return (
 
 <React.Fragment> 
 
-<div class="container">
-  <div class="row row-cols-2">
-    <div class="col" id ="column1">
+
+    <body className={`theme-toggler ${isDarkMode ? "dark" : "light"}`}>
 
 
+       <div className="container">
+          <div className="row row-cols-2">
+            <div className="col" id ="column1">
+      
+
+ 
+    
 
       <table id="tablePokemonIconIndicators2">
         <tr>
@@ -14466,11 +14507,11 @@ return (
 
 
       </div>
-    <div class="col" id ="column2">
+    <div className="col" id ="column2">
 
  
 
-      <div class ="container">
+      <div className ="container">
 
         <table id="tablePokemonIconIndicators">
           <tr>
@@ -14486,31 +14527,31 @@ return (
 
 
       </div>
-    <div class="col" id ="column3">
+    <div className="col" id ="column3">
 
 
 
 
-        <div class="CpuStatus">
+        <div className="CpuStatus">
           <p><b>Computer Pokemon:</b></p>
           <p id="cpuPokemonName">{compPokemonName}</p>
           <p id="cpuHpFont"><b>HP:</b></p>
-          <div class="cpuHP-progressBarBackground">
-        <div class="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{cpuHP}</div>
+          <div className="cpuHP-progressBarBackground">
+        <div className="cpuHP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{cpuHP}</div>
         </div>
         <p id="cpuSpeedFont"><b>Speed:</b></p>
-        <div class="cpuSpeed-progressBarBackground">
-        <div class="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{cpuSpeed}</div>
+        <div className="cpuSpeed-progressBarBackground">
+        <div className="cpuSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{cpuSpeed}</div>
         </div>
         </div>
 
 
       </div>
-    <div class="col"id ="column4">
+    <div className="col"id ="column4">
 
 
 
-<div class="CpuPokemonContainer">
+<div className="CpuPokemonContainer">
 {loadSquirtleImg}
 {loadScytherImg}
 {loadOnixImg}
@@ -14519,16 +14560,16 @@ return (
 
 
     </div>
-    <div class="col" id ="column5">
+    <div className="col" id ="column5">
 
 
 
       </div>
-    <div class="col" id ="column6">
+    <div className="col" id ="column6">
 
 
 
-<div class="AttackGraphicContainer">
+<div className="AttackGraphicContainer">
 <p id="player1AttackImage">
   {player1AttackImage}
   </p>
@@ -14536,22 +14577,22 @@ return (
 
 
       </div>
-      <div class="col" id ="column7">
+      <div className="col" id ="column7">
 
 
       </div>
-    <div class="col" id ="column8">
+    <div className="col" id ="column8">
 
 
 
     </div>
-    <div class="col" id ="column9">
+    <div className="col" id ="column9">
 
 
-      <div class="Player1PokemonContainer">
+      <div className="Player1PokemonContainer">
 
 
-        <div class="statusLayoutProgress">
+        <div className="statusLayoutProgress">
           <p id="statusProgress">{statusProgress}</p>
           <p id="statusProgress3">{statusProgress3}</p><a id="sendLink" href="#">{sendLink}</a>
           <p id="statusProgress2">{statusProgress2}</p>
@@ -14577,62 +14618,66 @@ return (
 
 
       </div>
-    <div class="col "id ="column10">
+    <div className="col "id ="column10">
 
  
 
 
-        <div class="Player1Status">
+        <div className="Player1Status">
           <p><b>Player1 Pokemon:</b></p>
           <p id="p1PokemonName">{p1PokemonName}</p>
           <p id="p1HpFont"></p><b>HP:</b>
-          <div class="player1HP-progressBarBackground">
-        <div class="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{player1HP}</div>
+          <div className="player1HP-progressBarBackground">
+        <div className="player1HP" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{player1HP}</div>
       </div>
           <p id="p1SpeedFont"></p><b>Speed:</b>
-          <div class="playerSpeed-progressBarBackground">
-        <div class="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{playerSpeed}</div>
+          <div className="playerSpeed-progressBarBackground">
+        <div className="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{playerSpeed}</div>
         </div>
         </div>
 
 
     </div>
   </div>
-  <div class="col" id ="column11">
+  <div className="col" id ="column11">
 
 
 
-    <div class="col" id ="column12">
+    <div className="col" id ="column12">
 
  
-      <div class="AttackGraphicContainer">
+      <div className="AttackGraphicContainer">
       <p id="computerAttackImage">{computerAttackImage}</p>
       </div>
         </div>
 
       </div>
 
-      <div class="col" id ="column13">
+      <div className="col" id ="column13">
 
 
 
-        <div class="col" id ="column14">
+        <div className="col" id ="column14">
+
+
+        
 
 
           </div>
 
           </div>
+      
           </div>
 
 
 
+          
 
+                <nav className="nav" id="PokemonAttackMenuController"> 
 
-                <nav class="nav" id="PokemonAttackMenuController"> 
-
-           <div class="dropup">
-         <button class="dropbtn"><img id="attack-menu-icon" src={attackMenuIcon}></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content">
+           <div className="dropup">
+         <button className="dropbtn"><img id="attack-menu-icon" src={attackMenuIcon}></img><i className="fa fa-caret-up"></i></button>
+         <div className="dropup-content">
 
                <a href="#" id="attackA" onClick={attackA}></a>
                <a href="#" id="attackB" onClick={attackB}></a>
@@ -14645,9 +14690,9 @@ return (
        </div>
 
 
-          <div class="dropup">
-         <button class="dropbtn"><img id="defense-menu-icon" src={defenseMenuIcon}></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content">
+          <div className="dropup">
+         <button className="dropbtn"><img id="defense-menu-icon" src={defenseMenuIcon}></img><i className="fa fa-caret-up"></i></button>
+         <div className="dropup-content">
 
 
                <a href="#" id="defenseA" onClick={defenseA}></a>
@@ -14661,9 +14706,9 @@ return (
        </div>
 
 
-          <div class="dropup">
-         <button class="dropbtn"><img id="select-menu-icon" src={selectIcon}></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content" id="dropUpPokemonSelectionMenu">
+          <div className="dropup">
+         <button className="dropbtn"><img id="select-menu-icon" src={selectIcon}></img><i className="fa fa-caret-up"></i></button>
+         <div className="dropup-content" id="dropUpPokemonSelectionMenu">
 
 
                <a href="#" id="Charmander_sel" onClick={loadCharmander}>Charmander</a>
@@ -14675,20 +14720,42 @@ return (
          </div>
        </div>
 
-            <div class="dropup">   
-         <button class="dropbtn"><img id="settings-menu-icon" src={settings}></img><i class="fa fa-caret-up"></i></button>
-         <div class="dropup-content" id="dropupContentSettings">
+            <div className="dropup">   
+         <button className="dropbtn"><img id="settings-menu-icon" src={settings}></img><i className="fa fa-caret-up"></i></button>
+         <div className="dropup-content" id="dropupContentSettings">
+         
 
 
+
+             
+
+          
+        
+             
+             <p>{mode === "Light" ? "Light Mode" : "Dark Mode"}</p>
+             <label className="switch">
+             <input type="checkbox" checked={isDarkMode} onChange={changePokemonTheme} />
+             <span className="slider round"></span>
+             </label>
              <a href="#" id="soundON" onClick={soundSettingsOn}>Sound ON</a>
              <a href="#" id="soundOFF"onClick={soundSettingsOff}>Sound OFF</a>
              <a href="#" id="restartYES" onClick={refreshPage}>Restart Game</a>
 
 
 
+             
+
          </div>
        </div>
        </nav>
+
+   
+    </body>
+
+
+
+
+   
  
 
           </React.Fragment>
@@ -14699,6 +14766,12 @@ return (
         }//end of PokemonGame function 
 
         export default PokemonGame;
+
+
+
+
+
+
 
 
 
