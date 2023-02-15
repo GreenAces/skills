@@ -42,6 +42,7 @@ import pikachuHeadDead from "../assets/images/pokemon/PikachuHeadDead.jpg";
 import pikachuHeadIcon from "../assets/images/pokemon/PikachuHeadIcon2023.png";
 import pokemonGameThumbnail from "../assets/images/pokemon/Pokemon_game_thumbnail.jpg";
 import pokemonLogo from "../assets/images/pokemon/pokemon_logo.jpg";
+import restartButton from "../assets/images/pokemon/restartButton.png";
 import ripPokemon from "../assets/images/pokemon/rip_pokemon.jpeg";
 import scytherFurycutter from "../assets/images/pokemon/scyther_Furycutter.png";
 import scytherQuickAttack from "../assets/images/pokemon/scyther_quickAttack.png";
@@ -239,8 +240,6 @@ const attackC_Sta = useState("");
 const defenseA_Sta = useState("");
 const defenseB_Sta = useState("");
 const defenseC_Sta = useState("");
-
-
 
 
 
@@ -1284,14 +1283,7 @@ const defenseC_Sta = useState("");
   }
 
   
-  
-
-
-
-
-
-
-  //Pokemon toggle sound ON/OFF: 
+  //Pokemon sound settings are here:
 
 
   const soundSettingsOn = function() {
@@ -1348,6 +1340,53 @@ const defenseC_Sta = useState("");
 
 
 
+  //Pokemon toggle sound ON/OFF: 
+
+    const [isSoundOn, setIsSoundOn] = useState(false);
+
+    const pauseAllSounds = () => {
+      console.log('Pausing all sounds');
+      try {
+        new Audio(CharmanderVoiceMp3).pause();
+        new Audio(BlastoiseVoiceWav).pause();
+        new Audio(OnixVoiceMp3).pause();
+        new Audio(PikachuVoiceMp3).pause();
+        new Audio(gameboy_battleThemeMp3).pause();
+        new Audio(victoryThemezzMp3).pause();
+        new Audio(ScytherVoiceWav).pause();
+        new Audio(SquirtleVoicezzzMp3).pause();
+      } catch (error) {
+        console.error('Error pausing sounds:', error);
+      }
+    }
+    
+  
+   
+    const toggleSound = () => {
+
+      if (isSoundOn) {
+        // Turn off sound
+        setIsSoundOn(false);
+        pauseAllSounds();
+      } else {
+        // Turn on sound
+        setIsSoundOn(true);
+        soundSettingsOn();
+      }
+
+    }
+
+   
+
+ 
+  
+   
+  
+  
+        
+   
+
+  
 
 
 
@@ -4524,9 +4563,7 @@ const pokemonLoops = function () {
           console.log("status check for pikachuAlive: " + pikachuAlive);
 
 
-          document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadIcon.png" </img>';
-          document.getElementById("PikachuIcon").style.width = 34;
-          document.getElementById("PikachuIcon").style.height = 46;
+         
 
 
         }
@@ -4540,9 +4577,7 @@ const pokemonLoops = function () {
           console.log("status check for blastoiseAlive: " + blastoiseAlive);
 
 
-          document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadIcon.png" </img>';
-          document.getElementById("BlastoiseIcon").style.width = 34;
-          document.getElementById("BlastoiseIcon").style.height = 46;
+         
 
 
         }
@@ -4558,9 +4593,7 @@ const pokemonLoops = function () {
           //debugging delete when neccessary
           console.log("status check for squirtleAlive: " + squirtleAlive);
 
-          document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHead.png" </img>';
-          document.getElementById("squirtleIcon").style.width = 34;
-          document.getElementById("squirtleIcon").style.height = 46;
+        
 
         }
 
@@ -4573,9 +4606,7 @@ const pokemonLoops = function () {
           //debugging delete when neccessary
           console.log("status check for scytherAlive: " + scytherAlive);
 
-          document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHead.png" </img>';
-          document.getElementById("ScytherIcon").style.width = 34;
-          document.getElementById("ScytherIcon").style.height = 46;
+         
 
         }
 
@@ -4587,10 +4618,7 @@ const pokemonLoops = function () {
           //debugging delete when neccessary
           console.log("status check for onixAlive: " + onixAlive);
 
-          document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHead.png" </img>';
-          document.getElementById("OnixIcon").style.width = 34;
-          document.getElementById("OnixIcon").style.height = 46;
-
+         
 
 
         }
@@ -14732,14 +14760,22 @@ return (
           
         
              
-             <p>{mode === "Light" ? "Light Mode" : "Dark Mode"}</p>
-             <label className="switch">
-             <input type="checkbox" checked={isDarkMode} onChange={changePokemonTheme} />
-             <span className="slider round"></span>
-             </label>
-             <a href="#" id="soundON" onClick={soundSettingsOn}>Sound ON</a>
-             <a href="#" id="soundOFF"onClick={soundSettingsOff}>Sound OFF</a>
-             <a href="#" id="restartYES" onClick={refreshPage}>Restart Game</a>
+         <p className="LightMode-text">{mode === "Light" ? "Light Mode" : "Dark Mode"}</p>
+         <label className="switch">
+         <input id="darkModeToggle" type="checkbox" checked={isDarkMode} onChange={changePokemonTheme} />
+         <span className="slider round"></span>
+         </label>
+         <br></br>
+         <p className="SoundON-text">{isSoundOn ? "Sound on" : "Sound off"}</p>
+         <label className="switch">
+         <input id="soundToggle" type="checkbox" checked={isSoundOn} onChange={toggleSound} />
+         <span className="slider round"></span>
+         </label>
+         <br></br>
+         <p className="restart-text-button">Restart</p>
+         <img id="theRestartButton"src={restartButton} onClick={refreshPage}/>
+         <br></br>
+          
 
 
 

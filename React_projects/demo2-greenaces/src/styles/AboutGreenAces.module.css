@@ -346,6 +346,7 @@ text-align: center;
  color: #DCDCDC;
  background-color: #23252C;
  width: 30vw;
+ margin: 0 auto; /* add this line to center the element */
 
 
 }
@@ -382,9 +383,39 @@ color: #F3BF99;
 
 .paragraphTwoAlignment {
 
- text-align: left;
- background-color: #23252C;
+  text-align: left;
+  background-color: #23252C;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12.24px;
+  line-height: 150%;
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 30vw;
+  margin: 0 auto; /* add this line to center the element */
+ 
 
+
+}
+
+.ParagraphTwoHighlights {
+
+  text-align: left;
+  background-color: #23252C;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15.24px;
+  
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 30vw;
+  margin: 0 auto; /* add this line to center the element */
+  
+ 
 
 }
 
@@ -829,6 +860,8 @@ text-align: center;
 
 }
 
+
+
 #AboutHeadline {
 
  background-color: #23252C;
@@ -840,6 +873,7 @@ text-align: center;
 
 .paragraphOne {
 
+  
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -854,7 +888,7 @@ text-align: center;
 
 #paragraphOneAlignment {
 
- text-align: left;
+
  background-color: #23252C;
  font-family: 'Inter';
  font-style: normal;
@@ -871,7 +905,7 @@ text-align: center;
 
 .interestSection {
 
-    
+   
    background-color: #23252C;
    width: 68vw;
 
@@ -903,9 +937,41 @@ color: #F3BF99;
 
  text-align: left;
  background-color: #23252C;
+ font-family: 'Inter';
+ font-style: normal;
+ font-weight: 400;
+ font-size: 12.24px;
+ line-height: 150%;
+ /* or 15px */
+ color: #DCDCDC;
+ background-color: #23252C;
+ width: 68vw;
+ height: 60vh;
+
 
 
 }
+
+
+.ParagraphTwoHighlights {
+
+  text-align: left;
+  background-color: #23252C;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15.24px;
+  
+  /* or 15px */
+  color: #DCDCDC;
+  background-color: #23252C;
+  width: 30vw;
+  margin: 0 auto; /* add this line to center the element */
+  
+ 
+
+}
+
 
 
 #AB {
@@ -1039,3 +1105,165 @@ color: #F3BF99;
 }
 
 
+
+
+
+/* new code 02-14-2023*/
+
+/* For desktop */
+@media screen and (min-width: 768px) {
+  .smallBoarderBackground {
+    width: 50vw;
+  }
+
+  .profileFrame {
+    width: 50vw;
+  }
+
+  .blackBorderTop {
+    width: 50vw;
+  }
+
+  .blackBorder {
+    width: 50vw;
+  }
+
+  .insideBox {
+    width: 50vw;
+    right: 25vw;
+  }
+
+  .primarySection {
+    width: 50vw;
+  }
+
+  .aboutMeSection {
+    width: 50vw;
+  }
+
+  .paragraphOne {
+    width: 40vw;
+  }
+
+  .paragraphTwo {
+    width: 50vw;
+  }
+
+
+
+  .footerSection {
+    width: 50vw;
+  }
+
+  .rectangle93 {
+    width: 50vw;
+  }
+}
+
+/* For mobile */
+@media screen and (max-width: 768px) {
+  .smallBoarderBackground {
+    width: 80vw;
+  }
+
+  .profileFrame {
+    width: 80vw;
+  }
+
+  .blackBorderTop {
+    width: 80vw;
+  }
+
+  .blackBorder {
+    width: 80vw;
+  }
+
+  .insideBox {
+    width: 80vw;
+    right: 10vw;
+  }
+
+  .primarySection {
+    width: 80vw;
+  }
+
+  .aboutMeSection {
+    width: 80vw;
+  }
+
+  .paragraphOne {
+    text-align: center;
+    width: 68vw;
+  }
+
+ 
+
+  .paragraphTwo {
+    text-align: center;
+    width: 80vw;
+  }
+
+
+  .ParagraphTwoHighlights {
+
+    position: absolute;
+    top: 233%;
+    left: 45%;
+    transform: translateX(-50%);
+    width: 60vw;
+  
+  }
+
+  .footerSection {
+    width: 100%; 
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .rectangle93 {
+    width: 80vw;
+  }
+}
+
+
+
+
+
+/*make font larger on larger screens*/
+
+
+/*Settings for AboutGreenAces.js*/
+
+/* For desktop: */
+@media only screen and (min-width: 769px) {
+  .AboutPageBody {
+    font-size: 16px;
+  }
+
+  .greenacesText,
+  .frontendFont,
+  #GreenAcesLink,
+  .paragraphOne,
+  #paragraphOneAlignment,
+  .AboutSectionContent,
+  #AboutHeadline,
+  .paragraphTwo,
+  .paragraphTwoAlignment,
+  #AB,
+  #ABC,
+  #ABCD,
+  #ABCDE,
+  #ABCDEF {
+    font-size: 20px;
+  }
+}
+
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+  .AboutPageBody {
+    box-sizing: border-box;
+    background-color: #FFF;
+  }
+
+  /* other existing styles */
+}

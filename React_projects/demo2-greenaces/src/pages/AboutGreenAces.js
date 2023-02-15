@@ -74,6 +74,9 @@ function AboutGreenAces() {
       <p className={AboutPage.paragraphTwoAlignment}>
       When Robert is not geeking around on the computer, he enjoys reading, watching YouTube videos related
       to cryptocurrencies, listening to music, playing video games, and working out.
+      </p>
+
+      <p className={AboutPage.ParagraphTwoHighlights}>
       <br></br>
       <br></br>
       <b id={AboutPage.AB}>Favorite book:</b> &nbsp; The 48 Laws of Power by Robert Greene
@@ -91,10 +94,15 @@ function AboutGreenAces() {
       <b id={AboutPage.ABCDEF}>Favorite workout:</b> &nbsp; Running on the treadmill
       </p></p>
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     
       </section>
 
-
+      
      <section className={AboutPage.rectangle93}>
 
 

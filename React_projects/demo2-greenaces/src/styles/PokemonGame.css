@@ -546,6 +546,133 @@ font-size: 10px;
 }
 
 
+/*text above toggle button*/
+
+.LightMode-text {
+  text-align: center;
+  color: black;
+
+}
+
+/*text above toggle button*/
+
+.SoundON-text {
+  text-align: center;
+  color: black;
+
+}
+
+
+
+/* Toggle buttons for sound and dark theme*/
+
+#darkModeToggle + .slider {
+  background-color: white;
+}
+
+#darkModeToggle:checked + .slider {
+  background-color: slategray;
+}
+
+#darkModeToggle:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+#soundToggle + .slider {
+  background-color: white;
+}
+
+#soundToggle:checked + .slider {
+  background-color: slategray;
+}
+
+#soundToggle:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.switch {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+  margin: 0 auto;
+}
+
+input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: gray;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:focus + .slider {
+  box-shadow: 0 0 1px slategray;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/*part 2 for slider setting related to dark/light mode*/
+
+.theme-toggler.light {
+  background-color: white;
+}
+
+.theme-toggler.dark {
+  background-color: grey;
+}
+
+
+/*restartButton Image*/
+
+.restart-text-button {
+  text-align: center;
+  color: black;
+
+}
+
+#theRestartButton {
+
+  display: block;
+  height: 42px;
+  width: 32px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+
+
+
 /*Custom settings here for mobile devices*/
 
 
@@ -568,9 +695,30 @@ font-size: 10px;
 
 
 
+/* Toggle buttons */
+#darkModeToggle + .slider {
+  background-color: white;
+}
 
+#darkModeToggle:checked + .slider {
+  background-color: slategray;
+}
 
-  /*toggle dark/light mode settings here */
+#darkModeToggle:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+#soundToggle + .slider {
+  background-color: white;
+}
+
+#soundToggle:checked + .slider {
+  background-color: slategray;
+}
+
+#soundToggle:checked + .slider:before {
+  transform: translateX(26px);
+}
 
 .switch {
   position: relative;
@@ -586,20 +734,18 @@ input[type="checkbox"] {
   height: 0;
 }
 
-.slider  {
+.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: white;
-  -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
 }
 
-.slider:before  {
+.slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -607,111 +753,12 @@ input[type="checkbox"] {
   left: 4px;
   bottom: 4px;
   background-color: gray;
-  -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
-}
-
-input[type="checkbox"]:checked + .slider {
-  background-color: slategray;
 }
 
 input[type="checkbox"]:focus + .slider {
   box-shadow: 0 0 1px slategray;
-}
-
-input[type="checkbox"]:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-/*part 2 for slider setting -- call back function*/
-
-.theme-toggler.light {
-  background-color: white;
-}
-
-.theme-toggler.dark {
-  background-color: grey;
-}
-
-
-  }
-
-
-
-
-
-
-
-
-
-
- /*toggle dark/light mode settings here */
-
- .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  
-}
-
-input[type="checkbox"] {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  
-}
-
-.slider  {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
-  
-}
-
-.slider:before  {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: gray;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input[type="checkbox"]:checked + .slider {
-  background-color: slategray;
-}
-
-input[type="checkbox"]:focus + .slider {
-  box-shadow: 0 0 1px slategray;
-}
-
-input[type="checkbox"]:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
 }
 
 .slider.round {
@@ -723,7 +770,10 @@ input[type="checkbox"]:checked + .slider:before {
 }
 
 
-/*part 2 for slider setting -- call back function*/
+
+
+  
+/*part 2 for slider setting related to dark/light mode*/
 
 .theme-toggler.light {
   background-color: white;
@@ -734,5 +784,15 @@ input[type="checkbox"]:checked + .slider:before {
 }
 
 
+  } /*end of media tag -- do not code below this line*/
 
 
+
+
+
+
+
+
+
+
+ 
