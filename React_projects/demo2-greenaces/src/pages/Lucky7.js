@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import  '../styles/Lucky7Game.css';
+import { Helmet } from 'react-helmet';
 import blackbackground from "../assets/images/lucky7_game_images/Black-wallpapers-33.jpg";
 import lucky7Font from "../assets/images/lucky7_game_images/lucky7_logo.png";
 import orangeButton from '../assets/images/lucky7_game_images/roll_button.png';
@@ -373,10 +374,13 @@ function Lucky7()  {
 
     <React.Fragment>
 
+    <Helmet>
+      <meta name="author" content="GreenAces" />
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <title>GreenAces Lucky7 Game || Are you feeling lucky? You have 3 chances to roll lucky number 7. Give it a try!</title>
+    </Helmet>    
 
-  <meta name="author" content="GreenAces" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>GreenAces Lucky7 Game || Are you feeling lucky? You have 3 chances to roll lucky number 7. Give it a try!</title>
+
 
 <div  style={{ backgroundImage: `url(${blackbackground})` }}>
 

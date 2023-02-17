@@ -1,0 +1,45 @@
+/*css for GreenAcesLegalStatement.js */
+
+
+
+.background{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.MainText01{
+    background-color: slategray;
+    height: 800px; /* sets the height of the background color*/
+    
+    
+    
+}
+
+.Header1, h2 {
+ text-align: center;
+}
+
+.Header2, h2 {
+ text-align: center;
+}
+
+.Header3, h2 {
+text-align: center;   
+}
+
+.Header4, h2 {
+text-align: center;  
+}
+
+
+
+
+/*start of viewport tag for mobile devices*/
+
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+    

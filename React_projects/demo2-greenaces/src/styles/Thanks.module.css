@@ -1,0 +1,73 @@
+
+
+/*start of viewport tag for mobile devices*/
+
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+    
+    #header {
+    height: 30px;
+    width: 100%;
+    }
+
+
+  #content {
+      background-color: #B0BEC5;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+  #footer {
+
+      height: 30px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+
+
+    }
+
+
+
+
+
+/*end of viewport tag for mobile devices*/
+
+
+
+
+/*content section*/
+
+.flex-wrapper {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+justify-content: space-between;
+
+}
+
+
+
+/*images on index*/
+
+#ThankYouImage001 {
+
+  width: 50%;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+
+
+
+

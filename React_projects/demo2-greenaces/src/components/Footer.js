@@ -49,10 +49,10 @@ function Footer() {
     <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Blog</a></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Privacy-Policy</a></div>
+    <div className="thumb-content"><Link to="/PrivacyPolicy" a href="#." target="_blank" rel="noreferrer">Privacy-Policy</Link></div>
     </li>
     <li>
-    <div className="thumb-content"><a href="#." target="_blank" rel="noreferrer">Legal-statement</a></div>
+    <div className="thumb-content"><Link to="/LegalStatement" a href="#." target="_blank" rel="noreferrer">Legal-statement</Link></div>
     </li>
     <li>
     <div className="thumb-content"><Link to="/AboutGreenAces" href="#." target="_blank" rel="noreferrer">About</Link></div>

@@ -556,11 +556,13 @@ font-size: 10px;
 
 /*text above toggle button*/
 
-.SoundON-text {
-  text-align: center;
-  color: black;
-
+button#soundOnText {
+  background-color: transparent;
+  color: black; /* this is not being applied for some weird reason */
+  border: none;
 }
+
+
 
 
 
@@ -572,6 +574,7 @@ font-size: 10px;
 
 #darkModeToggle:checked + .slider {
   background-color: slategray;
+  
 }
 
 #darkModeToggle:checked + .slider:before {
@@ -629,6 +632,7 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:focus + .slider {
   box-shadow: 0 0 1px slategray;
+  
 }
 
 .slider.round {

@@ -1,0 +1,28 @@
+.privacyPolicyScrollable { /*This div is scrollable because of overflow property*/
+
+    height: 200px; /* set the height of the scrollable div */
+    overflow: auto; /* or scroll */
+    background-color: slategray;
+    padding: 20px;
+    min-height: calc(100vh - 50px);
+  }
+  
+  .policySectionTitle {
+    margin-top: 20px;
+  }
+  
+  .policyEffectiveDate {
+    margin-top: 40px;
+  }
+  
+
+  
+
+ 
+  /*start of viewport tag for mobile devices*/
+
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+    
