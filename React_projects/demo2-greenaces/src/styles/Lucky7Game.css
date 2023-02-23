@@ -2,23 +2,39 @@
           created 9/27/2018*/
 
 
-          /*custom bootstrap 5 navbar settings*/
+/*custom bootstrap 5 navbar settings*/
 
 
-          .navbarDropdownProjects {
-            color: #50e177;
-            background-color: #212529;
-        }
+.navbarDropdownProjects {
+color: #50e177;
+background-color: #212529;
+}
 
-        .navbarDropdownAndroid {
-            color: #50e177;
-            background-color: #212529;
-        }
+ .navbarDropdownAndroid {
+color: #50e177;
+ background-color: #212529;
+}
 
-        .navbarDropdownOther {
-            color: #50e177;
-            background-color: #212529;
-        }
+ .navbarDropdownOther {
+ color: #50e177;
+ background-color: #212529;
+ }
+
+ html,
+ body {
+   height: 100%;
+ }
+
+ .blackWallImage {
+
+  background-image: url('../assets/images/lucky7_game_images/Black-wallpapers-33.jpg');
+  background-size: cover;
+  min-height: 100%;
+
+ }
+
+
+               
 
 
 /*table properties */
@@ -41,6 +57,16 @@ th, td {
   width: 11%;
   background-color: #00FFFF;
   
+}
+
+.table-status-displayRounds {
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-rounds-type {
+
+  font-weight: bold;
 }
 
 

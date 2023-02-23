@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect} from "react";
 import  '../styles/Lucky7Game.css';
 import { Helmet } from 'react-helmet';
 import blackbackground from "../assets/images/lucky7_game_images/Black-wallpapers-33.jpg";
@@ -14,8 +14,8 @@ import dice_4 from '../assets/images/lucky7_game_images/dice4.png';
 import dice_5 from '../assets/images/lucky7_game_images/dice5.png';
 import dice_6 from '../assets/images/lucky7_game_images/dice6.png';
 import mouseClickSound from '../assets/sounds/lucky7/MouseDoubleClick.wav';
-import applauseSound  from '../assets/sounds/lucky7/RollDiceSound.wav';
-import diceSound from '../assets/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav';
+import diceSound  from '../assets/sounds/lucky7/RollDiceSound.wav'; 
+import applauseSound from '../assets/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav';
 
 
 
@@ -24,6 +24,23 @@ import diceSound from '../assets/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav';
 
 
 function Lucky7()  {
+
+
+  useEffect(() => {
+    const setHeight = () => {
+      const windowHeight = window.innerHeight;
+      const myClassElement = document.querySelector('.blackWallImage');
+      myClassElement.style.height = `${windowHeight}px`;
+    };
+
+    setHeight();
+    window.addEventListener('resize', setHeight);
+
+    return () => {
+      window.removeEventListener('resize', setHeight);
+    };
+  }, []);
+
 
   //variable declartions
   const [displayRandomNumber, setDisplayRandomNumber] = useState(0);
@@ -34,12 +51,15 @@ function Lucky7()  {
   const [winDetails, setWinDetails] = useState("");
   const [sendLink, setSendLink] = useState("");
 
-  
-  
+
+
+
   const [displayRounds, setDisplayRounds] = useState(1);
   const [counter, setCounter] = useState(1);
   const [displayGameAlert, setDisplayGameAlert] = useState("");
   const [playAgainButton, setPlayAgainButton] = useState([]);
+
+
 
 
   const mainButton = useRef(false);
@@ -53,17 +73,20 @@ function Lucky7()  {
 
   }
 
+  
   const playApplauseSound = () => {
 
     new Audio (applauseSound).play();
 
   }
+ 
 
   const playDiceSound = () => {
 
     new Audio (diceSound).play();
 
   }
+
 
 
   //Each dice has a range from 1 to 6.
@@ -80,7 +103,7 @@ function Lucky7()  {
 
 
   //play mouse clicking sound when user clicks roll button
-  playMouseClicking();
+    playMouseClicking();
 
   
   
@@ -89,7 +112,7 @@ function Lucky7()  {
   setTimeout(function() {
 
       //play dice sound
-      playDiceSound();
+      //playDiceSound();
 
 
       // load dice animation for gif 1 and gif 2
@@ -239,11 +262,10 @@ function Lucky7()  {
 
 
   //remove comment regarding "Better Luck Next Time" when player wins during round 1, 2, or 3.
-  if (dice1 + dice2 === 7 && counter === 3 || dice1 + dice2 === 7 && counter === 2 || dice1 + dice2 === 7 && counter === 1) {
-
+  if ((dice1 + dice2 === 7 && counter === 3) || (dice1 + dice2 === 7 && counter === 2) || (dice1 + dice2 === 7 && counter === 1)) {
     setInformPlayerLoss("");
-
   }
+  
 
 
   //inform player1 of victory and get feedback
@@ -257,7 +279,7 @@ function Lucky7()  {
 
 
     //play applauseSound if the user won
-    playApplauseSound();
+      playApplauseSound();
 
 
     //disable roll button if player won
@@ -279,8 +301,9 @@ function Lucky7()  {
 
 
 
+
   //inform player of loss if these conditions are true
-  if (dice1 + dice2 != 7) {
+  if (dice1 + dice2 !== 7) {
 
     //enable roll button if player lost
     mainButton.current.disabled = false;
@@ -300,6 +323,13 @@ function Lucky7()  {
 
   }
 
+  
+
+
+
+
+  
+
 
   }//end of rollDice
 
@@ -317,7 +347,7 @@ function Lucky7()  {
     
 
 
-    if (counter == 3) {
+    if (counter === 3) {
   
       console.log("getRounds function started (2).")
 
@@ -381,8 +411,7 @@ function Lucky7()  {
     </Helmet>    
 
 
-
-<div  style={{ backgroundImage: `url(${blackbackground})` }}>
+<div className="blackWallImage" style={{ backgroundImage: `url(${blackbackground})` }}>
 
 
 
@@ -451,12 +480,8 @@ onClick={() => allFunctions()}  ref={mainButton} />
 
       <table className="t01">
         <tr>
-        <th className="table-table-type">Data Type:</th>
-        <th className="table-status-type" >Status:</th>
-          </tr>
-          <tr>
-          <td className="table-rounds-type"># of Rounds:</td>
-          <td className = "data2"> {displayRounds}  </td>
+          <td className="table-rounds-type">Rounds:</td>
+          <th className="table-status-displayRounds" >{displayRounds}</th>
           </tr>
         </table> 
 
