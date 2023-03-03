@@ -8,6 +8,7 @@ import Demo from './pages/Demo';
 import PrivacyPolicy from './pages/GreenAcesPrivacyPolicy';
 import LegalStatement from './pages/GreenAcesLegalStatement';
 import AboutGreenAces from './pages/AboutGreenAces';
+import ContactForm from './components/ContactForm';
 import Thanks from './pages/thanks';
 import NotFound from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom';
@@ -34,6 +35,7 @@ function GreenAcesApp() {
             <Route path={"/PrivacyPolicy"} element={<PrivacyPolicy />} /> 
             <Route path={"/LegalStatement"} element={<LegalStatement />} /> 
             <Route path={"/AboutGreenAces"} element={<AboutGreenAces />} />
+            <Route path={"/ContactForm"} element={<ContactForm />} /> 
             <Route path={"/Thanks"} element={<Thanks />} />  
             <Route path="*" element={<NotFound />} />
       
