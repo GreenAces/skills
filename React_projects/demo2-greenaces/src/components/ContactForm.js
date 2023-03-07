@@ -1,70 +1,99 @@
 import React, { useState } from "react";
+import ContactFormSetting from '../styles/ContactForm.module.css';
+
+
+
 
 function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Send form data to server
-    fetch("process-form.php", {
-      method: "POST",
-      body: JSON.stringify({ name, email, message }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-
-    // Clear form fields
-    setName("");
-    setEmail("");
-    setMessage("");
+    try {
+      const response = await fetch(
+        "https://greenaces.site/php/process-form.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message }),
+        }
+      );
+      const data = await response.json();
+      setSuccess(data.success);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
- 
-  return (
-    <form onSubmit={handleSubmit} style={{backgroundColor: "#708090", padding: "10px"}}>
-      <label style={{display: "block", margin: "10px 0"}}>
-        <b>Name:</b>
-        <br />
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} maxLength={15} style={{backgroundColor: "#50e177", color: "black"}} />
-        <br />
-        <span style={{float: "right", color: "grey"}}>{name.length}/15 characters</span>
-      </label>
-      <label style={{display: "block", margin: "10px 0"}}>
-        <b>Email:</b>
-        <br />
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={64} style={{backgroundColor: "#50e177", color: "black"}} />
-        <br />
-        <span style={{float: "right", color: "grey"}}>{email.length}/64 characters</span>
-      </label>
-      <label style={{display: "block", margin: "10px 0"}}>
-        <b>Message:</b>
-        <br />
-        <textarea 
-          value={message} 
-          onChange={(e) => setMessage(e.target.value)} 
-          maxLength={200} 
-          style={{width: "100%", height: "100px", resize: "none", backgroundColor: "#50e177", color: "black"}}
-        />
-        <br />
-        <span style={{float: "right", color: "grey"}}>{message.length}/200 characters</span>
-      </label>
-      <button 
-        type="submit" 
-        style={{backgroundColor: "#50e177", color: "black", padding: "10px", margin: "0 auto", display: "block"}}
-      >
-        Submit
-      </button>
-    </form>
-  );
-  
-  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "name") {
+      setName(value);
+    } else if (name === "email") {
+      setEmail(value);
+    } else if (name === "message") {
+      setMessage(value);
+    }
+  };
 
-  
-  
+  return (
+    
+    <React.Fragment>
+      <div className={ContactFormSetting['spacer']}>
+    <form onSubmit={handleSubmit} className={ContactFormSetting['form-container']}>
+      <label className={ContactFormSetting['form-container-label']}>
+        Name:
+        <input
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChange}
+          maxLength={15}
+          required
+        />
+      </label>
+      <br />
+      <label className={ContactFormSetting['form-container-label']}>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          maxLength={64}
+          required
+        />
+      </label>
+      <br />
+      <label className={ContactFormSetting['form-container-label']}>
+        Message:
+        <textarea className={ContactFormSetting['form-container-textarea']}
+          name="message"
+          value={message}
+          onChange={handleChange}
+          maxLength={200}
+          required
+        ></textarea>
+      </label>
+      <br />
+      <button type="submit" className={ContactFormSetting['form-container-button']} >Submit</button>
+      {success === true && (
+        <p style={{ color: "green" }}>Your message was sent successfully!</p>
+      )}
+      {success === false && (
+        <p style={{ color: "red" }}>Sorry, something went wrong.</p>
+      )}
+
+
+          </form>
+    </div>
+    </React.Fragment>
+   
+  );
 }
 
 export default ContactForm;

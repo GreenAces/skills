@@ -1,6 +1,15 @@
 /*css for GreenAcesLegalStatement.js */
 
 
+.privacyPolicyScrollable { /*This div is scrollable because of overflow property*/
+
+    height: 200px; /* set the height of the scrollable div */
+    overflow: auto; /* or scroll */
+    background-color: slategray;
+    padding: 20px;
+    min-height: calc(100vh - 50px);
+  }
+
 
 .background{
     margin: 0 auto;
@@ -18,19 +27,19 @@
 }
 
 .Header1, h2 {
- text-align: center;
+ text-align: left;
 }
 
 .Header2, h2 {
- text-align: center;
+ text-align: left;
 }
 
 .Header3, h2 {
-text-align: center;   
+text-align: left;   
 }
 
 .Header4, h2 {
-text-align: center;  
+text-align: left;  
 }
 
 

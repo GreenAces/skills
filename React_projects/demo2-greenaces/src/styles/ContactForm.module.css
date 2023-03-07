@@ -1,0 +1,74 @@
+.spacer{
+  margin-top: 20px;
+
+}
+
+
+.form-container {
+  background-color: #708090;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%; /* Change to desired width */
+  margin: 0 auto; /* Add this line to center the form horizontally */
+  border: 3px solid black; /* Add border to form container */
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+  color: black; /* Change label text color to black */
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 88%; /* Change input width to 10% */
+  background-color: #50e177; /* Change input background color to green */
+  color: black; /* Change input text color to black */
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"] {
+  max-width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+  max-length: 200;
+}
+
+button {
+  background-color: #50e177;
+  color: black;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+
+  /*start of viewport tag for mobile devices*/
+
+  @viewport {
+    width: device-width;
+    zoom: 1.0;
+    }
+    

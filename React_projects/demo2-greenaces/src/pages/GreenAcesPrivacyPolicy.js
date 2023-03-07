@@ -79,6 +79,10 @@ function PrivacyPolicy()  {
       </p>
 
       <p className={PrivacyPolicyPage.policyEffectiveDate}>Effective Date: [02/17/2023]</p>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
 
       
     </div>
