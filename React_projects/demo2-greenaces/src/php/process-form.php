@@ -4,7 +4,7 @@
 $host = "localhost:3306";
 $user = "greenace_AdminDemo";
 $password = "BRI7t^vWQO#1";
-$database = "greenace_databaseDemo"
+$database = "greenace_databaseDemo";
 
 // Create a new mysqli object and check for errors
 $mysqli = new mysqli($host, $user, $password, $database);
@@ -24,8 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sss", $name, $email, $message);
     $stmt->execute();
 
-    // Check if the query was successful and return a JSON response
-    if ($stmt->affected_rows > 0) {
+    // Check for errors and return a JSON response
+    if ($stmt->error) {
+        $response = array('success' => false, 'error' => $stmt->error);
+    } else if ($stmt->affected_rows > 0) {
         $response = array('success' => true);
     } else {
         $response = array('success' => false);
@@ -42,4 +44,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
