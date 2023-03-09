@@ -20,14 +20,14 @@ const ContactForm = () => {
     event.preventDefault();
 
     axios
-      .post("/php/processTestForm.php", formData)
+      .post("/php/processContactForm.php", formData)
       .then((response) => {
         console.log(response.data);
-        alert("Form submitted successfully!(2)");
+        alert("Form submitted successfully!");
       })
       .catch((error) => {
         console.log(error);
-        alert("An error occurred while submitting the form.(2)");
+        alert("An error occurred while submitting the form.");
       });
   };
 

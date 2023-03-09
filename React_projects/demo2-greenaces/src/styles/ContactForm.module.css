@@ -25,7 +25,7 @@ label {
 input[type="text"],
 input[type="email"],
 textarea {
-  width: 88%; /* Change input width to 10% */
+  width: 100%; /* Change input width to 10% */
   background-color: #50e177; /* Change input background color to green */
   color: black; /* Change input text color to black */
   border: none;

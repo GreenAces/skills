@@ -21,15 +21,15 @@ const TestForm = () => {
     console.log('Form data:', formData);
 
     axios
-      .post("/php/processContactForm.php", formData)
+      .post("/php/processTestForm.php", formData)
       .then((response) => {
         console.log(response.data);
         console.log(formData)
-        alert("Form submitted successfully!");
+        alert("Form submitted successfully! (2)");
       })
       .catch((error) => {
         console.log(error);
-        alert("An error occurred while submitting the form.");
+        alert("An error occurred while submitting the form. (2)");
       });
   };
 
