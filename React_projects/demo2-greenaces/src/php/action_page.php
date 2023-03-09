@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
 
   //varible declartions
@@ -40,5 +36,3 @@
 
 
 
-</body>
-</html>

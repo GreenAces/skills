@@ -10,6 +10,8 @@ import LegalStatement from './pages/GreenAcesLegalStatement';
 import AboutGreenAces from './pages/AboutGreenAces';
 import TestForm from './database/TestForm';
 import ContactForm from './database/ContactForm';
+import Lucky7Form from './database/Lucky7Form';
+import PokemonForm from './database/PokemonForm';
 import Thanks from './pages/thanks';
 import NotFound from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom';
@@ -38,6 +40,8 @@ function GreenAcesApp() {
             <Route path={"/AboutGreenAces"} element={<AboutGreenAces />} />
             <Route path={"/TestForm"} element={<TestForm />} /> 
             <Route path={"/ContactForm"} element={<ContactForm />} /> 
+            <Route path={"/Lucky7Form"} element={<Lucky7Form />} /> 
+            <Route path={"/PokemonForm"} element={<PokemonForm />} /> 
             <Route path={"/Thanks"} element={<Thanks />} />  
             <Route path="*" element={<NotFound />} />
       

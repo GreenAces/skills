@@ -17,7 +17,10 @@ function Footer() {
     if (pathname === "/AboutGreenAces" ||
         pathname === "/Lucky7" ||
         pathname === "/PokemonGame" ||
-        pathname === "/Demo"
+        pathname === "/Demo" ||
+        pathname === "/lucky7Form" ||
+        pathname === "/PokemonForm" 
+
         ) return null;
 
     return (
