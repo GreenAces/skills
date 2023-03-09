@@ -1,50 +1,34 @@
 import React, { useState } from "react";
+import axios from "axios";
 import ContactFormSetting from '../styles/ContactForm.module.css';
 
 const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [response, setResponse] = useState({ success: false });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = {
-      name: name,
-      email: email,
-      message: message,
-    };
-
-    const response = await fetch("php/process-form.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
     });
-
-    const responseData = await response.json();
-    setResponse(responseData);
-
-    if (response.success) {
-      setTimeout(function () {
-        window.location.href = "https://greenaces.site/";
-      }, 5000);
-    } else {
-      alert("There was an error sending your message.");
-    }
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "name") {
-      setName(value);
-    } else if (name === "email") {
-      setEmail(value);
-    } else if (name === "message") {
-      setMessage(value);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post("/php/processTestForm.php", formData)
+      .then((response) => {
+        console.log(response.data);
+        alert("Form submitted successfully!(2)");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("An error occurred while submitting the form.(2)");
+      });
   };
 
   return (
@@ -62,7 +46,8 @@ const ContactForm = () => {
             name="name"
             required
             maxLength={15}
-            onChange={handleChange}
+            value={formData.name}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -74,7 +59,8 @@ const ContactForm = () => {
             name="email"
             required
             maxLength={64}
-            onChange={handleChange}
+            value={formData.email}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -85,7 +71,8 @@ const ContactForm = () => {
             name="message"
             required
             maxLength={200}
-            onChange={handleChange}
+            value={formData.message}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -95,6 +82,8 @@ const ContactForm = () => {
 
     </div>
     </React.Fragment>
+
+   
   );
 };
 

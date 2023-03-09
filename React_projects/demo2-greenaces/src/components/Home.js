@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import DiceImage from '../assets/images/thumbnails/Lucky7_game_thumbnail.jpg';
 import PikachuImage from '../assets/images/thumbnails/Pokemon_game_thumbnail.jpg';
 import  '../styles/HomePage.css';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -14,6 +15,12 @@ function Home() {
     <React.Fragment>
       <br></br>
       <br></br>
+
+      <Helmet>     
+      <meta charset="utf-8"></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      <title>GreenAces | Official Website </title>
+     </Helmet>
 
     <main className='page-content'>
 
@@ -54,6 +61,7 @@ className="game-thumbnail" alt="Pokemon Game" title="Pokemon Game"/></Link>
 
   <p><br></br></p>
 
+
   </div>
   </div>
 
@@ -62,6 +70,10 @@ className="game-thumbnail" alt="Pokemon Game" title="Pokemon Game"/></Link>
 
 
 
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
     <br></br>
     <br></br>
     

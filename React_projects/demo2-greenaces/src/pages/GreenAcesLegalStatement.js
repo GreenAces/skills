@@ -13,7 +13,9 @@ function LegalStatement()  {
   return (<React.Fragment>
 
     <Helmet>
-      <title>GreenAces -- Legal Statement</title>
+      <meta charset="utf-8"></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      <title>GreenAces | Legal Statement</title>
     </Helmet>
 
     <div className={LegalStatementPage.privacyPolicyScrollable}>

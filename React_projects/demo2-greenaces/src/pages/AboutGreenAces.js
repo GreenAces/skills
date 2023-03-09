@@ -7,6 +7,7 @@ import TwitterLogo from '../assets/images/logos/twitter_logo_icon_187318.png';
 import GithubLogo from '../assets/images/logos/github_logo.png';
 import TikTok from '../assets/images/logos/tiktok_logo_icon_187324.png';
 import AboutPage from '../styles/AboutGreenAces.module.css';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -18,8 +19,11 @@ function AboutGreenAces() {
 
     <React.Fragment> 
 
+    <Helmet>
     <meta name="author" content="GreenAces" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>GreenAces | AboutPage</title>
+    </Helmet>
     
 
       <main className={AboutPage.smallBoarderBackground}>

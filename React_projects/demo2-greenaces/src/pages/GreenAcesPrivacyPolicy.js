@@ -13,7 +13,9 @@ function PrivacyPolicy()  {
   return (<React.Fragment>
 
     <Helmet>
-      <title>GreenAces -- Privacy Policy</title>
+      <meta charset="utf-8"></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      <title>GreenAces | Privacy Policy</title>
     </Helmet>
 
 <div className={PrivacyPolicyPage.privacyPolicyScrollable}>

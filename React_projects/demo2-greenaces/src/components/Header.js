@@ -50,7 +50,7 @@ function Header() {
         
         <li><a className="dropdown-item" id="label-column-Test1">Test 1</a></li>
         
-        <li><a className="dropdown-item" id="label-column-Test2">Test 2</a></li>
+        <li><Link to ="/TestForm" className="dropdown-item" id="label-column-Test2">Test Form</Link></li>
         
         <li><Link to ="/ContactForm" className="dropdown-item" id="label-column-Test3">Contact Form</Link></li>
       </ul>

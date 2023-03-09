@@ -80,7 +80,7 @@ function Footer() {
     <div className="widget no-box">
     <h5 className="widget-title">Contact:<span></span></h5>
 
-    <p className="GreenAcesMailTag"><a className="greenAcesEmailContact" href="mailto:greenaces@greenaces.site" title="Send Email to GreenAces">greenaces@greenaces.site</a></p>
+    <p className="GreenAcesMailTag"><a className="greenAcesEmailContact" href="mailto:greenaces@greenaces.site" title="Send Email to GreenAces">[greenaces@greenaces.site]</a></p>
     <ul className="social-footer2">
     <li className=""><a title="YouTube" target="_blank" href="https://www.youtube.com/channel/UC63jUz00mGHXB7pdtzT-vEw"><img alt="YouTube" width="30" height="30" src={GreenAcesYouTube}/></a></li>
     <li className=""><a href="https://www.tiktok.com/@greenacesgames" target="_blank" title="TikTok"><img alt="TikTok" width="30" height="30" src={GreenAcesTikTok}/></a></li>
