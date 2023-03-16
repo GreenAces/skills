@@ -1,4 +1,7 @@
 <?php
+
+
+
   header('Content-Type: application/json');
 
   $data = json_decode(file_get_contents('php://input'), true);
@@ -18,7 +21,7 @@
   }
 
   // prepare and bind statement
-  $stmt = $conn->prepare("INSERT INTO greenace_DatabaseForms.lucky7_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+  $stmt = $conn->prepare("INSERT INTO lucky7_form (enjoyable, age, errors, bugImpactGameplay, recommenedGame, AndriodORBrowser, rateGame, textarea) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
   $stmt->bind_param("ssssssss", $enjoyable, $age, $errors, $bugImpactGameplay, $recommenedGame, $AndriodORBrowser, $rateGame, $textarea);
 
   // sanitize input data to prevent SQL injection attacks
@@ -40,27 +43,4 @@
 
   $stmt->close();
   $conn->close();
-
-  // lucky7 validationForm
-  $errors = [];
-  $fields = ['enjoyable', 'age', 'errors', 'bugImpactGameplay', 'recommenedGame', 'AndriodORBrowser', 'rateGame'];
-  $optionalFields = ['textarea'];
-  $values = [];
-
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    foreach ($fields as $field) {
-      if (empty($data[$field]) && !in_array($field, $optionalFields)) {
-        $errors[] = $field;
-      } else {
-        $values[$field] = $data[$field];
-      }
-    }
-
-    if (empty($errors)) {
-      foreach ($fields as $field) {
-        printf("%s: %s<br />", $field, $data[$field]);
-      }
-      exit;
-    }
-  }
 ?>

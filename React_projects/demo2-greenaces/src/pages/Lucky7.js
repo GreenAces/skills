@@ -5,6 +5,7 @@ import blackbackground from "../assets/images/lucky7_game_images/Black-wallpaper
 import lucky7Font from "../assets/images/lucky7_game_images/lucky7_logo.png";
 import orangeButton from '../assets/images/lucky7_game_images/roll_button.png';
 import tryAgain from '../assets/images/lucky7_game_images/play-again-button.png';
+import FormIcon from "../assets/images/other/GreenAcesFormIconLogo.png"
 import dice1Gif from '../assets/images/lucky7_game_images/dice1_gif.gif';
 import dice_1 from '../assets/images/lucky7_game_images/dice1.png';
 import dice2Gif from '../assets/images/lucky7_game_images/dice2_gif.gif';
@@ -16,6 +17,7 @@ import dice_6 from '../assets/images/lucky7_game_images/dice6.png';
 import mouseClickSound from '../assets/sounds/lucky7/MouseDoubleClick.wav';
 import diceSound  from '../assets/sounds/lucky7/RollDiceSound.wav'; 
 import applauseSound from '../assets/sounds/lucky7/SMALL_CROWD_APPLAUSE.wav';
+
 
 
 
@@ -274,8 +276,8 @@ function Lucky7()  {
 
     setDisplayRandomNumber(dice1+dice2);
     setInformPlayerWon("Congratulations you won!!!");
-    setWinDetails("Click the link below to leave feedback:");
-    setSendLink("https://greenaces.site/lucky7Form.php");
+    setWinDetails("Click the icon below to leave feedback:");
+    setSendLink(<a href="https://greenaces.site/Lucky7Form"><img className="formIconEdit" src={FormIcon} /></a>);
 
 
     //play applauseSound if the user won
@@ -464,7 +466,7 @@ onClick={() => allFunctions()}  ref={mainButton} />
 <br></br>
 <p className= "InformPlayerWon"> {informPlayerWon} </p>
 <p className= "InformPlayerWonDetails"> {winDetails} </p>
-<a className= "sendLink" target = "_blank" href="https://greenaces.site/lucky7Form.php"> {sendLink} </a>
+<a className= "sendLink" target = "_blank"> {sendLink} </a>
 <br></br>
 <br></br>
 <p className= "PlayAgainButton" onClick={() => reload()}> {playAgainButton} </p>

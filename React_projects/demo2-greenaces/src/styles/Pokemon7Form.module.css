@@ -1,42 +1,85 @@
 form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding-bottom: 50px; /* adds space at the bottom to avoid interfering with the footer */
-  }
-  
-  h1 {
-    font-size: 28px;
-    margin-bottom: 30px;
-  }
-  
-  p {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  label {
-    margin-left: 10px;
-  }
-  
-  input[type="radio"],
-  textarea {
-    margin-bottom: 15px;
-  }
-  
-  input[type="submit"] {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #3e8e41;
-  }
-  
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 50px; /* adds space at the bottom to avoid interfering with the footer */
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+p {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+p > label {
+  font-weight: normal;
+}
+
+label {
+  margin-left: 10px;
+}
+
+input[type="radio"] {
+  margin-bottom: 15px;
+  font-weight: normal;
+}
+
+textarea {
+  margin-bottom: 15px;
+  background-color: #4CAF50;
+  color: black;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+  font-weight: bold;
+  color: black;
+}
+
+.enjoyable_Yes_label,
+.enjoyable_No_label,
+.enjoyable_alright_label,
+.age1_label,
+.age2_label,
+.age3_label,
+.errors_Yes_label,
+.errors_No_label,
+.bugImpactGameplay_Yes_label,
+.bugImpactGameplay_No_label,
+.recommenedGame_Yes_label,
+.recommenedGame_No_label,
+.andriod_Yes_label,
+.andriod_No_label,
+.rateGame_1_label,
+.rateGame_2_label,
+.rateGame_3_label,
+.rateGame_4_label,
+.rateGame_5_label {
+font-weight: normal;
+}
+
+
+
+
+/*start of viewport tag for mobile devices*/
+
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+} 

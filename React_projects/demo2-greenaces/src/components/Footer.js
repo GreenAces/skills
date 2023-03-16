@@ -18,7 +18,7 @@ function Footer() {
         pathname === "/Lucky7" ||
         pathname === "/PokemonGame" ||
         pathname === "/Demo" ||
-        pathname === "/lucky7Form" ||
+        pathname === "/Lucky7Form" ||
         pathname === "/PokemonForm" 
 
         ) return null;

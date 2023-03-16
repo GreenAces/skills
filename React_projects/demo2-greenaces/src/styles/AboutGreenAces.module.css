@@ -70,8 +70,10 @@ height: 350px;
 
 .frontendFont {
 
+ background-color: #23252C; 
  color: #F3BF99;
  text-align: center;
+ height: 20vh;
 }
 
 #GreenAcesLink{
@@ -308,6 +310,7 @@ width: 30vw;
 
 text-align: center;
 
+
 }
 
 #AboutHeadline {
@@ -357,6 +360,7 @@ text-align: center;
     
    background-color: #23252C;
    width: 30vw;
+   
 
 }
 
@@ -365,6 +369,7 @@ text-align: center;
 background-color: #23252C;
 color: #F3BF99;
 text-align: center;
+
 
 }
 
@@ -624,9 +629,13 @@ height: 350px;
 
  color: #F3BF99;
  text-align: center;
+
 }
 
+
+
 #GreenAcesLink{
+
 
 color: #FFFFFF;
 }
@@ -860,7 +869,10 @@ width: 68vw;
 
 text-align: center;
 
+
 }
+
+
 
 
 
@@ -1164,6 +1176,10 @@ color: #F3BF99;
 
 /* For mobile */
 @media screen and (max-width: 768px) {
+
+  .frontendFont{
+    height:22vh;
+  }
   .smallBoarderBackground {
     width: 80vw;
   }
@@ -1209,8 +1225,8 @@ color: #F3BF99;
   .ParagraphTwoHighlights {
 
     position: absolute;
-    top: 233%;
-    left: 45%;
+    top: 283%;
+    left: 47%;
     transform: translateX(-50%);
     width: 60vw;
   

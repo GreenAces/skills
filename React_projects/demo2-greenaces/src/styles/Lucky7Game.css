@@ -34,6 +34,37 @@ color: #50e177;
  }
 
 
+
+ .formIconEdit {
+
+  height: 35px;
+  width:  35px;
+
+}
+
+
+.enjoyable_Yes_label,
+.enjoyable_No_label,
+.enjoyable_alright_label,
+.age1_label,
+.age2_label,
+.age3_label,
+.errors_Yes_label,
+.errors_No_label,
+.bugImpactGameplay_Yes_label,
+.bugImpactGameplay_No_label,
+.recommenedGame_Yes_label,
+.recommenedGame_No_label,
+.andriod_Yes_label,
+.andriod_No_label,
+.rateGame_1_label,
+.rateGame_2_label,
+.rateGame_3_label,
+.rateGame_4_label,
+.rateGame_5_label {
+font-weight: normal;
+}
+
                
 
 

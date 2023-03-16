@@ -90,3 +90,18 @@
     font-size: larger;
 
 }
+
+
+
+
+/*for mobile devices*/
+
+    /*This is the hamburger icon that displays options */
+  @media (max-width: 480px) {
+    .navbar-toggler {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  

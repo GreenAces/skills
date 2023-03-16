@@ -4010,7 +4010,7 @@ function PokemonGame() {
   
         setStatusProgress3("Click the link below to leave feedback. ");
         document.getElementById("sendLink").innerHTML = "Give feedback";
-        document.getElementById("sendLink").href = "https://greenaces.site/pokemonForm.php";
+        document.getElementById("sendLink").href = "https://greenaces.site/PokemonForm";
         document.getElementById("sendLink").target = "_blank";
   
   

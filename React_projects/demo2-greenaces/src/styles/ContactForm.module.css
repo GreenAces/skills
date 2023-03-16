@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%; /* Change to desired width */
+  width: 65%; /* Change to desired width */
   margin: 0 auto; /* Add this line to center the form horizontally */
   border: 3px solid black; /* Add border to form container */
 }
@@ -46,10 +46,11 @@ textarea:focus {
   outline: none;
 }
 
-textarea {
+.form-container-textarea {
+  background-color: #50e177;
   height: 100px;
   resize: none;
-  max-length: 200;
+  
 }
 
 button {
@@ -73,3 +74,24 @@ button {
     zoom: 1.0;
     }
     
+
+  /*for desktops or notebooks or larger screen sizes*/
+
+  @media (min-width: 768px) {
+    .form-container {
+      width: 80%; /* Adjust width for larger screens */
+    }
+  
+    .form-container label,
+    .form-container input,
+    .form-container textarea {
+      width: 100%; /* Make inputs wider */
+      max-width: 100%; /* Make inputs responsive */
+    }
+  
+    .form-container label {
+      display: inline-block; /* Adjust label spacing */
+      margin-right: 20px;
+    }
+  }
+  

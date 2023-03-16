@@ -24,6 +24,11 @@ const ContactForm = () => {
       .then((response) => {
         console.log(response.data);
         alert("Form submitted successfully!");
+
+        setTimeout(function() {
+          window.location.href = "https://greenaces.site/"; 
+         }, 1000); 
+
       })
       .catch((error) => {
         console.log(error);

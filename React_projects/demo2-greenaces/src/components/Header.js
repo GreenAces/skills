@@ -47,10 +47,11 @@ function Header() {
       </a>
       <ul className="dropdown-menu" aria-labelledby="navbarDropdownOther">
         <li><a className="dropdown-item" id="label-row-Stuff" ><b>Stuff</b></a></li>
+
+
+        <li><Link to ="/Lucky7Form" className="dropdown-item" id="label-column-Test2">Lucky7 Form</Link></li>
         
-        <li><a className="dropdown-item" id="label-column-Test1">Test 1</a></li>
-        
-        <li><Link to ="/TestForm" className="dropdown-item" id="label-column-Test2">Test Form</Link></li>
+        <li><Link to ="/PokemonForm"className="dropdown-item" id="label-column-Test1">Pokemon Form</Link></li>
         
         <li><Link to ="/ContactForm" className="dropdown-item" id="label-column-Test3">Contact Form</Link></li>
       </ul>

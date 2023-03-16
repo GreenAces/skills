@@ -38,8 +38,11 @@ function AboutGreenAces() {
         <img src={Avatar} alt="GreenAcesAvatar" className={AboutPage.displayPicture} />
       <h2 className={AboutPage.greenacesText}>GreenAces</h2>
       <h4 className={AboutPage.frontendFont}>Frontend Developer</h4>
-        <br></br>
       <h5><a href = "https://www.greenaces.site/" target="_blank"  rel="noopener noreferrer" id={AboutPage.GreenAcesLink} >Website</a></h5>
+        <br></br>
+    
+     
+      
 
       <div className={AboutPage.ButtonWrapper}>
 
@@ -65,9 +68,11 @@ function AboutGreenAces() {
 
       <h2 id={AboutPage.AboutHeadline}>About</h2>
       <p id={AboutPage.paragraphOneAlignment}>
-      Robert spends most of his time learning about React and C# and is willing to learn about other programming
-      languages as well. He wants to grow an online business pertaining to games and the metaverse,
-      but when asked how long it takes to accomplish his goal, he simply laughed and said “Rome, wasn’t built in a day!”
+      Robert is a dedicated learner with a strong passion for programming. 
+      He is particularly focused on expanding his knowledge of React and C#, and is eager to explore new programming
+      languages as well. Robert is currently working on building an online business centered around the exciting world 
+      of games and the metaverse. He knows that success takes time and effort, and remains committed to achieving his goals
+      with a patient, persistent approach.
       </p>
           </div>
       
@@ -76,8 +81,9 @@ function AboutGreenAces() {
       <p className={AboutPage.paragraphTwo}>
       <h2 id={AboutPage.AboutInterest}>Interest</h2>
       <p className={AboutPage.paragraphTwoAlignment}>
-      When Robert is not geeking around on the computer, he enjoys reading, watching YouTube videos related
-      to cryptocurrencies, listening to music, playing video games, and working out.
+      When he's not hard at work on the computer, Robert enjoys reading, staying up-to-date on the latest developments 
+      in cryptocurrency by watching YouTube videos, listening to music, playing video games, and staying active with a 
+      regular workout routine.
       </p>
 
       <p className={AboutPage.ParagraphTwoHighlights}>
