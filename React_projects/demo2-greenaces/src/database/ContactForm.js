@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 import ContactFormSetting from '../styles/ContactForm.module.css';
+import ReCAPTCHA from 'react-google-recaptcha';
+
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+   
   });
+
+  //recaptcha variables 
+
+  const [captcha, setCaptcha] = useState(null);
+  const [verfied, setVerifed] = useState(false);
+
+  //recaptcha function
+  function onChange(value) {
+      console.log("Captcha value:", value);
+      setVerifed(true);
+    }
 
   const handleInputChange = (event) => {
     setFormData({
@@ -80,8 +94,8 @@ const ContactForm = () => {
             onChange={handleInputChange}
           />
         </label>
-
-        <button type="submit" className={ContactFormSetting['form-container-button']} >Submit</button>
+        <ReCAPTCHA sitekey="YOUR_SITE_KEY" onChange={(value) => setCaptcha(value)} />
+        <button type="submit" disabled={!verfied} className={ContactFormSetting['form-container-button'] } >Submit</button>
       </div>
     </form>
 
