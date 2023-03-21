@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import ContactFormSetting from '../styles/ContactForm.module.css';
 import ReCAPTCHA from 'react-google-recaptcha';
-
+import { RECAPTCHA_SITE_KEY } from '../config/config.js'; //needed for frontend only 
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-   
   });
 
-  //recaptcha variables 
-
+  // recaptcha variables
   const [captcha, setCaptcha] = useState(null);
-  const [verfied, setVerifed] = useState(false);
+  const [verified, setVerified] = useState(false);
 
-  //recaptcha function
-  function onChange(value) {
-      console.log("Captcha value:", value);
-      setVerifed(true);
-    }
+  // recaptcha function
+  const onChange = (value) => {
+    console.log("Captcha value:", value);
+    setCaptcha(value);
+    setVerified(true);
+  };
 
   const handleInputChange = (event) => {
     setFormData({
@@ -34,14 +33,14 @@ const ContactForm = () => {
     event.preventDefault();
 
     axios
-      .post("/php/processContactForm.php", formData)
+      .post("/php/processContactForm.php", { ...formData, captcha })
       .then((response) => {
         console.log(response.data);
         alert("Form submitted successfully!");
 
-        setTimeout(function() {
+        setTimeout(() => {
           window.location.href = "https://greenaces.site/"; 
-         }, 1000); 
+        }, 1000); 
 
       })
       .catch((error) => {
@@ -51,58 +50,62 @@ const ContactForm = () => {
   };
 
   return (
-
     <React.Fragment>
-    <div className={ContactFormSetting['spacer']}>
+      <div className={ContactFormSetting['spacer']}>
+        <form onSubmit={handleSubmit}>
+          <div className={ContactFormSetting['form-container']}>
+            <label>
+              <b>Name:</b>
+              <input
+                className={ContactFormSetting['form-container-label']}
+                type="text"
+                placeholder="Enter your name"
+                name="name"
+                required
+                maxLength={15}
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </label>
 
-    <form onSubmit={handleSubmit }>
-      <div className={ContactFormSetting['form-container']}>
-        <label>
-          <b>Name:</b>
-          <input className={ContactFormSetting['form-container-label']}
-            type="text"
-            placeholder="Enter your name"
-            name="name"
-            required
-            maxLength={15}
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-        </label>
+            <label>
+              <b>Email:</b>
+              <input
+                className={ContactFormSetting['form-container-label']}
+                type="email"
+                placeholder="Enter your email"
+                name="email"
+                required
+                maxLength={64}
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </label>
 
-        <label>
-          <b>Email:</b>
-          <input className={ContactFormSetting['form-container-label']}
-            type="email"
-            placeholder="Enter your email"
-            name="email"
-            required
-            maxLength={64}
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </label>
-
-        <label>
-          <b>Message:</b>
-          <textarea className={ContactFormSetting['form-container-textarea']}
-            placeholder="Enter your message"
-            name="message"
-            required
-            maxLength={200}
-            value={formData.message}
-            onChange={handleInputChange}
-          />
-        </label>
-        <ReCAPTCHA sitekey="YOUR_SITE_KEY" onChange={(value) => setCaptcha(value)} />
-        <button type="submit" disabled={!verfied} className={ContactFormSetting['form-container-button'] } >Submit</button>
+            <label>
+              <b>Message:</b>
+              <textarea
+                className={ContactFormSetting['form-container-textarea']}
+                placeholder="Enter your message"
+                name="message"
+                required
+                maxLength={200}
+                value={formData.message}
+                onChange={handleInputChange}
+              />
+            </label>
+            <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={onChange} />
+            <button
+              type="submit"
+              disabled={!verified}
+              className={ContactFormSetting['form-container-button']}
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
-
-    </div>
     </React.Fragment>
-
-   
   );
 };
 

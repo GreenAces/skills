@@ -25,3 +25,10 @@ yarn-error.log*
 # Ignore PHP files
 *.php
 
+# Ignore ENV files
+.env
+
+# Ignore everything inside the config folder
+/config/*
+
+
