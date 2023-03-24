@@ -66,6 +66,12 @@ button {
   font-size: 1rem;
 }
 
+.responseColorMessage {
+
+  color: red;
+
+}
+
 
   /*start of viewport tag for mobile devices*/
 
