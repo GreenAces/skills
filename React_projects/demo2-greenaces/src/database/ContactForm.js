@@ -6,24 +6,44 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 
 
+
+
+
+
 const ContactForm = () => {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [responseMessage, setResponseMessage] = useState("");
   const [recaptchaToken, setRecaptchaToken] = useState("");
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/php/processContactForm.php", {
-        name: formState.name,
-        email: formState.email,
-        message: formState.message,
-        token: recaptchaToken,
-      });
+      const formData = new FormData();
+      formData.append("name", formState.name);
+      formData.append("email", formState.email);
+      formData.append("message", formState.message);
+      formData.append("token", recaptchaToken);
+
+      const res = await axios.post("/php/processContactForm.php", formData, {
+        headers: {
+      "Content-Type": "multipart/form-data",
+  },
+});
 
       setResponseMessage(res.data.message);
       setFormState({ name: "", email: "", message: "" });
+
+    
+      // Reload the page after 1 second
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      
+
     } catch (err) {
       setResponseMessage(err.response.data.message);
     }
@@ -87,7 +107,7 @@ const ContactForm = () => {
               />
             </label>
 
-            <ReCAPTCHA sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} onChange={onRecaptchaChange} />
+            <ReCAPTCHA sitekey={`${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`} onChange={onRecaptchaChange} />
 
 
             <button
@@ -105,3 +125,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+

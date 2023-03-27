@@ -29,7 +29,9 @@ processContactForm.php
 # Ignore ENV files
 .env
 
-# Ignore everything inside the config folder
-/config/*
+# Ignore everything insider the private folder
+/private/*
+
+
 
 
