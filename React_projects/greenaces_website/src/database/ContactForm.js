@@ -40,8 +40,9 @@ const ContactForm = () => {
     
       // Reload the page after 1 second
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = "https://greenaces.site/";
       }, 1000);
+      
       
 
     } catch (err) {
@@ -62,7 +63,7 @@ const ContactForm = () => {
       <Helmet>
         <title> GreenAces | Contact Us</title>
       </Helmet>
-      <div className={ContactFormSetting["spacer"]}>
+      <div className={ContactFormSetting["spacer"]}></div>
         <form onSubmit={handleSubmit}>
           <div className={ContactFormSetting["form-container"]}>
             <label>
@@ -119,7 +120,6 @@ const ContactForm = () => {
           </div>
         </form>
         {responseMessage && <p className={ContactFormSetting["responseColorMessage"]}>{responseMessage}</p>}
-      </div>
      </React.Fragment>
   );
 };

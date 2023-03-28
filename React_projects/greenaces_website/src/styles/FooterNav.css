@@ -73,7 +73,17 @@ body, html {
 
   /*Custom button settings for signup*/
 
-  .widget .signupNewsButton {color: #50e177;}
+  .widget .signupNewsButton {
+    color: #50e177;
+    border-radius: 12px;
+    color: white;
+    padding: 0px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    
+  }
 
   .myButtonNews {
 
@@ -95,6 +105,11 @@ body, html {
   
   .myButtonNews:hover {
     background-color: #ff8d1e; 
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
     color: white;
   }
   

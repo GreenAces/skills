@@ -53,7 +53,7 @@ function Header() {
         
         <li><Link to ="/PokemonForm"className="dropdown-item" id="label-column-Test1">Pokemon Form</Link></li>
         
-        <li><Link to ="/ContactForm" className="dropdown-item" id="label-column-Test3">Contact Form</Link></li>
+        <li><Link to ="/Newsletter" className="dropdown-item" id="label-column-Test3">Newsletter</Link></li>
       </ul>
     </li>
   </ul>
