@@ -144,14 +144,8 @@ function PokemonGame() {
   const [player1Move, setPlayer1Move] = useState(false); // replaces makeMove[0].player1Move
   const [computerMove, setComputerMove] = useState(false); // replaces makeMove[0].computerMove
   
-  const [loadCharmanderImg, setLoadCharmanderImg] = useState([]);
-  const [loadPikachuImg, setLoadPikachuImg] = useState([]);
-  const [loadBlastoiseImg, setLoadBlastoiseImg] = useState([]);
-  
-  
-  const [loadSquirtleImg, setLoadSquirtleImg] = useState([]);
-  const [loadScytherImg, setLoadScytherImg] = useState([]);
-  const [loadOnixImg, setLoadOnixImg] = useState([]);
+  const [playerPokeImage, setPlayerPokeImage] = useState();
+  const [cpuPokeImage, setCpuPokeImage] = useState();
   
   const [player1AttackImage, setPlayer1AttackImage] = useState([]);
   const [computerAttackImage, setComputerAttackImage] = useState([]);
@@ -4840,10 +4834,20 @@ function PokemonGame() {
         document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-        //load charmander
-        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
-        document.getElementById("Player1PokeImage").style.width = 200;
-        document.getElementById("Player1PokeImage").style.height = 180;
+        // Load charmander
+        setPlayerPokeImage(
+          <img
+            src={charmanderGif}
+            style={{
+              width: "200px",
+              height: "180px",
+            }}
+            alt="Charmander"
+          />
+        );
+
+
+
   
   
   
@@ -4851,12 +4855,32 @@ function PokemonGame() {
   
   
          if(charmanderSelected === true && squirtleSelected === true) {
+
+        // Remove previous Pokemon image
+        setCpuPokeImage(
+          <img
+              src=""
+              style={{
+               width: "100px",
+               height: "100px",
+             }}
+              alt="Empty"
+              />
+            );
+          
   
   
-        //load computer pokemon
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
+        // Load computer pokemon
+        setCpuPokeImage(
+          <img
+            src={squirtleGif}
+            style={{
+              width: "200px",
+              height: "180px",
+            }}
+            alt="Squirtle"
+          />
+        );
   
         //load pokemon sound
         playSquirtleVO();
@@ -5078,12 +5102,17 @@ function PokemonGame() {
            document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-           //load player1 pokemon
-  
-          document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
-          document.getElementById("Player1PokeImage").style.width = 100;
-          document.getElementById("Player1PokeImage").style.height = 100;
-  
+          // Load player1 pokemon
+          setPlayerPokeImage(
+            <img
+              src={blastoiseGif}
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+              alt="Blastoise"
+            />
+          );
   
           setTimeout(function() {
   
@@ -5091,19 +5120,29 @@ function PokemonGame() {
             if(blastoiseSelected === true && onixSelected === true) {
   
   
-                // remove previous Pokemon image
-  
-                let elem =  document.createElement("img");
-                elem.src ="";
-                document.getElementById("CpuPokeImage").appendChild(elem);
-                document.getElementById("CpuPokeImage").style.width = 100;
-                document.getElementById("CpuPokeImage").style.height = 100;
-  
-                // replace with new pokemon
-  
-                document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
-                document.getElementById("CpuPokeImage").style.width = 320;
-                document.getElementById("CpuPokeImage").style.height = 380;
+              // Remove previous Pokemon image
+              setCpuPokeImage(
+                <img
+                  src=""
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                  }}
+                  alt="Empty"
+                />
+              );
+
+              // Replace with new pokemon
+              setCpuPokeImage(
+                <img
+                  src={OnixGif}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                  }}
+                  alt="Onix"
+                />
+              );
   
   
                //load pokemon sound
@@ -5309,11 +5348,18 @@ function PokemonGame() {
           document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-          //load pikachu
-  
-         document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
-         document.getElementById("Player1PokeImage").style.width = 200;
-         document.getElementById("Player1PokeImage").style.height = 180;
+          // Load Pikachu
+          setPlayerPokeImage(
+            <img
+              src={PikachuGif}
+              style={{
+                width: "200px",
+                height: "180px",
+              }}
+              alt="Pikachu"
+            />
+          );
+
   
          setTimeout(function(){
   
@@ -5324,19 +5370,29 @@ function PokemonGame() {
            if(pikachuSelected === true && scytherSelected === true) {
   
   
-               // remove previous Pokemon image
-  
-               let elem =  document.createElement("img");
-               elem.src ="";
-               document.getElementById("CpuPokeImage").appendChild(elem);
-               document.getElementById("CpuPokeImage").style.width = 100;
-               document.getElementById("CpuPokeImage").style.height = 100;
-  
-               // replace with new pokemon
-  
-               document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
-               document.getElementById("CpuPokeImage").style.width = 320;
-               document.getElementById("CpuPokeImage").style.height = 380;
+            // Remove previous Pokemon image
+            setCpuPokeImage(
+              <img
+                src=""
+                style={{
+                  width: "100px",
+                  height: "100px",
+                }}
+                alt="Empty"
+              />
+            );
+
+            // Replace with new pokemon
+            setCpuPokeImage(
+              <img
+                src={ScytherGif}
+                style={{
+                  width: "100px",
+                  height: "100px",
+                }}
+                alt="Scyther"
+              />
+            );
   
   
               //load pokemon sound
@@ -14546,10 +14602,9 @@ return (
 
 
 <div className="CpuPokemonContainer">
-{loadSquirtleImg}
-{loadScytherImg}
-{loadOnixImg}
-<p id="CpuPokeImage"></p>
+<p id="CpuPokeImage">
+{cpuPokeImage}
+</p>
 </div>
 
 
@@ -14596,9 +14651,9 @@ return (
 
 
         <p id="Player1PokeImage">
-          {loadCharmanderImg}
-          {loadPikachuImg}
-          {loadBlastoiseImg}
+          {playerPokeImage}
+          <br></br>
+          <br></br>
         </p>
       </div>
 

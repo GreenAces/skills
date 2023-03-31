@@ -19,7 +19,7 @@ const Unsubscribe = () => {
   };
 
   return (
-    <div className="unsubscribe-container">
+    <div className={UnsubscribeSettings[".form-container"]}>
       <h2 className={UnsubscribeSettings["h2-title"]}>Unsubscribe</h2>
       <p className={UnsubscribeSettings["paragraph-message"]}>Enter your email address to unsubscribe from our newsletter:</p>
       <div className={UnsubscribeSettings["spacer"]}></div>

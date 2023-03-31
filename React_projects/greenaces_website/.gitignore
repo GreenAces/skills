@@ -29,6 +29,9 @@ yarn-error.log*
 *.php
 processContactForm.php
 
+# Ignore vendor director for composer as files can be very large
+/vendor/
+
 # Ignore ENV files
 .env
 

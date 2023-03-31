@@ -96,14 +96,15 @@
   
     @media (min-width: 768px) {
       .form-container {
-        width: 85%; /* Adjust width for larger screens */
+        
+        width: 30%; /* Adjust width for larger screens */
       }
     
       .form-container label,
       .form-container input,
       .form-container textarea {
-        width: 100%; /* Make inputs wider */
-        max-width: 100%; /* Make inputs responsive */
+        width: 125%; /* Make inputs wider */
+        max-width: 125%; /* Make inputs responsive */
       }
     
       .form-container label {
