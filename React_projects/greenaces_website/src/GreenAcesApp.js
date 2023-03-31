@@ -14,8 +14,12 @@ import Newsletter from './database/Newsletter';
 import Lucky7Form from './database/Lucky7Form';
 import PokemonForm from './database/PokemonForm';
 import Thanks from './pages/thanks';
+import VerifySubscription from './database/VerifySubscription';
+import Unsubscribe from './database/Unsubscribe';
 import NotFound from './pages/NotFound';
 import {Routes, Route} from 'react-router-dom';
+
+
 
 
 
@@ -45,6 +49,10 @@ function GreenAcesApp() {
             <Route path={"/Lucky7Form"} element={<Lucky7Form />} /> 
             <Route path={"/PokemonForm"} element={<PokemonForm />} /> 
             <Route path={"/Thanks"} element={<Thanks />} />  
+            <Route path="/VerifySubscription/:email/:token" element={<VerifySubscription />} />
+            <Route path="/Unsubscribe" element={<Unsubscribe />} />
+            
+
             <Route path="*" element={<NotFound />} />
       
           </Routes>

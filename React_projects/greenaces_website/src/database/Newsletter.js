@@ -24,9 +24,9 @@ const NewsletterForm = () => {
       setEmail(""); // clear email input field
       
       // Redirect to main page after 1 second
-      setTimeout(() => {
-        window.location.href = "https://greenaces.site/";
-      }, 1000);
+         setTimeout(() => {
+         window.location.href = "https://greenaces.site/";
+       }, 5000);
 
     } catch (err) {
       setResponseMessage(err.response.data.message);
