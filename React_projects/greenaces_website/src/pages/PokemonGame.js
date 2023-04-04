@@ -154,6 +154,13 @@ function PokemonGame() {
   const [playerSpeed, setPlayerSpeed] = useState([]);
   const [cpuHP, setCpuHP] = useState([]);
   const [cpuSpeed, setCpuSpeed] = useState([]);
+
+  const [squirtleIcon, setSquirtleIcon] = useState(null);
+  const [scytherIcon, setScytherIcon] = useState(null);
+  const [onixIcon, setOnixIcon] = useState(null);
+  const [charmanderIcon, setCharmanderIcon] = useState(null);
+  const [pikachuIcon, setPikachuIcon] = useState(null);
+  const [blastoiseIcon, setBlastoiseIcon] = useState(null);
   
   
   
@@ -2437,19 +2444,29 @@ function PokemonGame() {
   
   
   
-           // remove previous icon
-  
-           let elem =  document.createElement("img");
-           elem.src ="";
-           document.getElementById("squirtleIcon").appendChild(elem);
-           document.getElementById("squirtleIcon").style.width = 34;
-           document.getElementById("squirtleIcon").style.height = 46;
-  
-           // replace with new squirtle icon
-  
-           document.getElementById("squirtleIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/SquirtleHeadDead.png" </img>';
-           document.getElementById("squirtleIcon").style.width = 34;
-           document.getElementById("squirtleIcon").style.height = 46;
+            // Remove previous icon
+            setSquirtleIcon(
+              <img
+                src=""
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Empty"
+              />
+            );
+
+            // Replace with new Squirtle icon
+            setSquirtleIcon(
+              <img
+                src={SquirtleHeadDead}
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Squirtle is dead"
+              />
+            );
   
            //mark computer as dead and un-selected starting here
            squirtleAlive = false;
@@ -2475,19 +2492,28 @@ function PokemonGame() {
               scytherDied === true && blastoiseDied === false) {
   
   
-             // remove previous icon
+            // Remove previous icon
+
+            setScytherIcon(
+              <img
+                src=""
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Empty"
+              />
+            );
   
-             let elem =  document.createElement("img");
-             elem.src ="";
-             document.getElementById("ScytherIcon").appendChild(elem);
-             document.getElementById("ScytherIcon").style.width = 34;
-             document.getElementById("ScytherIcon").style.height = 46;
-  
-             // replace with new squirtle icon
-  
-             document.getElementById("ScytherIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/scytherHeadDead.png" </img>';
-             document.getElementById("ScytherIcon").style.width = 34;
-             document.getElementById("ScytherIcon").style.height = 46;
+            // Replace Scyther icon
+
+            setScytherIcon(
+              <img
+                src={scytherHeadDead}
+                style={{ width: '34px', height: '46px' }}
+                alt="Scyther is dead"
+              />
+            );
   
              //mark computer as dead and un-selected starting here
              scytherAlive = false;
@@ -2510,19 +2536,28 @@ function PokemonGame() {
                onixDied === true && pikachuDied === false) {
   
   
-             // remove previous icon
+              // Remove previous icon
+
+              setOnixIcon(
+                <img
+                  src=""
+                  style={{
+                    width: "34px",
+                    height: "46px",
+                  }}
+                  alt="Empty"
+                />
+              );
   
-             let elem =  document.createElement("img");
-             elem.src ="";
-             document.getElementById("OnixIcon").appendChild(elem);
-             document.getElementById("OnixIcon").style.width = 34;
-             document.getElementById("OnixIcon").style.height = 46;
-  
-             // replace with new onix icon
-  
-             document.getElementById("OnixIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/OnixHeadDead.png" </img>';
-             document.getElementById("OnixIcon").style.width = 34;
-             document.getElementById("OnixIcon").style.height = 46;
+              // Replace Onix icon
+
+              setOnixIcon(
+                <img
+                  src={OnixHeadDead}
+                  style={{ width: '34px', height: '46px' }}
+                  alt="Onix Head Dead"
+                />
+              );
   
              //mark computer as dead and un-selected starting here
              onixAlive = false;
@@ -4600,19 +4635,29 @@ function PokemonGame() {
               charmanderDied === true && scytherDied === false ||
               charmanderDied === true && onixDied === false) {
   
-            // remove previousicon
+
+            // Remove previous icon
+
+            setCharmanderIcon(
+              <img
+                src=""
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Empty"
+              />
+            );
   
-            let elem =  document.createElement("img");
-            elem.src ="";
-            document.getElementById("charmanderIcon").appendChild(elem);
-            document.getElementById("charmanderIcon").style.width = 34;
-            document.getElementById("charmanderIcon").style.height = 46;
-  
-            // replace with new icon
-  
-            document.getElementById("charmanderIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmanderHeadDEAD.png" </img>';
-            document.getElementById("charmanderIcon").style.width = 34;
-            document.getElementById("charmanderIcon").style.height = 46;
+            // Replace Charmander icon
+
+            setCharmanderIcon(
+              <img
+                src={charmanderHeadDEAD}
+                style={{ width: '34px', height: '46px' }}
+                alt="Charmander is dead"
+              />
+            );
   
   
             //mark player1 pokemon as un-selected
@@ -4633,19 +4678,30 @@ function PokemonGame() {
                pikachuDied === true && squirtleDied === false ||
                pikachuDied === true && onixDied === false) {
   
-            // remove previous icon
+
   
-            let elem =  document.createElement("img");
-            elem.src ="";
-            document.getElementById("PikachuIcon").appendChild(elem);
-            document.getElementById("PikachuIcon").style.width = 34;
-            document.getElementById("PikachuIcon").style.height = 46;
+            // Remove previous icon
+
+            setPikachuIcon(
+              <img
+                src=""
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Empty"
+              />
+            );
   
-            // replace with new icon
-  
-            document.getElementById("PikachuIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/PikachuHeadDead.jpg" </img>';
-            document.getElementById("PikachuIcon").style.width = 34;
-            document.getElementById("PikachuIcon").style.height = 46;
+            // Replace Pikachu icon
+
+            setPikachuIcon(
+              <img
+                src={pikachuHeadDead}
+                style={{ width: '34px', height: '46px' }}
+                alt="Pikachu Head Dead"
+              />
+            );
   
             //mark player1 pokemon as un-selected
             pikachuSelected = false;
@@ -4663,19 +4719,28 @@ function PokemonGame() {
                 blastoiseDied === true && squirtleDied === false ||
                 blastoiseDied === true && scytherDied === false) {
   
-            // remove previous icon
+            // Remove previous icon
+
+            setBlastoiseIcon(
+              <img
+                src=""
+                style={{
+                  width: "34px",
+                  height: "46px",
+                }}
+                alt="Empty"
+              />
+            );
   
-            let elem =  document.createElement("img");
-            elem.src ="";
-            document.getElementById("BlastoiseIcon").appendChild(elem);
-            document.getElementById("BlastoiseIcon").style.width = 34;
-            document.getElementById("BlastoiseIcon").style.height = 46;
-  
-            // replace with new icon
-  
-            document.getElementById("BlastoiseIcon").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/BlastoiseHeadDead.png" </img>';
-            document.getElementById("BlastoiseIcon").style.width = 34;
-            document.getElementById("BlastoiseIcon").style.height = 46;
+            // Replace Blastoise icon
+
+            setBlastoiseIcon(
+              <img
+                src={blastoiseHeadDead}
+                style={{ width: '34px', height: '46px' }}
+                alt="Blastoise Head Dead"
+              />
+            );
   
             //mark player1 pokemon as un-selected
             blastoiseSelected = false;
@@ -4923,10 +4988,18 @@ function PokemonGame() {
          document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-         //load charmander
-         document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
-         document.getElementById("Player1PokeImage").style.width = 200;
-         document.getElementById("Player1PokeImage").style.height = 180;
+        // Load charmander
+        setPlayerPokeImage(
+          <img
+            src={charmanderGif}
+            style={{
+              width: "200px",
+              height: "180px",
+            }}
+            alt="Charmander"
+          />
+        );
+
   
   
   
@@ -4950,10 +5023,18 @@ function PokemonGame() {
         document.getElementById("defenseB").addEventListener("click", defenseB);
         document.getElementById("defenseC").addEventListener("click", defenseC);
   
-        //load charmander
-        document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
-        document.getElementById("Player1PokeImage").style.width = 200;
-        document.getElementById("Player1PokeImage").style.height = 180;
+        // Load charmander
+        setPlayerPokeImage(
+          <img
+            src={charmanderGif}
+            style={{
+              width: "200px",
+              height: "180px",
+            }}
+            alt="Charmander"
+          />
+        );
+
   
         setTimeout(function(){
   
@@ -4977,11 +5058,18 @@ function PokemonGame() {
       document.getElementById("defenseB").addEventListener("click", defenseB);
       document.getElementById("defenseC").addEventListener("click", defenseC);
   
-      //load charmander
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/charmander.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
-  
+        // Load charmander
+        setPlayerPokeImage(
+          <img
+            src={charmanderGif}
+            style={{
+              width: "200px",
+              height: "180px",
+            }}
+            alt="Charmander"
+          />
+        );
+
     }
   
   
@@ -5102,7 +5190,7 @@ function PokemonGame() {
            document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-          // Load player1 pokemon
+          // Load Blastoise
           setPlayerPokeImage(
             <img
               src={blastoiseGif}
@@ -5184,11 +5272,17 @@ function PokemonGame() {
             document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-            //load blastoise
-  
-           document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
-           document.getElementById("Player1PokeImage").style.width = 100;
-           document.getElementById("Player1PokeImage").style.height = 100;
+          // Load Blastoise
+          setPlayerPokeImage(
+            <img
+              src={blastoiseGif}
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+              alt="Blastoise"
+            />
+          );
   
   
            setTimeout(function() {
@@ -5212,11 +5306,17 @@ function PokemonGame() {
          document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-         //load blastoise
-  
-         document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/blastoise.gif" </img>';
-         document.getElementById("Player1PokeImage").style.width = 100;
-         document.getElementById("Player1PokeImage").style.height = 100;
+          // Load Blastoise
+          setPlayerPokeImage(
+            <img
+              src={blastoiseGif}
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+              alt="Blastoise"
+            />
+          );
   
   
          setTimeout(function() {
@@ -5436,11 +5536,17 @@ function PokemonGame() {
        document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-       //load pikachu
-  
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
+          // Load Pikachu
+          setPlayerPokeImage(
+            <img
+              src={PikachuGif}
+              style={{
+                width: "200px",
+                height: "180px",
+              }}
+              alt="Pikachu"
+            />
+          );
   
       setTimeout(function(){
   
@@ -5462,11 +5568,17 @@ function PokemonGame() {
        document.getElementById("defenseC").addEventListener("click", defenseC);
   
   
-       //load pikachu
-  
-      document.getElementById("Player1PokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Pikachu.gif" </img>';
-      document.getElementById("Player1PokeImage").style.width = 200;
-      document.getElementById("Player1PokeImage").style.height = 180;
+          // Load Pikachu
+          setPlayerPokeImage(
+            <img
+              src={PikachuGif}
+              style={{
+                width: "200px",
+                height: "180px",
+              }}
+              alt="Pikachu"
+            />
+          );
   
        setTimeout(function(){
   
@@ -5512,17 +5624,29 @@ function PokemonGame() {
   
           //remove previous Pokemon image
   
-          let elem =  document.createElement("img");
-          elem.src ="";
-          document.getElementById("CpuPokeImage").appendChild(elem);
-          document.getElementById("CpuPokeImage").style.width = 100;
-          document.getElementById("CpuPokeImage").style.height = 100;
+          setCpuPokeImage(
+            <img
+              src=""
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+              alt="Empty"
+            />
+          );
   
           //replace with new pokemon
   
-          document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-          document.getElementById("CpuPokeImage").style.width = 320;
-          document.getElementById("CpuPokeImage").style.height = 380;
+          setCpuPokeImage(
+            <img
+              src={squirtleGif}
+              style={{
+                width: "320px",
+                height: "380px",
+              }}
+              alt="Squirtle"
+            />
+          );
   
   
   
@@ -5567,17 +5691,29 @@ function PokemonGame() {
   
          //remove previous Pokemon image
   
-         let elem =  document.createElement("img");
-         elem.src ="";
-         document.getElementById("CpuPokeImage").appendChild(elem);
-         document.getElementById("CpuPokeImage").style.width = 100;
-         document.getElementById("CpuPokeImage").style.height = 100;
+         setCpuPokeImage(
+          <img
+            src=""
+            style={{
+              width: "100px",
+              height: "100px",
+            }}
+            alt="Empty"
+          />
+        );
   
          //replace with new pokemon
   
-         document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
-         document.getElementById("CpuPokeImage").style.width = 320;
-         document.getElementById("CpuPokeImage").style.height = 380;
+         setCpuPokeImage(
+          <img
+            src={OnixGif}
+            style={{
+              width: "320px",
+              height: "380px",
+            }}
+            alt="Onix"
+          />
+        );
   
   
          //Inform player that computer selected a pokemon
@@ -5640,17 +5776,27 @@ function PokemonGame() {
   
         //remove previous Pokemon image
   
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
+        setCpuPokeImage(
+          <img
+            src=""
+            style={{
+              width: "100px",
+              height: "100px",
+            }}
+            alt="Empty"
+          />
+        );
   
-        //replace with new pokemon
-  
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/squirtle.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
+        setCpuPokeImage(
+          <img
+            src={squirtleGif}
+            style={{
+              width: "320px",
+              height: "380px",
+            }}
+            alt="Squirtle"
+          />
+        );
   
   
   
@@ -5695,18 +5841,29 @@ function PokemonGame() {
   
         //remove previous Pokemon image
   
-        let elem =  document.createElement("img");
-        elem.src ="";
-        document.getElementById("CpuPokeImage").appendChild(elem);
-        document.getElementById("CpuPokeImage").style.width = 100;
-        document.getElementById("CpuPokeImage").style.height = 100;
+        setCpuPokeImage(
+          <img
+            src=""
+            style={{
+              width: "100px",
+              height: "100px",
+            }}
+            alt="Empty"
+          />
+        );
   
         //replace with new pokemon
   
-        document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
-        document.getElementById("CpuPokeImage").style.width = 320;
-        document.getElementById("CpuPokeImage").style.height = 380;
-  
+        setCpuPokeImage(
+          <img
+            src={ScytherGif}
+            style={{
+              width: "320px",
+              height: "380px",
+            }}
+            alt="Scyther"
+          />
+        );
   
         //Inform player that computer selected a pokemon
         document.getElementById("statusProgress").innerHTML=("Computer seleted " + ComputerPokemonChoices[0] + " and has no pokemon remaining.");
@@ -5775,17 +5932,29 @@ function PokemonGame() {
   
           //remove previous Pokemon image
   
-          let elem =  document.createElement("img");
-          elem.src ="";
-          document.getElementById("CpuPokeImage").appendChild(elem);
-          document.getElementById("CpuPokeImage").style.width = 100;
-          document.getElementById("CpuPokeImage").style.height = 100;
+          setCpuPokeImage(
+            <img
+              src=""
+              style={{
+                width: "100px",
+                height: "100px",
+              }}
+              alt="Empty"
+            />
+          );
   
           //replace with new pokemon
   
-          document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/Scyther.gif" </img>';
-          document.getElementById("CpuPokeImage").style.width = 320;
-          document.getElementById("CpuPokeImage").style.height = 380;
+          setCpuPokeImage(
+            <img
+              src={ScytherGif}
+              style={{
+                width: "320px",
+                height: "380px",
+              }}
+              alt="Scyther"
+            />
+          );
   
   
           //Inform player that computer selected a pokemon
@@ -5836,17 +6005,29 @@ function PokemonGame() {
   
              //remove previous Pokemon image
   
-             let elem =  document.createElement("img");
-             elem.src ="";
-             document.getElementById("CpuPokeImage").appendChild(elem);
-             document.getElementById("CpuPokeImage").style.width = 100;
-             document.getElementById("CpuPokeImage").style.height = 100;
+             setCpuPokeImage(
+              <img
+                src=""
+                style={{
+                  width: "100px",
+                  height: "100px",
+                }}
+                alt="Empty"
+              />
+            );
   
              //replace with new pokemon
   
-             document.getElementById("CpuPokeImage").innerHTML = '<img src ="https://greenaces.site/5DFbHhuN/images/pokemon/onix.gif" </img>';
-             document.getElementById("CpuPokeImage").style.width = 320;
-             document.getElementById("CpuPokeImage").style.height = 380;
+             setCpuPokeImage(
+              <img
+                src={OnixGif}
+                style={{
+                  width: "320px",
+                  height: "380px",
+                }}
+                alt="Onix"
+              />
+            );
   
   
              //Inform player that computer selected a pokemon
@@ -14654,6 +14835,7 @@ return (
           {playerPokeImage}
           <br></br>
           <br></br>
+          <br></br>
         </p>
       </div>
 
@@ -14684,8 +14866,9 @@ return (
         <div className="playerSpeed" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">{playerSpeed}</div>
         </div>
         </div>
-
-
+        <br></br>
+        <br></br>
+        <br></br>
     </div>
   </div>
   <div className="col" id ="column11">
@@ -14698,6 +14881,9 @@ return (
       <div className="AttackGraphicContainer">
       <p id="computerAttackImage">{computerAttackImage}</p>
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
         </div>
 
       </div>
