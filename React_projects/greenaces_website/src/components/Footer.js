@@ -4,9 +4,11 @@ import '../styles/FooterNav.css';
 import { useLocation } from "react-router-dom";
 import GreenAcesGithub from "../assets/images/logos/github_logo.png";
 import GreenAcesLinkin from "../assets/images/logos/linkedin.png";
+import GreenAcesDiscord from "../assets/images/logos/discordLogo3840.png";
 import GreenAcesTikTok from "../assets/images/logos/tiktok_logo_icon_187324.png";
 import GreenAcesTwitter from "../assets/images/logos/twitter_logo_icon_187318.png";
 import GreenAcesYouTube from "../assets/images/logos/YouTube_23392.png";
+
 
 
 function Footer() {
@@ -85,6 +87,7 @@ function Footer() {
 
     <p className="GreenAcesMailTag"><Link to ="/ContactForm" className="greenAcesEmailContact"  title="Send Email to GreenAces">Contact Us</Link></p>
     <ul className="social-footer2">
+    <li className=""><a title="Discord" target="_blank" href="https://discord.gg/aQMS2sJ"><img alt="Discord" width="30" height="30" src={GreenAcesDiscord}/></a></li>
     <li className=""><a title="YouTube" target="_blank" href="https://www.youtube.com/channel/UC63jUz00mGHXB7pdtzT-vEw"><img alt="YouTube" width="30" height="30" src={GreenAcesYouTube}/></a></li>
     <li className=""><a href="https://www.tiktok.com/@greenacesgames" target="_blank" title="TikTok"><img alt="TikTok" width="30" height="30" src={GreenAcesTikTok}/></a></li>
     <li className=""><a href="https://twitter.com/GreenAces_" target="_blank" title="Twitter"><img alt="Twitter" width="30" height="30" src={GreenAcesTwitter}/></a></li>
