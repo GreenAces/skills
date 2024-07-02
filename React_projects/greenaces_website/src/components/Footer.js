@@ -38,7 +38,7 @@ function Footer() {
     <div className="col-xs-12 col-sm-6 col-md-3">
     <div className="widget subscribe no-box">
     <h5 className="widget-title">GreenAces<span></span></h5>
-    <p>Awesome games in your hands </p>
+    <p> </p>
     <form action="https://www.paypal.com/donate" method="post" target="_top">
     <input type="hidden" name="hosted_button_id" value="P7VSF439RBSTS" />
     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
